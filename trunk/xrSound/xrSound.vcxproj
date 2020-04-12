@@ -59,21 +59,21 @@
     <IntDir>x:\intermediate\$(Configuration)\$(ProjectName)\</IntDir>
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>Z:\OpenAL\Include;Z:\Xiph\include;Z:\eax\include;Z:\OpenAL\libs;S:\xrCore;Z:\dxSDK\Include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>S:\;Z:\OpenAL\Include;Z:\Xiph\include;Z:\eax\include;Z:\OpenAL\libs;Z:\dxSDK\Include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <LibraryPath>Z:\eax\;Z:\Xiph\Libs;X:\libraries;Z:\dxSDK\lib;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>x:\binaries\</OutDir>
     <IntDir>x:\intermediate\$(Configuration)\$(ProjectName)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>Z:\OpenAL\Include;Z:\Xiph\include;Z:\eax\include;Z:\OpenAL\libs;S:\xrCore;Z:\dxSDK\Include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>S:\;Z:\OpenAL\Include;Z:\Xiph\include;Z:\eax\include;Z:\OpenAL\libs;Z:\dxSDK\Include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <LibraryPath>Z:\eax\;Z:\Xiph\Libs;X:\libraries;Z:\dxSDK\lib;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Mixed|Win32'">
     <OutDir>x:\binaries\</OutDir>
     <IntDir>x:\intermediate\$(Configuration)\$(ProjectName)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>Z:\OpenAL\Include;Z:\Xiph\include;Z:\eax\include;Z:\OpenAL\libs;S:\xrCore;Z:\dxSDK\Include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>S:\;Z:\OpenAL\Include;Z:\Xiph\include;Z:\eax\include;Z:\OpenAL\libs;Z:\dxSDK\Include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <LibraryPath>Z:\eax\;Z:\Xiph\Libs;X:\libraries;Z:\dxSDK\lib;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

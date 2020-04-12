@@ -17,14 +17,14 @@
 #define		R_R2	2
 #define		RENDER	R_R1
 
-#include "..\resourcemanager.h"
-#include "..\vis_common.h"
-#include "..\render.h"
+#include <xr_3da/resourcemanager.h>
+#include <xr_3da/vis_common.h>
+#include <xr_3da/render.h>
 #include "..\igame_level.h"
-#include "..\blenders\blender.h"
-#include "..\blenders\blender_clsid.h"
-#include "..\psystem.h"
-#include "..\xrRender\xrRender_console.h"
+#include <xr_3da/blenders/blender.h>
+#include <xr_3da/blenders/blender_clsid.h>
+#include <xr_3da/psystem.h>
+#include <xr_3da/xrRender/xrRender_console.h>
 #include "FStaticRender.h"
 
 #define		TEX_POINT_ATT	"internal\\internal_light_attpoint"

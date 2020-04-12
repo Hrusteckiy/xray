@@ -1,10 +1,10 @@
 #include "stdafx.h"
-#include "../fbasicvisual.h"
-#include "../fmesh.h"
-#include "../xrLevel.h"
-#include "../x_ray.h"
-#include "../IGame_Persistent.h"
-#include "../xrCore/stream_reader.h"
+#include <xr_3da/fbasicvisual.h>
+#include <xr_3da/fmesh.h>
+#include <xr_3da/xrLevel.h>
+#include <xr_3da/x_ray.h>
+#include <xr_3da/IGame_Persistent.h>
+#include <xrCore/stream_reader.h>
 
 #pragma warning(push)
 #pragma warning(disable:4995)

@@ -1,5 +1,5 @@
 #pragma once
-#include "../fhierrarhyvisual.h"
+#include <xr_3da/fhierrarhyvisual.h>
 
 class	FLOD	:	public FHierrarhyVisual
 {

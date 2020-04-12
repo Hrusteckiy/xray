@@ -18,15 +18,15 @@
 #define		R_R2	2
 #define		RENDER	R_R2
 
-#include "..\resourcemanager.h"
-#include "..\vis_common.h"
-#include "..\render.h"
-#include "..\_d3d_extensions.h"
+#include <xr_3da/resourcemanager.h>
+#include <xr_3da/vis_common.h>
+#include <xr_3da/render.h>
+#include <xr_3da/_d3d_extensions.h>
 #include "..\igame_level.h"
-#include "..\blenders\blender.h"
-#include "..\blenders\blender_clsid.h"
-#include "..\psystem.h"
-#include "..\xrRender\xrRender_console.h"
+#include <xr_3da/blenders/blender.h>
+#include <xr_3da/blenders/blender_clsid.h>
+#include <xr_3da/psystem.h>
+#include <xr_3da/xrRender/xrRender_console.h>
 #include "r2.h"
 
 IC	void	jitter(CBlender_Compile& C)

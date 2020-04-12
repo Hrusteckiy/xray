@@ -105,21 +105,21 @@
     <ExtensionsToDeleteOnClean>*.idb%3b*.obj%3b*.ilk%3b*.pdb%3b*.tlb%3b*.tli%3b*.tlh%3b*.tmp%3b*.rsp%3b*.bat%3b$(TargetPath)</ExtensionsToDeleteOnClean>
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>Z:\OpenAL\include;Z:\Xiph\Include;Z:\boost_1_30_0;S:\xrLua\src;Z:\luabind\luabind;S:\xrCore;Z:\dxSDK\Include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>S:\;Z:\OpenAL\include;Z:\Xiph\Include;Z:\boost_1_30_0;S:\xrLua\src;Z:\luabind\luabind;Z:\dxSDK\Include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <LibraryPath>Z:\OpenAL\libs;Z:\Xiph\Libs;X:\libraries;Z:\dxSDK\lib;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Mixed|Win32'">
     <OutDir>x:\binaries\</OutDir>
     <IntDir>x:\intermediate\$(Configuration)\$(ProjectName)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>Z:\OpenAL\include;Z:\Xiph\Include;Z:\boost_1_30_0;S:\xrLua\src;Z:\luabind\luabind;S:\xrCore;Z:\dxSDK\Include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>S:\;Z:\OpenAL\include;Z:\Xiph\Include;Z:\boost_1_30_0;S:\xrLua\src;Z:\luabind\luabind;Z:\dxSDK\Include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <LibraryPath>Z:\OpenAL\libs;Z:\Xiph\Libs;X:\libraries;Z:\dxSDK\lib;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>x:\binaries\</OutDir>
     <IntDir>x:\intermediate\$(Configuration)\$(ProjectName)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>Z:\OpenAL\include;Z:\Xiph\Include;Z:\boost_1_30_0;S:\xrLua\src;Z:\luabind\luabind;S:\xrCore;Z:\dxSDK\Include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>S:\;Z:\OpenAL\include;Z:\Xiph\Include;Z:\boost_1_30_0;S:\xrLua\src;Z:\luabind\luabind;Z:\dxSDK\Include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <LibraryPath>Z:\OpenAL\libs;Z:\Xiph\Libs;X:\libraries;Z:\dxSDK\lib;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Dedicated|Win32'">
@@ -128,21 +128,21 @@
     <ExtensionsToDeleteOnClean>*.idb%3b*.obj%3b*.ilk%3b*.pdb%3b*.tlb%3b*.tli%3b*.tlh%3b*.tmp%3b*.rsp%3b*.bat%3b$(TargetPath)</ExtensionsToDeleteOnClean>
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>Z:\OpenAL\include;Z:\Xiph\Include;Z:\boost_1_30_0;S:\xrLua\src;Z:\luabind\luabind;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>S:\;Z:\OpenAL\include;Z:\Xiph\Include;Z:\boost_1_30_0;S:\xrLua\src;Z:\luabind\luabind;Z:\dxSDK\Include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <LibraryPath>Z:\OpenAL\libs;Z:\Xiph\Libs;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Mixed_Dedicated|Win32'">
     <OutDir>x:\binaries\dedicated\</OutDir>
     <IntDir>x:\intermediate\$(Configuration)\$(ProjectName)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>Z:\OpenAL\include;Z:\Xiph\Include;Z:\boost_1_30_0;S:\xrLua\src;Z:\luabind\luabind;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>S:\;Z:\OpenAL\include;Z:\Xiph\Include;Z:\boost_1_30_0;S:\xrLua\src;Z:\luabind\luabind;Z:\dxSDK\Include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <LibraryPath>Z:\OpenAL\libs;Z:\Xiph\Libs;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Dedicated|Win32'">
     <OutDir>x:\binaries\dedicated\</OutDir>
     <IntDir>x:\intermediate\$(Configuration)\$(ProjectName)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>Z:\OpenAL\include;Z:\Xiph\Include;Z:\boost_1_30_0;S:\xrLua\src;Z:\luabind\luabind;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>S:\;Z:\OpenAL\include;Z:\Xiph\Include;Z:\boost_1_30_0;S:\xrLua\src;Z:\luabind\luabind;Z:\dxSDK\Include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <LibraryPath>Z:\OpenAL\libs;Z:\Xiph\Libs;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

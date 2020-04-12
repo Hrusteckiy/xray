@@ -6,8 +6,8 @@
 #define _MS_BUGS_OFF_
 // -- includes ------------------------------------------------------
 #include "stdafx.h"
-#include "..\skeletonX.h"
-#include "..\SkeletonCustom.h"
+#include <xr_3da/skeletonX.h">
+#include <xr_3da/SkeletonCustom.h>
 #pragma warning(disable:4537)
 
 // -- offsets -------------------------------------------------------

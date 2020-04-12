@@ -4,19 +4,19 @@
 
 #include "..\xrRender\PSLibrary.h"
 
-#include "..\xrRender\hom.h"
+#include "..\xrRender\HOM.h"
 #include "..\xrRender\detailmanager.h"
 #include "glowmanager.h"
 #include "..\xrRender\wallmarksengine.h"
 #include "fstaticrender_rendertarget.h"
-#include "..\xrRender\modelpool.h"
+#include <xr_3da/xrRender/modelpool.h>
 
 #include "lightShadows.h"
 #include "lightProjector.h"
 #include "lightPPA.h"
 #include "..\xrRender\light_DB.h"
 
-#include "../Fmesh.h"
+#include <xr_3da/Fmesh.h>
 
 // definition
 class CRender													:	public R_dsgraph_structure

@@ -7,7 +7,7 @@
 #define stdafxH
 #pragma once
 
-#include "../xrCore/xrCore.h"
+#include <xrCore/xrCore.h>
 
 #define ENGINE_API
 #include "opcode.h"

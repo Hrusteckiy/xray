@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "r2.h"
-#include "..\fbasicvisual.h"
+#include <xr_3da/fbasicvisual.h>
 #include "..\xr_object.h"
-#include "..\CustomHUD.h"
-#include "..\igame_persistent.h"
-#include "..\environment.h"
-#include "..\SkeletonCustom.h"
-#include "..\xrRender\LightTrack.h"
+#include <xr_3da/CustomHUD.h>
+#include <xr_3da/igame_persistent.h>
+#include <xr_3da/environment.h>
+#include <xr_3da/SkeletonCustom.h>
+#include <xr_3da/xrRender/LightTrack.h>
 
 CRender										RImplementation;
 

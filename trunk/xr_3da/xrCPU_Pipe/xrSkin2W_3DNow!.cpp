@@ -44,8 +44,8 @@
 #include "skeletonX.h"
 #include "skeletoncustom.h"
 #else
-#include "..\skeletonX.h"
-#include "..\skeletoncustom.h"
+#include <xr_3da/skeletonX.h>
+#include <xr_3da/skeletoncustom.h>
 #endif
 // -- offsets -------------------------------------------------------
 #define M11 0

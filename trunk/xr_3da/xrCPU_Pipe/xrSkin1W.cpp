@@ -2,11 +2,11 @@
 #pragma hdrstop
 
 #ifdef _EDITOR
-	#include "skeletonX.h"
- 	#include "skeletoncustom.h"
+#include "skeletonX.h"
+#include "skeletoncustom.h"
 #else
-#include "..\skeletonX.h"
- 	#include "..\skeletoncustom.h"
+#include <xr_3da/skeletonX.h>
+#include <xr_3da/skeletoncustom.h>
 #endif
 
 void __stdcall xrSkin1W_x86(	vertRender*		D,

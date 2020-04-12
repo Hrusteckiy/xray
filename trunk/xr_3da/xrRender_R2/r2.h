@@ -8,9 +8,9 @@
 #include "r2_types.h"
 #include "r2_rendertarget.h"
 
-#include "..\xrRender\hom.h"
-#include "..\xrRender\detailmanager.h"
-#include "..\xrRender\modelpool.h"
+#include "../xrRender/HOM.h"
+#include <xr_3da/xrRender/detailmanager.h>
+#include <xr_3da/xrRender/modelpool.h>
 #include "..\xrRender\wallmarksengine.h"
 
 #include "smap_allocator.h"
@@ -19,7 +19,7 @@
 #include "..\xrRender\LightTrack.h"
 
 #include "../irenderable.h"
-#include "../fmesh.h"
+#include <xr_3da/fmesh.h>
 
 // definition
 class CRender													:	public R_dsgraph_structure

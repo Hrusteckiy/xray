@@ -7,7 +7,7 @@
 
 // --  includes -----------------------------------------------------
 #include "stdafx.h"
-#include "..\skeletonanimated.h"
+#include <xr_3da/skeletonanimated.h>
 
 //;******************************************************************************
 // A "magic" type to allow initialization with any type

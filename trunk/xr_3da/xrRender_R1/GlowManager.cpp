@@ -3,10 +3,10 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
-#include "..\igame_persistent.h"
-#include "..\environment.h"
-#include "..\x_ray.h"
-#include "..\GameFont.h"
+#include <xr_3da/IGame_Persistent.h>
+#include <xr_3da/environment.h>
+#include <xr_3da/x_ray.h>
+#include <xr_3da/GameFont.h>
 #include "GlowManager.h"
 #include "..\xr_object.h"
 
