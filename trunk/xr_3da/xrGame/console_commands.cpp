@@ -1,7 +1,7 @@
 #include "pch_script.h"
-#include "../xr_ioconsole.h"
-#include "../xr_ioc_cmd.h"
-#include "../customhud.h"
+#include <xr_3da/xr_ioconsole.h>
+#include <xr_3da/xr_ioc_cmd.h>
+#include "../CustomHUD.h"
 #include "../fdemorecord.h"
 #include "../fdemoplay.h"
 #include "xrMessages.h"
@@ -37,7 +37,7 @@
 #include "MainMenu.h"
 #include "saved_game_wrapper.h"
 #include "level_graph.h"
-#include "../resourcemanager.h"
+#include <xr_3da/resourcemanager.h>
 #include "doug_lea_memory_allocator.h"
 #include "cameralook.h"
 

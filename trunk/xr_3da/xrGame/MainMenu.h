@@ -6,8 +6,8 @@ class CUICursor;
 class CUIMessageBoxEx;
 class CGameSpy_HTTP;
 class CGameSpy_Full;
-#include "../IInputReceiver.h"
-#include "../IGame_Persistent.h"
+#include <xr_3da/IInputReceiver.h>
+#include <xr_3da/IGame_Persistent.h>
 #include "UIDialogHolder.h"
 #include "ui/UIWndCallback.h"
 #include "ui_base.h"

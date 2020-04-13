@@ -3,7 +3,7 @@
 #include "hudmanager.h"
 #ifdef DEBUG
 #	include "ode_include.h"
-#	include "../StatGraph.h"
+#	include <xr_3da/StatGraph.h>
 #	include "PHDebug.h"
 #endif // DEBUG
 #include "alife_space.h"
@@ -26,7 +26,7 @@
 #include "game_cl_base_weapon_usage_statistic.h"
 
 // breakpoints
-#include "../xr_input.h"
+#include <xr_3da/xr_input.h>
 
 //
 #include "Actor.h"
@@ -45,10 +45,10 @@
 #include "xrmessages.h"
 #include "string_table.h"
 #include "usablescriptobject.h"
-#include "../cl_intersect.h"
+#include <xr_3da/cl_intersect.h>
 #include "ExtendedGeom.h"
 #include "alife_registry_wrappers.h"
-#include "../skeletonanimated.h"
+#include <xr_3da/skeletonanimated.h>
 #include "artifact.h"
 #include "CharacterPhysicsSupport.h"
 #include "material_manager.h"

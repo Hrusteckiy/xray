@@ -9,7 +9,7 @@
 
 #include "stdafx.h"
 #include "UIMultiTextStatic.h"
-#include "../../CustomHUD.h"
+#include <xr_3da/CustomHUD.h>
 
 //////////////////////////////////////////////////////////////////////////
 CUIMultiTextStatic::CUIMultiTextStatic				()

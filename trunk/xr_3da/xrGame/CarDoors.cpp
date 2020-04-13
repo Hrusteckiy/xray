@@ -1,15 +1,15 @@
 #include "stdafx.h"
 #ifdef DEBUG
 #include "ode_include.h"
-#include "../StatGraph.h"
+#include <xr_3da/StatGraph.h>
 #include "PHDebug.h"
 #endif
 #include "alife_space.h"
 #include "hit.h"
 #include "PHDestroyable.h"
 #include "car.h"
-#include "../../xrNetServer/net_utils.h"
-#include "../skeletoncustom.h"
+#include <xrNetServer/net_utils.h>
+#include <xr_3da/skeletoncustom.h>
 #include "MathUtils.h"
 #include "game_object_space.h"
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

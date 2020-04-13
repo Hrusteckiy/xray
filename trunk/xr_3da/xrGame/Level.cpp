@@ -1,8 +1,8 @@
 #include "pch_script.h"
 #include "../fdemorecord.h"
 #include "../fdemoplay.h"
-#include "../environment.h"
-#include "../igame_persistent.h"
+#include <xr_3da/environment.h>
+#include <xr_3da/IGame_Persistent.h>
 #include "ParticlesObject.h"
 #include "Level.h"
 #include "xrServer.h"
@@ -41,7 +41,7 @@
 #include "game_cl_base_weapon_usage_statistic.h"
 #include "clsid_game.h"
 #include "MainMenu.h"
-#include "..\XR_IOConsole.h"
+#include <xr_3da/XR_IOConsole.h>
 
 #include <functional>
 

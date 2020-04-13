@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "level.h"
-#include "../frustum.h"
+#include <xr_3da/frustum.h>
 
 #ifdef DEBUG
 #	include "debug_renderer.h"

@@ -11,9 +11,9 @@
 #include "base_client_classes_wrappers.h"
 #include "../feel_sound.h"
 #include "../fbasicvisual.h"
-#include "../skeletonanimated.h"
+#include <xr_3da/skeletonanimated.h>
 #include "ai/stalker/ai_stalker.h"
-#include "../../xrNetServer/net_utils.h"
+#include <xrNetServer/net_utils.h>
 
 using namespace luabind;
 

@@ -1,16 +1,16 @@
 #include "StdAfx.h"
-#include "..\game_base_space.h"
-#include "..\Spectator.h"
+#include "../game_base_space.h"
+#include "../Spectator.h"
 #include "GameSpy_Browser.h"
 #include "GameSpy_Base_Defs.h"
-#include "..\ui\ServerList.h"
-#include "..\MainMenu.h"
+#include <xr_3da/xrGame/ui/ServerList.h>
+#include <xr_3da/xrGame/MainMenu.h>
 
 #include "GameSpy_Available.h"
 #include "GameSpy_QR2.h"
 
 #include "../object_broker.h"
-#include "../string_table.h"
+#include <xr_3da/xrGame/string_table.h>
 
 void __cdecl SBCallback(void* sb, SBCallbackReason reason, void* server, void *instance);
 

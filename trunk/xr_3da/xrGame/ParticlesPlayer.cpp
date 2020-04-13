@@ -5,7 +5,7 @@
 #include "stdafx.h"
 #include "ParticlesPlayer.h"
 #include "../xr_object.h"
-#include "../skeletoncustom.h"
+#include <xr_3da/skeletoncustom.h>
 //-------------------------------------------------------------------------------------
 static void generate_orthonormal_basis(const Fvector& dir,Fmatrix &result)
 {

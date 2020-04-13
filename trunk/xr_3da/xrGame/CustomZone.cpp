@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "../xr_ioconsole.h"
+#include <xr_3da/xr_IOConsole.h>
 #include "customzone.h"
 #include "hit.h"
 #include "PHDestroyable.h"
@@ -7,13 +7,13 @@
 #include "hudmanager.h"
 #include "ParticlesObject.h"
 #include "xrserver_objects_alife_monsters.h"
-#include "../LightAnimLibrary.h"
+#include <xr_3da/LightAnimLibrary.h>
 #include "level.h"
 #include "game_cl_base.h"
-#include "../igame_persistent.h"
+#include <xr_3da/IGame_Persistent.h>
 #include "artifact.h"
 #include "ai_object_location.h"
-#include "../skeletoncustom.h"
+#include <xr_3da/skeletoncustom.h>
 #include "zone_effector.h"
 #include "breakableobject.h"
 

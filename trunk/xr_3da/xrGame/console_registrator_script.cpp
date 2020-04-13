@@ -1,6 +1,6 @@
 #include "pch_script.h"
 #include "console_registrator.h"
-#include "../xr_ioconsole.h"
+#include <xr_3da/XR_IOConsole.h>
 
 using namespace luabind;
 

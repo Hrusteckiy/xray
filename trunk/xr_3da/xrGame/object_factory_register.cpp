@@ -17,7 +17,7 @@
 
 // client entities includes
 #ifndef NO_XR_GAME
-#	include "../std_classes.h"
+#	include <xr_3da/std_classes.h>
 #	include "level.h"
 #	include "gamepersistent.h"
 #	include "hudmanager.h"
@@ -49,7 +49,7 @@
 #	include "ai/crow/ai_crow.h"
 
 #	ifdef DEBUG
-#		include "../StatGraph.h"
+#		include <xr_3da/StatGraph.h>
 #		include "PHDebug.h"
 #	endif // DEBUG
 

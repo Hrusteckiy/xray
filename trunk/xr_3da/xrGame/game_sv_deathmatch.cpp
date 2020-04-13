@@ -6,7 +6,7 @@
 #include "xrserver.h"
 #include "Inventory.h"
 #include "CustomZone.h"
-#include "../igame_persistent.h"
+#include <xr_3da/IGame_Persistent.h>
 #include "clsid_game.h"
 #include "Actor.h"
 #include "game_cl_base.h"
@@ -19,7 +19,7 @@
 
 //#define DELAYED_ROUND_TIME	7000
 #include "ui\UIBuyWndShared.h"
-#include "../xr_ioconsole.h"
+#include <xr_3da/xr_IOConsole.h>
 
 #define UNBUYABLESLOT		20
 

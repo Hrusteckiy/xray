@@ -2,15 +2,15 @@
 
 #include "../feel_touch.h"
 #include "../feel_sound.h"
-#include "../iinputreceiver.h"
-#include "../SkeletonAnimated.h"
+#include <xr_3da/iinputreceiver.h>
+#include <xr_3da/SkeletonAnimated.h>
 #include "actor_flags.h"
 #include "actor_defs.h"
 #include "entity_alive.h"
 #include "PHMovementControl.h"
 #include "PhysicsShell.h"
 #include "InventoryOwner.h"
-#include "../StatGraph.h"
+#include <xr_3da/StatGraph.h>
 #include "PhraseDialogManager.h"
 
 #include "step_manager.h"

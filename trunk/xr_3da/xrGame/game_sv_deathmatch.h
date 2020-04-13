@@ -2,9 +2,9 @@
 
 #include "game_sv_mp.h"
 #include "inventory_space.h"
-#include "../../xrNetServer/client_id.h"
+#include <xrNetServer/client_id.h>
 #include "Hit.h"
-#include "../pure_relcase.h"
+#include <xr_3da/pure_relcase.h>
 
 class	game_sv_Deathmatch			: public game_sv_mp,private pure_relcase
 {

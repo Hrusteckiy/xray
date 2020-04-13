@@ -1,6 +1,6 @@
 #include "pch_script.h"
 #include "GameObject.h"
-#include "../fbasicvisual.h"
+#include <xr_3da/fbasicvisual.h>
 #include "PhysicsShell.h"
 #include "ai_space.h"
 #include "CustomMonster.h" 
@@ -15,13 +15,13 @@
 #include "xrServer_Objects_ALife_Items.h"
 #include "game_cl_base.h"
 #include "object_factory.h"
-#include "../skeletoncustom.h"
+#include <xr_3da/skeletoncustom.h>
 #include "ai_object_location_impl.h"
 #include "game_graph.h"
 #include "ai_debug.h"
 #include "../igame_level.h"
 #include "level.h"
-#include "../../xrNetServer/net_utils.h"
+#include <xrNetServer/net_utils.h>
 #include "script_callback_ex.h"
 #include "MathUtils.h"
 #include "game_cl_base_weapon_usage_statistic.h"

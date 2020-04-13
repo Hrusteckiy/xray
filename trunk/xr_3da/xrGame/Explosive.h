@@ -6,7 +6,7 @@
 
 #define SND_RIC_COUNT 5
 
-#include "../Render.h"
+#include <xr_3da/Render.h>
 #include "../feel_touch.h"
 #include "inventory_item.h"
 #include "ai_sounds.h"

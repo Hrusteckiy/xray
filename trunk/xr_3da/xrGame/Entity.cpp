@@ -14,7 +14,7 @@
 #include "squad_hierarchy_holder.h"
 #include "group_hierarchy_holder.h"
 #include "clsid_game.h"
-#include "../skeletoncustom.h"
+#include <xr_3da/skeletoncustom.h>
 #include "monster_community.h"
 #include "ai_space.h"
 

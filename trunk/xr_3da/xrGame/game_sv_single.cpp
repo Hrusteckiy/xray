@@ -5,11 +5,11 @@
 #include "alife_object_registry.h"
 #include "alife_graph_registry.h"
 #include "alife_time_manager.h"
-#include "../../xrNetServer/net_utils.h"
+#include <xrNetServer/net_utils.h>
 #include "object_broker.h"
 #include "gamepersistent.h"
 #include "xrServer.h"
-#include "..\x_ray.h"
+#include <xr_3da/x_ray.h>
 
 game_sv_Single::game_sv_Single			()
 {

@@ -8,13 +8,13 @@
 #include "ActorEffector.h"
 #include "level.h"
 #include "xr_level_controller.h"
-#include "../skeletoncustom.h"
+#include <xr_3da/skeletoncustom.h>
 #include "ai_object_location.h"
 #include "ExtendedGeom.h"
 #include "MathUtils.h"
 #include "characterphysicssupport.h"
 #include "inventory.h"
-#include "../IGame_Persistent.h"
+#include <xr_3da/IGame_Persistent.h>
 #ifdef DEBUG
 #	include "phdebug.h"
 #endif

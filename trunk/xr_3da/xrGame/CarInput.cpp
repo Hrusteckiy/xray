@@ -2,7 +2,7 @@
 #pragma hdrstop
 #ifdef DEBUG
 #include "ode_include.h"
-#include "../StatGraph.h"
+#include <xr_3da/StatGraph.h>
 #include "PHDebug.h"
 #endif
 #include "alife_space.h"
@@ -14,7 +14,7 @@
 #include "camerafirsteye.h"
 #include "script_entity_action.h"
 #include "xr_level_controller.h"
-#include "../skeletoncustom.h"
+#include <xr_3da/skeletoncustom.h>
 #include "level.h"
 #include "CarWeapon.h"
 

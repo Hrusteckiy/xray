@@ -4,8 +4,8 @@
 
 #include "stdafx.h"
 #include "wound.h"
-#include "../../xrNetServer/net_utils.h"
-#include "../bone.h"
+#include <xrNetServer/net_utils.h>
+#include <xr_3da/bone.h>
 
 CWound::CWound(u16 bone_num)
 {

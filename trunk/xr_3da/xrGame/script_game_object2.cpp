@@ -15,12 +15,12 @@
 #include "script_zone.h"
 #include "object_handler.h"
 #include "script_hit.h"
-#include "../skeletoncustom.h"
+#include <xr_3da/skeletoncustom.h>
 #include "pda.h"
 #include "InfoPortion.h"
 #include "memory_manager.h"
 #include "ai_phrasedialogmanager.h"
-#include "../../xrNetServer/net_utils.h"
+#include <xrNetServer/net_utils.h>
 #include "xrMessages.h"
 #include "custommonster.h"
 #include "memory_manager.h"
@@ -32,7 +32,7 @@
 #include "danger_manager.h"
 #include "memory_space.h"
 #include "actor.h"
-#include "../skeletonanimated.h"
+#include <xr_3da/skeletonanimated.h>
 #include "../CameraBase.h"
 #include "ai/stalker/ai_stalker.h"
 #include "car.h"

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GameSpy_FuncDefs.h"
-#include "..\battleye.h"
+#include <xr_3da/xrGame/battleye.h>
 
 class CGameSpy_QR2
 {

@@ -3,11 +3,11 @@
 #include "Physics.h"
 #include "PHElement.h"
 #include "PHShell.h"
-#include "../skeletoncustom.h"
+#include <xr_3da/skeletoncustom.h>
 
 #pragma warning(disable:4995)
 #pragma warning(disable:4267)
-#include "../../xrODE/ode/src/joint.h"
+#include <xrODE/ode/src/joint.h>
 #pragma warning(default:4995)
 #pragma warning(default:4267)
 extern	class CPHWorld	*ph_world;

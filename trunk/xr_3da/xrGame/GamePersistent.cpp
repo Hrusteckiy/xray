@@ -1,9 +1,9 @@
 #include "pch_script.h"
 #include "gamepersistent.h"
-#include "../fmesh.h"
-#include "../xr_ioconsole.h"
+#include <xr_3da/fmesh.h>
+#include <xr_3da/xr_IOConsole.h>
 #include "gamemtllib.h"
-#include "../skeletoncustom.h"
+#include <xr_3da/skeletoncustom.h>
 #include "profiler.h"
 #include "MainMenu.h"
 #include "UICursor.h"

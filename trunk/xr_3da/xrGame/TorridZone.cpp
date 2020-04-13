@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "torridZone.h"
-#include "../objectanimator.h"
+#include <xr_3da/objectanimator.h>
 #include "xrServer_Objects_ALife_Monsters.h"
 
 CTorridZone::CTorridZone()

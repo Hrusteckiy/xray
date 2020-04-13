@@ -8,7 +8,7 @@
 
 #include "pch_script.h"
 #include "script_lanim.h"
-#include "../LightAnimLibrary.h"
+#include <xr_3da/LightAnimLibrary.h>
 
 
 using namespace luabind;

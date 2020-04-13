@@ -1,5 +1,5 @@
 #pragma once
-#include "../SkeletonAnimated.h"
+#include <xr_3da/SkeletonAnimated.h>
 class CPhysicsShell;
 class interactive_motion
 {

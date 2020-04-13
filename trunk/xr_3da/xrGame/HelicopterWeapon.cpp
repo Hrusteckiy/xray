@@ -2,8 +2,8 @@
 #include "helicopter.h"
 #include "ExplosiveRocket.h"
 #include "xrMessages.h"
-#include "../../xrNetServer/net_utils.h"
-#include "..\skeletoncustom.h"
+#include <xrNetServer/net_utils.h>
+#include <xr_3da/skeletoncustom.h>
 #include "Level.h"
 
 void  

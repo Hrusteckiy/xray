@@ -7,9 +7,9 @@
 #include "MathUtils.h"
 #include "PhysicsShellHolder.h"
 #include "game_object_space.h"
-//#include "../skeletoncustom.h"
-#include "../skeletonanimated.h"
-#include <../../xrODE/ode/src/util.h>
+//#include <xr_3da/skeletoncustom.h>
+#include <xr_3da/skeletonanimated.h>
+#include <xrODE/ode/src/util.h>
 #ifdef DEBUG
 #include	"PHDebug.h"
 #endif

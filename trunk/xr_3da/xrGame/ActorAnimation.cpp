@@ -15,11 +15,11 @@
 #include "hit.h"
 #include "PHDestroyable.h"
 #include "Car.h"
-#include "../skeletonanimated.h"
+#include <xr_3da/skeletonanimated.h>
 #include "clsid_game.h"
 #include "ai_object_location.h"
 #include "game_cl_base.h"
-#include "../motion.h"
+#include <xr_3da/motion.h>
 #include "artifact.h"
 #include "IKLimbsController.h"
 static const float y_spin0_factor		= 0.0f;

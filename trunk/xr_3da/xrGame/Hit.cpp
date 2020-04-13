@@ -2,8 +2,8 @@
 #include "alife_space.h"
 #include "hit.h"
 #include "ode_include.h"
-#include "..\bone.h"
-#include "../../xrNetServer/net_utils.h"
+#include <xr_3da/bone.h>
+#include <xrNetServer/net_utils.h>
 #include "xrMessages.h"
 #include "Level.h"
 
