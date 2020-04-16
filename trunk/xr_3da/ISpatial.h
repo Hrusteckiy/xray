@@ -1,3 +1,5 @@
+#ifndef ISPATIAL_H
+#define ISPATIAL_H
 #pragma once
 
 #include <xrCore/xrPool.h>
@@ -188,3 +190,4 @@ ENGINE_API extern ISpatial_DB*		g_SpatialSpace			;
 ENGINE_API extern ISpatial_DB*		g_SpatialSpacePhysic	;
 
 #pragma pack(pop)
+#endif // ISPATIAL_H

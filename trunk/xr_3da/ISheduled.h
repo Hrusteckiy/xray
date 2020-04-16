@@ -1,3 +1,5 @@
+#ifndef ISHEDULED_H
+#define ISHEDULED_H
 #pragma once
 
 class	ENGINE_API	ISheduled
@@ -27,3 +29,5 @@ public:
 	virtual bool						shedule_Needed		()			= 0;
 
 };
+
+#endif //ISHEDULED_H
