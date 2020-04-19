@@ -71,7 +71,7 @@ static DWORD __stdcall
         //lint -e666
         iMin = min ( (int)nSize , (lstrlen ( pStart ) + 1) ) ;
         //lint +e666
-        lstrcpyn ( lpBaseName , pStart , iMin ) ;
+        (void)lstrcpyn ( lpBaseName , pStart , iMin ) ;
     }
     else
     {
@@ -79,7 +79,7 @@ static DWORD __stdcall
         //lint -e666
         iMin = min ( (int)nSize , (lstrlen ( szBuff ) + 1) ) ;
         //lint +e666
-        lstrcpyn ( lpBaseName , szBuff , iMin ) ;
+        (void)lstrcpyn ( lpBaseName , szBuff , iMin ) ;
     }
     // Always NULL terminate.
     lpBaseName[ iMin ] = '\0' ;

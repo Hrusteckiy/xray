@@ -508,7 +508,8 @@ bool CScriptEntity::bfAssignMovement(CScriptEntityAction *tpEntityAction)
 		}
 		default : {
 			m_monster->movement().set_desirable_speed(0.f);
-			return									(l_tMovementAction.m_bCompleted = true);
+            l_tMovementAction.m_bCompleted = true;
+			return l_tMovementAction.m_bCompleted;
 		}
 	}
 

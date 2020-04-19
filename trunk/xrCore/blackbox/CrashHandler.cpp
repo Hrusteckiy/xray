@@ -395,7 +395,7 @@ LPCTSTR __stdcall GetFaultReason ( EXCEPTION_POINTERS * pExPtrs )
         if ( NULL != dwTemp )
         {
             iCurr += wsprintf ( g_szBuff + iCurr ,
-                                _T ( "%s" )      ,
+                                _T ( "%04d" )      ,
                                 dwTemp            ) ;
         }
         else
@@ -471,7 +471,7 @@ LPCTSTR __stdcall GetFaultReason ( EXCEPTION_POINTERS * pExPtrs )
             if ( (int)dwTemp > ( ( BUFF_SIZE - iCurr) -
                                  ( MAX_SYM_SIZE + 50 )  ) )
             {
-                lstrcpyn ( g_szBuff + iCurr      ,
+                (void)lstrcpyn(g_szBuff + iCurr,
                            pSym->Name            ,
                            BUFF_SIZE - iCurr - 1  ) ;
                 // Gotta leave now
@@ -526,7 +526,7 @@ LPCTSTR __stdcall GetFaultReason ( EXCEPTION_POINTERS * pExPtrs )
             if ( (int)dwTemp > ( BUFF_SIZE - iCurr -
                                  MAX_PATH - 50       ) )
             {
-                lstrcpyn ( g_szBuff + iCurr      ,
+                (void)lstrcpyn(g_szBuff + iCurr,
                            g_stLine.FileName     ,
                            BUFF_SIZE - iCurr - 1  ) ;
                 // Gotta leave now
@@ -584,7 +584,7 @@ BOOL __stdcall GetFaultReasonVB ( EXCEPTION_POINTERS * pExPtrs ,
         {
             return ( NULL != szRet ) ;
         }
-        lstrcpyn ( szBuff   ,
+        (void)lstrcpyn(szBuff,
                    szRet    ,
                    min ( (UINT)lstrlen ( szRet ) + 1, uiSize ) ) ;
     }
@@ -782,7 +782,7 @@ LPCTSTR __stdcall
                 if ( dwTemp > (DWORD)( BUFF_SIZE - iCurr -
                                      ( MAX_SYM_SIZE + 50 ) ) )
                 {
-                    lstrcpyn ( g_szBuff + iCurr      ,
+                    (void)lstrcpyn(g_szBuff + iCurr,
                                pSym->Name            ,
                                BUFF_SIZE - iCurr - 1  ) ;
                     // Gotta leave now
@@ -794,7 +794,7 @@ LPCTSTR __stdcall
                     if ( dwDisp > 0 )
                     {
                         iCurr += wsprintf ( g_szBuff + iCurr         ,
-                                            _T( "%s()") ,
+                                            _T( "%s()+%04d byte(s)") ,
                                             pSym->Name               ,
                                             dwDisp                   );
                     }
@@ -839,7 +839,7 @@ LPCTSTR __stdcall
                 if ( dwTemp > (DWORD)( BUFF_SIZE - iCurr -
                                        ( MAX_PATH + 50     ) ) )
                 {
-                    lstrcpyn ( g_szBuff + iCurr      ,
+                    (void)lstrcpyn ( g_szBuff + iCurr      ,
                                g_stLine.FileName     ,
                                BUFF_SIZE - iCurr - 1  ) ;
                     // Gotta leave now
@@ -851,7 +851,7 @@ LPCTSTR __stdcall
                     if ( dwDisp > 0 )
                     {
                         iCurr += wsprintf(g_szBuff + iCurr             ,
-                                       _T("%s, %d"),
+                                       _T("%s, line %04d+%04d byte(s)"),
                                           g_stLine.FileName            ,
                                           g_stLine.LineNumber          ,
                                           dwDisp                     );
@@ -899,7 +899,7 @@ BOOL __stdcall
         {
             return ( NULL != szRet ) ;
         }
-        lstrcpyn ( szBuff   ,
+        (void)lstrcpyn ( szBuff   ,
                    szRet    ,
                    min ( (UINT)lstrlen ( szRet ) + 1 , uiSize ) ) ;
     }
@@ -931,7 +931,7 @@ BOOL __stdcall
         {
             return ( NULL != szRet ) ;
         }
-        lstrcpyn ( szBuff   ,
+        (void)lstrcpyn ( szBuff   ,
                    szRet    ,
                    min ( (UINT)lstrlen ( szRet ) + 1 , uiSize ) ) ;
     }
@@ -1005,7 +1005,7 @@ BOOL __stdcall GetRegisterStringVB ( EXCEPTION_POINTERS * pExPtrs ,
         {
             return ( NULL != szRet ) ;
         }
-        lstrcpyn ( szBuff   ,
+        (void)lstrcpyn(szBuff,
                    szRet    ,
                    min ( (UINT)lstrlen ( szRet ) + 1 , uiSize ) ) ;
     }
