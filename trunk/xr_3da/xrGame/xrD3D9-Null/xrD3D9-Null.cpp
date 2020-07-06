@@ -47,7 +47,7 @@ CxrD3D9Null::CxrD3D9Null()
 	if (SDKVersion != cSDKVersion)
 	{
 //		LogOut_File("NULL");
-		return NULL;
+        return nullptr;
 	}
 #endif
 	xrIDirect3D9* I = new xrIDirect3D9();

@@ -10,7 +10,7 @@ void CRenderDevice::Initialize()
 	TimerMM.Start				();
 
 	// Unless a substitute hWnd has been specified, create a window to render into
-    if( m_hWnd == NULL)
+    if (m_hWnd == nullptr)
     {
 		const char*	wndclass ="_XRAY_";
 
@@ -18,9 +18,9 @@ void CRenderDevice::Initialize()
 		HINSTANCE hInstance = (HINSTANCE)GetModuleHandle(0);
         WNDCLASS wndClass = { 0, WndProc, 0, 0, hInstance,
                               LoadIcon( hInstance, MAKEINTRESOURCE(IDI_ICON1) ),
-                              LoadCursor( NULL, IDC_ARROW ),
+                              LoadCursor(nullptr, IDC_ARROW),
                               (HBRUSH)GetStockObject(BLACK_BRUSH),
-                              NULL, wndclass };
+                              nullptr, wndclass };
         RegisterClass( &wndClass );
 
         // Set the window's initial style
@@ -45,11 +45,11 @@ void CRenderDevice::Initialize()
 
 	// Command line
 	char *lpCmdLine		= Core.Params;
-	if (strstr(lpCmdLine,"-gpu_sw")!=NULL)		HW.Caps.bForceGPU_SW		= TRUE;
+    if (strstr(lpCmdLine, "-gpu_sw") != nullptr)		HW.Caps.bForceGPU_SW = TRUE;
 	else										HW.Caps.bForceGPU_SW		= FALSE;
-	if (strstr(lpCmdLine,"-gpu_nopure")!=NULL)	HW.Caps.bForceGPU_NonPure	= TRUE;
+    if (strstr(lpCmdLine, "-gpu_nopure") != nullptr)	HW.Caps.bForceGPU_NonPure = TRUE;
 	else										HW.Caps.bForceGPU_NonPure	= FALSE;
-	if (strstr(lpCmdLine,"-gpu_ref")!=NULL)		HW.Caps.bForceGPU_REF		= TRUE;
+    if (strstr(lpCmdLine, "-gpu_ref") != nullptr)		HW.Caps.bForceGPU_REF = TRUE;
 	else										HW.Caps.bForceGPU_REF		= FALSE;
 }
 

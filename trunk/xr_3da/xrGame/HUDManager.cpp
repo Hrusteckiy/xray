@@ -26,8 +26,10 @@ CFontManager::CFontManager()
 
 	FONTS_VEC_IT it		= m_all_fonts.begin();
 	FONTS_VEC_IT it_e	= m_all_fonts.end();
-	for(;it!=it_e;++it)
-		(**it) = NULL;
+    for (; it != it_e; ++it)
+    {
+        (**it) = nullptr;
+    }
 
 	InitializeFonts();
 
@@ -146,7 +148,7 @@ void CHUDManager::Load()
 		return;
 	}
 	pUI					= xr_new<CUI> (this);
-	pUI->Load			(NULL);
+	pUI->Load			(nullptr);
 	OnDisconnected		();
 }
 //--------------------------------------------------------------------

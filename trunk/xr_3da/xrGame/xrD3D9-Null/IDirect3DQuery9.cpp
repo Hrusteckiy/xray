@@ -10,7 +10,7 @@ xrIDirect3DQuery9::xrIDirect3DQuery9(IDirect3DDevice9* pIDirect3DDevice9, D3DQUE
 	APIDEBUG("xrIDirect3DQuery9::xrIDirect3DQuery9");
 	DataSize = 0;
 	memcpy(&Type, &rType, sizeof(rType));
-	CreationCallStack = NULL;
+    CreationCallStack = nullptr;
 	m_pIDirect3DDevice9 = pIDirect3DDevice9;
 };
 

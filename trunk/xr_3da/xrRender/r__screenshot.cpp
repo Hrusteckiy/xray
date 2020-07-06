@@ -42,7 +42,7 @@ void CRender::Screenshot		(IRender_interface::ScreenshotMode mode, LPCSTR name)
 	IDirect3DSurface9*	pFB;
 	D3DLOCKED_RECT		D;
 	HRESULT				hr;
-	hr					= HW.pDevice->CreateOffscreenPlainSurface(Device.dwWidth,Device.dwHeight,D3DFMT_A8R8G8B8,D3DPOOL_SYSTEMMEM,&pFB,NULL);
+	hr					= HW.pDevice->CreateOffscreenPlainSurface(Device.dwWidth,Device.dwHeight,D3DFMT_A8R8G8B8,D3DPOOL_SYSTEMMEM,&pFB,nullptr);
 	if(hr!=D3D_OK)		return;
 
 	hr					= HW.pDevice->GetFrontBufferData(0,pFB);
@@ -77,10 +77,10 @@ void CRender::Screenshot		(IRender_interface::ScreenshotMode mode, LPCSTR name)
 		case IRender_interface::SM_FOR_GAMESAVE:
 			{
 				// texture
-				IDirect3DTexture9*	texture	= NULL;
+                IDirect3DTexture9*	texture = nullptr;
 				hr					= D3DXCreateTexture(HW.pDevice,GAMESAVE_SIZE,GAMESAVE_SIZE,1,0,D3DFMT_DXT1,D3DPOOL_SCRATCH,&texture);
 				if(hr!=D3D_OK)		goto _end_;
-				if(NULL==texture)	goto _end_;
+                if (nullptr == texture)	goto _end_;
 
 				// resize&convert to surface
 				IDirect3DSurface9*	surface = 0;

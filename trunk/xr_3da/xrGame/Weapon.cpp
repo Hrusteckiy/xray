@@ -51,7 +51,7 @@ CWeapon::CWeapon(LPCSTR name)
 	iAmmoElapsed			= -1;
 	iMagazineSize			= -1;
 	m_ammoType				= 0;
-	m_ammoName				= NULL;
+	m_ammoName				= nullptr;
 
 	eHandDependence			= hdNone;
 
@@ -59,11 +59,11 @@ CWeapon::CWeapon(LPCSTR name)
 	m_fZoomRotationFactor	= 0.f;
 
 
-	m_pAmmo					= NULL;
+	m_pAmmo					= nullptr;
 
 
-	m_pFlameParticles2		= NULL;
-	m_sFlameParticles2		= NULL;
+	m_pFlameParticles2		= nullptr;
+	m_sFlameParticles2		= nullptr;
 
 
 	m_fCurrentCartirdgeDisp = 1.f;
@@ -75,7 +75,7 @@ CWeapon::CWeapon(LPCSTR name)
 	m_can_be_strapped		= false;
 	m_ef_main_weapon_type	= u32(-1);
 	m_ef_weapon_type		= u32(-1);
-	m_UIScope				= NULL;
+	m_UIScope				= nullptr;
 	m_set_next_ammoType_on_reload = u32(-1);
 }
 
@@ -226,7 +226,7 @@ void CWeapon::ForceUpdateFireParticles()
 		if (!H_Parent())		return;
 
 		CInventoryOwner* io		= smart_cast<CInventoryOwner*>(H_Parent());
-		if(NULL == io->inventory().ActiveItem())
+        if (nullptr == io->inventory().ActiveItem())
 		{
 				Log("current_state", GetState() );
 				Log("next_state", GetNextState());
@@ -823,7 +823,7 @@ bool CWeapon::Action(s32 cmd, u32 flags)
 					{
 						m_set_next_ammoType_on_reload = l_newType;						
 /*						m_ammoType = l_newType;
-						m_pAmmo = NULL;
+						m_pAmmo = nullptr;
 						if (unlimited_ammo())
 						{
 							m_DefaultCartridge.Load(*m_ammoTypes[m_ammoType], u8(m_ammoType));
@@ -1055,7 +1055,7 @@ void CWeapon::UpdateHUDAddonsVisibility()
 
 	CKinematics* pHudVisual									= smart_cast<CKinematics*>(m_pHUD->Visual());
 	VERIFY(pHudVisual);
-	if (H_Parent() != Level().CurrentEntity()) pHudVisual	= NULL;
+    if (H_Parent() != Level().CurrentEntity()) pHudVisual = nullptr;
 
 
 	if (!pHudVisual)return;
@@ -1229,7 +1229,7 @@ CUIStaticItem* CWeapon::ZoomTexture()
 	if (UseScopeTexture())
 		return m_UIScope;
 	else
-		return NULL;
+        return nullptr;
 }
 
 void CWeapon::SwitchState(u32 S)

@@ -46,7 +46,7 @@ BOOL CBulletManager::test_callback(const collide::ray_defs& rd, CObject* object,
 		CEntity*	entity			= smart_cast<CEntity*>(object);
 		if (entity&&entity->g_Alive()&&(entity->ID()!=bullet->parent_id)){
 			ICollisionForm*	cform	= entity->collidable.model;
-			if ((NULL!=cform) && (cftObject==cform->Type())){
+            if ((nullptr != cform) && (cftObject == cform->Type())){
 				CActor* actor		= smart_cast<CActor*>(entity);
 				CAI_Stalker* stalker= smart_cast<CAI_Stalker*>(entity);
 				// в кого попали?
@@ -207,7 +207,7 @@ void CBulletManager::FireShotmark (SBullet* bullet, const Fvector& vDir, const F
 		if(Level().CurrentEntity() && Level().CurrentEntity()->ID() == R.O->ID()) return;
 
 		ref_shader* pWallmarkShader = (!mtl_pair || mtl_pair->CollideMarks.empty())?
-						NULL:&mtl_pair->CollideMarks[::Random.randI(0,mtl_pair->CollideMarks.size())];;
+            nullptr : &mtl_pair->CollideMarks[::Random.randI(0, mtl_pair->CollideMarks.size())];;
 
 		if (pWallmarkShader && ShowMark)
 		{
@@ -227,7 +227,7 @@ void CBulletManager::FireShotmark (SBullet* bullet, const Fvector& vDir, const F
 		CDB::TRI*	pTri	= Level().ObjectSpace.GetStaticTris()+R.element;
 
 		ref_shader* pWallmarkShader =	(!mtl_pair || mtl_pair->CollideMarks.empty())?
-										NULL:&mtl_pair->CollideMarks[::Random.randI(0,mtl_pair->CollideMarks.size())];;
+            nullptr : &mtl_pair->CollideMarks[::Random.randI(0, mtl_pair->CollideMarks.size())];;
 
 		if (pWallmarkShader && ShowMark)
 		{
@@ -237,7 +237,7 @@ void CBulletManager::FireShotmark (SBullet* bullet, const Fvector& vDir, const F
 	}
 
 	ref_sound* pSound = (!mtl_pair || mtl_pair->CollideSounds.empty())?
-						NULL:&mtl_pair->CollideSounds[::Random.randI(0,mtl_pair->CollideSounds.size())];
+        nullptr : &mtl_pair->CollideSounds[::Random.randI(0, mtl_pair->CollideSounds.size())];
 
 	//проиграть звук
 	if(pSound && ShowMark)
@@ -248,7 +248,7 @@ void CBulletManager::FireShotmark (SBullet* bullet, const Fvector& vDir, const F
 	}
 
 	LPCSTR ps_name = (!mtl_pair || mtl_pair->CollideParticles.empty())?
-NULL:*mtl_pair->CollideParticles[::Random.randI(0,mtl_pair->CollideParticles.size())];
+        nullptr : *mtl_pair->CollideParticles[::Random.randI(0, mtl_pair->CollideParticles.size())];
 
 	SGameMtl*	tgt_mtl = GMLib.GetMaterialByIdx(target_material);
 	BOOL bStatic = !tgt_mtl->Flags.test(SGameMtl::flDynamic);
@@ -367,7 +367,7 @@ void CBulletManager::DynamicObjectHit	(CBulletManager::_event& E)
 
 		SHit	Hit = SHit(	power, 
 							original_dir, 
-							NULL, 
+                            nullptr,
 							u16(E.R.element), 
 							position_in_bone_space, 
 							impulse, 

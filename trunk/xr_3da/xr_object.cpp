@@ -38,7 +38,7 @@ void CObject::cNameVisual_set	(shared_str N)
 		NameVisual				= N;
 		renderable.visual		= Render->model_Create	(*N);
 		
-		CKinematics* old_k	= old_v?old_v->dcast_PKinematics():NULL;
+        CKinematics* old_k = old_v ? old_v->dcast_PKinematics() : nullptr;
 		CKinematics* new_k	= renderable.visual->dcast_PKinematics();
 
 		if(old_k && new_k){
@@ -101,11 +101,11 @@ CObject::CObject		( )		: ISpatial(g_SpatialSpace)
 	// Transform
 	Props.storage				= 0;
 
-	Parent						= NULL;
+    Parent = nullptr;
 
-	NameObject					= NULL;
-	NameSection					= NULL;
-	NameVisual					= NULL;
+    NameObject = nullptr;
+    NameSection = nullptr;
+    NameVisual = nullptr;
 
 #ifdef DEBUG
 	dbg_update_shedule			= u32(-1)/2;

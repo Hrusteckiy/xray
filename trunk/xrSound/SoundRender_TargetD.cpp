@@ -8,9 +8,9 @@
 
 CSoundRender_TargetD::CSoundRender_TargetD():CSoundRender_Target()
 {
-	pBuffer_base	= NULL;
-	pBuffer			= NULL;
-	pControl		= NULL;
+    pBuffer_base = nullptr;
+    pBuffer = nullptr;
+    pControl = nullptr;
 
 	cache_hw_volume	= DSBVOLUME_MIN;
 	cache_hw_freq	= 11025;
@@ -56,7 +56,7 @@ BOOL CSoundRender_TargetD::_initialize	()
 
 	// Create
 	bDX7				= FALSE;
-	R_CHK	(SoundRenderD->pDevice->CreateSoundBuffer(&dsBD, &pBuffer_base, NULL));
+	R_CHK	(SoundRenderD->pDevice->CreateSoundBuffer(&dsBD, &pBuffer_base, nullptr));
 	R_CHK	(pBuffer_base->QueryInterface(IID_IDirectSoundBuffer8,(void **)&pBuffer));
 	R_CHK	(pBuffer->QueryInterface(IID_IDirectSound3DBuffer8,	(void **)&pControl));
 	R_ASSERT(pBuffer_base && pBuffer && pControl);

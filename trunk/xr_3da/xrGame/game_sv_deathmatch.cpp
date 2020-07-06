@@ -59,7 +59,7 @@ game_sv_Deathmatch::game_sv_Deathmatch()
 
 	m_bSpectatorMode = false;
 	m_dwSM_CurViewEntity = 0;
-	m_pSM_CurViewEntity = NULL;
+    m_pSM_CurViewEntity = nullptr;
 	m_dwSM_LastSwitchTime = 0;
 
 	//-------------------------------
@@ -349,7 +349,7 @@ void game_sv_Deathmatch::OnGiveBonus(KILL_RES KillResult, game_PlayerState* pKil
 
 game_PlayerState*	game_sv_Deathmatch::GetWinningPlayer		()
 {
-	game_PlayerState* res = NULL;
+    game_PlayerState* res = nullptr;
 	s16 MaxFrags	= -10000;
 
 	u32		cnt		= get_players_count	();
@@ -538,7 +538,7 @@ void	game_sv_Deathmatch::SM_SwitchOnNextActivePlayer()
 	};
 	
 	
-	CObject* pNewObject				= NULL;
+	CObject* pNewObject				= nullptr;
 	if (!PPlayersCount)
 	{
 		xrClientData*	C			= (xrClientData*) m_server->GetServerClient();
@@ -547,7 +547,7 @@ void	game_sv_Deathmatch::SM_SwitchOnNextActivePlayer()
 	else
 	{
 		it							= PossiblePlayers[::Random.randI((int)PPlayersCount)];
-		xrClientData*	C			= NULL;
+		xrClientData*	C			= nullptr;
 		C							= (xrClientData*)m_server->client_Get(it);
 		pNewObject					=  Level().Objects.net_Find(C->ps->GameID);
 		CActor* pActor				= smart_cast<CActor*>(pNewObject);
@@ -562,7 +562,7 @@ void	game_sv_Deathmatch::SM_SwitchOnNextActivePlayer()
 void game_sv_Deathmatch::net_Relcase(CObject* O)
 {
 	if(m_pSM_CurViewEntity==O)
-		m_pSM_CurViewEntity = NULL;
+        m_pSM_CurViewEntity = nullptr;
 	
 }
 
@@ -859,7 +859,7 @@ void	game_sv_Deathmatch::OnPlayerBuyFinished		(ClientID id_who, NET_Packet& P)
 	CActor* pActor = smart_cast<CActor*>(Level().Objects.net_Find	(ps->GameID));
 	if (pActor)
 	{
-		PIItem pItem = NULL;
+        PIItem pItem = nullptr;
 		xr_vector<u16>				ItemsToDelete;
 
 		bool ExactMatch	= true;
@@ -1766,7 +1766,7 @@ void	game_sv_Deathmatch::check_ForceRespawn		()
 INT	g_sv_Skip_Winner_Waiting = 0;
 bool	game_sv_Deathmatch::HasChampion()
 {
-	game_PlayerState* res = NULL;
+    game_PlayerState* res = nullptr;
 	s16 MaxFragsMin		= -100;
 	s16 MaxFragsCurr	= MaxFragsMin;
 

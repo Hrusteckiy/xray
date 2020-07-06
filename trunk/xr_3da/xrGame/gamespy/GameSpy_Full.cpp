@@ -12,12 +12,12 @@
 
 CGameSpy_Full::CGameSpy_Full()	
 {
-	m_pGSA	= NULL;
-	m_pGS_Patching = NULL;
-	m_pGS_HTTP = NULL;
-	m_pGS_SB = NULL;
+    m_pGSA = nullptr;
+    m_pGS_Patching = nullptr;
+    m_pGS_HTTP = nullptr;
+    m_pGS_SB = nullptr;
 
-	m_hGameSpyDLL	= NULL;
+    m_hGameSpyDLL = nullptr;
 	m_bServicesAlreadyChecked	= false;
 
 	LoadGameSpy();
@@ -42,7 +42,7 @@ CGameSpy_Full::~CGameSpy_Full()
 	if (m_hGameSpyDLL)
 	{
 		FreeLibrary(m_hGameSpyDLL);
-		m_hGameSpyDLL = NULL;
+        m_hGameSpyDLL = nullptr;
 	}
 }
 

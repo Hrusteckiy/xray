@@ -223,7 +223,7 @@ void CActorCondition::UpdateSatiety()
 
 CWound* CActorCondition::ConditionHit(SHit* pHDS)
 {
-	if (GodMode()) return NULL;
+    if (GodMode()) return nullptr;
 	return inherited::ConditionHit(pHDS);
 }
 

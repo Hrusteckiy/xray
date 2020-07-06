@@ -314,7 +314,7 @@ void					CRender::model_Delete			(IRender_DetailModel* & F)
 		CDetail*	D	= (CDetail*)F;
 		D->Unload		();
 		xr_delete		(D);
-		F				= NULL;
+        F = nullptr;
 	}
 }
 IRender_Visual*			CRender::model_CreatePE			(LPCSTR name)	

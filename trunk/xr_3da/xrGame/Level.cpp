@@ -70,9 +70,9 @@ CLevel::CLevel():IPureClient	(Device.GetTimerGlobal())
 {
 	g_bDebugEvents				= strstr(Core.Params,"-debug_ge")?TRUE:FALSE;
 
-	Server						= NULL;
+	Server						= nullptr;
 
-	game						= NULL;
+	game						= nullptr;
 //	game						= xr_new<game_cl_GameState>();
 	game_events					= xr_new<NET_Queue_Event>();
 
@@ -91,7 +91,7 @@ CLevel::CLevel():IPureClient	(Device.GetTimerGlobal())
 	if(!g_dedicated_server)
 		m_map_manager				= xr_new<CMapManager>();
 	else
-		m_map_manager				= NULL;
+		m_map_manager				= nullptr;
 
 //	m_pFogOfWarMngr				= xr_new<CFogOfWarMngr>();
 //----------------------------------------------------
@@ -118,13 +118,13 @@ CLevel::CLevel():IPureClient	(Device.GetTimerGlobal())
 
 	}else
 	{
-		m_level_sound_manager		= NULL;
-		m_client_spawn_manager		= NULL;
-		m_autosave_manager			= NULL;
-		m_space_restriction_manager = NULL;
+		m_level_sound_manager		= nullptr;
+		m_client_spawn_manager		= nullptr;
+		m_autosave_manager			= nullptr;
+		m_space_restriction_manager = nullptr;
 	#ifdef DEBUG
-		m_debug_renderer			= NULL;
-		m_level_debug				= NULL;
+		m_debug_renderer			= nullptr;
+		m_level_debug				= nullptr;
 	#endif
 	}
 
@@ -137,13 +137,13 @@ CLevel::CLevel():IPureClient	(Device.GetTimerGlobal())
 	m_bSynchronization			= false;
 #endif	
 	//---------------------------------------------------------
-	pStatGraphR = NULL;
-	pStatGraphS = NULL;
+    pStatGraphR = nullptr;
+    pStatGraphS = nullptr;
 	//---------------------------------------------------------
 	pObjects4CrPr.clear();
 	pActors4CrPr.clear();
 	//---------------------------------------------------------
-	pCurrentControlEntity = NULL;
+    pCurrentControlEntity = nullptr;
 
 	//---------------------------------------------------------
 	m_dwCL_PingLastSendTime = 0;
@@ -154,8 +154,8 @@ CLevel::CLevel():IPureClient	(Device.GetTimerGlobal())
 	m_sDemoName[0] = 0;
 	m_bDemoSaveMode = FALSE;
 	m_dwStoredDemoDataSize = 0;
-	m_pStoredDemoData = NULL;
-	m_pOldCrashHandler = NULL;
+    m_pStoredDemoData = nullptr;
+    m_pOldCrashHandler = nullptr;
 	m_we_used_old_crach_handler	= false;
 
 //	if ( !strstr( Core.Params, "-tdemo " ) && !strstr(Core.Params,"-tdemof "))
@@ -195,7 +195,7 @@ extern CAI_Space *g_ai_space;
 
 CLevel::~CLevel()
 {
-//	g_pGameLevel		= NULL;
+//	g_pGameLevel		= nullptr;
 	Msg							("- Destroying level");
 
 	Engine.Event.Handler_Detach	(eEntitySpawn,	this);

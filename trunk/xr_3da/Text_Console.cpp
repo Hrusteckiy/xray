@@ -1,16 +1,16 @@
 #include "stdafx.h"
 #include "Text_Console.h"
 
-//ENGINE_API CTextConsole* TextConsole = NULL;
+//ENGINE_API CTextConsole* TextConsole = nullptr;
 extern	const char *			ioc_prompt;
 int g_svTextConsoleUpdateRate = 1;
 
 CTextConsole::CTextConsole()
 {
-	m_pMainWnd = NULL;
-	m_hConsoleWnd = NULL;
-	m_hLogWnd = NULL;
-	m_hLogWndFont = NULL;
+    m_pMainWnd = nullptr;
+    m_hConsoleWnd = nullptr;
+    m_hLogWnd = nullptr;
+    m_hLogWndFont = nullptr;
 
 	m_bScrollLog = true;
 	m_dwStartLine = 0;
@@ -21,7 +21,7 @@ CTextConsole::CTextConsole()
 
 CTextConsole::~CTextConsole()
 {
-	m_pMainWnd = NULL;
+    m_pMainWnd = nullptr;
 };
 //-------------------------------------------------------------------------------------------
 LRESULT CALLBACK TextConsole_WndProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam );
@@ -40,10 +40,10 @@ void	CTextConsole::CreateConsoleWnd()
 
 	// Register the windows class
 	WNDCLASS wndClass = { 0, TextConsole_WndProc, 0, 0, hInstance,
-		NULL,
+        nullptr,
 		LoadCursor( hInstance, IDC_ARROW ),
 		GetStockBrush(GRAY_BRUSH),
-		NULL, wndclass };
+        nullptr, wndclass };
 	RegisterClass( &wndClass );
 
 	// Set the window's initial style
@@ -79,10 +79,10 @@ void	CTextConsole::CreateLogWnd()
 
 	// Register the windows class
 	WNDCLASS wndClass = { 0, TextConsole_LogWndProc, 0, 0, hInstance,
-		NULL,
-		LoadCursor( NULL, IDC_ARROW ),
+        nullptr,
+        LoadCursor(nullptr, IDC_ARROW),
 		GetStockBrush(BLACK_BRUSH),
-		NULL, wndclass };
+        nullptr, wndclass };
 	RegisterClass( &wndClass );
 
 	// Set the window's initial style
@@ -321,7 +321,7 @@ void	CTextConsole::OnFrame			(void)
 {
 	inherited::OnFrame();
 	if (!m_bNeedUpdate && m_dwLastUpdateTime+1000/g_svTextConsoleUpdateRate>Device.dwTimeGlobal) return;
-	InvalidateRect(m_hConsoleWnd, NULL, FALSE);
-	SetCursor(LoadCursor( NULL, IDC_ARROW ));	
+    InvalidateRect(m_hConsoleWnd, nullptr, FALSE);
+    SetCursor(LoadCursor(nullptr, IDC_ARROW));
 	m_bNeedUpdate = true;
 }

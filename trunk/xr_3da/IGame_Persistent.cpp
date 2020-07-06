@@ -17,7 +17,7 @@
 	bool g_dedicated_server	= false;
 #endif
 
-ENGINE_API	IGame_Persistent*		g_pGamePersistent	= NULL;
+ENGINE_API	IGame_Persistent*		g_pGamePersistent	= nullptr;
 
 IGame_Persistent::IGame_Persistent	()
 {
@@ -27,7 +27,7 @@ IGame_Persistent::IGame_Persistent	()
 	Device.seqAppActivate.Add		(this);
 	Device.seqAppDeactivate.Add		(this);
 
-	m_pMainMenu						= NULL;
+	m_pMainMenu						= nullptr;
 
 	pEnvironment					= xr_new<CEnvironment>();
 }

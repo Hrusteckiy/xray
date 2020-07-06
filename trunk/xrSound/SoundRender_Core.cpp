@@ -32,11 +32,11 @@ CSoundRender_Core::CSoundRender_Core	()
     bEAX						= FALSE;
     bDeferredEAX				= FALSE;
 	bUserEnvironment			= FALSE;
-	geom_MODEL					= NULL;
-	geom_ENV					= NULL;
-	geom_SOM					= NULL;
-	s_environment				= NULL;
-	Handler						= NULL;
+	geom_MODEL					= nullptr;
+	geom_ENV					= nullptr;
+	geom_SOM					= nullptr;
+	s_environment				= nullptr;
+	Handler						= nullptr;
 	s_targets_pu				= 0;
 	s_emitters_u				= 0;
     e_current.set_identity		();
@@ -364,7 +364,7 @@ void CSoundRender_Core::_destroy_data( ref_sound_data& S)
 	}
 	R_ASSERT						(0==S.feedback);
 	SoundRender->i_destroy_source	((CSoundRender_Source*)S.handle);
-	S.handle						= NULL;
+    S.handle = nullptr;
 }
 
 CSoundRender_Environment*	CSoundRender_Core::get_environment			( const Fvector& P )
@@ -489,7 +489,7 @@ void CSoundRender_Core::i_eax_commit_setting()
 {
 	// commit eax 
     if (bDeferredEAX)
-    	i_eax_set(&DSPROPSETID_EAX_ListenerProperties, DSPROPERTY_EAXLISTENER_COMMITDEFERREDSETTINGS,NULL,0);
+        i_eax_set(&DSPROPSETID_EAX_ListenerProperties, DSPROPERTY_EAXLISTENER_COMMITDEFERREDSETTINGS, nullptr, 0);
 }
 
 void CSoundRender_Core::object_relcase( CObject* obj )

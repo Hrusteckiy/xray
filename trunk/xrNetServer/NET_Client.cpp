@@ -12,7 +12,7 @@
 #include "dxerr9.h"
 //#pragma warning(pop)
 
-static	INetLog* pClNetLog = NULL; 
+static INetLog* pClNetLog = nullptr;
 
 #define BASE_PORT_LAN_SV	5445
 #define BASE_PORT_LAN_CL	5446
@@ -268,21 +268,21 @@ IPureClient::IPureClient	(CTimer* timer): net_Statistic(timer)
 ,net_csEnumeration(MUTEX_PROFILE_ID(IPureClient::net_csEnumeration))
 #endif // PROFILE_CRITICAL_SECTIONS
 {
-	NET						= NULL;
-	net_Address_server		= NULL;
-	net_Address_device		= NULL;
+    NET = nullptr;
+    net_Address_server = nullptr;
+    net_Address_device = nullptr;
 	device_timer			= timer;
 	net_TimeDelta_User		= 0;
 	net_Time_LastUpdate		= 0;
 	net_TimeDelta			= 0;
 	net_TimeDelta_Calculated = 0;
 
-	pClNetLog = NULL;//xr_new<INetLog>("logs\\net_cl_log.log", timeServer());
+    pClNetLog = nullptr;//xr_new<INetLog>("logs\\net_cl_log.log", timeServer());
 }
 
 IPureClient::~IPureClient	()
 {
-	xr_delete(pClNetLog); pClNetLog = NULL;
+    xr_delete(pClNetLog); pClNetLog = nullptr;
 	psNET_direct_connect = FALSE;
 }
 
@@ -366,7 +366,7 @@ BOOL IPureClient::Connect	(LPCSTR options)
 
 		//---------------------------
 		string1024 tmp="";
-		//	HRESULT CoInitializeExRes = CoInitializeEx(NULL, 0);
+		//	HRESULT CoInitializeExRes = CoInitializeEx(nullptr, 0);
 		//	if (CoInitializeExRes != S_OK && CoInitializeExRes != S_FALSE)
 		//	{
 		//		DXTRACE_ERR(tmp, CoInitializeExRes);
@@ -374,7 +374,7 @@ BOOL IPureClient::Connect	(LPCSTR options)
 		//	};	
 		//---------------------------
 		// Create the IDirectPlay8Client object.
-		HRESULT CoCreateInstanceRes = CoCreateInstance	(CLSID_DirectPlay8Client, NULL, CLSCTX_INPROC_SERVER, IID_IDirectPlay8Client, (LPVOID*) &NET);
+        HRESULT CoCreateInstanceRes = CoCreateInstance(CLSID_DirectPlay8Client, nullptr, CLSCTX_INPROC_SERVER, IID_IDirectPlay8Client, (LPVOID*)&NET);
 		//---------------------------	
 		if (CoCreateInstanceRes != S_OK)
 		{
@@ -393,16 +393,16 @@ BOOL IPureClient::Connect	(LPCSTR options)
 		if (strstr(Core.Params,"-netsim"))		bSimulator = TRUE;
 
 		// Create our IDirectPlay8Address Device Address, --- Set the SP for our Device Address
-		net_Address_device	= NULL;
-		R_CHK(CoCreateInstance	(CLSID_DirectPlay8Address,NULL, CLSCTX_INPROC_SERVER, IID_IDirectPlay8Address,(LPVOID*) &net_Address_device )); 
+        net_Address_device = nullptr;
+        R_CHK(CoCreateInstance(CLSID_DirectPlay8Address, nullptr, CLSCTX_INPROC_SERVER, IID_IDirectPlay8Address, (LPVOID*)&net_Address_device));
 		R_CHK(net_Address_device->SetSP(bSimulator? &CLSID_NETWORKSIMULATOR_DP8SP_TCPIP : &CLSID_DP8SP_TCPIP ));	
 
 		// Create our IDirectPlay8Address Server Address, --- Set the SP for our Server Address
 		WCHAR	ServerNameUNICODE	[256];
 		R_CHK(MultiByteToWideChar(CP_ACP, 0, server_name, -1, ServerNameUNICODE, 256 ));
 
-		net_Address_server = NULL;
-		R_CHK(CoCreateInstance	(CLSID_DirectPlay8Address,NULL, CLSCTX_INPROC_SERVER, IID_IDirectPlay8Address,(LPVOID*) &net_Address_server )); 
+        net_Address_server = nullptr;
+        R_CHK(CoCreateInstance(CLSID_DirectPlay8Address, nullptr, CLSCTX_INPROC_SERVER, IID_IDirectPlay8Address, (LPVOID*)&net_Address_server));
 		R_CHK(net_Address_server->SetSP			(bSimulator? &CLSID_NETWORKSIMULATOR_DP8SP_TCPIP : &CLSID_DP8SP_TCPIP  ));
 		R_CHK(net_Address_server->AddComponent	(DPNA_KEY_HOSTNAME, ServerNameUNICODE, 2*u32(wcslen(ServerNameUNICODE) + 1), DPNA_DATATYPE_STRING ));
 		R_CHK(net_Address_server->AddComponent	(DPNA_KEY_PORT,	&psSV_Port, sizeof(psSV_Port), DPNA_DATATYPE_DWORD ));
@@ -463,11 +463,11 @@ BOOL IPureClient::Connect	(LPCSTR options)
 					&dpAppDesc,				// pdnAppDesc
 					net_Address_server,		// pHostAddr
 					net_Address_device,		// pDeviceInfo
-					NULL,					// pdnSecurity
-					NULL,					// pdnCredentials
-					NULL, 0,				// pvUserConnectData/Size
-					NULL,					// pvAsyncContext
-					NULL,					// pvAsyncHandle
+					nullptr,				// pdnSecurity
+					nullptr,				// pdnCredentials
+					nullptr, 0,				// pvUserConnectData/Size
+					nullptr,				// pvAsyncContext
+					nullptr,				// pvAsyncHandle
 					DPNCONNECT_SYNC);		// dwFlags
 				if (res != S_OK)
 				{
@@ -533,8 +533,8 @@ BOOL IPureClient::Connect	(LPCSTR options)
 					10,						// dwEnumCount
 					1000,					// dwRetryInterval
 					1000,					// dwTimeOut
-					NULL,					// pvUserContext
-					NULL,					// pAsyncHandle
+                    nullptr,				// pvUserContext
+                    nullptr,				// pAsyncHandle
 					DPNENUMHOSTS_SYNC		// dwFlags
 					);
 				if (res != S_OK)
@@ -577,7 +577,7 @@ BOOL IPureClient::Connect	(LPCSTR options)
 
 
 			// ****** Connection
-			IDirectPlay8Address*        pHostAddress = NULL;
+            IDirectPlay8Address* pHostAddress = nullptr;
 			if (net_Hosts.empty())		 
 			{
 				OnInvalidHost();
@@ -603,11 +603,11 @@ BOOL IPureClient::Connect	(LPCSTR options)
 				&dpAppDesc,				// pdnAppDesc
 				pHostAddress,			// pHostAddr
 				net_Address_device,		// pDeviceInfo
-				NULL,					// pdnSecurity
-				NULL,					// pdnCredentials
-				NULL, 0,				// pvUserConnectData/Size
-				NULL,					// pvAsyncContext
-				NULL,					// pvAsyncHandle
+				nullptr,				// pdnSecurity
+				nullptr,				// pdnCredentials
+				nullptr, 0,				// pvUserConnectData/Size
+				nullptr,				// pvAsyncContext
+				nullptr,				// pvAsyncHandle
 				DPNCONNECT_SYNC);		// dwFlags
 			//		R_CHK(res);		
 			net_csEnumeration.Leave		();
@@ -689,8 +689,8 @@ HRESULT	IPureClient::net_Handler(u32 dwMessageType, PVOID pMessage)
 		{
 			PDPNMSG_ENUM_HOSTS_RESPONSE     pEnumHostsResponseMsg;
 			const DPN_APPLICATION_DESC*     pDesc;
-			// HOST_NODE*                      pHostNode = NULL;
-			// WCHAR*                          pwszSession = NULL;
+			// HOST_NODE*                      pHostNode = nullptr;
+			// WCHAR*                          pwszSession = nullptr;
 
 			pEnumHostsResponseMsg			= (PDPNMSG_ENUM_HOSTS_RESPONSE) pMessage;
 			pDesc							= pEnumHostsResponseMsg->pApplicationDescription;
@@ -720,11 +720,11 @@ HRESULT	IPureClient::net_Handler(u32 dwMessageType, PVOID pMessage)
 				CopyMemory(&NODE.dpAppDesc,pDesc,sizeof(DPN_APPLICATION_DESC));
 
 				// Null out all the pointers we aren't copying
-				NODE.dpAppDesc.pwszSessionName					= NULL;
-				NODE.dpAppDesc.pwszPassword						= NULL;
-				NODE.dpAppDesc.pvReservedData					= NULL;
+				NODE.dpAppDesc.pwszSessionName					= nullptr;
+				NODE.dpAppDesc.pwszPassword						= nullptr;
+				NODE.dpAppDesc.pvReservedData					= nullptr;
 				NODE.dpAppDesc.dwReservedDataSize				= 0;
-				NODE.dpAppDesc.pvApplicationReservedData		= NULL;
+				NODE.dpAppDesc.pvApplicationReservedData		= nullptr;
 				NODE.dpAppDesc.dwApplicationReservedDataSize	= 0;
 
 				if( pDesc->pwszSessionName)	{

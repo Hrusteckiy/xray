@@ -96,7 +96,7 @@ HRESULT					xrIDirect3DCubeTexture9::GetCubeMapSurface( D3DCUBEMAP_FACES FaceTyp
 { 
 	APIDEBUG("xrIDirect3DCubeTexture9::GetCubeMapSurface"); 
 
-	*ppCubeMapSurface = NULL;
+    *ppCubeMapSurface = nullptr;
 	xrIDirect3DSurface9* I = new xrIDirect3DSurface9(m_pIDirect3DDevice9, Width,Height,Format,D3DMULTISAMPLE_TYPE(0),0);
 	*ppCubeMapSurface = I;
 

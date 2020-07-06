@@ -34,7 +34,7 @@ void CUISpeechMenu::Init(float x, float y, float width, float height){
 
 void CUISpeechMenu::InitList(LPCSTR section_name){
 	R_ASSERT2(pSettings->section_exist(section_name), section_name);
-	CUIStatic* pItem = NULL;
+    CUIStatic* pItem = nullptr;
 
 	string64 phrase;
 	string256 str;

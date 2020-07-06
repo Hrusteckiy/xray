@@ -69,14 +69,14 @@ struct CUITradeInternal{
 
 CUITradeWnd::CUITradeWnd()
 	:	m_bDealControlsVisible	(false),
-		m_pTrade(NULL),
-		m_pOthersTrade(NULL),
-		bStarted(false)
+    m_pTrade(nullptr),
+    m_pOthersTrade(nullptr),
+    bStarted(false)
 {
 	m_uidata = xr_new<CUITradeInternal>();
 	Init();
 	Hide();
-	SetCurrentItem			(NULL);
+    SetCurrentItem(nullptr);
 }
 
 CUITradeWnd::~CUITradeWnd()
@@ -166,7 +166,7 @@ void CUITradeWnd::Init()
 	AttachChild							(&m_uidata->UIToTalkButton);
 	xml_init.Init3tButton					(uiXml, "button", 1, &m_uidata->UIToTalkButton);
 
-	m_uidata->UIDealMsg					= NULL;
+	m_uidata->UIDealMsg					= nullptr;
 
 	BindDragDropListEnents				(&m_uidata->UIOurBagList);
 	BindDragDropListEnents				(&m_uidata->UIOthersBagList);
@@ -242,7 +242,7 @@ void CUITradeWnd::Update()
 		if( !m_uidata->UIDealMsg->IsActual()){
 			HUD().GetUI()->UIGame()->RemoveCustomStatic("not_enough_money_mine");
 			HUD().GetUI()->UIGame()->RemoveCustomStatic("not_enough_money_other");
-			m_uidata->UIDealMsg			= NULL;
+            m_uidata->UIDealMsg = nullptr;
 		}
 	}
 }
@@ -254,9 +254,9 @@ void CUITradeWnd::Show()
 	inherited::Show					(true);
 	inherited::Enable				(true);
 
-	SetCurrentItem					(NULL);
-	ResetAll						();
-	m_uidata->UIDealMsg				= NULL;
+    SetCurrentItem(nullptr);
+	ResetAll();
+    m_uidata->UIDealMsg = nullptr;
 }
 
 void CUITradeWnd::Hide()
@@ -267,7 +267,7 @@ void CUITradeWnd::Hide()
 	if(bStarted)
 		StopTrade					();
 	
-	m_uidata->UIDealMsg				= NULL;
+    m_uidata->UIDealMsg = nullptr;
 
 	if(HUD().GetUI()->UIGame()){
 		HUD().GetUI()->UIGame()->RemoveCustomStatic("not_enough_money_mine");
@@ -423,7 +423,7 @@ void CUITradeWnd::PerformTrade()
 
 		m_uidata->UIDealMsg->m_endTime	= Device.fTimeGlobal+2.0f;// sec
 	}
-	SetCurrentItem			(NULL);
+    SetCurrentItem(nullptr);
 }
 
 void CUITradeWnd::DisableAll()
@@ -590,7 +590,7 @@ CUICellItem* CUITradeWnd::CurrentItem()
 
 PIItem CUITradeWnd::CurrentIItem()
 {
-	return	(m_pCurrentCellItem)?(PIItem)m_pCurrentCellItem->m_pData : NULL;
+    return	(m_pCurrentCellItem) ? (PIItem)m_pCurrentCellItem->m_pData : nullptr;
 }
 
 void CUITradeWnd::SetCurrentItem(CUICellItem* itm)

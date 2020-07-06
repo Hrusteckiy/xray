@@ -65,7 +65,7 @@ static void *lua_alloc_xr	(void *ud, void *ptr, size_t osize, size_t nsize) {
   (void)osize;
   if (nsize == 0) {
     xr_free	(ptr);
-    return	NULL;
+    return	nullptr;
   }
   else
 #ifdef DEBUG_MEMORY_NAME
@@ -78,7 +78,7 @@ static void *lua_alloc_xr	(void *ud, void *ptr, size_t osize, size_t nsize) {
 static void *lua_alloc_dl	(void *ud, void *ptr, size_t osize, size_t nsize) {
   (void)ud;
   (void)osize;
-  if (nsize == 0)	{	dlfree			(ptr);	 return	NULL;  }
+  if (nsize == 0)	{	dlfree			(ptr);	 return	nullptr;  }
   else				return dlrealloc	(ptr, nsize);
 }
 
@@ -111,9 +111,9 @@ void CScriptStorage::reinit	()
 		lua_close			(m_virtual_machine);
 
 #ifndef USE_DL_ALLOCATOR
-	m_virtual_machine		= lua_newstate(lua_alloc_xr, NULL);
+	m_virtual_machine		= lua_newstate(lua_alloc_xr, nullptr);
 #else // USE_DL_ALLOCATOR
-	m_virtual_machine		= lua_newstate(lua_alloc_dl, NULL);
+    m_virtual_machine		= lua_newstate(lua_alloc_dl, nullptr);
 #endif // USE_DL_ALLOCATOR
 
 	if (!m_virtual_machine) {

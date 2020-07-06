@@ -117,7 +117,7 @@ void __cdecl callback_playerkey(int keyid, int index, void* outbuf, void *userda
 	CGameSpy_QR2* pQR2 = pServer->QR2();
 	if (!pQR2) return;
 
-	xrGameSpyClientData* pCD = NULL;
+    xrGameSpyClientData* pCD = nullptr;
 	
 	if (pServer->IsDedicated())
 	{

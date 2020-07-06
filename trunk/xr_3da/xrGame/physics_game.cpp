@@ -130,7 +130,7 @@ void  TContactShotMark(CDB::TRI* T,dContactGeom* c)
 				{
 					if(data->ph_ref_object&&!mtl_pair->CollideSounds.empty())
 					{
-						CPHSoundPlayer* sp=NULL;
+                        CPHSoundPlayer* sp = nullptr;
 						sp=data->ph_ref_object->ph_sound_player();
 						if(sp) sp->Play(mtl_pair,*(Fvector*)c->pos);
 					}

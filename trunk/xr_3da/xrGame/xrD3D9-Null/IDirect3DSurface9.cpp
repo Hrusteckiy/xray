@@ -17,16 +17,16 @@ xrIDirect3DSurface9::xrIDirect3DSurface9	(IDirect3DDevice9* pIDirect3DDevice9, U
 
 	m_pIDirect3DDevice9 = pIDirect3DDevice9;
 	//-----------------------------------------------
-	Name = NULL;	
+    Name = nullptr;
 	Usage = 0;	
 	Pool = D3DPOOL(0);	
 	MultiSampleQuality = 0;
 	Priority = 0;
 	LockCount = 0;
 	DCCount = 0;
-	CreationCallStack = NULL;
+    CreationCallStack = nullptr;
 	//-----------------------------------------------
-	m_pLockedData = NULL;
+    m_pLockedData = nullptr;
 };
 
 /*** IUnknown methods ***/
@@ -97,13 +97,13 @@ HRESULT			xrIDirect3DSurface9::LockRect		( D3DLOCKED_RECT* pLockedRect,CONST REC
 {
 	APIDEBUG("xrIDirect3DSurface9::LockRect");
 #ifdef _DEBUG
-	if (m_pLockedData != NULL)
+    if (m_pLockedData != nullptr)
 	{
 		_ASSERT(0);
 	}
 #endif
-	UINT RWidth = (NULL == pRect) ? Width : (pRect->right - pRect->left);
-	UINT RHeight = (NULL == pRect) ? Height : (pRect->bottom - pRect->top);
+    UINT RWidth = (nullptr == pRect) ? Width : (pRect->right - pRect->left);
+    UINT RHeight = (nullptr == pRect) ? Height : (pRect->bottom - pRect->top);
 	m_pLockedData = new BYTE[RWidth*RHeight*4];
 	pLockedRect->Pitch = 4;
 	pLockedRect->pBits = m_pLockedData;
@@ -115,13 +115,13 @@ HRESULT			xrIDirect3DSurface9::UnlockRect		()
 	APIDEBUG("xrIDirect3DSurface9::UnlockRect");
 	
 #ifdef _DEBUG
-	if (m_pLockedData == NULL)
+    if (m_pLockedData == nullptr)
 	{
 		_ASSERT(0);
 	}
 #endif
 	delete[] m_pLockedData;
-	m_pLockedData = NULL;
+    m_pLockedData = nullptr;
 
 	return HRESULT_Proc(S_OK);
 };

@@ -229,7 +229,7 @@ Shader*	CResourceManager::_cpp_Create	(LPCSTR s_shader, LPCSTR s_textures, LPCST
 #ifndef DEDICATED_SERVER
 	return	_cpp_Create(_GetBlender(s_shader?s_shader:"null"),s_shader,s_textures,s_constants,s_matrices);
 #else
-	return NULL;
+    return nullptr;
 #endif
 }
 
@@ -238,7 +238,7 @@ Shader*		CResourceManager::Create	(IBlender*	B,		LPCSTR s_shader,	LPCSTR s_textu
 #ifndef DEDICATED_SERVER
 	return	_cpp_Create	(B,s_shader,s_textures,s_constants,s_matrices);
 #else
-	return NULL;
+    return nullptr;
 #endif
 }
 
@@ -251,7 +251,7 @@ Shader*		CResourceManager::Create	(LPCSTR s_shader,	LPCSTR s_textures,	LPCSTR s_
 	#endif
 		return	_cpp_Create	(s_shader,s_textures,s_constants,s_matrices);
 #else
-	return NULL;
+    return nullptr;
 #endif
 }
 

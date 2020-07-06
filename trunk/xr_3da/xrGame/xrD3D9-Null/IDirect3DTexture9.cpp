@@ -96,7 +96,7 @@ HRESULT					xrIDirect3DTexture9::GetSurfaceLevel		( UINT Level,IDirect3DSurface9
 { 
 	APIDEBUG("xrIDirect3DTexture9::GetSurfaceLevel"); 
 	
-	*ppSurfaceLevel = NULL;
+    *ppSurfaceLevel = nullptr;
 	xrIDirect3DSurface9* I = new xrIDirect3DSurface9(m_pIDirect3DDevice9, Width,Height,Format,D3DMULTISAMPLE_TYPE(0),0);
 	*ppSurfaceLevel = I;
 

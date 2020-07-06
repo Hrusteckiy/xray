@@ -16,7 +16,7 @@ void _VertexStream::Create	()
 	Device.Resources->Evict		();
 
 	mSize					= rsDVB_Size*1024;
-	R_CHK					(HW.pDevice->CreateVertexBuffer( mSize, D3DUSAGE_WRITEONLY|D3DUSAGE_DYNAMIC, 0, D3DPOOL_DEFAULT, &pVB, NULL));
+	R_CHK					(HW.pDevice->CreateVertexBuffer( mSize, D3DUSAGE_WRITEONLY|D3DUSAGE_DYNAMIC, 0, D3DPOOL_DEFAULT, &pVB, nullptr));
 	R_ASSERT				(pVB);
 
 	mPosition				= 0;
@@ -90,7 +90,7 @@ void	_VertexStream::reset_begin	()
 void	_VertexStream::reset_end	()
 {
 	Create				();
-	//old_pVB				= NULL;
+	//old_pVB				= nullptr;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -99,7 +99,7 @@ void	_IndexStream::Create	()
 	Device.Resources->Evict		();
 
 	mSize					= rsDIB_Size*1024;
-	R_CHK					(HW.pDevice->CreateIndexBuffer( mSize, D3DUSAGE_WRITEONLY|D3DUSAGE_DYNAMIC, D3DFMT_INDEX16, D3DPOOL_DEFAULT, &pIB, NULL));
+	R_CHK					(HW.pDevice->CreateIndexBuffer( mSize, D3DUSAGE_WRITEONLY|D3DUSAGE_DYNAMIC, D3DFMT_INDEX16, D3DPOOL_DEFAULT, &pIB, nullptr));
 	R_ASSERT				(pIB);
 
 	mPosition				= 0;
@@ -157,5 +157,5 @@ void	_IndexStream::reset_begin	()
 void	_IndexStream::reset_end	()
 {
 	Create				();
-	//old_pIB				= NULL;
+	//old_pIB				= nullptr;
 }

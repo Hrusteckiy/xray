@@ -9,7 +9,7 @@
 #include <dsound.h>
 #pragma warning(pop)
 
-#define _RELEASE(x)		{ if(x) { (x)->Release();       (x)=NULL; } }
+#define _RELEASE(x)		{ if(x) { (x)->Release();       (x)=nullptr; } }
 
 class CSoundRender_CoreD: public CSoundRender_Core
 {

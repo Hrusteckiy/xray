@@ -26,11 +26,11 @@ public:
 
 	CHW()
 	{
-    	hD3D9		= NULL;
-		pD3D		= NULL;
-		pDevice		= NULL;
-		pBaseRT		= NULL;
-		pBaseZB		= NULL;
+    	hD3D9		= nullptr;
+		pD3D		= nullptr;
+		pDevice		= nullptr;
+		pBaseRT		= nullptr;
+		pBaseZB		= nullptr;
 	};
 
 	void					CreateD3D				();

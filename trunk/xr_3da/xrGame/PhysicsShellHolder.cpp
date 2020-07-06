@@ -83,7 +83,7 @@ void CPhysicsShellHolder::create_physic_shell	()
 
 void CPhysicsShellHolder::init			()
 {
-	m_pPhysicsShell				=	NULL		;
+    m_pPhysicsShell = nullptr;
 	b_sheduled					=	false		;
 }
 void CPhysicsShellHolder::correct_spawn_pos()

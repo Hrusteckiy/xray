@@ -11,7 +11,7 @@ class CTextureDescrMngr
 		shared_str			detail_name;
 		R_constant_setup*	        cs;
 		u8				usage;
-                texture_assoc                   ():cs(NULL),usage(0){}
+        texture_assoc() :cs(nullptr), usage(0){}
 	};
 	struct texture_spec
 	{
@@ -24,7 +24,7 @@ class CTextureDescrMngr
 #ifdef _EDITOR
 		STextureParams::ETType	m_type;
 #endif
-                texture_desc            ():m_assoc(NULL),m_spec(NULL){}
+        texture_desc() :m_assoc(nullptr), m_spec(nullptr){}
 	};
 	DEFINE_MAP(shared_str, texture_desc,	map_TD,	map_TDIt);
 

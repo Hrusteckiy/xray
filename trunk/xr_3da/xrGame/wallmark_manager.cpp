@@ -37,7 +37,7 @@ void CWalmarkManager::AddWallmark(const Fvector& dir, const Fvector& start_pos,
 		end_point.set(0,0,0);
 		end_point.mad(start_pos, dir, range);
 
-		ref_shader* pWallmarkShader = wallmarks_vector.empty()?NULL:
+        ref_shader* pWallmarkShader = wallmarks_vector.empty() ? nullptr :
 		&wallmarks_vector[::Random.randI(0,wallmarks_vector.size())];
 
 		if (pWallmarkShader)
@@ -156,7 +156,7 @@ void CWalmarkManager::StartWorkflow()
 		
 		if(test>0.f)
 		{
-			if(Level().ObjectSpace.RayTest(m_pos, pdir, test, collide::rqtStatic, NULL, m_owner))
+            if (Level().ObjectSpace.RayTest(m_pos, pdir, test, collide::rqtStatic, nullptr, m_owner))
 			{
 				++_ray_test;
 				continue;

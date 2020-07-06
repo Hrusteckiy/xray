@@ -104,7 +104,7 @@ BOOL CActor::CanPickItem(const CFrustum& frustum, const Fvector& from, CObject* 
 			collide::ray_defs			RD(from, dir, range, CDB::OPT_CULL, collide::rqtBoth);
 			VERIFY						(!fis_zero(RD.dir.square_magnitude()));
 			RQR.r_clear					();
-			Level().ObjectSpace.RayQuery(RQR,RD, info_trace_callback, &bOverlaped, NULL, item);
+            Level().ObjectSpace.RayQuery(RQR, RD, info_trace_callback, &bOverlaped, nullptr, item);
 		}
 	}
 	return !bOverlaped;
@@ -144,7 +144,7 @@ void	CActor::PickupModeUpdate_COD	()
 		
 	if (!g_Alive() || eacFirstEye != cam_active) 
 	{
-		HUD().GetUI()->UIMainIngameWnd->SetPickUpItem(NULL);
+        HUD().GetUI()->UIMainIngameWnd->SetPickUpItem(nullptr);
 		return;
 	};
 	
@@ -157,13 +157,13 @@ void	CActor::PickupModeUpdate_COD	()
 	//---------------------------------------------------------------------------
 
 	float maxlen = 1000.0f;
-	CInventoryItem* pNearestItem = NULL;
+    CInventoryItem* pNearestItem = nullptr;
 	for (u32 o_it=0; o_it<ISpatialResult.size(); o_it++)
 	{
 		ISpatial*		spatial	= ISpatialResult[o_it];
 		CInventoryItem*	pIItem	= smart_cast<CInventoryItem*> (spatial->dcast_CObject        ());
 		if (0 == pIItem) continue;
-		if (pIItem->object().H_Parent() != NULL) continue;
+        if (pIItem->object().H_Parent() != nullptr) continue;
 		if (!pIItem->CanTake()) continue;
 		if (pIItem->object().CLS_ID == CLSID_OBJECT_G_RPG7 || pIItem->object().CLS_ID == CLSID_OBJECT_G_FAKE)
 			continue;
@@ -195,13 +195,13 @@ void	CActor::PickupModeUpdate_COD	()
 		CFrustum					frustum;
 		frustum.CreateFromMatrix	(Device.mFullTransform,FRUSTUM_P_LRTB|FRUSTUM_P_FAR);
 		if (!CanPickItem(frustum,Device.vCameraPosition,&pNearestItem->object()))
-			pNearestItem = NULL;
+            pNearestItem = nullptr;
 	}
 
 	if (pNearestItem && pNearestItem->cast_game_object())
 	{
 		if (Level().m_feel_deny.is_object_denied(pNearestItem->cast_game_object()))
-				pNearestItem = NULL;
+            pNearestItem = nullptr;
 	}
 
 	HUD().GetUI()->UIMainIngameWnd->SetPickUpItem(pNearestItem);
@@ -217,7 +217,7 @@ void	CActor::PickupModeUpdate_COD	()
 
 void CActor::PickupInfoDraw(CObject* object)
 {
-	LPCSTR draw_str = NULL;
+    LPCSTR draw_str = nullptr;
 	
 	CInventoryItem* item = smart_cast<CInventoryItem*>(object);
 //.	CInventoryOwner* inventory_owner = smart_cast<CInventoryOwner*>(object);

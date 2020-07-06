@@ -18,13 +18,13 @@ ENGINE_API	bool	g_dedicated_server;
 
 BattlEyeServer::BattlEyeServer( xrServer* Server )
 {
-	m_module        = NULL;
-	pfnRun          = NULL;
-	pfnCommand      = NULL;
-	pfnAddPlayer    = NULL;
-	pfnRemovePlayer = NULL;
-	pfnNewPacket    = NULL;
-	Init            = NULL;
+	m_module        = nullptr;
+	pfnRun          = nullptr;
+	pfnCommand      = nullptr;
+	pfnAddPlayer    = nullptr;
+	pfnRemovePlayer = nullptr;
+	pfnNewPacket    = nullptr;
+	Init            = nullptr;
 	m_succefull     = false;
 
 	if ( !Level().battleye_system.InitDir() )
@@ -51,7 +51,7 @@ BattlEyeServer::BattlEyeServer( xrServer* Server )
 		{
 			Msg( "! Error FreeLibrary for %s", BATTLEYE_SERVER_DLL );
 		}
-		m_module = NULL;
+        m_module = nullptr;
 		return;
 	}
 
@@ -79,12 +79,12 @@ BattlEyeServer::BattlEyeServer( xrServer* Server )
 		{
 			Msg( "! Error FreeLibrary for %s", BATTLEYE_SERVER_DLL );
 		}
-		m_module        = NULL;
-		pfnRun          = NULL;
-		pfnCommand      = NULL;
-		pfnAddPlayer    = NULL;
-		pfnRemovePlayer = NULL;
-		pfnNewPacket    = NULL;
+		m_module        = nullptr;
+		pfnRun          = nullptr;
+		pfnCommand      = nullptr;
+		pfnAddPlayer    = nullptr;
+		pfnRemovePlayer = nullptr;
+		pfnNewPacket    = nullptr;
 		return;
 	}
 }
@@ -234,7 +234,7 @@ void BattlEyeServer::NewPacket( int player, void *packet, int len )
 
 bool BattlEyeServer::IsLoaded()
 {
-	return m_module != NULL;
+    return m_module != nullptr;
 }
 
 BattlEyeServer::~BattlEyeServer()
@@ -258,12 +258,12 @@ void BattlEyeServer::ReleaseDLL()
 			Msg( "! Error FreeLibrary for %s", BATTLEYE_SERVER_DLL );
 		}
 	}
-	m_module        = NULL;
-	pfnRun          = NULL;
-	pfnCommand      = NULL;
-	pfnAddPlayer    = NULL;
-	pfnRemovePlayer = NULL;
-	pfnNewPacket    = NULL;
+	m_module        = nullptr;
+	pfnRun          = nullptr;
+	pfnCommand      = nullptr;
+	pfnAddPlayer    = nullptr;
+	pfnRemovePlayer = nullptr;
+	pfnNewPacket    = nullptr;
 }
 
 #endif // BATTLEYE

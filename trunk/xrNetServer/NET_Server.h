@@ -172,7 +172,7 @@ protected:
 	IClient*				ID_to_client		(ClientID ID, bool ScanAll = false);
 
 	virtual IClient*		new_client			( SClientConnectData* cl_data )   =0;
-			bool			GetClientAddress	(IDirectPlay8Address* pClientAddress, ip_address& Address, DWORD* pPort = NULL);
+			bool			GetClientAddress	(IDirectPlay8Address* pClientAddress, ip_address& Address, DWORD* pPort = nullptr);
 
 			IBannedClient*	GetBannedClient		(const ip_address& Address);			
 			void			BannedList_Save		();
@@ -221,7 +221,7 @@ public:
 	BOOL					HasBandwidth			(IClient* C);
 
 	IC int					GetPort					()				{ return psNET_Port; };
-			bool			GetClientAddress		(ClientID ID, ip_address& Address, DWORD* pPort = NULL);
+			bool			GetClientAddress		(ClientID ID, ip_address& Address, DWORD* pPort = nullptr);
 	virtual bool			DisconnectClient		(IClient* C);
 	virtual bool			DisconnectClient		(IClient* C,string512& Reason);
 	virtual bool			DisconnectAddress		(const ip_address& Address);

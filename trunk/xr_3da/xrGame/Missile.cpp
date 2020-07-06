@@ -56,7 +56,7 @@ void CMissile::reinit		()
 	m_fThrowForce		= 0;
 	m_dwDestroyTime		= 0xffffffff;
 	m_bPending			= false;
-	m_fake_missile		= NULL;
+	m_fake_missile		= nullptr;
 	SetHUDmode			(FALSE);
 	SetState			( MS_HIDDEN );
 }
@@ -416,7 +416,7 @@ void CMissile::setup_throw_params()
 	if (this == inventory_owner->inventory().ActiveItem())
 	{
 		CInventoryOwner* io		= smart_cast<CInventoryOwner*>(H_Parent());
-		if(NULL == io->inventory().ActiveItem())
+        if (nullptr == io->inventory().ActiveItem())
 		{
 				Log("current_state", GetState() );
 				Log("next_state", GetNextState());
@@ -481,7 +481,7 @@ void CMissile::OnEvent(NET_Packet& P, u16 type)
 			bool IsFakeMissile = false;
 			if (m_fake_missile && (id == m_fake_missile->ID()))
 			{
-				m_fake_missile	= NULL;
+                m_fake_missile = nullptr;
 				IsFakeMissile = true;
 			}
 
@@ -637,7 +637,7 @@ void	CMissile::net_Relcase(CObject* O)
 		if(O==smart_cast<CObject*>((CPhysicsShellHolder*)PPhysicsShell()->get_CallbackData()))
 		{
 			PPhysicsShell()->remove_ObjectContactCallback(ExitContactCallback);
-			PPhysicsShell()->set_CallbackData(NULL);
+            PPhysicsShell()->set_CallbackData(nullptr);
 		}
 	}
 
@@ -682,7 +682,7 @@ void CMissile::OnDrawUI()
 
 void	 CMissile::ExitContactCallback(bool& do_colide,bool bo1,dContact& c,SGameMtl * /*material_1*/,SGameMtl * /*material_2*/)
 {
-	dxGeomUserData	*gd1=NULL,	*gd2=NULL;
+    dxGeomUserData	*gd1 = nullptr, *gd2 = nullptr;
 	if(bo1)
 	{
 		gd1 =retrieveGeomUserData(c.geom.g1);

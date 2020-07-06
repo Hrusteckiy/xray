@@ -15,9 +15,9 @@
 #include "../gametaskmanager.h"
 
 CUITaskItem::CUITaskItem			(CUIEventsWnd* w)
-:m_GameTask			(NULL),
-m_TaskObjectiveIdx(u16(-1)),
-m_EventsWnd(w)
+    :m_GameTask(nullptr),
+    m_TaskObjectiveIdx(u16(-1)),
+    m_EventsWnd(w)
 {
 }
 
@@ -178,7 +178,7 @@ void CUITaskRootItem::OnSwitchDescriptionClicked	(CUIWindow*, void*)
 	m_switchDescriptionBtn->SetButtonMode(m_EventsWnd->GetDescriptionMode() ? CUIButton::BUTTON_PUSHED : CUIButton::BUTTON_NORMAL);
 
 	m_EventsWnd->SetDescriptionMode						(!m_EventsWnd->GetDescriptionMode());
-	OnItemClicked										(this, NULL);
+	OnItemClicked										(this, nullptr);
 }
 
 void CUITaskRootItem::MarkSelected (bool b)
@@ -295,7 +295,7 @@ void CUITaskSubItem::MarkSelected (bool b)
 CUIUserTaskItem::CUIUserTaskItem(CUIEventsWnd* w)
 :inherited(w)
 {
-	m_edtWnd = NULL;
+	m_edtWnd = nullptr;
 	Init();
 }
 
@@ -356,7 +356,7 @@ void CUIUserTaskItem::Update					()
 	inherited::Update		();
 	SGameTaskObjective	*obj				= &m_GameTask->m_Objectives[m_TaskObjectiveIdx];
 	CMapLocation* ml						= obj->LinkedMapLocation();
-	bool bHasLocation						= (NULL != ml);
+	bool bHasLocation						= (nullptr != ml);
 	m_showPointerBtn->Show					(bHasLocation && ml->SpotEnabled());
 	if(bHasLocation)
 	{

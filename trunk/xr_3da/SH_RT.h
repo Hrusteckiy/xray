@@ -27,7 +27,7 @@ public:
 struct ENGINE_API		resptrcode_crt	: public resptr_base<CRT>
 {
 	void				create			(LPCSTR Name, u32 w, u32 h, D3DFORMAT f);
-	void				destroy			()	{ _set(NULL);		}
+	void				destroy			()	{ _set(nullptr);		}
 };
 typedef	resptr_core<CRT,resptrcode_crt>		ref_rt;
 
@@ -55,7 +55,7 @@ public:
 struct ENGINE_API		resptrcode_crtc	: public resptr_base<CRTC>
 {
 	void				create			(LPCSTR Name, u32 size, D3DFORMAT f);
-	void				destroy			()	{ _set(NULL);		}
+	void				destroy			()	{ _set(nullptr);		}
 };
 typedef	resptr_core<CRTC,resptrcode_crtc>		ref_rtc;
 

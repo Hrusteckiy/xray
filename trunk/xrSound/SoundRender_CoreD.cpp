@@ -9,10 +9,10 @@ CSoundRender_CoreD*	SoundRenderD= 0;
 
 CSoundRender_CoreD::CSoundRender_CoreD	():CSoundRender_Core()
 {
-	pDevice						= NULL;
-	pBuffer						= NULL;
-	pListener					= NULL;
-	pExtensions					= NULL;
+    pDevice = nullptr;
+    pBuffer = nullptr;
+    pListener = nullptr;
+    pExtensions = nullptr;
 }
 
 CSoundRender_CoreD::~CSoundRender_CoreD()
@@ -60,8 +60,9 @@ void CSoundRender_CoreD::_initialize	(u64 window)
 	bPresent			= FALSE;
 
 	// DirectX device
-	if( FAILED			( EAXDirectSoundCreate8( NULL, &pDevice, NULL ) ) )
-		if( FAILED		( DirectSoundCreate8( NULL, &pDevice, NULL ) ) )	return;
+    if (FAILED(EAXDirectSoundCreate8(nullptr, &pDevice, nullptr)))
+        if (FAILED(DirectSoundCreate8(nullptr, &pDevice, nullptr)))
+            return;
 	if( FAILED			( pDevice->SetCooperativeLevel(  (HWND)window, DSSCL_PRIORITY ) ) )	
 	{
 		_destroy();
@@ -74,7 +75,7 @@ void CSoundRender_CoreD::_initialize	(u64 window)
 	dsbd.dwSize			= sizeof( DSBUFFERDESC );
 	dsbd.dwFlags		= DSBCAPS_CTRL3D | DSBCAPS_PRIMARYBUFFER;
 	dsbd.dwBufferBytes	= 0;
-	if( FAILED	( pDevice->CreateSoundBuffer( &dsbd, &pBuffer, NULL ) ) )
+    if (FAILED(pDevice->CreateSoundBuffer(&dsbd, &pBuffer, nullptr)))
 	{
 		_destroy();
 		return;
@@ -125,7 +126,7 @@ void CSoundRender_CoreD::_initialize	(u64 window)
         desc.dwBufferBytes 		= 64;  
         desc.lpwfxFormat 		= &wave; 
 
-		if (DS_OK==pDevice->CreateSoundBuffer(&desc, &pTempBuf, NULL)){
+        if (DS_OK == pDevice->CreateSoundBuffer(&desc, &pTempBuf, nullptr)){
         	bEAX				= TRUE;
 			if (FAILED(pTempBuf->QueryInterface(IID_IKsPropertySet, (LPVOID *)&pExtensions))){
                 bEAX			= FALSE;
@@ -193,13 +194,13 @@ void CSoundRender_CoreD::_clear	()
 void	CSoundRender_CoreD::i_eax_set			(const GUID* guid, u32 prop, void* val, u32 sz)
 {
 	VERIFY	(pExtensions);
-	R_CHK	(pExtensions->Set		(*guid, prop, NULL, 0, val, sz));
+    R_CHK(pExtensions->Set(*guid, prop, nullptr, 0, val, sz));
 }
 void	CSoundRender_CoreD::i_eax_get			(const GUID* guid, u32 prop, void* val, u32 sz)
 {
 	unsigned long total_bytes;
 	VERIFY	(pExtensions);
-	R_CHK	(pExtensions->Get		(*guid, prop, NULL, 0, val, sz, &total_bytes));
+    R_CHK(pExtensions->Get(*guid, prop, nullptr, 0, val, sz, &total_bytes));
 }
 
 void CSoundRender_CoreD::update_listener( const Fvector& P, const Fvector& D, const Fvector& N, float dt )

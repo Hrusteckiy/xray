@@ -12,14 +12,14 @@ xrIDirect3DVertexBuffer9::xrIDirect3DVertexBuffer9(IDirect3DDevice9*	pIDirect3DD
 	APIDEBUG("xrIDirect3DVertexBuffer9::xrIDirect3DVertexBuffer9");
 	m_pIDirect3DDevice9 = pIDirect3DDevice9;
 	//-----------------------------------------------
-	Name = NULL;
+    Name = nullptr;
 	Length = iLength;
 	Usage = iUsage;
 	m_FVF = iFVF;
 	Pool = iPool;
 	Priority = 0;
 	LockCount = 0;
-	CreationCallStack = NULL;
+    CreationCallStack = nullptr;
 	//-----------------------------------------------	
 	m_pBuffer = new BYTE[Length];
 

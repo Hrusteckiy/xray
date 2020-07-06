@@ -34,25 +34,25 @@ void CBackend::OnFrameBegin	()
 
 void CBackend::Invalidate	()
 {
-	pRT[0]						= NULL;
-	pRT[1]						= NULL;
-	pRT[2]						= NULL;
-	pRT[3]						= NULL;
-	pZB							= NULL;
+	pRT[0]						= nullptr;
+	pRT[1]						= nullptr;
+	pRT[2]						= nullptr;
+	pRT[3]						= nullptr;
+	pZB							= nullptr;
 
-	decl						= NULL;
-	vb							= NULL;
-	ib							= NULL;
+	decl						= nullptr;
+	vb							= nullptr;
+	ib							= nullptr;
 	vb_stride					= 0;
 
-	state						= NULL;
-	ps							= NULL;
-	vs							= NULL;
-	ctable						= NULL;
+	state						= nullptr;
+	ps							= nullptr;
+	vs							= nullptr;
+	ctable						= nullptr;
 
-	T							= NULL;
-	M							= NULL;
-	C							= NULL;
+	T							= nullptr;
+	M							= nullptr;
+	C							= nullptr;
 
 	colorwrite_mask				= u32(-1);
 
@@ -63,7 +63,7 @@ void CBackend::Invalidate	()
 #endif
 }
 
-void	CBackend::set_ClipPlanes	(u32 _enable, Fplane*	_planes /*=NULL */, u32 count/* =0*/)
+void	CBackend::set_ClipPlanes	(u32 _enable, Fplane*	_planes /*=nullptr */, u32 count/* =0*/)
 {
 	if (0==HW.Caps.geometry.dwClipPlanes)	return;
 	if (!_enable)	{
@@ -76,7 +76,7 @@ void	CBackend::set_ClipPlanes	(u32 _enable, Fplane*	_planes /*=NULL */, u32 coun
 	if		(count>HW.Caps.geometry.dwClipPlanes)	count=HW.Caps.geometry.dwClipPlanes;
 
 	D3DXMATRIX			worldToClipMatrixIT;
-	D3DXMatrixInverse	(&worldToClipMatrixIT,NULL,(D3DXMATRIX*)&Device.mFullTransform);
+	D3DXMatrixInverse	(&worldToClipMatrixIT,nullptr,(D3DXMATRIX*)&Device.mFullTransform);
 	D3DXMatrixTranspose	(&worldToClipMatrixIT,&worldToClipMatrixIT);
 	for		(u32 it=0; it<count; it++)		{
 		Fplane&		P			= _planes	[it];
@@ -153,17 +153,17 @@ void CBackend::set_Textures			(STextureList* _T)
 	// clear remaining stages (PS)
 	for (++_last_ps; _last_ps<16 && textures_ps[_last_ps]; _last_ps++)	{
 		textures_ps[_last_ps]			= 0;
-		CHK_DX							(HW.pDevice->SetTexture(_last_ps,NULL));
+        CHK_DX(HW.pDevice->SetTexture(_last_ps, nullptr));
 	}
 	// clear remaining stages (VS)
 	for (++_last_vs; _last_vs<5 && textures_vs[_last_vs]; _last_vs++)		{
 		textures_vs[_last_vs]			= 0;
-		CHK_DX							(HW.pDevice->SetTexture(_last_vs+256,NULL));
+        CHK_DX(HW.pDevice->SetTexture(_last_vs + 256, nullptr));
 	}
 }
 #else
 
-void	CBackend::set_ClipPlanes	(u32 _enable, Fmatrix*	_xform  /*=NULL */, u32 fmask/* =0xff */) {}
+void	CBackend::set_ClipPlanes	(u32 _enable, Fmatrix*	_xform  /*=nullptr */, u32 fmask/* =0xff */) {}
 void CBackend::set_Textures			(STextureList* _T) {}
 
 #endif

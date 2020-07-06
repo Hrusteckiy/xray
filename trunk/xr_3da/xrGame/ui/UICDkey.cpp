@@ -19,7 +19,7 @@ void CUICDkey::OnFocusLost()
 	{
 		m_bInputFocus = false;
 		m_iKeyPressAndHold = 0;
-		GetMessageTarget()->SendMessage(this,EDIT_TEXT_COMMIT,NULL);
+        GetMessageTarget()->SendMessage(this, EDIT_TEXT_COMMIT, nullptr);
 	}
 }
 

@@ -4,7 +4,7 @@
 
 CGameSpy_Available::CGameSpy_Available()
 {
-	m_hGameSpyDLL = NULL;
+    m_hGameSpyDLL = nullptr;
 	//-----------------------------------------------
 	LPCSTR			g_name	= "xrGameSpy.dll";
 	Log				("Loading DLL:",g_name);
@@ -17,7 +17,7 @@ CGameSpy_Available::CGameSpy_Available()
 
 CGameSpy_Available::CGameSpy_Available(HMODULE hGameSpyDLL)
 {
-	m_hGameSpyDLL = NULL;
+    m_hGameSpyDLL = nullptr;
 	LoadGameSpy(hGameSpyDLL);
 }
 
@@ -26,7 +26,7 @@ CGameSpy_Available::~CGameSpy_Available()
 	if (m_hGameSpyDLL)
 	{
 		FreeLibrary(m_hGameSpyDLL);
-		m_hGameSpyDLL = NULL;
+        m_hGameSpyDLL = nullptr;
 	}
 };
 

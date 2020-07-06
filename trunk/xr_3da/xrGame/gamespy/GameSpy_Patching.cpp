@@ -5,7 +5,7 @@
 
 CGameSpy_Patching::CGameSpy_Patching()
 {
-	m_hGameSpyDLL = NULL;
+    m_hGameSpyDLL = nullptr;
 
 	LPCSTR			g_name	= "xrGameSpy.dll";
 	Log				("Loading DLL:",g_name);
@@ -17,7 +17,7 @@ CGameSpy_Patching::CGameSpy_Patching()
 };
 CGameSpy_Patching::CGameSpy_Patching(HMODULE hGameSpyDLL)
 {
-	m_hGameSpyDLL = NULL;
+    m_hGameSpyDLL = nullptr;
 
 	LoadGameSpy(hGameSpyDLL);
 };
@@ -26,7 +26,7 @@ CGameSpy_Patching::~CGameSpy_Patching()
 	if (m_hGameSpyDLL)
 	{
 		FreeLibrary(m_hGameSpyDLL);
-		m_hGameSpyDLL = NULL;
+        m_hGameSpyDLL = nullptr;
 	}
 };
 void	CGameSpy_Patching::LoadGameSpy(HMODULE hGameSpyDLL)

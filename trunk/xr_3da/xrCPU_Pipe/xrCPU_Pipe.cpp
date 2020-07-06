@@ -46,7 +46,7 @@ extern "C" {
 		T->m44_mul	= xrM44_Mul_x86;
 		T->transfer = xrTransfer_x86;
 		T->memCopy	= xrMemCopy_x86;
-		T->memFill	= NULL;
+		T->memFill	= nullptr;
 		T->memFill32= xrMemFill32_MMX;
 		
 		// SSE

@@ -65,7 +65,7 @@ void CSoundRender_CoreA::_initialize	(u64 window)
 
     // OpenAL device
     pDevice						= alcOpenDevice		(deviceDesc.name.c_str());
-	if (pDevice == NULL){
+    if (pDevice == nullptr){
 		Log						("SOUND: OpenAL: Failed to create device.");
 		bPresent				= FALSE;
 		return;
@@ -77,7 +77,7 @@ void CSoundRender_CoreA::_initialize	(u64 window)
 	Msg				        	("SOUND: OpenAL: Required device: %s. Created device: %s.", deviceDesc.name.c_str(), deviceSpecifier);
 
     // Create context
-    pContext					= alcCreateContext	(pDevice,NULL);
+    pContext = alcCreateContext(pDevice, nullptr);
 	if (0==pContext){
 		Log						("SOUND: OpenAL: Failed to create context.");
 		bPresent				= FALSE;
@@ -102,9 +102,9 @@ void CSoundRender_CoreA::_initialize	(u64 window)
     // Check for EAX extension
     bEAX 				        = deviceDesc.eax && !deviceDesc.eax_unwanted;
     eaxSet 				        = (EAXSet)alGetProcAddress	((const ALchar*)"EAXSet");
-    if (eaxSet==NULL) bEAX 		= false;
+    if (eaxSet == nullptr) bEAX = false;
     eaxGet 				        = (EAXGet)alGetProcAddress	((const ALchar*)"EAXGet");
-    if (eaxGet==NULL) bEAX 		= false;
+    if (eaxGet == nullptr) bEAX = false;
 
     if (bEAX){
 		bDeferredEAX			= EAXTestSupport(TRUE);
@@ -161,7 +161,7 @@ void CSoundRender_CoreA::_clear	()
         xr_delete				(T);
 	}
     // Reset the current context to NULL.
-    alcMakeContextCurrent		(NULL);         
+    alcMakeContextCurrent(nullptr);
     // Release the context and the device.
     alcDestroyContext			(pContext);		pContext	= 0;
     alcCloseDevice				(pDevice);		pDevice		= 0;

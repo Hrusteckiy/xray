@@ -49,7 +49,7 @@ bool	ReadRegistryValue(LPCSTR rKeyName, DWORD rKeyType, void* value )
 		}break;
 	};	
 		
-	res = RegQueryValueEx(hKey, rKeyName, NULL, &rKeyType, (LPBYTE)rBuf, &KeyValueSize);
+    res = RegQueryValueEx(hKey, rKeyName, nullptr, &rKeyType, (LPBYTE)rBuf, &KeyValueSize);
 	if (hKey != 0) RegCloseKey(hKey);
 
 	if (res != ERROR_SUCCESS)

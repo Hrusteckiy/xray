@@ -55,7 +55,7 @@ void	CMusicStream::DeleteSound	(CSoundStream* pSnd)
 
 	if (slot>=0){
 		xr_delete(streams[slot]);
-		pSnd = NULL;
+        pSnd = nullptr;
 	}
 }
 

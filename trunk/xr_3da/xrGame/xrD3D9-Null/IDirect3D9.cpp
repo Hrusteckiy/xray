@@ -14,7 +14,7 @@ xrIDirect3D9::xrIDirect3D9() : m_refCount(0)
 {
 	APIDEBUG("xrIDirect3D9::xrIDirect3D9");
 //#ifdef D3D_DEBUG_INFO
-	Version = NULL;
+    Version = nullptr;
 //#endif
 };
 
@@ -118,13 +118,13 @@ HRESULT xrIDirect3D9::GetDeviceCaps( UINT Adapter,D3DDEVTYPE DeviceType,D3DCAPS9
 HMONITOR xrIDirect3D9::GetAdapterMonitor( UINT Adapter)
 {
 	APIDEBUG("xrIDirect3D9::GetAdapterMonitor");
-	return NULL;
+    return nullptr;
 };
 
 HRESULT xrIDirect3D9::CreateDevice	(UINT Adapter,D3DDEVTYPE DeviceType,HWND hFocusWindow,DWORD BehaviorFlags,D3DPRESENT_PARAMETERS* pPresentationParameters,IDirect3DDevice9** ppReturnedDeviceInterface)
 {
 	APIDEBUG("xrIDirect3D9::CreateDevice");
-	*ppReturnedDeviceInterface = NULL;
+    *ppReturnedDeviceInterface = nullptr;
 	xrIDirect3DDevice9* I = new xrIDirect3DDevice9(this, pPresentationParameters);
 	*ppReturnedDeviceInterface = I;
 	return HRESULT_Proc(S_OK);

@@ -273,7 +273,7 @@ float evalEnvelope( CEnvelope *env, float time ){
          	case BEH_RESET:            return 0.0f;
          	case BEH_CONSTANT:			return skey->value;
          	case BEH_REPEAT:
-            	time = range( time, skey->time, ekey->time, NULL );
+                time = range(time, skey->time, ekey->time, nullptr);
             break;
          	case BEH_OSCILLATE:
             	time = range( time, skey->time, ekey->time, &noff );
@@ -295,7 +295,7 @@ float evalEnvelope( CEnvelope *env, float time ){
          	case BEH_RESET:            return 0.0f;
          	case BEH_CONSTANT:			return ekey->value;
          	case BEH_REPEAT:
-            	time = range( time, skey->time, ekey->time, NULL );
+                time = range(time, skey->time, ekey->time, nullptr);
             break;
          	case BEH_OSCILLATE:
             	time = range( time, skey->time, ekey->time, &noff );

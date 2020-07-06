@@ -23,7 +23,7 @@ public:
 private:
 	void						_clear			()
 	{
-		pVB			= NULL;
+		pVB			= nullptr;
 		mSize		= 0;
 		mPosition	= 0;
 		mDiscardID	= 0;
@@ -60,7 +60,7 @@ public:
 private:
 	void						_clear	()
 	{
-		pIB			= NULL;
+		pIB			= nullptr;
 		mSize		= 0;
 		mPosition	= 0;
 		mDiscardID	= 0;

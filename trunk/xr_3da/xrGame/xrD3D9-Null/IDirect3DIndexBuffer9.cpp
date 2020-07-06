@@ -14,14 +14,14 @@ xrIDirect3DIndexBuffer9::xrIDirect3DIndexBuffer9(IDirect3DDevice9*	pIDirect3DDev
 	
 //#ifdef D3D_DEBUG_INFO
 	//-----------------------------------------------
-	Name = NULL;
+    Name = nullptr;
 	Length = iLength;
 	Usage = iUsage;
 	Format = iFormat;
 	Pool = iPool;
 	Priority = 0;
 	LockCount = 0;
-	CreationCallStack = NULL;
+    CreationCallStack = nullptr;
 	//-----------------------------------------------
 //#endif
 	

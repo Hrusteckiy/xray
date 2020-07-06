@@ -6,7 +6,7 @@
 
 CGameSpy_GCD_Client::CGameSpy_GCD_Client()
 {
-	m_hGameSpyDLL = NULL;
+    m_hGameSpyDLL = nullptr;
 
 	LPCSTR			g_name	= "xrGameSpy.dll";
 	Log				("Loading DLL:",g_name);
@@ -18,7 +18,7 @@ CGameSpy_GCD_Client::CGameSpy_GCD_Client()
 };
 CGameSpy_GCD_Client::CGameSpy_GCD_Client(HMODULE hGameSpyDLL)
 {
-	m_hGameSpyDLL = NULL;
+    m_hGameSpyDLL = nullptr;
 
 	LoadGameSpy(hGameSpyDLL);
 };
@@ -28,7 +28,7 @@ CGameSpy_GCD_Client::~CGameSpy_GCD_Client()
 	if (m_hGameSpyDLL)
 	{
 		FreeLibrary(m_hGameSpyDLL);
-		m_hGameSpyDLL = NULL;
+        m_hGameSpyDLL = nullptr;
 	}
 };
 void	CGameSpy_GCD_Client::LoadGameSpy(HMODULE hGameSpyDLL)

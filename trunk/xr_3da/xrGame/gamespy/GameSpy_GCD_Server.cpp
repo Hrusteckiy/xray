@@ -6,7 +6,7 @@
 
 CGameSpy_GCD_Server::CGameSpy_GCD_Server()
 {
-	m_hGameSpyDLL = NULL;
+    m_hGameSpyDLL = nullptr;
 
 	LPCSTR			g_name	= "xrGameSpy.dll";
 	Log				("Loading DLL:",g_name);
@@ -18,7 +18,7 @@ CGameSpy_GCD_Server::CGameSpy_GCD_Server()
 };
 CGameSpy_GCD_Server::CGameSpy_GCD_Server(HMODULE hGameSpyDLL)
 {
-	m_hGameSpyDLL = NULL;
+    m_hGameSpyDLL = nullptr;
 
 	LoadGameSpy(hGameSpyDLL);
 };
@@ -27,7 +27,7 @@ CGameSpy_GCD_Server::~CGameSpy_GCD_Server()
 	if (m_hGameSpyDLL)
 	{
 		FreeLibrary(m_hGameSpyDLL);
-		m_hGameSpyDLL = NULL;
+        m_hGameSpyDLL = nullptr;
 	}
 };
 
@@ -45,7 +45,7 @@ void	CGameSpy_GCD_Server::LoadGameSpy(HMODULE hGameSpyDLL)
 
 bool	CGameSpy_GCD_Server::Init()
 {
-	int res = xrGS_gcd_init_qr2(NULL);
+    int res = xrGS_gcd_init_qr2(nullptr);
 	if (res == -1)
 	{
 		Msg("! xrGS::CDKey : Failes to Initialize!");

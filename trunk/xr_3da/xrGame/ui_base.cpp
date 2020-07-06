@@ -175,7 +175,7 @@ void ui_core::PopScissor()
 	m_Scissors.pop		();
 	
 	if(m_Scissors.empty())
-		RCache.set_Scissor(NULL);
+        RCache.set_Scissor(nullptr);
 	else{
 		const Frect& top= m_Scissors.top();
 		Irect tgt;
@@ -196,8 +196,8 @@ ui_core::ui_core()
 		m_pFontManager				= xr_new<CFontManager>();
 	}else
 	{
-		m_pUICursor					= NULL;
-		m_pFontManager				= NULL;
+        m_pUICursor = nullptr;
+        m_pFontManager = nullptr;
 	}
 	m_bPostprocess				= false;
 	
@@ -256,7 +256,7 @@ shared_str	ui_core::get_xml_name(LPCSTR fn)
 	string_path				str;
 	if(!is_16_9_mode()){
 		sprintf_s(str, "%s", fn);
-		if ( NULL==strext(fn) ) strcat(str, ".xml");
+        if (nullptr == strext(fn)) strcat(str, ".xml");
 	}else{
 
 		string_path			str_;
@@ -268,10 +268,10 @@ shared_str	ui_core::get_xml_name(LPCSTR fn)
 		}else
 			sprintf_s				(str, "%s_16", fn);
 
-		if(NULL==FS.exist(str_, "$game_config$", "ui\\" , str) )
+        if (nullptr == FS.exist(str_, "$game_config$", "ui\\", str))
 		{
 			sprintf_s(str, "%s", fn);
-			if ( NULL==strext(fn) ) strcat(str, ".xml");
+            if (nullptr == strext(fn)) strcat(str, ".xml");
 		}
 		Msg("[16-9] get_xml_name for[%s] returns [%s]", fn, str);
 	}

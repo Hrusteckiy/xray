@@ -62,13 +62,13 @@ void ALDeviceList::Enumerate()
 	
 	CoUninitialize();
 	// grab function pointers for 1.0-API functions, and if successful proceed to enumerate all devices
-	if (alcIsExtensionPresent(NULL, "ALC_ENUMERATION_EXT")) 
+    if (alcIsExtensionPresent(nullptr, "ALC_ENUMERATION_EXT"))
 	{
 		Msg("SOUND: OpenAL: EnumerationExtension Present");
 
-		devices				= (char *)alcGetString(NULL, ALC_DEVICE_SPECIFIER);
+        devices = (char *)alcGetString(nullptr, ALC_DEVICE_SPECIFIER);
 		Msg					("devices %s",devices);
-		m_defaultDeviceName	= (char *)alcGetString(NULL, ALC_DEFAULT_DEVICE_SPECIFIER);
+        m_defaultDeviceName = (char *)alcGetString(nullptr, ALC_DEFAULT_DEVICE_SPECIFIER);
 		Msg("SOUND: OpenAL: system  default SndDevice name is %s", m_defaultDeviceName.c_str());
 		
 		// ManowaR
@@ -93,14 +93,14 @@ void ALDeviceList::Enumerate()
 			ALCdevice *device		= alcOpenDevice(devices);
 			if (device) 
 			{
-				ALCcontext *context = alcCreateContext(device, NULL);
+                ALCcontext *context = alcCreateContext(device, nullptr);
 				if (context) 
 				{
 					alcMakeContextCurrent(context);
 					// if new actual device name isn't already in the list, then add it...
 					actualDeviceName = alcGetString(device, ALC_DEVICE_SPECIFIER);
 
-					if ( (actualDeviceName != NULL) && xr_strlen(actualDeviceName)>0 ) 
+                    if ((actualDeviceName != nullptr) && xr_strlen(actualDeviceName)>0)
 					{
 						alcGetIntegerv					(device, ALC_MAJOR_VERSION, sizeof(int), &major);
 						alcGetIntegerv					(device, ALC_MINOR_VERSION, sizeof(int), &minor);
@@ -139,7 +139,7 @@ void ALDeviceList::Enumerate()
 			minorVersion,
 			(GetDeviceName(i)==m_defaultDeviceName)? "(default)":"" );
 	}
-	CoInitializeEx (NULL, COINIT_MULTITHREADED);
+    CoInitializeEx(nullptr, COINIT_MULTITHREADED);
 }
 
 void ALDeviceList::SelectBestDevice()

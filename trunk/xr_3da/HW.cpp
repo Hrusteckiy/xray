@@ -66,7 +66,7 @@ void CHW::Reset		(HWND hwnd)
 #endif
 }
 
-xr_token*				vid_mode_token = NULL;
+xr_token*				vid_mode_token = nullptr;
 
 void CHW::CreateD3D	()
 {
@@ -266,7 +266,7 @@ void		CHW::CreateDevice		(HWND m_hWnd)
 	if ((D3DFMT_UNKNOWN==fTarget) || (D3DFMT_UNKNOWN==fTarget))	{
 		Msg					("Failed to initialize graphics hardware.\nPlease try to restart the game.");
 		FlushLog			();
-		MessageBox			(NULL,"Failed to initialize graphics hardware.\nPlease try to restart the game.","Error!",MB_OK|MB_ICONERROR);
+		MessageBox			(nullptr,"Failed to initialize graphics hardware.\nPlease try to restart the game.","Error!",MB_OK|MB_ICONERROR);
 		TerminateProcess	(GetCurrentProcess(),0);
 	}
 
@@ -324,7 +324,7 @@ void		CHW::CreateDevice		(HWND m_hWnd)
 		// Fatal error! Cannot create rendering device AT STARTUP !!!
 		Msg					("Failed to initialize graphics hardware.\nPlease try to restart the game.");
 		FlushLog			();
-		MessageBox			(NULL,"Failed to initialize graphics hardware.\nPlease try to restart the game.","Error!",MB_OK|MB_ICONERROR);
+		MessageBox			(nullptr,"Failed to initialize graphics hardware.\nPlease try to restart the game.","Error!",MB_OK|MB_ICONERROR);
 		TerminateProcess	(GetCurrentProcess(),0);
 	};
 	R_CHK		(R);
@@ -506,12 +506,12 @@ void free_vid_mode_list()
 		xr_free					(vid_mode_token[i].name);
 	}
 	xr_free						(vid_mode_token);
-	vid_mode_token				= NULL;
+	vid_mode_token				= nullptr;
 }
 
 void	fill_vid_mode_list			(CHW* _hw)
 {
-	if(vid_mode_token != NULL)		return;
+    if (vid_mode_token != nullptr)		return;
 	xr_vector<LPCSTR>	_tmp;
 	u32 cnt = _hw->pD3D->GetAdapterModeCount	(_hw->DevAdapter, _hw->Caps.fTarget);
 
@@ -529,7 +529,7 @@ void	fill_vid_mode_list			(CHW* _hw)
 		if(_tmp.end() != std::find_if(_tmp.begin(), _tmp.end(), _uniq_mode(str)))
 			continue;
 
-		_tmp.push_back				(NULL);
+		_tmp.push_back				(nullptr);
 		_tmp.back()					= xr_strdup(str);
 	}
 
@@ -538,7 +538,7 @@ void	fill_vid_mode_list			(CHW* _hw)
 	vid_mode_token					= xr_alloc<xr_token>(_cnt);
 
 	vid_mode_token[_cnt-1].id			= -1;
-	vid_mode_token[_cnt-1].name		= NULL;
+	vid_mode_token[_cnt-1].name		= nullptr;
 
 #ifdef DEBUG
 	Msg("Available video modes[%d]:",_tmp.size());

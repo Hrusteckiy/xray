@@ -16,7 +16,7 @@ CPhysicObject::CPhysicObject(void)
 {
 	m_type					=	epotBox;
 	m_mass					=	10.f;
-	m_collision_hit_callback=	NULL;
+    m_collision_hit_callback = nullptr;
 }
 
 CPhysicObject::~CPhysicObject(void)
@@ -30,7 +30,7 @@ BOOL CPhysicObject::net_Spawn(CSE_Abstract* DC)
 	R_ASSERT				(po);
 	m_type					= EPOType(po->type);
 	m_mass					= po->mass;
-	m_collision_hit_callback= NULL;
+	m_collision_hit_callback= nullptr;
 	inherited::net_Spawn	(DC);
 	xr_delete(collidable.model);
 	switch(m_type) {
@@ -70,7 +70,7 @@ void CPhysicObject::RunStartupAnim(CSE_Abstract *D)
 	if(Visual()&&smart_cast<CKinematics*>(Visual()))
 	{
 		//		CSE_PHSkeleton	*po	= smart_cast<CSE_PHSkeleton*>(D);
-		CKinematicsAnimated*	PKinematicsAnimated=NULL;
+        CKinematicsAnimated*	PKinematicsAnimated = nullptr;
 		R_ASSERT			(Visual()&&smart_cast<CKinematics*>(Visual()));
 		PKinematicsAnimated	=smart_cast<CKinematicsAnimated*>(Visual());
 		if(PKinematicsAnimated)
@@ -280,7 +280,7 @@ bool					CPhysicObject::	set_collision_hit_callback	(SCollisionHitCallback *cc)
 {
 	if(!cc)
 	{
-		m_collision_hit_callback=NULL;
+        m_collision_hit_callback = nullptr;
 		return true;
 	}
 	if(PPhysicsShell())

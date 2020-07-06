@@ -5,7 +5,7 @@
 
 CGameSpy_HTTP::CGameSpy_HTTP()
 {
-	m_hGameSpyDLL = NULL;
+    m_hGameSpyDLL = nullptr;
 	m_LastRequest	= -1;
 
 	LPCSTR			g_name	= "xrGameSpy.dll";
@@ -21,7 +21,7 @@ CGameSpy_HTTP::CGameSpy_HTTP()
 
 CGameSpy_HTTP::CGameSpy_HTTP(HMODULE hGameSpyDLL)
 {
-	m_hGameSpyDLL = NULL;
+    m_hGameSpyDLL = nullptr;
 	m_LastRequest	= -1;
 
 	LoadGameSpy(hGameSpyDLL);
@@ -36,7 +36,7 @@ CGameSpy_HTTP::~CGameSpy_HTTP()
 	if (m_hGameSpyDLL)
 	{
 		FreeLibrary(m_hGameSpyDLL);
-		m_hGameSpyDLL = NULL;
+        m_hGameSpyDLL = nullptr;
 	}
 };
 void	CGameSpy_HTTP::LoadGameSpy(HMODULE hGameSpyDLL)
@@ -121,7 +121,7 @@ void		CGameSpy_HTTP::DownloadFile(LPCSTR URL, LPCSTR FileName)
 //	GHTTPRequest res = xrGS_ghttpSave(URL, FileName, GHTTPFalse, CompletedCallBack, this);
 	Msg		("URL:  %s",URL);
 	Msg		("File: %s",FileName);
-	m_LastRequest = xrGS_ghttpSaveEx(URL, FileName, "", NULL, GHTTPFalse, GHTTPFalse, ProgressCallback, CompletedCallBack, this);
+    m_LastRequest = xrGS_ghttpSaveEx(URL, FileName, "", nullptr, GHTTPFalse, GHTTPFalse, ProgressCallback, CompletedCallBack, this);
 	Msg		("Code: %d",m_LastRequest);
 	if (m_LastRequest < 0)
 	{

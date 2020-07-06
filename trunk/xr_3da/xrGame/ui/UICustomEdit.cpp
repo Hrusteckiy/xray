@@ -68,7 +68,7 @@ void CUICustomEdit::SetLightAnim(LPCSTR lanim)
 	if(lanim&&xr_strlen(lanim))
 		m_lanim	= LALib.FindItem(lanim);
 	else
-		m_lanim	= NULL;
+        m_lanim = nullptr;
 }
 
 void CUICustomEdit::SetPasswordMode(bool mode){
@@ -82,7 +82,7 @@ void CUICustomEdit::OnFocusLost(){
 	{
 		m_bInputFocus = false;
 		m_iKeyPressAndHold = 0;
-		GetMessageTarget()->SendMessage(this,EDIT_TEXT_COMMIT,NULL);
+		GetMessageTarget()->SendMessage(this,EDIT_TEXT_COMMIT,nullptr);
 	}
 */
 }
@@ -186,7 +186,7 @@ bool CUICustomEdit::KeyPressed(int dik)
 		GetParent()->SetKeyboardCapture(this, false);
 		m_bInputFocus = false;
 		m_iKeyPressAndHold = 0;
-		GetMessageTarget()->SendMessage(this,EDIT_TEXT_COMMIT,NULL);
+        GetMessageTarget()->SendMessage(this, EDIT_TEXT_COMMIT, nullptr);
 		break;
 	case DIK_BACKSPACE:
 		m_lines.DelLeftChar();
@@ -247,7 +247,7 @@ bool CUICustomEdit::KeyPressed(int dik)
 		}
 
 		if(bChanged)
-			GetMessageTarget()->SendMessage(this,EDIT_TEXT_CHANGED,NULL);
+            GetMessageTarget()->SendMessage(this, EDIT_TEXT_CHANGED, nullptr);
 
 		return true;
 }

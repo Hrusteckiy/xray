@@ -37,7 +37,7 @@ void CWeaponRPG7::UpdateMissileVisibility()
 
 	CKinematics* pHudVisual = smart_cast<CKinematics*>(m_pHUD->Visual());
 	VERIFY(pHudVisual);
-	if (H_Parent() != Level().CurrentEntity()) pHudVisual = NULL;
+    if (H_Parent() != Level().CurrentEntity()) pHudVisual = nullptr;
 	CKinematics* pWeaponVisual = smart_cast<CKinematics*>(Visual()); 
 	VERIFY(pWeaponVisual);
 
@@ -109,7 +109,7 @@ void CWeaponRPG7::switch2_Fire	()
 		CEntity* E = smart_cast<CEntity*>	(H_Parent());
 		if (E){
 			CInventoryOwner* io		= smart_cast<CInventoryOwner*>(H_Parent());
-			if(NULL == io->inventory().ActiveItem())
+            if (nullptr == io->inventory().ActiveItem())
 			{
 			Log("current_state", GetState() );
 			Log("next_state", GetNextState());

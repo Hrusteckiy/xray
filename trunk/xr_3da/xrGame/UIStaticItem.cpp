@@ -2,7 +2,7 @@
 #include "uistaticitem.h"
 #include "hudmanager.h"
 
-ref_geom		hGeom_fan = NULL;	
+ref_geom hGeom_fan = nullptr;
 
 void CreateUIGeom()
 {
@@ -27,9 +27,9 @@ CUIStaticItem::CUIStaticItem()
 	iRemX			= 0.0f;
 	iRemY			= 0.0f;
 	alpha_ref		= -1;
-	hShader			= NULL;
+	hShader			= nullptr;
 #ifdef DEBUG
-	dbg_tex_name = NULL;
+    dbg_tex_name = nullptr;
 #endif
 }
 

@@ -512,7 +512,7 @@ void	CKinematicsAnimated::IBoneInstances_Destroy()
     inherited::IBoneInstances_Destroy();
 	if (blend_instances) {
 		xr_free(blend_instances);
-		blend_instances = NULL;
+        blend_instances = nullptr;
 	}
 }
 
@@ -577,8 +577,8 @@ void CKinematicsAnimated::Load(const char* N, IReader *data, u32 dwFlags)
 	inherited::Load	(N, data, dwFlags);
 
 	// Globals
-	blend_instances		= NULL;
-    m_Partition			= NULL;
+	blend_instances		= nullptr;
+    m_Partition			= nullptr;
 	Update_LastTime 	= 0;
 
 	// Load animation
@@ -611,7 +611,7 @@ void CKinematicsAnimated::Load(const char* N, IReader *data, u32 dwFlags)
 				m_Motions.back().motions.create	(nm,MS,bones);
 				FS.r_close						(MS);
 			}
-			m_Motions.back().motions.create	(nm,NULL,bones);
+            m_Motions.back().motions.create(nm, nullptr, bones);
     	}
     }else{
 		string_path	nm;

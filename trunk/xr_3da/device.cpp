@@ -101,7 +101,7 @@ void CRenderDevice::End		(void)
 	Memory.dbg_check		();
     CHK_DX				(HW.pDevice->EndScene());
 
-	HRESULT _hr		= HW.pDevice->Present( NULL, NULL, NULL, NULL );
+    HRESULT _hr = HW.pDevice->Present(nullptr, nullptr, nullptr, nullptr);
 	if				(D3DERR_DEVICELOST==_hr)	return;			// we will handle this later
 	//R_ASSERT2		(SUCCEEDED(_hr),	"Presentation failed. Driver upgrade needed?");
 #endif
@@ -189,7 +189,7 @@ void CRenderDevice::Run			()
 	thread_spawn				(mt_Thread,"X-RAY Secondary thread",0,0);
 
 	// Message cycle
-    PeekMessage					( &msg, NULL, 0U, 0U, PM_NOREMOVE );
+    PeekMessage(&msg, nullptr, 0U, 0U, PM_NOREMOVE);
 
 	seqAppStart.Process			(rp_AppStart);
 
@@ -197,7 +197,7 @@ void CRenderDevice::Run			()
 
 	while( WM_QUIT != msg.message  )
     {
-        bGotMsg = PeekMessage( &msg, NULL, 0U, 0U, PM_REMOVE );
+        bGotMsg = PeekMessage(&msg, nullptr, 0U, 0U, PM_REMOVE);
         if( bGotMsg )
         {
               TranslateMessage	( &msg );

@@ -19,9 +19,9 @@ static const float lookup_angle_sine	=0.34202014f;//20
 extern	class CPHWorld	*ph_world;
 CElevatorState::CElevatorState()
 {
-	m_state=clbNoLadder;
-	m_ladder=NULL;
-	m_character=NULL;
+	m_state = clbNoLadder;
+    m_ladder = nullptr;
+    m_character = nullptr;
 }
 
 float CElevatorState::ClimbDirection()
@@ -46,7 +46,7 @@ void CElevatorState::PhTune(float step)
 	case 	clbClimbingUp	:UpdateStClimbingUp()	;		break;					
 	case 	clbClimbingDown	:UpdateStClimbingDown()	;		break;	
 	case	clbDepart		:UpdateDepart()			;		break;
-	case	clbNoLadder		:m_ladder = NULL		;		break;		
+	case	clbNoLadder		:m_ladder = nullptr		;		break;		
 	}
 
 }
@@ -361,8 +361,8 @@ void CElevatorState::Deactivate()
 {
 	SwitchState(clbNoLadder);
 	m_state=clbNoLadder;
-	m_ladder=NULL;
-	m_character=NULL;
+    m_ladder = nullptr;
+    m_character = nullptr;
 }
 
 

@@ -170,7 +170,7 @@ HRESULT		xrIDirect3DDevice9::CreateTexture( UINT Width,UINT Height,UINT Levels,D
 {
 	APIDEBUG("xrIDirect3DDevice9::CreateTexture");  
 
-	*ppTexture = NULL;
+    *ppTexture = nullptr;
 	xrIDirect3DTexture9* I = new xrIDirect3DTexture9(this, Width,Height,Levels,Usage,Format,Pool);
 	*ppTexture = I;
 	
@@ -184,7 +184,7 @@ HRESULT		xrIDirect3DDevice9::CreateCubeTexture( UINT EdgeLength,UINT Levels,DWOR
 { 
 	APIDEBUG("xrIDirect3DDevice9::CreateCubeTexture");  
 
-	*ppCubeTexture = NULL;
+    *ppCubeTexture = nullptr;
 	xrIDirect3DCubeTexture9* I = new xrIDirect3DCubeTexture9(this, EdgeLength, EdgeLength,Levels,Usage,Format,Pool);
 	*ppCubeTexture = I;
 
@@ -195,7 +195,7 @@ HRESULT		xrIDirect3DDevice9::CreateVertexBuffer( UINT Length,DWORD Usage,DWORD F
 { 
 	APIDEBUG("xrIDirect3DDevice9::CreateVertexBuffer");  
 
-	*ppVertexBuffer = NULL;
+    *ppVertexBuffer = nullptr;
 	xrIDirect3DVertexBuffer9* I = new xrIDirect3DVertexBuffer9(this, Length, Usage, FVF, Pool);
 	*ppVertexBuffer = I;
 
@@ -205,7 +205,7 @@ HRESULT		xrIDirect3DDevice9::CreateIndexBuffer( UINT Length,DWORD Usage,D3DFORMA
 { 
 	APIDEBUG("xrIDirect3DDevice9::CreateIndexBuffer");  
 	
-	*ppIndexBuffer = NULL;
+    *ppIndexBuffer = nullptr;
 	xrIDirect3DIndexBuffer9* I = new xrIDirect3DIndexBuffer9(this, Length, Usage, Format, Pool);
 	*ppIndexBuffer = I;
 
@@ -239,7 +239,7 @@ HRESULT		xrIDirect3DDevice9::GetDepthStencilSurface( IDirect3DSurface9** ppZSten
 { 
 	APIDEBUG("xrIDirect3DDevice9::GetDepthStencilSurface");  
 
-	*ppZStencilSurface = NULL;
+    *ppZStencilSurface = nullptr;
 	xrIDirect3DSurface9* I = new xrIDirect3DSurface9(this, 0, 0, D3DFORMAT(0), D3DMULTISAMPLE_TYPE(0),0);
 	*ppZStencilSurface = I;
 
@@ -284,7 +284,7 @@ HRESULT		xrIDirect3DDevice9::GetRenderState( D3DRENDERSTATETYPE State,DWORD* pVa
 HRESULT		xrIDirect3DDevice9::CreateStateBlock( D3DSTATEBLOCKTYPE Type,IDirect3DStateBlock9** ppSB) 
 { 
 	APIDEBUG("xrIDirect3DDevice9::CreateStateBlock");
-	*ppSB = NULL;
+    *ppSB = nullptr;
 	xrIDirect3DStateBlock9* I = new xrIDirect3DStateBlock9(this);
 	*ppSB = I;
 	return HRESULT_Proc(S_OK); 
@@ -344,7 +344,7 @@ HRESULT		xrIDirect3DDevice9::ProcessVertices( UINT SrcStartIndex,UINT DestIndex,
 HRESULT		xrIDirect3DDevice9::CreateVertexDeclaration( CONST D3DVERTEXELEMENT9* pVertexElements,IDirect3DVertexDeclaration9** ppDecl) 
 { 
 	APIDEBUG("xrIDirect3DDevice9::CreateVertexDeclaration");  	
-	*ppDecl = NULL;
+    *ppDecl = nullptr;
 	xrIDirect3DVertexDeclaration9* I = new xrIDirect3DVertexDeclaration9(this);
 	*ppDecl = I;
 	return HRESULT_Proc(S_OK);
@@ -360,7 +360,7 @@ HRESULT		xrIDirect3DDevice9::GetFVF( DWORD* pFVF)
 HRESULT		xrIDirect3DDevice9::CreateVertexShader( CONST DWORD* pFunction,IDirect3DVertexShader9** ppShader) 
 {
 	APIDEBUG("xrIDirect3DDevice9::CreateVertexShader");  
-	*ppShader = NULL;
+    *ppShader = nullptr;
 	xrIDirect3DVertexShader9* I = new xrIDirect3DVertexShader9(this);
 	*ppShader = I;
 	return HRESULT_Proc(S_OK); 
@@ -396,7 +396,7 @@ HRESULT		xrIDirect3DDevice9::GetIndices( IDirect3DIndexBuffer9** ppIndexData)
 HRESULT		xrIDirect3DDevice9::CreatePixelShader( CONST DWORD* pFunction,IDirect3DPixelShader9** ppShader) 
 { 
 	APIDEBUG("xrIDirect3DDevice9::CreatePixelShader");
-	*ppShader = NULL;
+    *ppShader = nullptr;
 	xrIDirect3DPixelShader9* I = new xrIDirect3DPixelShader9(this);
 	*ppShader = I;
 	return HRESULT_Proc(S_OK); 
@@ -420,7 +420,7 @@ HRESULT		xrIDirect3DDevice9::DeletePatch				( UINT Handle)																	{ API
 HRESULT		xrIDirect3DDevice9::CreateQuery				( D3DQUERYTYPE Type,IDirect3DQuery9** ppQuery)									
 { 
 	APIDEBUG("xrIDirect3DDevice9::CreateQuery"); 
-	*ppQuery = NULL;
+    *ppQuery = nullptr;
 	xrIDirect3DQuery9* I = new xrIDirect3DQuery9(this, Type);
 	*ppQuery = I;
 	return HRESULT_Proc(S_OK);

@@ -51,14 +51,14 @@ BOOL CRenderTarget::Create	()
 	RT.create			(RTname,			rtWidth,rtHeight,HW.Caps.fTarget);
 	RT_distort.create	(RTname_distort,	rtWidth,rtHeight,HW.Caps.fTarget);
 	if ((rtHeight!=Device.dwHeight) || (rtWidth!=Device.dwWidth))	{
-		R_CHK		(HW.pDevice->CreateDepthStencilSurface	(rtWidth,rtHeight,HW.Caps.fDepth,D3DMULTISAMPLE_NONE,0,TRUE,&ZB,NULL));
+        R_CHK(HW.pDevice->CreateDepthStencilSurface(rtWidth, rtHeight, HW.Caps.fDepth, D3DMULTISAMPLE_NONE, 0, TRUE, &ZB, nullptr));
 	} else {
 		ZB			= HW.pBaseZB;
 		ZB->AddRef	();
 	}
 
 	// Temp ZB, used by some of the shadowing code
-	R_CHK	(HW.pDevice->CreateDepthStencilSurface	(512,512,HW.Caps.fDepth,D3DMULTISAMPLE_NONE,0,TRUE,&pTempZB,NULL));
+    R_CHK(HW.pDevice->CreateDepthStencilSurface(512, 512, HW.Caps.fDepth, D3DMULTISAMPLE_NONE, 0, TRUE, &pTempZB, nullptr));
 
 	// Shaders and stream
 	s_postprocess.create				("postprocess");
@@ -281,7 +281,7 @@ void	CRenderTarget::phase_distortion	()
 	RCache.set_ZB								(ZB);
 	RCache.set_CullMode							(CULL_CCW);
 	RCache.set_ColorWriteEnable					( );
-	CHK_DX(HW.pDevice->Clear					( 0L, NULL, D3DCLEAR_TARGET, color_rgba(127,127,127,127), 1.0f, 0L));
+	CHK_DX(HW.pDevice->Clear					( 0L, nullptr, D3DCLEAR_TARGET, color_rgba(127,127,127,127), 1.0f, 0L));
 	
 	if(g_pGameLevel && g_pGamePersistent && !g_pGamePersistent->OnRenderPPUI_query() )
 		RImplementation.r_dsgraph_render_distort	( );
