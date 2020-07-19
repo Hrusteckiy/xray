@@ -7,10 +7,6 @@
 #include "NET_Common.h"
 #include "NET_Compressor.h"
 
-
-
-
-
 #if NET_USE_COMPRESSION
 
 #	ifdef DEBUG
@@ -19,8 +15,6 @@
 #		include <malloc.h>
 #		pragma warning(pop)
 #	endif // DEBUG
-
-#	include <boost/crc.hpp>
 
 #	if NET_USE_LZO_COMPRESSION
 #		define	ENCODE	rtc9_compress
@@ -33,8 +27,6 @@
 
 #endif // NET_USE_COMPRESSION
 
-
-
 #if 1//def DEBUG
 //static FILE*    OriginalTrafficDump     = NULL;
 //static FILE*    CompressedTrafficDump   = NULL;
@@ -43,7 +35,6 @@ static FILE*    CompressionDump         = NULL;
 #endif // DEBUG
 
 #define NOWARN
-
 
 // size of range encoding code values
 
@@ -384,13 +375,10 @@ u16 NET_Compressor::Compress(BYTE* dest, const u32 &dest_size, BYTE* src, const 
 	{
 		*dest = NET_TAG_COMPRESSED;
 		
-        #if NET_USE_COMPRESSION_CRC
-		boost::crc_32_type	temp; 
-		temp.process_block( dest+offset, dest+compressed_size );		
-		u32	                crc = temp.checksum();
-
-		*((u32*)(dest + 1))	= crc;
-        #endif // NET_USE_COMPRESSION_CRC
+#if NET_USE_COMPRESSION_CRC
+        u32 crc = crc32(dest + offset, compressed_size);
+        *((u32*)(dest+1)) = crc;
+#endif // NET_USE_COMPRESSION_CRC
 
         #if NET_LOG_COMPRESSION
         Msg( "#compress %u->%u  %02X (%08X)", count, compressed_size, *dest, *((u32*)(src+1)) );
@@ -500,16 +488,14 @@ u16 NET_Compressor::Decompress	(BYTE* dest, const u32 &dest_size, BYTE* src, con
     offset += sizeof(u32);
     #endif // NET_USE_COMPRESSION_CRC
     
-    #if NET_USE_COMPRESSION_CRC
-	boost::crc_32_type	temp;
-	temp.process_block	(src + offset,src + count);
-	u32					crc = temp.checksum();
-//	Msg					("decompressed %d -> ? [0x%08x]",count,crc);
-    if( crc != *((u32*)(src + 1)) )
-        Msg( "!CRC mismatch" );
-        
-	R_ASSERT2(crc == *((u32*)(src + 1)),make_string("crc is different! (0x%08x != 0x%08x)",crc,*((u32*)(src + 1))));
-    #endif // NET_USE_COMPRESSION_CRC
+#if NET_USE_COMPRESSION_CRC
+    u32 crc = crc32(src + offset, count);
+    //Msg("decompressed %d -> ? [0x%08x]", count, crc);
+    if (crc != *((u32*)(src + 1)))
+        Msg("!CRC mismatch");
+
+    R_ASSERT2(crc == *((u32*)(src + 1)), make_string("crc is different! (0x%08x != 0x%08x)", crc, *((u32*)(src + 1))));
+#endif // NET_USE_COMPRESSION_CRC
 
 	CS.Enter();
 	u32 uncompressed_size = DECODE( dest, dest_size, src+offset, count-offset );
