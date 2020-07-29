@@ -52,6 +52,7 @@
     <ClCompile>
       <AdditionalIncludeDirectories>
         $(SolutionDir);
+        $(xrExternals);
         $(xrSdkDir)dxSDK/Include;
         %(AdditionalIncludeDirectories)
       </AdditionalIncludeDirectories>
