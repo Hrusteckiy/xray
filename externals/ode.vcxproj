@@ -83,7 +83,7 @@
       <ProxyFileName>default_p.c</ProxyFileName>
     </Midl>
     <ClCompile>
-      <AdditionalIncludeDirectories>../../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>ode\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_USRDLL;dSINGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -106,7 +106,7 @@
     </ResourceCompile>
     <Link>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <ModuleDefinitionFile>../../../config/msvcdefs.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>ode\config\msvcdefs.def</ModuleDefinitionFile>
       <GenerateMapFile>false</GenerateMapFile>
       <MapFileName />
       <TargetMachine>MachineX86</TargetMachine>
@@ -131,7 +131,7 @@
     <ClCompile>
       <OmitFramePointers>true</OmitFramePointers>
       <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-      <AdditionalIncludeDirectories>../../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>ode\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_USRDLL;dSINGLE;dNODEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling />
@@ -152,7 +152,7 @@
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <ModuleDefinitionFile>../../../config/msvcdefs.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>ode\config\msvcdefs.def</ModuleDefinitionFile>
       <ProgramDatabaseFile>$(OutDir)$(ProjectName).pdb</ProgramDatabaseFile>
       <GenerateMapFile>false</GenerateMapFile>
       <MapFileName />
@@ -178,7 +178,7 @@
     <ClCompile>
       <OmitFramePointers>false</OmitFramePointers>
       <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-      <AdditionalIncludeDirectories>../../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>ode\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_USRDLL;dSINGLE;dNODEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -198,7 +198,7 @@
     </ResourceCompile>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <ModuleDefinitionFile>..\..\..\config\msvcdefs.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>ode\config\msvcdefs.def</ModuleDefinitionFile>
       <GenerateMapFile>false</GenerateMapFile>
       <MapFileName>$(OutDir)$(ProjectName).map</MapFileName>
       <TargetMachine>MachineX86</TargetMachine>
@@ -209,96 +209,96 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\ode\src\array.h" />
-    <ClInclude Include="..\..\..\ode\src\Bounder33.h" />
-    <ClInclude Include="..\..\..\include\ode\collision.h" />
-    <ClInclude Include="..\..\..\ode\src\collision_kernel.h" />
-    <ClInclude Include="..\..\..\include\ode\collision_space.h" />
-    <ClInclude Include="..\..\..\ode\src\collision_space_internal.h" />
-    <ClInclude Include="..\..\..\ode\src\collision_std.h" />
-    <ClInclude Include="..\..\..\ode\src\collision_transform.h" />
-    <ClInclude Include="..\..\..\include\ode\collision_trimesh.h" />
-    <ClInclude Include="..\..\..\ode\src\collision_trimesh_internal.h" />
-    <ClInclude Include="..\..\..\ode\src\collision_util.h" />
-    <ClInclude Include="..\..\..\ode\src\geom_internal.h" />
-    <ClInclude Include="..\..\..\ode\src\joint.h" />
-    <ClInclude Include="..\..\..\ode\src\lcp.h" />
-    <ClInclude Include="..\..\..\ode\src\mat.h" />
-    <ClInclude Include="..\..\..\ode\src\objects.h" />
-    <ClInclude Include="..\..\..\ode\src\obstack.h" />
-    <ClInclude Include="..\..\..\include\ode\odecpp_collision.h" />
-    <ClInclude Include="..\..\..\ode\src\quickstep.h" />
-    <ClInclude Include="..\..\..\ode\src\stack.h" />
-    <ClInclude Include="..\..\..\ode\src\step.h" />
-    <ClInclude Include="..\..\..\ode\src\StepJointInternal.h" />
-    <ClInclude Include="..\..\..\ode\src\testing.h" />
-    <ClInclude Include="..\..\..\include\ode\common.h" />
-    <ClInclude Include="..\..\..\include\ode\compatibility.h" />
-    <ClInclude Include="..\..\..\include\ode\config.h" />
-    <ClInclude Include="..\..\..\include\ode\contact.h" />
-    <ClInclude Include="..\..\..\include\ode\error.h" />
-    <ClInclude Include="..\..\..\include\ode\export-dif.h" />
-    <ClInclude Include="..\..\..\include\ode\geom.h" />
-    <ClInclude Include="..\..\..\include\ode\mass.h" />
-    <ClInclude Include="..\..\..\include\ode\matrix.h" />
-    <ClInclude Include="..\..\..\include\ode\memory.h" />
-    <ClInclude Include="..\..\..\include\ode\misc.h" />
-    <ClInclude Include="..\..\..\include\ode\objects.h" />
-    <ClInclude Include="..\..\..\include\ode\ode.h" />
-    <ClInclude Include="..\..\..\include\ode\odecpp.h" />
-    <ClInclude Include="..\..\..\include\ode\odemath.h" />
-    <ClInclude Include="..\..\..\include\ode\rotation.h" />
-    <ClInclude Include="..\..\..\include\ode\space.h" />
-    <ClInclude Include="..\..\..\include\ode\timer.h" />
-    <ClInclude Include="de_padf_integration.h" />
-    <ClInclude Include="..\..\..\ode\src\Lcp33.h" />
-    <ClInclude Include="..\..\..\ode\src\util.h" />
+    <ClInclude Include="ode\ode\src\array.h" />
+    <ClInclude Include="ode\ode\src\Bounder33.h" />
+    <ClInclude Include="ode\include\ode\collision.h" />
+    <ClInclude Include="ode\ode\src\collision_kernel.h" />
+    <ClInclude Include="ode\include\ode\collision_space.h" />
+    <ClInclude Include="ode\ode\src\collision_space_internal.h" />
+    <ClInclude Include="ode\ode\src\collision_std.h" />
+    <ClInclude Include="ode\ode\src\collision_transform.h" />
+    <ClInclude Include="ode\include\ode\collision_trimesh.h" />
+    <ClInclude Include="ode\ode\src\collision_trimesh_internal.h" />
+    <ClInclude Include="ode\ode\src\collision_util.h" />
+    <ClInclude Include="ode\ode\src\geom_internal.h" />
+    <ClInclude Include="ode\ode\src\joint.h" />
+    <ClInclude Include="ode\ode\src\lcp.h" />
+    <ClInclude Include="ode\ode\src\mat.h" />
+    <ClInclude Include="ode\ode\src\objects.h" />
+    <ClInclude Include="ode\ode\src\obstack.h" />
+    <ClInclude Include="ode\include\ode\odecpp_collision.h" />
+    <ClInclude Include="ode\ode\src\quickstep.h" />
+    <ClInclude Include="ode\ode\src\stack.h" />
+    <ClInclude Include="ode\ode\src\step.h" />
+    <ClInclude Include="ode\ode\src\StepJointInternal.h" />
+    <ClInclude Include="ode\ode\src\testing.h" />
+    <ClInclude Include="ode\include\ode\common.h" />
+    <ClInclude Include="ode\include\ode\compatibility.h" />
+    <ClInclude Include="ode\include\ode\config.h" />
+    <ClInclude Include="ode\include\ode\contact.h" />
+    <ClInclude Include="ode\include\ode\error.h" />
+    <ClInclude Include="ode\include\ode\export-dif.h" />
+    <ClInclude Include="ode\include\ode\geom.h" />
+    <ClInclude Include="ode\include\ode\mass.h" />
+    <ClInclude Include="ode\include\ode\matrix.h" />
+    <ClInclude Include="ode\include\ode\memory.h" />
+    <ClInclude Include="ode\include\ode\misc.h" />
+    <ClInclude Include="ode\include\ode\objects.h" />
+    <ClInclude Include="ode\include\ode\ode.h" />
+    <ClInclude Include="ode\include\ode\odecpp.h" />
+    <ClInclude Include="ode\include\ode\odemath.h" />
+    <ClInclude Include="ode\include\ode\rotation.h" />
+    <ClInclude Include="ode\include\ode\space.h" />
+    <ClInclude Include="ode\include\ode\timer.h" />
+    <ClInclude Include="ode\contrib\msvc7\ode_default\de_padf_integration.h" />
+    <ClInclude Include="ode\ode\src\Lcp33.h" />
+    <ClInclude Include="ode\ode\src\util.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\ode\src\array.cpp" />
-    <ClCompile Include="..\..\..\ode\src\Bounder33.cpp" />
-    <ClCompile Include="..\..\..\ode\src\collision_kernel.cpp" />
-    <ClCompile Include="..\..\..\ode\src\collision_quadtreespace.cpp">
+    <ClCompile Include="ode\ode\src\array.cpp" />
+    <ClCompile Include="ode\ode\src\Bounder33.cpp" />
+    <ClCompile Include="ode\ode\src\collision_kernel.cpp" />
+    <ClCompile Include="ode\ode\src\collision_quadtreespace.cpp">
       <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Mixed|Win32'">4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
-    <ClCompile Include="..\..\..\ode\src\collision_space.cpp" />
-    <ClCompile Include="..\..\..\ode\src\collision_std.cpp">
+    <ClCompile Include="ode\ode\src\collision_space.cpp" />
+    <ClCompile Include="ode\ode\src\collision_std.cpp">
       <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Mixed|Win32'">4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
-    <ClCompile Include="..\..\..\ode\src\collision_transform.cpp" />
-    <ClCompile Include="..\..\..\ode\src\collision_util.cpp" />
-    <ClCompile Include="de_padf_integration.cpp" />
-    <ClCompile Include="..\..\..\ode\src\error.cpp" />
-    <ClCompile Include="..\..\..\ode\src\export-dif.cpp" />
-    <ClCompile Include="..\..\..\ode\src\fastdot.c" />
-    <ClCompile Include="..\..\..\ode\src\fastldlt.c" />
-    <ClCompile Include="..\..\..\ode\src\fastlsolve.c" />
-    <ClCompile Include="..\..\..\ode\src\fastltsolve.c" />
-    <ClCompile Include="..\..\..\ode\src\joint.cpp" />
-    <ClCompile Include="..\..\..\ode\src\lcp.cpp" />
-    <ClCompile Include="..\..\..\ode\src\mass.cpp" />
-    <ClCompile Include="..\..\..\ode\src\mat.cpp" />
-    <ClCompile Include="..\..\..\ode\src\matrix.cpp" />
-    <ClCompile Include="..\..\..\ode\src\memory.cpp" />
-    <ClCompile Include="..\..\..\ode\src\misc.cpp" />
-    <ClCompile Include="..\..\..\ode\src\obstack.cpp" />
-    <ClCompile Include="..\..\..\ode\src\ode.cpp" />
-    <ClCompile Include="..\..\..\ode\src\odemath.cpp" />
-    <ClCompile Include="..\..\..\ode\src\quickstep.cpp" />
-    <ClCompile Include="..\..\..\ode\src\rotation.cpp" />
-    <ClCompile Include="..\..\..\ode\src\step.cpp" />
-    <ClCompile Include="..\..\..\ode\src\stepfast.cpp" />
-    <ClCompile Include="..\..\..\ode\src\StepJointInternal.cpp" />
-    <ClCompile Include="..\..\..\ode\src\testing.cpp" />
-    <ClCompile Include="..\..\..\ode\src\timer.cpp" />
-    <ClCompile Include="..\..\..\ode\src\util.cpp" />
+    <ClCompile Include="ode\ode\src\collision_transform.cpp" />
+    <ClCompile Include="ode\ode\src\collision_util.cpp" />
+    <ClCompile Include="ode\contrib\msvc7\ode_default\de_padf_integration.cpp" />
+    <ClCompile Include="ode\ode\src\error.cpp" />
+    <ClCompile Include="ode\ode\src\export-dif.cpp" />
+    <ClCompile Include="ode\ode\src\fastdot.c" />
+    <ClCompile Include="ode\ode\src\fastldlt.c" />
+    <ClCompile Include="ode\ode\src\fastlsolve.c" />
+    <ClCompile Include="ode\ode\src\fastltsolve.c" />
+    <ClCompile Include="ode\ode\src\joint.cpp" />
+    <ClCompile Include="ode\ode\src\lcp.cpp" />
+    <ClCompile Include="ode\ode\src\mass.cpp" />
+    <ClCompile Include="ode\ode\src\mat.cpp" />
+    <ClCompile Include="ode\ode\src\matrix.cpp" />
+    <ClCompile Include="ode\ode\src\memory.cpp" />
+    <ClCompile Include="ode\ode\src\misc.cpp" />
+    <ClCompile Include="ode\ode\src\obstack.cpp" />
+    <ClCompile Include="ode\ode\src\ode.cpp" />
+    <ClCompile Include="ode\ode\src\odemath.cpp" />
+    <ClCompile Include="ode\ode\src\quickstep.cpp" />
+    <ClCompile Include="ode\ode\src\rotation.cpp" />
+    <ClCompile Include="ode\ode\src\step.cpp" />
+    <ClCompile Include="ode\ode\src\stepfast.cpp" />
+    <ClCompile Include="ode\ode\src\StepJointInternal.cpp" />
+    <ClCompile Include="ode\ode\src\testing.cpp" />
+    <ClCompile Include="ode\ode\src\timer.cpp" />
+    <ClCompile Include="ode\ode\src\util.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\config\msvcdefs.def" />
+    <None Include="ode\config\msvcdefs.def" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
