@@ -10,3 +10,6 @@
 [submodule "externals/FreeMagic"]
 	path = externals/FreeMagic
 	url = https://github.com/OpenXRay/FreeMagic.git
+[submodule "externals/GameSpy"]
+	path = externals/GameSpy
+	url = https://github.com/OpenXRay/GameSpy.git

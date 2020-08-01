@@ -1,6 +1,6 @@
 #pragma once
 #include "xrGameSpy_MainDefs.h"
-#include "GameSpy/Patching/pt.h"
+#include <GameSpy/src/GameSpy/pt/pt.h>
 
 extern "C"
 {

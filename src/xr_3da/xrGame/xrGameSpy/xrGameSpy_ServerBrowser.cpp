@@ -3,7 +3,7 @@
 #include "xrGameSpy_MainDefs.h"
 
 #include "xrGameSpy_ServerBrowser.h"
-#include "gamespy/qr2/qr2regkeys.h"
+#include <GameSpy/src/GameSpy/qr2/qr2regkeys.h>
 #include "../battleye.h"
 
 #define GAMETYPE_NAME_KEY						100

@@ -1,6 +1,6 @@
 #pragma once
 #include "xrGameSpy_MainDefs.h"
-#include "gamespy/ghttp/ghttp.h"
+#include <GameSpy/src/GameSpy/ghttp/ghttp.h>
 extern "C"
 {
 	EXPORT_FN_DECL(void, ghttpStartup, ());
