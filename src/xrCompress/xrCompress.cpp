@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "lzo\lzo1x.h"
+#include "lzo/lzo1x.h"
 #include <mmsystem.h>
 
 #pragma warning(disable:4995)
@@ -268,9 +268,9 @@ void	Compress			(LPCSTR path, LPCSTR base, BOOL bFast)
 					// c_size_compressed	=	rtc_compress	(c_data,c_size_max,src->pointer(),c_size_real);
 					c_size_compressed	= c_size_max;
 					if (bFast){		
-						R_ASSERT(LZO_E_OK == lzo1x_1_compress	((u8*)src->pointer(),c_size_real,c_data,&c_size_compressed,c_heap));
+                        R_ASSERT(LZO_E_OK == lzo1x_1_compress((u8*)src->pointer(), c_size_real, c_data, (lzo_uintp)&c_size_compressed, c_heap));
 					}else{
-						R_ASSERT(LZO_E_OK == lzo1x_999_compress	((u8*)src->pointer(),c_size_real,c_data,&c_size_compressed,c_heap));
+                        R_ASSERT(LZO_E_OK == lzo1x_999_compress((u8*)src->pointer(), c_size_real, c_data, (lzo_uintp)&c_size_compressed, c_heap));
 					}
 				}
 				t_compress.End		();
@@ -289,7 +289,7 @@ void	Compress			(LPCSTR path, LPCSTR base, BOOL bFast)
 					if (!bFast){
 						u8*		c_out	= xr_alloc<u8>	(c_size_real);
 						u32		c_orig	= c_size_real;
-						R_ASSERT		(LZO_E_OK	== lzo1x_optimize	(c_data,c_size_compressed,c_out,&c_orig, NULL));
+                        R_ASSERT(LZO_E_OK == lzo1x_optimize(c_data, c_size_compressed, c_out, (lzo_uintp)&c_orig, NULL));
 						R_ASSERT		(c_orig		== c_size_real		);
 						xr_free			(c_out);
 					}

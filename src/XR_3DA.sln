@@ -74,6 +74,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NVTT", "..\externals\NVTT\N
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OPCODE", "..\externals\OPCODE.vcxproj", "{DAFD6D98-3DCD-40AD-BC85-EC71797B6767}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lzo", "..\externals\lzo.vcxproj", "{060ABF0E-D784-46B5-8B67-9BD84EE2CA88}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug_Dedicated|Win32 = Debug_Dedicated|Win32
@@ -578,6 +580,24 @@ Global
 		{DAFD6D98-3DCD-40AD-BC85-EC71797B6767}.Release_Priquel|Win32.Build.0 = Release|Win32
 		{DAFD6D98-3DCD-40AD-BC85-EC71797B6767}.Release|Win32.ActiveCfg = Release|Win32
 		{DAFD6D98-3DCD-40AD-BC85-EC71797B6767}.Release|Win32.Build.0 = Release|Win32
+		{060ABF0E-D784-46B5-8B67-9BD84EE2CA88}.Debug_Dedicated|Win32.ActiveCfg = Debug|Win32
+		{060ABF0E-D784-46B5-8B67-9BD84EE2CA88}.Debug_Dedicated|Win32.Build.0 = Debug|Win32
+		{060ABF0E-D784-46B5-8B67-9BD84EE2CA88}.Debug_Priquel|Win32.ActiveCfg = Debug|Win32
+		{060ABF0E-D784-46B5-8B67-9BD84EE2CA88}.Debug_Priquel|Win32.Build.0 = Debug|Win32
+		{060ABF0E-D784-46B5-8B67-9BD84EE2CA88}.Debug|Win32.ActiveCfg = Debug|Win32
+		{060ABF0E-D784-46B5-8B67-9BD84EE2CA88}.Debug|Win32.Build.0 = Debug|Win32
+		{060ABF0E-D784-46B5-8B67-9BD84EE2CA88}.Mixed_Dedicated|Win32.ActiveCfg = Release|Win32
+		{060ABF0E-D784-46B5-8B67-9BD84EE2CA88}.Mixed_Dedicated|Win32.Build.0 = Release|Win32
+		{060ABF0E-D784-46B5-8B67-9BD84EE2CA88}.Mixed_Priquel|Win32.ActiveCfg = Release|Win32
+		{060ABF0E-D784-46B5-8B67-9BD84EE2CA88}.Mixed_Priquel|Win32.Build.0 = Release|Win32
+		{060ABF0E-D784-46B5-8B67-9BD84EE2CA88}.Mixed|Win32.ActiveCfg = Mixed|Win32
+		{060ABF0E-D784-46B5-8B67-9BD84EE2CA88}.Mixed|Win32.Build.0 = Mixed|Win32
+		{060ABF0E-D784-46B5-8B67-9BD84EE2CA88}.Release_Dedicated|Win32.ActiveCfg = Release|Win32
+		{060ABF0E-D784-46B5-8B67-9BD84EE2CA88}.Release_Dedicated|Win32.Build.0 = Release|Win32
+		{060ABF0E-D784-46B5-8B67-9BD84EE2CA88}.Release_Priquel|Win32.ActiveCfg = Release|Win32
+		{060ABF0E-D784-46B5-8B67-9BD84EE2CA88}.Release_Priquel|Win32.Build.0 = Release|Win32
+		{060ABF0E-D784-46B5-8B67-9BD84EE2CA88}.Release|Win32.ActiveCfg = Release|Win32
+		{060ABF0E-D784-46B5-8B67-9BD84EE2CA88}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -604,6 +624,7 @@ Global
 		{A6EBBBBB-5FEF-4C20-8460-DFAB11734DED} = {89F6A7EE-3BBE-45D3-A8A8-5D9366CD987B}
 		{0EB257DC-5CFC-44B0-82C9-CE6B158BE473} = {259D3FDC-5BA5-46B1-99D3-8C3B1470331C}
 		{DAFD6D98-3DCD-40AD-BC85-EC71797B6767} = {259D3FDC-5BA5-46B1-99D3-8C3B1470331C}
+		{060ABF0E-D784-46B5-8B67-9BD84EE2CA88} = {259D3FDC-5BA5-46B1-99D3-8C3B1470331C}
 	EndGlobalSection
 	GlobalSection(DPCodeReviewSolutionGUID) = preSolution
 		DPCodeReviewSolutionGUID = {00000000-0000-0000-0000-000000000000}
