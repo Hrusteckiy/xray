@@ -7,3 +7,6 @@
 [submodule "externals/lzo"]
 	path = externals/lzo
 	url = https://github.com/alexgdi/lzo.git
+[submodule "externals/FreeMagic"]
+	path = externals/FreeMagic
+	url = https://github.com/OpenXRay/FreeMagic.git

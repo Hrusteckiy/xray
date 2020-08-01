@@ -99,28 +99,28 @@
     <_ProjectFileVersion>12.0.21005.1</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(xrSdkDir)loki;$(xrSdkDir)MagicSoftware\FreeMagic\Include;$(xrSdkDir)FreeImage;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <LibraryPath>$(xrSdkDir)MagicSoftware\FreeMagic\Library\ReleaseDLL;$(xrSdkDir)FreeImage;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
+    <IncludePath>$(xrSdkDir)loki;$(xrExternals)FreeMagic\Include;$(xrSdkDir)FreeImage;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>$(xrSdkDir)FreeImage;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Priquel|Win32'">
-    <IncludePath>$(xrSdkDir)loki;$(xrSdkDir)MagicSoftware\FreeMagic\Include;$(xrSdkDir)FreeImage;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <LibraryPath>$(xrSdkDir)MagicSoftware\FreeMagic\Library\ReleaseDLL;$(xrSdkDir)FreeImage;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
+    <IncludePath>$(xrSdkDir)loki;$(xrExternals)FreeMagic\Include;$(xrSdkDir)FreeImage;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>$(xrSdkDir)FreeImage;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Mixed_Priquel|Win32'">
-    <IncludePath>$(xrSdkDir)loki;$(xrSdkDir)MagicSoftware\FreeMagic\Include;$(xrSdkDir)FreeImage;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <LibraryPath>$(xrSdkDir)MagicSoftware\FreeMagic\Library\ReleaseDLL;$(xrSdkDir)FreeImage;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
+    <IncludePath>$(xrSdkDir)loki;$(xrExternals)FreeMagic\Include;$(xrSdkDir)FreeImage;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>$(xrSdkDir)FreeImage;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Mixed|Win32'">
-    <IncludePath>$(xrSdkDir)loki;$(xrSdkDir)MagicSoftware\FreeMagic\Include;$(xrSdkDir)FreeImage;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <LibraryPath>$(xrSdkDir)MagicSoftware\FreeMagic\Library\ReleaseDLL;$(xrSdkDir)FreeImage;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
+    <IncludePath>$(xrSdkDir)loki;$(xrExternals)FreeMagic\Include;$(xrSdkDir)FreeImage;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>$(xrSdkDir)FreeImage;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Priquel|Win32'">
-    <IncludePath>$(xrSdkDir)loki;$(xrSdkDir)MagicSoftware\FreeMagic\Include;$(xrSdkDir)FreeImage;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <LibraryPath>$(xrSdkDir)MagicSoftware\FreeMagic\Library\ReleaseDLL;$(xrSdkDir)FreeImage;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
+    <IncludePath>$(xrSdkDir)loki;$(xrExternals)FreeMagic\Include;$(xrSdkDir)FreeImage;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>$(xrSdkDir)FreeImage;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(xrSdkDir)loki;$(xrSdkDir)MagicSoftware\FreeMagic\Include;$(xrSdkDir)FreeImage;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <LibraryPath>$(xrSdkDir)MagicSoftware\FreeMagic\Library\ReleaseDLL;$(xrSdkDir)FreeImage;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
+    <IncludePath>$(xrSdkDir)loki;$(xrExternals)FreeMagic\Include;$(xrSdkDir)FreeImage;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>$(xrSdkDir)FreeImage;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
@@ -660,6 +660,9 @@
     <ResourceCompile Include="resource.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\externals\MagicFM.vcxproj">
+      <Project>{faf855f8-d80c-4cb8-be57-b8828fdf9605}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\xrCDB\xrCDB.vcxproj">
       <Project>{a19b1df2-82ec-4364-8bdf-85d13a1c89b5}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
