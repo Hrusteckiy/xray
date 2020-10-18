@@ -2,7 +2,7 @@
 //
 
 #include "stdafx.h"
-#include "..\xrRender\xrRender_console.h"
+#include "xrRender_R1_console.hpp"
 
 #pragma comment(lib,"xr_3DA")
 
@@ -15,7 +15,7 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 	{
 	case DLL_PROCESS_ATTACH:
 		::Render							= &RImplementation;
-		xrRender_initconsole				();
+		xrRender_R1_initconsole();
 		break;
 	case DLL_THREAD_ATTACH:
 	case DLL_THREAD_DETACH:

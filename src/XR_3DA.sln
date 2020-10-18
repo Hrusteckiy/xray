@@ -80,6 +80,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MagicFM", "..\externals\Mag
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameSpy", "..\externals\GameSpy.vcxproj", "{C8F90FA4-B003-4F56-BB7F-E7326469B33C}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xrRender", "xr_3da\xrRender\xrRender.vcxproj", "{D20E4399-B63C-429D-9B8C-DBED9FAD9BAE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug_Dedicated|Win32 = Debug_Dedicated|Win32
@@ -638,6 +640,24 @@ Global
 		{C8F90FA4-B003-4F56-BB7F-E7326469B33C}.Release_Priquel|Win32.Build.0 = Release|Win32
 		{C8F90FA4-B003-4F56-BB7F-E7326469B33C}.Release|Win32.ActiveCfg = Release|Win32
 		{C8F90FA4-B003-4F56-BB7F-E7326469B33C}.Release|Win32.Build.0 = Release|Win32
+		{D20E4399-B63C-429D-9B8C-DBED9FAD9BAE}.Debug_Dedicated|Win32.ActiveCfg = Debug|Win32
+		{D20E4399-B63C-429D-9B8C-DBED9FAD9BAE}.Debug_Dedicated|Win32.Build.0 = Debug|Win32
+		{D20E4399-B63C-429D-9B8C-DBED9FAD9BAE}.Debug_Priquel|Win32.ActiveCfg = Debug|Win32
+		{D20E4399-B63C-429D-9B8C-DBED9FAD9BAE}.Debug_Priquel|Win32.Build.0 = Debug|Win32
+		{D20E4399-B63C-429D-9B8C-DBED9FAD9BAE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D20E4399-B63C-429D-9B8C-DBED9FAD9BAE}.Debug|Win32.Build.0 = Debug|Win32
+		{D20E4399-B63C-429D-9B8C-DBED9FAD9BAE}.Mixed_Dedicated|Win32.ActiveCfg = Mixed|Win32
+		{D20E4399-B63C-429D-9B8C-DBED9FAD9BAE}.Mixed_Dedicated|Win32.Build.0 = Mixed|Win32
+		{D20E4399-B63C-429D-9B8C-DBED9FAD9BAE}.Mixed_Priquel|Win32.ActiveCfg = Debug|Win32
+		{D20E4399-B63C-429D-9B8C-DBED9FAD9BAE}.Mixed_Priquel|Win32.Build.0 = Debug|Win32
+		{D20E4399-B63C-429D-9B8C-DBED9FAD9BAE}.Mixed|Win32.ActiveCfg = Mixed|Win32
+		{D20E4399-B63C-429D-9B8C-DBED9FAD9BAE}.Mixed|Win32.Build.0 = Mixed|Win32
+		{D20E4399-B63C-429D-9B8C-DBED9FAD9BAE}.Release_Dedicated|Win32.ActiveCfg = Release|Win32
+		{D20E4399-B63C-429D-9B8C-DBED9FAD9BAE}.Release_Dedicated|Win32.Build.0 = Release|Win32
+		{D20E4399-B63C-429D-9B8C-DBED9FAD9BAE}.Release_Priquel|Win32.ActiveCfg = Release|Win32
+		{D20E4399-B63C-429D-9B8C-DBED9FAD9BAE}.Release_Priquel|Win32.Build.0 = Release|Win32
+		{D20E4399-B63C-429D-9B8C-DBED9FAD9BAE}.Release|Win32.ActiveCfg = Release|Win32
+		{D20E4399-B63C-429D-9B8C-DBED9FAD9BAE}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -667,6 +687,7 @@ Global
 		{060ABF0E-D784-46B5-8B67-9BD84EE2CA88} = {259D3FDC-5BA5-46B1-99D3-8C3B1470331C}
 		{FAF855F8-D80C-4CB8-BE57-B8828FDF9605} = {259D3FDC-5BA5-46B1-99D3-8C3B1470331C}
 		{C8F90FA4-B003-4F56-BB7F-E7326469B33C} = {259D3FDC-5BA5-46B1-99D3-8C3B1470331C}
+		{D20E4399-B63C-429D-9B8C-DBED9FAD9BAE} = {B49A7C21-376A-4D31-BADB-F69726CB39E0}
 	EndGlobalSection
 	GlobalSection(DPCodeReviewSolutionGUID) = preSolution
 		DPCodeReviewSolutionGUID = {00000000-0000-0000-0000-000000000000}

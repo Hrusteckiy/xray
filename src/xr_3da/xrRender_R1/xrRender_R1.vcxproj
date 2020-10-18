@@ -150,7 +150,6 @@
   <ItemGroup>
     <ClInclude Include="..\xrRender\cl_intersect.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="..\xrRender\xrRender_console.h" />
     <ClInclude Include="FStaticRender.h" />
     <ClInclude Include="FStaticRender_RenderTarget.h" />
     <ClInclude Include="..\xrRender\PSLibrary.h" />
@@ -203,6 +202,7 @@
     <ClInclude Include="LightProjector.h" />
     <ClInclude Include="LightShadows.h" />
     <ClInclude Include="..\xrRender\LightTrack.h" />
+    <ClInclude Include="xrRender_R1_console.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -210,7 +210,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Mixed|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\xrRender\xrRender_console.cpp" />
     <ClCompile Include="xrRender_R1.cpp" />
     <ClCompile Include="FStaticRender.cpp" />
     <ClCompile Include="FStaticRender_Blenders.cpp" />
@@ -292,6 +291,7 @@
     <ClCompile Include="LightProjector.cpp" />
     <ClCompile Include="LightShadows.cpp" />
     <ClCompile Include="..\xrRender\LightTrack.cpp" />
+    <ClCompile Include="xrRender_R1_console.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pipeline.txt" />
@@ -312,6 +312,14 @@
     <ProjectReference Include="..\xrCPU_Pipe\xrCPU_Pipe.vcxproj">
       <Project>{ca0649dd-d089-423a-981c-46b57a884eb9}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\xrRender\xrRender.vcxproj">
+      <Project>{d20e4399-b63c-429d-9b8c-dbed9fad9bae}</Project>
+      <Private>false</Private>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
     <ProjectReference Include="..\XR_3DA.vcxproj">
       <Project>{2578c6d8-660d-48ae-9322-7422f8664f06}</Project>

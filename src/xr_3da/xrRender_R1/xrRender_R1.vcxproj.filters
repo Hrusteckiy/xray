@@ -51,9 +51,6 @@
     <ClInclude Include="stdafx.h">
       <Filter>Kernel</Filter>
     </ClInclude>
-    <ClInclude Include="..\xrRender\xrRender_console.h">
-      <Filter>Kernel</Filter>
-    </ClInclude>
     <ClInclude Include="FStaticRender.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -210,12 +207,12 @@
     <ClInclude Include="..\xrRender\LightTrack.h">
       <Filter>Lights</Filter>
     </ClInclude>
+    <ClInclude Include="xrRender_R1_console.hpp">
+      <Filter>Kernel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
-      <Filter>Kernel</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\xrRender_console.cpp">
       <Filter>Kernel</Filter>
     </ClCompile>
     <ClCompile Include="xrRender_R1.cpp">
@@ -412,6 +409,9 @@
     </ClCompile>
     <ClCompile Include="..\xrRender\LightTrack.cpp">
       <Filter>Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="xrRender_R1_console.cpp">
+      <Filter>Kernel</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

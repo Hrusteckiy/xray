@@ -7,7 +7,7 @@
 	#include "..\editors\ECore\stdafx.h"
 #else
 
-#include "../xrCore/xrCore.h"
+#include <xrCore/xrCore.h>
 
 #ifdef _DEBUG
 	#define D3D_DEBUG_INFO
@@ -39,14 +39,14 @@
 #include "engine.h"
 #include "defines.h"
 #ifndef NO_XRLOG
-#include "log.h"
+#include <xrCore/log.h>
 #endif
 #include "device.h"
-#include "fs.h"
+#include <xrCore/FS.h>
 
 #include "xrXRC.h"
 
-#include "../xrSound/sound.h"
+#include <xrSound/Sound.h>
 
 extern ENGINE_API CInifile *pGameIni;
 

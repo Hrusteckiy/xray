@@ -1,7 +1,7 @@
 // xrRender_R2.cpp : Defines the entry point for the DLL application.
 //
 #include "stdafx.h"
-#include "..\xrRender\xrRender_console.h"
+#include "xrRender_R2_console.hpp"
 
 #pragma comment(lib,"xr_3DA")
 
@@ -15,7 +15,7 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 	case DLL_PROCESS_ATTACH	:
 		if (!xrRender_test_hw())	return FALSE;
 		::Render					= &RImplementation;
-		xrRender_initconsole		();
+		xrRender_R2_initconsole();
 		break	;
 	case DLL_THREAD_ATTACH	:
 	case DLL_THREAD_DETACH	:

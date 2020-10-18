@@ -249,8 +249,6 @@ void	CROS_impl::update	(IRenderable* O)
 	approximate				=	accum;
 }
 
-extern float ps_r2_lt_smooth;
-
 // hemi & sun: update and smooth
 void	CROS_impl::update_smooth	(IRenderable* O)
 {

@@ -292,7 +292,7 @@ void	light::export		(light_Package& package)
 #endif
 
 extern float		r_ssaGLOD_start,	r_ssaGLOD_end;
-extern float		ps_r2_slight_fade;
+
 float	light::get_LOD					()
 {
 	if	(!flags.bShadow)	return 1;

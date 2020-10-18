@@ -4,29 +4,16 @@
 
 #pragma once
 
-#pragma warning(disable:4995)
-#include "..\stdafx.h"
-#pragma warning(disable:4995)
-#include <d3dx9.h>
-#pragma warning(default:4995)
-#pragma warning(disable:4714)
-#pragma warning( 4 : 4018 )
-#pragma warning( 4 : 4244 )
+#include "../xrRender/stdafx.h"
+
 #pragma warning(disable:4237)
 
 #define		R_R1	1
 #define		R_R2	2
 #define		RENDER	R_R2
 
-#include "..\resourcemanager.h"
-#include "..\vis_common.h"
-#include "..\render.h"
-#include "..\_d3d_extensions.h"
-#include "..\igame_level.h"
-#include "..\blenders\blender.h"
-#include "..\blenders\blender_clsid.h"
-#include "..\psystem.h"
-#include "..\xrRender\xrRender_console.h"
+#include "../_d3d_extensions.h"
+#include "xrRender_R2_console.hpp"
 #include "r2.h"
 
 IC	void	jitter(CBlender_Compile& C)
