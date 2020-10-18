@@ -25,7 +25,7 @@ struct tgaHeader{
 #define IMG_24B 0
 #define IMG_32B 1
 
-class TGAdesc
+class XRRENDER_API TGAdesc
 {
 public:
 	int format;

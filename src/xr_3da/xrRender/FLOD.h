@@ -1,7 +1,7 @@
 #pragma once
 #include "../fhierrarhyvisual.h"
 
-class	FLOD	:	public FHierrarhyVisual
+class XRRENDER_API FLOD : public FHierrarhyVisual
 {
 	typedef FHierrarhyVisual inherited;
 public:

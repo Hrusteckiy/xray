@@ -131,18 +131,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="cl_intersect.h" />
+    <ClInclude Include="DetailModel.h" />
+    <ClInclude Include="FLOD.h" />
+    <ClInclude Include="NvTriStrip.h" />
+    <ClInclude Include="NvTriStripObjects.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="tga.h" />
+    <ClInclude Include="VertexCache.h" />
     <ClInclude Include="xrRender_console.h" />
     <ClInclude Include="xrRender_console_cmd.hpp" />
+    <ClInclude Include="xrStripify.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DetailModel.cpp" />
+    <ClCompile Include="FLOD.cpp" />
+    <ClCompile Include="NvTriStrip.cpp" />
+    <ClCompile Include="NvTriStripObjects.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Mixed|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="tga.cpp" />
+    <ClCompile Include="VertexCache.cpp" />
     <ClCompile Include="xrRender_console.cpp" />
     <ClCompile Include="xrRender_console_cmd.cpp" />
+    <ClCompile Include="xrStripify.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\xrCDB\xrCDB.vcxproj">

@@ -13,9 +13,6 @@
     <Filter Include="Details">
       <UniqueIdentifier>{57ca94d8-7651-49e4-8e6a-50aef1eff766}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Stripifier">
-      <UniqueIdentifier>{086ebd0c-3336-4535-a29e-d0f42968c3c4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Glows">
       <UniqueIdentifier>{55050825-eabd-47ce-8974-d26a2fd840e6}</UniqueIdentifier>
     </Filter>
@@ -45,9 +42,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\xrRender\cl_intersect.h">
-      <Filter>Kernel</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>Kernel</Filter>
     </ClInclude>
@@ -55,9 +49,6 @@
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="FStaticRender_RenderTarget.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender\PSLibrary.h">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="..\xrRender\r__dsgraph_structure.h">
@@ -69,26 +60,8 @@
     <ClInclude Include="..\xrRender\doug_lea_memory_allocator.h">
       <Filter>Core\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\xrRender\DetailFormat.h">
-      <Filter>Details</Filter>
-    </ClInclude>
     <ClInclude Include="..\xrRender\DetailManager.h">
       <Filter>Details</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender\DetailModel.h">
-      <Filter>Details</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender\NvTriStrip.h">
-      <Filter>Stripifier</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender\NvTriStripObjects.h">
-      <Filter>Stripifier</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender\VertexCache.h">
-      <Filter>Stripifier</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender\xrStripify.h">
-      <Filter>Stripifier</Filter>
     </ClInclude>
     <ClInclude Include="GlowManager.h">
       <Filter>Glows</Filter>
@@ -153,9 +126,6 @@
     <ClInclude Include="..\xrRender\ModelPool.h">
       <Filter>Models</Filter>
     </ClInclude>
-    <ClInclude Include="..\xrRender\FLOD.h">
-      <Filter>Models\Visuals</Filter>
-    </ClInclude>
     <ClInclude Include="..\xrRender\FProgressive.h">
       <Filter>Models\Visuals</Filter>
     </ClInclude>
@@ -166,15 +136,6 @@
       <Filter>Models\Visuals</Filter>
     </ClInclude>
     <ClInclude Include="..\xrRender\FVisual.h">
-      <Filter>Models\Visuals</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender\ParticleEffect.h">
-      <Filter>Models\Visuals</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender\ParticleEffectDef.h">
-      <Filter>Models\Visuals</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender\ParticleGroup.h">
       <Filter>Models\Visuals</Filter>
     </ClInclude>
     <ClInclude Include="..\xrRender\r__sector.h">
@@ -210,6 +171,21 @@
     <ClInclude Include="xrRender_R1_console.hpp">
       <Filter>Kernel</Filter>
     </ClInclude>
+    <ClInclude Include="..\xrRender\DetailFormat.h">
+      <Filter>Details</Filter>
+    </ClInclude>
+    <ClInclude Include="..\xrRender\PSLibrary.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\xrRender\ParticleEffect.h">
+      <Filter>Models\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="..\xrRender\ParticleEffectDef.h">
+      <Filter>Models\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="..\xrRender\ParticleGroup.h">
+      <Filter>Models\Visuals</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -233,9 +209,6 @@
     <ClCompile Include="FStaticRender_RenderTarget.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\xrRender\PSLibrary.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="..\xrRender\r__dsgraph_build.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -249,9 +222,6 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="..\xrRender\Texture.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\tga.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="..\xrRender\doug_lea_memory_allocator.c">
@@ -271,21 +241,6 @@
     </ClCompile>
     <ClCompile Include="..\xrRender\DetailManager_VS.cpp">
       <Filter>Details</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\DetailModel.cpp">
-      <Filter>Details</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\NvTriStrip.cpp">
-      <Filter>Stripifier</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\NvTriStripObjects.cpp">
-      <Filter>Stripifier</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\VertexCache.cpp">
-      <Filter>Stripifier</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\xrStripify.cpp">
-      <Filter>Stripifier</Filter>
     </ClCompile>
     <ClCompile Include="GlowManager.cpp">
       <Filter>Glows</Filter>
@@ -350,9 +305,6 @@
     <ClCompile Include="..\xrRender\ModelPool.cpp">
       <Filter>Models</Filter>
     </ClCompile>
-    <ClCompile Include="..\xrRender\FLOD.cpp">
-      <Filter>Models\Visuals</Filter>
-    </ClCompile>
     <ClCompile Include="..\xrRender\FProgressive.cpp">
       <Filter>Models\Visuals</Filter>
     </ClCompile>
@@ -363,15 +315,6 @@
       <Filter>Models\Visuals</Filter>
     </ClCompile>
     <ClCompile Include="..\xrRender\FVisual.cpp">
-      <Filter>Models\Visuals</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\ParticleEffect.cpp">
-      <Filter>Models\Visuals</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\ParticleEffectDef.cpp">
-      <Filter>Models\Visuals</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\ParticleGroup.cpp">
       <Filter>Models\Visuals</Filter>
     </ClCompile>
     <ClCompile Include="..\xrRender\r__sector.cpp">
@@ -412,6 +355,18 @@
     </ClCompile>
     <ClCompile Include="xrRender_R1_console.cpp">
       <Filter>Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\xrRender\PSLibrary.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\xrRender\ParticleEffect.cpp">
+      <Filter>Models\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="..\xrRender\ParticleEffectDef.cpp">
+      <Filter>Models\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="..\xrRender\ParticleGroup.cpp">
+      <Filter>Models\Visuals</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

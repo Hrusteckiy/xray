@@ -2,7 +2,8 @@
 #ifndef ParticleGroupH
 #define ParticleGroupH
 
-#include "..\ParticleCustom.h"
+#include "../ParticleCustom.h"
+#include "../FBasicVisual.h"
 
 namespace PS
 {
