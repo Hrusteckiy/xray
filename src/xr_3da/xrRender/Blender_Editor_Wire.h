@@ -2,7 +2,7 @@
 #define BLENDER_EDITOR_WIRE_H
 #pragma once
 
-class CBlender_Editor_Wire : public IBlender  
+class XRRENDER_API CBlender_Editor_Wire : public IBlender
 {
 	string64	oT_Factor;
 public:

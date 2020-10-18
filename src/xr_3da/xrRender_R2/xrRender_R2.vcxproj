@@ -140,6 +140,12 @@
     <ClInclude Include="..\xrRender\ParticleEffectDef.h" />
     <ClInclude Include="..\xrRender\ParticleGroup.h" />
     <ClInclude Include="..\xrRender\PSLibrary.h" />
+    <ClInclude Include="Blender_BmmD_R2.hpp" />
+    <ClInclude Include="Blender_detail_still_R2.hpp" />
+    <ClInclude Include="Blender_Lm(EbB)_R2.hpp" />
+    <ClInclude Include="Blender_Model_EbB_R2.hpp" />
+    <ClInclude Include="Blender_Particle_R2.hpp" />
+    <ClInclude Include="Blender_tree_R2.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="r2.h" />
     <ClInclude Include="r2_types.h" />
@@ -159,13 +165,10 @@
     <ClInclude Include="SMAP_Allocator.h" />
     <ClInclude Include="..\xrRender\WallmarksEngine.h" />
     <ClInclude Include="blender_bloom_build.h" />
-    <ClInclude Include="..\xrRender\Blender_BmmD.h" />
     <ClInclude Include="blender_combine.h" />
     <ClInclude Include="blender_deffer_aref.h" />
     <ClInclude Include="blender_deffer_flat.h" />
     <ClInclude Include="blender_deffer_model.h" />
-    <ClInclude Include="..\xrRender\Blender_Editor_Selection.h" />
-    <ClInclude Include="..\xrRender\Blender_Editor_Wire.h" />
     <ClInclude Include="blender_light_direct.h" />
     <ClInclude Include="blender_light_mask.h" />
     <ClInclude Include="blender_light_occq.h" />
@@ -173,13 +176,6 @@
     <ClInclude Include="blender_light_reflected.h" />
     <ClInclude Include="blender_light_spot.h" />
     <ClInclude Include="blender_luminance.h" />
-    <ClInclude Include="..\xrRender\Blender_Particle.h" />
-    <ClInclude Include="..\xrRender\uber_deffer.h" />
-    <ClInclude Include="..\xrRender\Blender_detail_still.h" />
-    <ClInclude Include="..\xrRender\Blender_Lm(EbB).h" />
-    <ClInclude Include="..\xrRender\Blender_Model_EbB.h" />
-    <ClInclude Include="..\xrRender\Blender_Screen_SET.h" />
-    <ClInclude Include="..\xrRender\Blender_tree.h" />
     <ClInclude Include="..\xrRender\ModelPool.h" />
     <ClInclude Include="..\xrRender\FProgressive.h" />
     <ClInclude Include="..\xrRender\FSkinned.h" />
@@ -191,6 +187,7 @@
     <ClInclude Include="du_sphere_part.h" />
     <ClInclude Include="r2_rendertarget.h" />
     <ClInclude Include="r2_rendertarget_wallmarks.h" />
+    <ClInclude Include="uber_deffer.h" />
     <ClInclude Include="xrRender_R2_console.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -198,11 +195,18 @@
     <ClCompile Include="..\xrRender\ParticleEffectDef.cpp" />
     <ClCompile Include="..\xrRender\ParticleGroup.cpp" />
     <ClCompile Include="..\xrRender\PSLibrary.cpp" />
+    <ClCompile Include="Blender_BmmD_R2.cpp" />
+    <ClCompile Include="Blender_detail_still_R2.cpp" />
+    <ClCompile Include="Blender_Lm(EbB)_R2.cpp" />
+    <ClCompile Include="Blender_Model_EbB_R2.cpp" />
+    <ClCompile Include="Blender_Particle_R2.cpp" />
+    <ClCompile Include="Blender_tree_R2.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Mixed|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="uber_deffer.cpp" />
     <ClCompile Include="xrRender_R2.cpp" />
     <ClCompile Include="r2.cpp" />
     <ClCompile Include="r2_blenders.cpp" />
@@ -247,13 +251,10 @@
     <ClCompile Include="..\xrRender\LightTrack.cpp" />
     <ClCompile Include="..\xrRender\WallmarksEngine.cpp" />
     <ClCompile Include="blender_bloom_build.cpp" />
-    <ClCompile Include="..\xrRender\Blender_BmmD.cpp" />
     <ClCompile Include="blender_combine.cpp" />
     <ClCompile Include="blender_deffer_aref.cpp" />
     <ClCompile Include="blender_deffer_flat.cpp" />
     <ClCompile Include="blender_deffer_model.cpp" />
-    <ClCompile Include="..\xrRender\Blender_Editor_Selection.cpp" />
-    <ClCompile Include="..\xrRender\Blender_Editor_Wire.cpp" />
     <ClCompile Include="blender_light_direct.cpp" />
     <ClCompile Include="blender_light_mask.cpp" />
     <ClCompile Include="blender_light_occq.cpp" />
@@ -261,13 +262,6 @@
     <ClCompile Include="blender_light_reflected.cpp" />
     <ClCompile Include="blender_light_spot.cpp" />
     <ClCompile Include="blender_luminance.cpp" />
-    <ClCompile Include="..\xrRender\Blender_Particle.cpp" />
-    <ClCompile Include="..\xrRender\uber_deffer.cpp" />
-    <ClCompile Include="..\xrRender\Blender_detail_still.cpp" />
-    <ClCompile Include="..\xrRender\Blender_Lm(EbB).cpp" />
-    <ClCompile Include="..\xrRender\Blender_Model_EbB.cpp" />
-    <ClCompile Include="..\xrRender\Blender_Screen_SET.cpp" />
-    <ClCompile Include="..\xrRender\Blender_tree.cpp" />
     <ClCompile Include="..\xrRender\ModelPool.cpp" />
     <ClCompile Include="..\xrRender\FProgressive.cpp" />
     <ClCompile Include="..\xrRender\FSkinned.cpp" />

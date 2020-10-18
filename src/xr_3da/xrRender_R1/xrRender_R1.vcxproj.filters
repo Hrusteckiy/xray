@@ -72,46 +72,19 @@
     <ClInclude Include="Blender_Blur.h">
       <Filter>Shading templates</Filter>
     </ClInclude>
-    <ClInclude Include="..\xrRender\Blender_BmmD.h">
-      <Filter>Shading templates</Filter>
-    </ClInclude>
     <ClInclude Include="Blender_default_aref.h">
-      <Filter>Shading templates</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender\Blender_detail_still.h">
-      <Filter>Shading templates</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender\Blender_Editor_Selection.h">
-      <Filter>Shading templates</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender\Blender_Editor_Wire.h">
       <Filter>Shading templates</Filter>
     </ClInclude>
     <ClInclude Include="Blender_LaEmB.h">
       <Filter>Shading templates</Filter>
     </ClInclude>
-    <ClInclude Include="..\xrRender\Blender_Lm(EbB).h">
-      <Filter>Shading templates</Filter>
-    </ClInclude>
     <ClInclude Include="Blender_Model.h">
-      <Filter>Shading templates</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender\Blender_Model_EbB.h">
-      <Filter>Shading templates</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender\Blender_Particle.h">
       <Filter>Shading templates</Filter>
     </ClInclude>
     <ClInclude Include="Blender_Screen_GRAY.h">
       <Filter>Shading templates</Filter>
     </ClInclude>
-    <ClInclude Include="..\xrRender\Blender_Screen_SET.h">
-      <Filter>Shading templates</Filter>
-    </ClInclude>
     <ClInclude Include="Blender_Shadow_World.h">
-      <Filter>Shading templates</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender\Blender_tree.h">
       <Filter>Shading templates</Filter>
     </ClInclude>
     <ClInclude Include="Blender_Vertex.h">
@@ -186,6 +159,24 @@
     <ClInclude Include="..\xrRender\ParticleGroup.h">
       <Filter>Models\Visuals</Filter>
     </ClInclude>
+    <ClInclude Include="Blender_tree_R1.hpp">
+      <Filter>Shading templates</Filter>
+    </ClInclude>
+    <ClInclude Include="Blender_BmmD_R1.hpp">
+      <Filter>Shading templates</Filter>
+    </ClInclude>
+    <ClInclude Include="Blender_Lm(EbB)_R1.hpp">
+      <Filter>Shading templates</Filter>
+    </ClInclude>
+    <ClInclude Include="Blender_detail_still_R1.hpp">
+      <Filter>Shading templates</Filter>
+    </ClInclude>
+    <ClInclude Include="Blender_Model_EbB_R1.hpp">
+      <Filter>Shading templates</Filter>
+    </ClInclude>
+    <ClInclude Include="Blender_Particle_R1.hpp">
+      <Filter>Shading templates</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -251,46 +242,19 @@
     <ClCompile Include="Blender_Blur.cpp">
       <Filter>Shading templates</Filter>
     </ClCompile>
-    <ClCompile Include="..\xrRender\Blender_BmmD.cpp">
-      <Filter>Shading templates</Filter>
-    </ClCompile>
     <ClCompile Include="Blender_default_aref.cpp">
-      <Filter>Shading templates</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\Blender_detail_still.cpp">
-      <Filter>Shading templates</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\Blender_Editor_Selection.cpp">
-      <Filter>Shading templates</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\Blender_Editor_Wire.cpp">
       <Filter>Shading templates</Filter>
     </ClCompile>
     <ClCompile Include="Blender_LaEmB.cpp">
       <Filter>Shading templates</Filter>
     </ClCompile>
-    <ClCompile Include="..\xrRender\Blender_Lm(EbB).cpp">
-      <Filter>Shading templates</Filter>
-    </ClCompile>
     <ClCompile Include="Blender_Model.cpp">
-      <Filter>Shading templates</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\Blender_Model_EbB.cpp">
-      <Filter>Shading templates</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\Blender_Particle.cpp">
       <Filter>Shading templates</Filter>
     </ClCompile>
     <ClCompile Include="Blender_Screen_GRAY.cpp">
       <Filter>Shading templates</Filter>
     </ClCompile>
-    <ClCompile Include="..\xrRender\Blender_Screen_SET.cpp">
-      <Filter>Shading templates</Filter>
-    </ClCompile>
     <ClCompile Include="Blender_Shadow_World.cpp">
-      <Filter>Shading templates</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\Blender_tree.cpp">
       <Filter>Shading templates</Filter>
     </ClCompile>
     <ClCompile Include="Blender_Vertex.cpp">
@@ -367,6 +331,24 @@
     </ClCompile>
     <ClCompile Include="..\xrRender\ParticleGroup.cpp">
       <Filter>Models\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="Blender_tree_R1.cpp">
+      <Filter>Shading templates</Filter>
+    </ClCompile>
+    <ClCompile Include="Blender_BmmD_R1.cpp">
+      <Filter>Shading templates</Filter>
+    </ClCompile>
+    <ClCompile Include="Blender_Lm(EbB)_R1.cpp">
+      <Filter>Shading templates</Filter>
+    </ClCompile>
+    <ClCompile Include="Blender_detail_still_R1.cpp">
+      <Filter>Shading templates</Filter>
+    </ClCompile>
+    <ClCompile Include="Blender_Model_EbB_R1.cpp">
+      <Filter>Shading templates</Filter>
+    </ClCompile>
+    <ClCompile Include="Blender_Particle_R1.cpp">
+      <Filter>Shading templates</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
