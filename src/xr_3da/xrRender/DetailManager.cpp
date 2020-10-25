@@ -177,8 +177,6 @@ void CDetailManager::Unload		()
 	FS.r_close			(dtFS);
 }
 
-extern ECORE_API float r_ssaDISCARD;
-
 void CDetailManager::UpdateVisibleM()
 {
 	Fvector		EYE				= Device.vCameraPosition;
@@ -189,7 +187,7 @@ void CDetailManager::UpdateVisibleM()
 	float fade_limit			= dm_fade;	fade_limit=fade_limit*fade_limit;
 	float fade_start			= 1.f;		fade_start=fade_start*fade_start;
 	float fade_range			= fade_limit-fade_start;
-	float		r_ssaCHEAP		= 16*r_ssaDISCARD;
+	float		r_ssaCHEAP		= 16 * xray::r_ssaDISCARD;
 
 	// Initialize 'vis' and 'cache'
 	// Collect objects for rendering
@@ -244,7 +242,7 @@ void CDetailManager::UpdateVisibleM()
 							SlotItem& Item			= *(*siIT);
 							float   scale			= Item.scale_calculated	= Item.scale*alpha_i;
 							float	ssa				= scale*scale*Rq_drcp;
-							if (ssa < r_ssaDISCARD) continue;
+                            if (ssa < xray::r_ssaDISCARD) continue;
 							u32		vis_id			= 0;
 							if (ssa > r_ssaCHEAP)	vis_id = Item.vis_ID;
 							

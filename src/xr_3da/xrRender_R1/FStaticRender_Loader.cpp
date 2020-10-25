@@ -49,7 +49,7 @@ void CRender::level_Load(IReader *fs)
 	L_Projector					= xr_new<CLightProjector>	();
 	L_DB						= xr_new<CLight_DB>			();
 	L_Glows						= xr_new<CGlowManager>		();
-	Wallmarks					= xr_new<CWallmarksEngine>	();
+    xray::renderBase.Wallmarks  = xr_new<CWallmarksEngine>();
 	Details						= xr_new<CDetailManager>	();
 
 	rmFar						();
@@ -143,7 +143,7 @@ void CRender::level_Unload		()
 
 	//*** Components
 	xr_delete					(Details);
-	xr_delete					(Wallmarks);
+	xr_delete					(xray::renderBase.Wallmarks);
 	xr_delete					(L_Glows);
 	xr_delete					(L_DB);
 	xr_delete					(L_Projector);

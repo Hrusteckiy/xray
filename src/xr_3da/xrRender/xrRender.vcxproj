@@ -142,12 +142,15 @@
     <ClInclude Include="Blender_Screen_SET.h" />
     <ClInclude Include="Blender_tree.h" />
     <ClInclude Include="DetailModel.h" />
+    <ClInclude Include="doug_lea_memory_allocator.h" />
     <ClInclude Include="FLOD.h" />
     <ClInclude Include="NvTriStrip.h" />
     <ClInclude Include="NvTriStripObjects.h" />
+    <ClInclude Include="RenderBase.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="tga.h" />
     <ClInclude Include="VertexCache.h" />
+    <ClInclude Include="WallmarksEngine.h" />
     <ClInclude Include="xrRender_console.h" />
     <ClInclude Include="xrRender_console_cmd.hpp" />
     <ClInclude Include="xrStripify.h" />
@@ -163,9 +166,24 @@
     <ClCompile Include="Blender_Screen_SET.cpp" />
     <ClCompile Include="Blender_tree.cpp" />
     <ClCompile Include="DetailModel.cpp" />
+    <ClCompile Include="doug_lea_memory_allocator.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Mixed|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
+      </PrecompiledHeader>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Mixed|Win32'">Level2</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level2</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level2</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">Level2</WarningLevel>
+    </ClCompile>
     <ClCompile Include="FLOD.cpp" />
     <ClCompile Include="NvTriStrip.cpp" />
     <ClCompile Include="NvTriStripObjects.cpp" />
+    <ClCompile Include="RenderBase.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Mixed|Win32'">Create</PrecompiledHeader>
@@ -173,6 +191,7 @@
     </ClCompile>
     <ClCompile Include="tga.cpp" />
     <ClCompile Include="VertexCache.cpp" />
+    <ClCompile Include="WallmarksEngine.cpp" />
     <ClCompile Include="xrRender_console.cpp" />
     <ClCompile Include="xrRender_console_cmd.cpp" />
     <ClCompile Include="xrStripify.cpp" />

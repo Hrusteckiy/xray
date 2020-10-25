@@ -7,14 +7,9 @@
 
 using namespace		R_dsgraph;
 
-extern float		r_ssaDISCARD;
-extern float		r_ssaDONTSORT;
-extern float		r_ssaHZBvsTEX;
-extern float		r_ssaGLOD_start,	r_ssaGLOD_end;
-
 ICF float calcLOD	(float ssa/*fDistSq*/, float R)
 {
-	return			_sqrt(clampr((ssa - r_ssaGLOD_end)/(r_ssaGLOD_start-r_ssaGLOD_end),0.f,1.f));
+    return _sqrt(clampr((ssa - xray::r_ssaGLOD_end) / (xray::r_ssaGLOD_start - xray::r_ssaGLOD_end), 0.f, 1.f));
 }
 
 // NORMAL
@@ -52,7 +47,7 @@ void __fastcall mapMatrix_Render	(mapMatrixItems& N)
 }
 
 // ALPHA
-void __fastcall sorted_L1		(mapSorted_Node *N)
+void __fastcall xray::render::sorted_L1(R_dsgraph::mapSorted_Node *N)
 {
 	VERIFY (N);
 	IRender_Visual *V				= N->val.pVisual;
@@ -152,8 +147,10 @@ void		sort_tlist_nrm
 			mapNormalTextures::TNode* _it	= textures.begin	();
 			mapNormalTextures::TNode* _end	= textures.end		();
 			for (; _it!=_end; _it++)	{
-				if (_it->val.ssa > r_ssaHZBvsTEX)	lst.push_back	(_it);
-				else								temp.push_back	(_it);
+                if (_it->val.ssa > xray::r_ssaHZBvsTEX)
+                    lst.push_back(_it);
+				else
+                    temp.push_back(_it);
 			}
 
 			// 1st - part - SSA, 2nd - lexicographically
@@ -198,8 +195,10 @@ void		sort_tlist_mat
 			mapMatrixTextures::TNode* _it	= textures.begin	();
 			mapMatrixTextures::TNode* _end	= textures.end		();
 			for (; _it!=_end; _it++)	{
-				if (_it->val.ssa > r_ssaHZBvsTEX)	lst.push_back	(_it);
-				else								temp.push_back	(_it);
+                if (_it->val.ssa > xray::r_ssaHZBvsTEX)
+                    lst.push_back(_it);
+				else
+                    temp.push_back(_it);
 			}
 
 			// 1st - part - SSA, 2nd - lexicographically
@@ -376,7 +375,7 @@ void R_dsgraph_structure::r_dsgraph_render_hud	()
 
 	// Rendering
 	rmNear						();
-	mapHUD.traverseLR			(sorted_L1);
+	mapHUD.traverseLR			(xray::render::sorted_L1);
 	mapHUD.clear				();
 	rmNormal					();
 
@@ -391,30 +390,8 @@ void R_dsgraph_structure::r_dsgraph_render_hud	()
 void	R_dsgraph_structure::r_dsgraph_render_sorted	()
 {
 	// Sorted (back to front)
-	mapSorted.traverseRL	(sorted_L1);
+	mapSorted.traverseRL	(xray::render::sorted_L1);
 	mapSorted.clear			();
-}
-
-//////////////////////////////////////////////////////////////////////////
-// strict-sorted render
-void	R_dsgraph_structure::r_dsgraph_render_emissive	()
-{
-#if	RENDER==R_R2
-	// Sorted (back to front)
-	mapEmissive.traverseLR	(sorted_L1);
-	mapEmissive.clear		();
-#endif
-}
-
-//////////////////////////////////////////////////////////////////////////
-// strict-sorted render
-void	R_dsgraph_structure::r_dsgraph_render_wmarks	()
-{
-#if	RENDER==R_R2
-	// Sorted (back to front)
-	mapWmark.traverseLR	(sorted_L1);
-	mapWmark.clear		();
-#endif
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -422,7 +399,7 @@ void	R_dsgraph_structure::r_dsgraph_render_wmarks	()
 void	R_dsgraph_structure::r_dsgraph_render_distort	()
 {
 	// Sorted (back to front)
-	mapDistort.traverseRL	(sorted_L1);
+	mapDistort.traverseRL	(xray::render::sorted_L1);
 	mapDistort.clear		();
 }
 

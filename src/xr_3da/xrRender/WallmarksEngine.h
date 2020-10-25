@@ -3,17 +3,20 @@
 //////////////////////////////////////////////////////////////////////
 #pragma once
 
+namespace xray {
+namespace render {
+extern XRRENDER_API u32 g_r;
+}}
+
 namespace WallmarksEngine {
-	struct wm_slot;
+    struct XRRENDER_API wm_slot;
 }
 
-
-class CWallmarksEngine
+class XRRENDER_API CWallmarksEngine
 {
 public:
 	typedef WallmarksEngine::wm_slot	wm_slot;
 
-public:
 	struct static_wallmark 
 	{
 		Fsphere				bounds;
@@ -37,10 +40,10 @@ private:
 	xr_vector<u32>		sml_adjacency;
 
 	xrCriticalSection	lock;
-private:
+
 	wm_slot*			FindSlot				(ref_shader shader);
 	wm_slot*			AppendSlot				(ref_shader shader);
-private:
+
 	void				BuildMatrix				(Fmatrix &dest, float invsz, const Fvector& from);
 	void				RecurseTri				(u32 T,	Fmatrix &mView, static_wallmark	&W);
 	void				AddWallmark_internal	(CDB::TRI* pTri, const Fvector* pVerts, const Fvector &contact_point, ref_shader hTexture, float sz);
@@ -62,4 +65,6 @@ public:
 	void				Render					();
 
 	void				clear					();
+private:
+    void renderWMarks();
 };

@@ -9,9 +9,6 @@
 #include "..\environment.h"
 #endif
 
-extern float	r_ssaLOD_A;
-extern float	r_ssaLOD_B;
-
 ICF		bool	pred_dot		(const std::pair<float,u32>& _1, const std::pair<float,u32>& _2)	{ return _1.first < _2.first; }
 void R_dsgraph_structure::r_dsgraph_render_lods	(bool _setup_zb, bool _clear)
 {
@@ -29,7 +26,7 @@ void R_dsgraph_structure::r_dsgraph_render_lods	(bool _setup_zb, bool _clear)
 	int							cur_count	= 0;
 	u32							vOffset		;
 	FLOD::_hw*					V			= (FLOD::_hw*)RCache.Vertex.Lock	(lstLODs.size()*4,firstV->geom->vb_stride, vOffset);
-	float	ssaRange						= r_ssaLOD_A - r_ssaLOD_B;
+    float ssaRange = xray::r_ssaLOD_A - xray::r_ssaLOD_B;
 	if		(ssaRange<EPS_S)	ssaRange	= EPS_S;
 	for (u32 i=0; i<lstLODs.size(); i++)
 	{
@@ -43,7 +40,7 @@ void R_dsgraph_structure::r_dsgraph_render_lods	(bool _setup_zb, bool _clear)
 		}
 
 		// calculate alpha
-		float	ssaDiff					= P.ssa - r_ssaLOD_B;
+		float	ssaDiff					= P.ssa - xray::r_ssaLOD_B;
 		float	scale					= ssaDiff/ssaRange	;
 		int		iA						= iFloor	((1-scale)*255.f);	
 		u32		uA						= u32		(clampr(iA,0,255));

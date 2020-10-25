@@ -79,8 +79,7 @@ ICF		bool	psort_pred			(const std::pair<CPortal*, float>& _1, const std::pair<CP
 	float		d2		= PortalTraverser.i_vBase.distance_to_sqr(_2.first->S.P);
 	return		d2>d1;	// descending, back to front
 }
-extern float r_ssaDISCARD			;
-extern float r_ssaLOD_A, r_ssaLOD_B ;
+
 void CPortalTraverser::fade_render	()
 {
 	if (f_portals.empty())			return;
@@ -95,7 +94,7 @@ void CPortalTraverser::fade_render	()
 	// fill buffers
 	u32			_offset				= 0;
 	FVF::L*		_v					= (FVF::L*)RCache.Vertex.Lock(_pcount*3,f_geom.stride(),_offset);
-	float		ssaRange			= r_ssaLOD_A - r_ssaLOD_B;
+	float		ssaRange			= xray::r_ssaLOD_A - xray::r_ssaLOD_B;
 	Fvector		_ambient_f			= g_pGamePersistent->Environment().CurrentEnv.ambient;
 	u32			_ambient			= color_rgba_f	(_ambient_f.x,_ambient_f.y,_ambient_f.z,0);
 	for (u32 _it = 0; _it<f_portals.size(); _it++)
@@ -103,7 +102,7 @@ void CPortalTraverser::fade_render	()
 		std::pair<CPortal*, float>&	fp		= f_portals	[_it]	;
 		CPortal*					_P		= fp.first	;
 		float						_ssa	= fp.second	;
-		float		ssaDiff					= _ssa-r_ssaLOD_B	;
+		float		ssaDiff					= _ssa - xray::r_ssaLOD_B	;
 		float		ssaScale				= ssaDiff/ssaRange	;
 		int			iA						= iFloor((1-ssaScale)*255.5f);	clamp(iA,0,255);
 		u32							_clr	= subst_alpha(_ambient,u32(iA));	

@@ -28,7 +28,7 @@ void CRender::render_main	(Fmatrix&	m_ViewProjection, bool _fportals)
 				lstRenderables,
 				ISpatial_DB::O_ORDERED,
 				STYPE_RENDERABLE + STYPE_LIGHTSOURCE,
-				ViewBase
+                xray::renderBase.ViewBase
 				);
 
 			// (almost) Exact sorting order (front-to-back)
@@ -37,7 +37,7 @@ void CRender::render_main	(Fmatrix&	m_ViewProjection, bool _fportals)
 			// Determine visibility for dynamic part of scene
 			set_Object							(0);
 			u32 uID_LTRACK						= 0xffffffff;
-			if (phase==PHASE_NORMAL)			{
+            if (xray::renderBase.phase == R_dsgraph_structure::RenderPhase::PHASE_NORMAL)			{
 				uLastLTRACK	++;
 				if (lstRenderables.size())		uID_LTRACK	= uLastLTRACK%lstRenderables.size();
 
@@ -64,7 +64,7 @@ void CRender::render_main	(Fmatrix&	m_ViewProjection, bool _fportals)
 		PortalTraverser.traverse	
 			(
 			pLastSector,
-			ViewBase,
+            xray::renderBase.ViewBase,
 			Device.vCameraPosition,
 			m_ViewProjection,
 			CPortalTraverser::VQ_HOM + CPortalTraverser::VQ_SSA + CPortalTraverser::VQ_FADE
@@ -131,12 +131,12 @@ void CRender::render_main	(Fmatrix&	m_ViewProjection, bool _fportals)
 				break;	// exit loop on frustums
 			}
 		}
-		if (g_pGameLevel && (phase==PHASE_NORMAL))	g_pGameLevel->pHUD->Render_Last();		// HUD
+        if (g_pGameLevel && (xray::renderBase.phase == R_dsgraph_structure::RenderPhase::PHASE_NORMAL))	g_pGameLevel->pHUD->Render_Last(); // HUD
 	}
 	else
 	{
 		set_Object									(0);
-		if (g_pGameLevel && (phase==PHASE_NORMAL))	g_pGameLevel->pHUD->Render_Last();		// HUD
+        if (g_pGameLevel && (xray::renderBase.phase == R_dsgraph_structure::RenderPhase::PHASE_NORMAL))	g_pGameLevel->pHUD->Render_Last(); // HUD
 	}
 }
 
@@ -183,10 +183,9 @@ void CRender::render_menu	()
 	RCache.Render					(D3DPT_TRIANGLELIST,Offset,0,4,0,2);
 }
 
-extern u32 g_r;
 void CRender::Render		()
 {
-	g_r						= 1;
+    xray::render::g_r = 1;
 	VERIFY					(0==mapDistort.size());
 
 	bool	_menu_pp		= g_pGamePersistent?g_pGamePersistent->OnRenderPPUI_query():false;
@@ -205,11 +204,11 @@ void CRender::Render		()
 	// Msg						("sstatic: %s, sun: %s",o.sunstatic?"true":"false", bSUN?"true":"false");
 
 	// HOM
-	ViewBase.CreateFromMatrix					(Device.mFullTransform, FRUSTUM_P_LRTB + FRUSTUM_P_FAR);
+    xray::renderBase.ViewBase.CreateFromMatrix(Device.mFullTransform, FRUSTUM_P_LRTB + FRUSTUM_P_FAR);
 	View										= 0;
 	if (!ps_r2_ls_flags.test(R2FLAG_EXP_MT_CALC))	{
 		HOM.Enable									();
-		HOM.Render									(ViewBase);
+        HOM.Render(xray::renderBase.ViewBase);
 	}
 
 	//******* Z-prefill calc - DEFERRER RENDERER
@@ -224,7 +223,7 @@ void CRender::Render		()
 		m_zfill.mul	(m_project,Device.mView);
 		r_pmask										(true,false);	// enable priority "0"
 		set_Recorder								(NULL)		;
-		phase										= PHASE_SMAP;
+        xray::renderBase.phase = R_dsgraph_structure::RenderPhase::PHASE_SMAP;
 		render_main									(m_zfill,false)	;
 		r_pmask										(true,false);	// disable priority "1"
 		Device.Statistic->RenderCALC.End				( )			;
@@ -264,7 +263,7 @@ void CRender::Render		()
 	r_pmask										(true,false,true);	// enable priority "0",+ capture wmarks
 	if (bSUN)									set_Recorder	(&main_coarse_structure);
 	else										set_Recorder	(NULL);
-	phase										= PHASE_NORMAL;
+    xray::renderBase.phase = R_dsgraph_structure::RenderPhase::PHASE_NORMAL;
 	render_main									(Device.mFullTransform,true);
 	set_Recorder								(NULL);
 	r_pmask										(true,false);	// disable priority "1"
@@ -357,10 +356,11 @@ void CRender::Render		()
 	}
 
 	// Wall marks
-	if(Wallmarks)	{
+    if (xray::renderBase.Wallmarks)
+    {
 		Target->phase_wallmarks					();
-		g_r										= 0;
-		Wallmarks->Render						();				// wallmarks has priority as normal geometry
+        xray::render::g_r = 0;
+        xray::renderBase.Wallmarks->Render();				// wallmarks has priority as normal geometry
 	}
 
 	// Update incremental shadowmap-visibility solver
@@ -410,7 +410,7 @@ void CRender::render_forward				()
 	{
 		// level
 		r_pmask									(false,true);			// enable priority "1"
-		phase									= PHASE_NORMAL;
+        xray::renderBase.phase = R_dsgraph_structure::RenderPhase::PHASE_NORMAL;
 		render_main								(Device.mFullTransform,false);//
 		r_dsgraph_render_graph					(1)	;					// normal level, secondary priority
 		PortalTraverser.fade_render				()	;					// faded-portals
@@ -419,4 +419,22 @@ void CRender::render_forward				()
 	}
 
 	RImplementation.o.distortion				= FALSE;				// disable distorion
+}
+
+//////////////////////////////////////////////////////////////////////////
+// strict-sorted render
+void CRender::r_dsgraph_render_emissive()
+{
+    // Sorted (back to front)
+    mapEmissive.traverseLR(xray::render::sorted_L1);
+    mapEmissive.clear();
+}
+
+//////////////////////////////////////////////////////////////////////////
+// strict-sorted render
+void CRender::r_dsgraph_render_wmarks()
+{
+    // Sorted (back to front)
+    mapWmark.traverseLR(xray::render::sorted_L1);
+    mapWmark.clear();
 }

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "r2.h"
+#include "WallmarksEngine_R2.hpp"
 #include "../resourcemanager.h"
 #include "../fbasicvisual.h"
 #include "../fmesh.h"
@@ -46,7 +47,7 @@ void CRender::level_Load(IReader* fs)
 	}
 
 	// Components
-	Wallmarks					= xr_new<CWallmarksEngine>	();
+    xray::renderBase.Wallmarks  = xr_new<CWallmarksEngine_R2>();
 	Details						= xr_new<CDetailManager>	();
 
 	if	(!g_dedicated_server)	{
@@ -150,7 +151,7 @@ void CRender::level_Unload()
 
 	//*** Components
 	xr_delete					(Details);
-	xr_delete					(Wallmarks);
+	xr_delete					(xray::renderBase.Wallmarks);
 
 	//*** Shaders
 	Shaders.clear_and_free		();

@@ -10,7 +10,10 @@
 #include "..\GameFont.h"
 #include "..\SkeletonCustom.h"
 
-u32 g_r = 1;
+namespace xray {
+namespace render {
+XRRENDER_API u32 g_r = 1;
+}}
 
 namespace WallmarksEngine {
 	struct wm_slot
@@ -272,7 +275,7 @@ void CWallmarksEngine::AddStaticWallmark	(CDB::TRI* pTri, const Fvector* pVerts,
 
 void CWallmarksEngine::AddSkeletonWallmark	(const Fmatrix* xf, CKinematics* obj, ref_shader& sh, const Fvector& start, const Fvector& dir, float size)
 {	
-	if( 0==g_r || ::RImplementation.phase != CRender::PHASE_NORMAL)				return;
+    if (0 == xray::render::g_r || xray::renderBase.phase != R_dsgraph_structure::RenderPhase::PHASE_NORMAL) return;
 	// optimization cheat: don't allow wallmarks more than 50 m from viewer/actor
 	if (xf->c.distance_to_sqr(Device.vCameraPosition) > _sqr(50.f))				return;
 
@@ -284,9 +287,9 @@ void CWallmarksEngine::AddSkeletonWallmark	(const Fmatrix* xf, CKinematics* obj,
 
 void CWallmarksEngine::AddSkeletonWallmark(intrusive_ptr<CSkeletonWallmark> wm)
 {
-	if(0==g_r || ::RImplementation.phase != CRender::PHASE_NORMAL) return;
+    if (0 == xray::render::g_r || xray::renderBase.phase != R_dsgraph_structure::RenderPhase::PHASE_NORMAL) return;
 
-	if (!::RImplementation.val_bHUD)
+    if (!xray::renderBase.val_bHUD)
 	{
 		lock.Enter			();
 		// search if similar wallmark exists
@@ -301,7 +304,6 @@ void CWallmarksEngine::AddSkeletonWallmark(intrusive_ptr<CSkeletonWallmark> wm)
 	}
 }
 
-extern float r_ssaDISCARD;
 ICF void BeginStream(ref_geom hGeom, u32& w_offset, FVF::LIT*& w_verts, FVF::LIT*& w_start)
 {
 	w_offset				= 0;
@@ -344,7 +346,7 @@ void CWallmarksEngine::Render()
 	Device.Statistic->RenderDUMP_WMD_Count	= 0;
 	Device.Statistic->RenderDUMP_WMT_Count	= 0;
 
-	float	ssaCLIP				= r_ssaDISCARD/4;
+    float ssaCLIP = xray::r_ssaDISCARD / 4;
 
 	lock.Enter		();			// Physics may add wallmarks in parallel with rendering
 
@@ -356,7 +358,7 @@ void CWallmarksEngine::Render()
 		// static wallmarks
 		for (StaticWMVecIt w_it=slot->static_items.begin(); w_it!=slot->static_items.end(); ){
 			static_wallmark* W	= *w_it;
-			if (RImplementation.ViewBase.testSphere_dirty(W->bounds.P,W->bounds.R)){
+            if (xray::renderBase.ViewBase.testSphere_dirty(W->bounds.P, W->bounds.R)){
 				Device.Statistic->RenderDUMP_WMS_Count++;
 				float dst	= Device.vCameraPosition.distance_to_sqr(W->bounds.P);
 				float ssa	= W->bounds.R * W->bounds.R / dst;
@@ -431,7 +433,7 @@ void CWallmarksEngine::Render()
 	lock.Leave();				// Physics may add wallmarks in parallel with rendering
 
 	// Level-wmarks
-	RImplementation.r_dsgraph_render_wmarks	();
+    renderWMarks();
 	Device.Statistic->RenderDUMP_WM.End		();
 
 	// Projection
@@ -439,4 +441,9 @@ void CWallmarksEngine::Render()
 	Device.mProject._43			= _43;
 	RCache.set_xform_view		(Device.mView);
 	RCache.set_xform_project	(Device.mProject);
+}
+
+void CWallmarksEngine::renderWMarks()
+{
+    // empty, used by R2
 }

@@ -16,9 +16,6 @@
     <Filter Include="Glows">
       <UniqueIdentifier>{55050825-eabd-47ce-8974-d26a2fd840e6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Wallmarks">
-      <UniqueIdentifier>{eb6c1faa-ac21-4d21-8787-e9aa1c1c43e0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Shading templates">
       <UniqueIdentifier>{7e1d6f26-86bb-4d86-9d22-ff77bebd4b4b}</UniqueIdentifier>
     </Filter>
@@ -65,9 +62,6 @@
     </ClInclude>
     <ClInclude Include="GlowManager.h">
       <Filter>Glows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender\WallmarksEngine.h">
-      <Filter>Wallmarks</Filter>
     </ClInclude>
     <ClInclude Include="Blender_Blur.h">
       <Filter>Shading templates</Filter>
@@ -235,9 +229,6 @@
     </ClCompile>
     <ClCompile Include="GlowManager.cpp">
       <Filter>Glows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\WallmarksEngine.cpp">
-      <Filter>Wallmarks</Filter>
     </ClCompile>
     <ClCompile Include="Blender_Blur.cpp">
       <Filter>Shading templates</Filter>

@@ -22,6 +22,12 @@
     <Filter Include="Shading templates">
       <UniqueIdentifier>{73fd57c3-5408-4c2b-a924-a0a53feeb753}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\memory">
+      <UniqueIdentifier>{b5dbfe3c-820c-4127-b98c-6c8320017336}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Wallmarks">
+      <UniqueIdentifier>{f53b22b7-618c-416e-84b6-dd702c88f756}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -81,6 +87,15 @@
     <ClCompile Include="Blender_Particle.cpp">
       <Filter>Shading templates</Filter>
     </ClCompile>
+    <ClCompile Include="RenderBase.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="doug_lea_memory_allocator.c">
+      <Filter>Core\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="WallmarksEngine.cpp">
+      <Filter>Wallmarks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -97,9 +112,6 @@
     </ClInclude>
     <ClInclude Include="FLOD.h">
       <Filter>Models\Visuals</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender_R2\cl_intersect.h">
-      <Filter>Kernel</Filter>
     </ClInclude>
     <ClInclude Include="NvTriStrip.h">
       <Filter>Stripifier</Filter>
@@ -142,6 +154,16 @@
     </ClInclude>
     <ClInclude Include="Blender_Particle.h">
       <Filter>Shading templates</Filter>
+    </ClInclude>
+    <ClInclude Include="cl_intersect.h" />
+    <ClInclude Include="RenderBase.hpp">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="doug_lea_memory_allocator.h">
+      <Filter>Core\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="WallmarksEngine.h">
+      <Filter>Wallmarks</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,13 +1,10 @@
 #pragma once
 
-#include "..\xrRender\r__dsgraph_structure.h"
-
 #include "..\xrRender\PSLibrary.h"
 
 #include "..\xrRender\hom.h"
 #include "..\xrRender\detailmanager.h"
 #include "glowmanager.h"
-#include "..\xrRender\wallmarksengine.h"
 #include "fstaticrender_rendertarget.h"
 #include "..\xrRender\modelpool.h"
 
@@ -19,14 +16,9 @@
 #include "../Fmesh.h"
 
 // definition
-class CRender													:	public R_dsgraph_structure
+class CRender : public xray::CRenderBase
 {
 public:
-	enum	{
-		PHASE_NORMAL,
-		PHASE_POINT,
-		PHASE_SPOT
-	};
 	struct		_options	{
 		u32		vis_intersect		: 1;	// config
 
@@ -39,11 +31,8 @@ public:
 	}			stats;
 public:
 	// Sector detection and visibility
-	CSector*													pLastSector;
 	Fvector														vLastCameraPos;
 	u32															uLastLTRACK;
-	xr_vector<IRender_Portal*>									Portals;
-	xr_vector<IRender_Sector*>									Sectors;
 	xrXRC														Sectors_xrc;
 	CDB::MODEL*													rmPortals;
 	CHOM														HOM;
@@ -51,12 +40,10 @@ public:
 	
 	// Global containers
 	xr_vector<FSlideWindowItem>									SWIs;
-	xr_vector<ref_shader>										Shaders;
 	typedef svector<D3DVERTEXELEMENT9,MAXD3DDECLLENGTH+1>		VertexDeclarator;
 	xr_vector<VertexDeclarator>									DCL;
 	xr_vector<IDirect3DVertexBuffer9*>							VB;
 	xr_vector<IDirect3DIndexBuffer9*>							IB;
-	xr_vector<IRender_Visual*>									Visuals;
 	CPSLibrary													PSLibrary;
 
 	CLight_DB*													L_DB;
@@ -64,7 +51,6 @@ public:
 	CLightShadows*												L_Shadows;
 	CLightProjector*											L_Projector;
 	CGlowManager*												L_Glows;
-	CWallmarksEngine*											Wallmarks;
 	CDetailManager*												Details;
 	CModelPool*													Models;
 
@@ -98,8 +84,6 @@ public:
 	IDirect3DVertexBuffer9*				getVB					(int id);
 	IDirect3DIndexBuffer9*				getIB					(int id);
 	FSlideWindowItem*					getSWI					(int id);
-	IRender_Portal*						getPortal				(int id);
-	IRender_Sector*						getSectorActive			();
 	IRender_Visual*						model_CreatePE			(LPCSTR			name);
 	void								ApplyBlur4				(FVF::TL4uv*	dest, u32 w, u32 h, float k);
 	void								apply_object			(IRenderable*	O);
@@ -134,9 +118,6 @@ public:
 	// Information
 	virtual void					Statistics				(CGameFont* F);
 	virtual LPCSTR					getShaderPath			()									{ return "r1\\";	}
-	virtual ref_shader				getShader				(int id);
-	virtual IRender_Sector*			getSector				(int id);
-	virtual IRender_Visual*			getVisual				(int id);
 	virtual IRender_Sector*			detectSector			(const Fvector& P);
 	virtual IRender_Target*			getTarget				();
 	
@@ -146,12 +127,6 @@ public:
 	virtual	void					add_Occluder			(Fbox2&	bb_screenspace	);			// mask screen region as oclluded
 	virtual void					add_Visual				(IRender_Visual*	V	);			// add visual leaf (no culling performed at all)
 	virtual void					add_Geometry			(IRender_Visual*	V	);			// add visual(s)	(all culling performed)
-
-	// wallmarks
-	virtual void					add_StaticWallmark		(ref_shader& S, const Fvector& P, float s, CDB::TRI* T, Fvector* V);
-	virtual void					clear_static_wallmarks	();
-	virtual void					add_SkeletonWallmark	(intrusive_ptr<CSkeletonWallmark> wm);
-	virtual void					add_SkeletonWallmark	(const Fmatrix* xf, CKinematics* obj, ref_shader& sh, const Fvector& start, const Fvector& dir, float size);
 	
 	//
 	virtual IBlender*				blender_create			(CLASS_ID cls);

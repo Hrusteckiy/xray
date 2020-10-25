@@ -20,8 +20,10 @@ const float	SSM_tex_size 			=	32.f;
 void cl_light_PR::setup		(R_constant* C)					{
 	Fvector&	P	= RImplementation.r1_dlight_light->position;
 	float		R	= RImplementation.r1_dlight_light->range;
-	if (RImplementation.phase==CRender::PHASE_POINT)		RCache.set_c	(C,P.x,P.y,P.z,.5f/R);
-	else													RCache.set_c	(C,P.x,P.y,P.z,1.f/R);
+    if (xray::renderBase.phase == R_dsgraph_structure::RenderPhase::PHASE_POINT)
+        RCache.set_c(C, P.x, P.y, P.z, .5f / R);
+	else
+        RCache.set_c(C,P.x,P.y,P.z,1.f/R);
 }
 void cl_light_C::setup		(R_constant* C)					{
 	Fcolor		_C	= RImplementation.r1_dlight_light->color;
@@ -68,7 +70,7 @@ void CLightR_Manager::render_point	()
 		if (PPL.color.magnitude_sqr_rgb()<EPS)										continue;
 		float	alpha		= Device.vCameraPosition.distance_to(PPL.position)/MAX_DISTANCE;
 		if (alpha>=1)																continue;
-		if (!RImplementation.ViewBase.testSphere_dirty (PPL.position,PPL.range))	continue;
+		if (!xray::renderBase.ViewBase.testSphere_dirty (PPL.position,PPL.range))	continue;
 
 		// Calculations and rendering
 		Device.Statistic->RenderDUMP_Lights.Begin();
@@ -292,12 +294,12 @@ void CLightR_Manager::render_spot	()
 void CLightR_Manager::render		()
 {
 	if (selected_spot.size())		{ 
-		RImplementation.phase		= CRender::PHASE_SPOT;
+        xray::renderBase.phase = R_dsgraph_structure::RenderPhase::PHASE_SPOT;
 		render_spot			();	
 		selected_spot.clear	();	
 	}
 	if (selected_point.size())		{ 
-		RImplementation.phase		= CRender::PHASE_POINT;
+        xray::renderBase.phase = R_dsgraph_structure::RenderPhase::PHASE_POINT;
 		render_point		();	
 		selected_point.clear(); 
 	}

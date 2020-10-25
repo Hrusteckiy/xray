@@ -106,10 +106,6 @@ CSector::~CSector()
 {
 }
 
-//
-extern float r_ssaDISCARD			;
-extern float r_ssaLOD_A, r_ssaLOD_B ;
-
 void CSector::traverse			(CFrustum &F, _scissor& R_scissor)
 {
 	// Register traversal process
@@ -153,11 +149,14 @@ void CSector::traverse			(CFrustum &F, _scissor& R_scissor)
 			float ssa			=	R*R/distSQ;
 			dir2portal.div		(_sqrt(distSQ));
 			ssa					*=	_abs(PORTAL->P.n.dotproduct(dir2portal));
-			if (ssa<r_ssaDISCARD)	continue;
+            if (ssa<xray::r_ssaDISCARD) continue;
 
-			if (PortalTraverser.i_options&CPortalTraverser::VQ_FADE)	{
-				if (ssa<r_ssaLOD_A)	PortalTraverser.fade_portal			(PORTAL,ssa);
-				if (ssa<r_ssaLOD_B)	continue							;
+			if (PortalTraverser.i_options&CPortalTraverser::VQ_FADE)
+            {
+				if (ssa<xray::r_ssaLOD_A)
+                    PortalTraverser.fade_portal(PORTAL,ssa);
+				if (ssa<xray::r_ssaLOD_B)
+                    continue;
 			}
 		}
 

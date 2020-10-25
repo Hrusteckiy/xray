@@ -32,7 +32,7 @@ float		r_dtex_range		= 50.f;
 ShaderElement*			CRender::rimp_select_sh_dynamic	(IRender_Visual	*pVisual, float cdist_sq)
 {
 	int		id	= SE_R2_SHADOW;
-	if	(CRender::PHASE_NORMAL == RImplementation.phase)
+    if (R_dsgraph_structure::RenderPhase::PHASE_NORMAL == xray::renderBase.phase)
 	{
 		id = ((_sqrt(cdist_sq)-pVisual->vis.sphere.R)<r_dtex_range)?SE_R2_NORMAL_HQ:SE_R2_NORMAL_LQ;
 	}
@@ -42,7 +42,7 @@ ShaderElement*			CRender::rimp_select_sh_dynamic	(IRender_Visual	*pVisual, float
 ShaderElement*			CRender::rimp_select_sh_static	(IRender_Visual	*pVisual, float cdist_sq)
 {
 	int		id	= SE_R2_SHADOW;
-	if	(CRender::PHASE_NORMAL == RImplementation.phase)
+    if (R_dsgraph_structure::RenderPhase::PHASE_NORMAL == xray::renderBase.phase)
 	{
 		id = ((_sqrt(cdist_sq)-pVisual->vis.sphere.R)<r_dtex_range)?SE_R2_NORMAL_HQ:SE_R2_NORMAL_LQ;
 	}
@@ -334,11 +334,6 @@ IRender_Visual*			CRender::model_CreateParticles	(LPCSTR name)
 void					CRender::models_Prefetch		()					{ Models->Prefetch	();}
 void					CRender::models_Clear			(BOOL b_complete)	{ Models->ClearPool	(b_complete);}
 
-ref_shader				CRender::getShader				(int id)			{ VERIFY(id<int(Shaders.size()));	return Shaders[id];	}
-IRender_Portal*			CRender::getPortal				(int id)			{ VERIFY(id<int(Portals.size()));	return Portals[id];	}
-IRender_Sector*			CRender::getSector				(int id)			{ VERIFY(id<int(Sectors.size()));	return Sectors[id];	}
-IRender_Sector*			CRender::getSectorActive		()					{ return pLastSector;									}
-IRender_Visual*			CRender::getVisual				(int id)			{ VERIFY(id<int(Visuals.size()));	return Visuals[id];	}
 D3DVERTEXELEMENT9*		CRender::getVB_Format			(int id, BOOL	_alt)	{ 
 	if (_alt)	{ VERIFY(id<int(xDC.size()));	return xDC[id].begin();	}
 	else		{ VERIFY(id<int(nDC.size()));	return nDC[id].begin(); }
@@ -365,26 +360,7 @@ BOOL					CRender::occ_visible			(Fbox& P)			{ return HOM.visible(P);								}
 
 void					CRender::add_Visual				(IRender_Visual*		V )	{ add_leafs_Dynamic(V);								}
 void					CRender::add_Geometry			(IRender_Visual*		V )	{ add_Static(V,View->getMask());					}
-void					CRender::add_StaticWallmark		(ref_shader& S, const Fvector& P, float s, CDB::TRI* T, Fvector* verts)
-{
-	if (T->suppress_wm)	return;
-	VERIFY2							(_valid(P) && _valid(s) && T && verts && (s>EPS_L), "Invalid static wallmark params");
-	Wallmarks->AddStaticWallmark	(T,verts,P,&*S,s);
-}
 
-void					CRender::clear_static_wallmarks	()
-{
-	Wallmarks->clear				();
-}
-
-void					CRender::add_SkeletonWallmark	(intrusive_ptr<CSkeletonWallmark> wm)
-{
-	Wallmarks->AddSkeletonWallmark				(wm);
-}
-void					CRender::add_SkeletonWallmark	(const Fmatrix* xf, CKinematics* obj, ref_shader& sh, const Fvector& start, const Fvector& dir, float size)
-{
-	Wallmarks->AddSkeletonWallmark				(xf, obj, sh, start, dir, size);
-}
 void					CRender::add_Occluder			(Fbox2&	bb_screenspace	)
 {
 	HOM.occlude			(bb_screenspace);

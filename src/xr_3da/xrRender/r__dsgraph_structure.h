@@ -5,6 +5,12 @@
 #include "r__dsgraph_types.h"
 #include "r__sector.h"
 
+// ALPHA
+namespace xray {
+namespace render {
+void __fastcall sorted_L1(R_dsgraph::mapSorted_Node *N);
+}}
+
 //////////////////////////////////////////////////////////////////////////
 // feedback	for receiving visuals										//
 //////////////////////////////////////////////////////////////////////////
@@ -20,6 +26,14 @@ public:
 class	R_dsgraph_structure										: public IRender_interface, public pureFrame
 {
 public:
+    enum class RenderPhase : u32
+    {
+        PHASE_NORMAL = 0,
+        PHASE_POINT,
+        PHASE_SPOT,
+        PHASE_SMAP
+    };
+
 	IRenderable*												val_pObject;
 	Fmatrix*													val_pTransform;
 	BOOL														val_bHUD;
@@ -28,7 +42,7 @@ public:
 	R_feedback*													val_feedback;		// feedback for geometry being rendered
 	u32															val_feedback_breakp;// breakpoint
 	xr_vector<Fbox3,render_alloc<Fbox3> >*						val_recorder;		// coarse structure recorder
-	u32															phase;
+    RenderPhase													phase;
 	u32															marker;
 	bool														pmask		[2]		;
 	bool														pmask_wmark			;
@@ -145,8 +159,6 @@ public:
 	void		r_dsgraph_render_hud							();
 	void		r_dsgraph_render_lods							(bool	_setup_zb,	bool _clear);
 	void		r_dsgraph_render_sorted							();
-	void		r_dsgraph_render_emissive						();
-	void		r_dsgraph_render_wmarks							();
 	void		r_dsgraph_render_distort						();
 	void		r_dsgraph_render_subspace						(IRender_Sector* _sector, CFrustum* _frustum, Fmatrix& mCombined, Fvector& _cop, BOOL _dynamic, BOOL _precise_portals=FALSE	);
 	void		r_dsgraph_render_subspace						(IRender_Sector* _sector, Fmatrix& mCombined, Fvector& _cop, BOOL _dynamic, BOOL _precise_portals=FALSE	);

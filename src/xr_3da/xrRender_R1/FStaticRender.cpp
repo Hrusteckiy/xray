@@ -19,11 +19,11 @@ CRender													RImplementation;
 //////////////////////////////////////////////////////////////////////////
 ShaderElement*			CRender::rimp_select_sh_dynamic	(IRender_Visual	*pVisual, float cdist_sq)
 {
-	switch (phase)		{
-	case PHASE_NORMAL:	return (RImplementation.L_Projector->shadowing()?pVisual->shader->E[SE_R1_NORMAL_HQ]:pVisual->shader->E[SE_R1_NORMAL_LQ])._get();
-	case PHASE_POINT:	return pVisual->shader->E[SE_R1_LPOINT]._get();
-	case PHASE_SPOT:	return pVisual->shader->E[SE_R1_LSPOT]._get();
-	default:			NODEFAULT;
+	switch (xray::renderBase.phase)		{
+    case R_dsgraph_structure::RenderPhase::PHASE_NORMAL: return (RImplementation.L_Projector->shadowing() ? pVisual->shader->E[SE_R1_NORMAL_HQ] : pVisual->shader->E[SE_R1_NORMAL_LQ])._get();
+	case R_dsgraph_structure::RenderPhase::PHASE_POINT: return pVisual->shader->E[SE_R1_LPOINT]._get();
+	case R_dsgraph_structure::RenderPhase::PHASE_SPOT: return pVisual->shader->E[SE_R1_LSPOT]._get();
+	default: NODEFAULT;
 	}
 #ifdef DEBUG
 	return	0;
@@ -32,11 +32,11 @@ ShaderElement*			CRender::rimp_select_sh_dynamic	(IRender_Visual	*pVisual, float
 //////////////////////////////////////////////////////////////////////////
 ShaderElement*			CRender::rimp_select_sh_static	(IRender_Visual	*pVisual, float cdist_sq)
 {
-	switch (phase)		{
-	case PHASE_NORMAL:	return (((_sqrt(cdist_sq) - pVisual->vis.sphere.R)<44)?pVisual->shader->E[SE_R1_NORMAL_HQ]:pVisual->shader->E[SE_R1_NORMAL_LQ])._get();
-	case PHASE_POINT:	return pVisual->shader->E[SE_R1_LPOINT]._get();
-	case PHASE_SPOT:	return pVisual->shader->E[SE_R1_LSPOT]._get();
-	default:			NODEFAULT;
+    switch (xray::renderBase.phase)		{
+	case R_dsgraph_structure::RenderPhase::PHASE_NORMAL: return (((_sqrt(cdist_sq) - pVisual->vis.sphere.R)<44)?pVisual->shader->E[SE_R1_NORMAL_HQ]:pVisual->shader->E[SE_R1_NORMAL_LQ])._get();
+	case R_dsgraph_structure::RenderPhase::PHASE_POINT: return pVisual->shader->E[SE_R1_LPOINT]._get();
+	case R_dsgraph_structure::RenderPhase::PHASE_SPOT: return pVisual->shader->E[SE_R1_LSPOT]._get();
+	default: NODEFAULT;
 	}
 #ifdef DEBUG
 	return	0;
@@ -160,11 +160,6 @@ IRender_Visual*			CRender::model_CreateParticles	(LPCSTR name)
 void					CRender::models_Prefetch		()					{ Models->Prefetch	();}
 void					CRender::models_Clear			(BOOL b_complete)	{ Models->ClearPool	(b_complete);}
 
-ref_shader				CRender::getShader				(int id)			{ VERIFY(id<int(Shaders.size()));	return Shaders[id];	}
-IRender_Portal*			CRender::getPortal				(int id)			{ VERIFY(id<int(Portals.size()));	return Portals[id];	}
-IRender_Sector*			CRender::getSector				(int id)			{ VERIFY(id<int(Sectors.size()));	return Sectors[id];	}
-IRender_Sector*			CRender::getSectorActive		()					{ return pLastSector;									}
-IRender_Visual*			CRender::getVisual				(int id)			{ VERIFY(id<int(Visuals.size()));	return Visuals[id];	}
 D3DVERTEXELEMENT9*		CRender::getVB_Format			(int id)			{ VERIFY(id<int(DCL.size()));		return DCL[id].begin();	}
 IDirect3DVertexBuffer9*	CRender::getVB					(int id)			{ VERIFY(id<int(VB.size()));		return VB[id];		}
 IDirect3DIndexBuffer9*	CRender::getIB					(int id)			{ VERIFY(id<int(IB.size()));		return IB[id];		}
@@ -187,26 +182,7 @@ void					CRender::add_Visual				(IRender_Visual* V )
 	add_leafs_Dynamic	(V);									
 }
 void					CRender::add_Geometry			(IRender_Visual* V ){ add_Static(V,View->getMask());						}
-void					CRender::add_StaticWallmark		(ref_shader& S, const Fvector& P, float s, CDB::TRI* T, Fvector* verts)
-{
-	if (T->suppress_wm)	return;
-	VERIFY2							(_valid(P) && _valid(s) && T && verts && (s>EPS_L), "Invalid static wallmark params");
-	Wallmarks->AddStaticWallmark	(T,verts,P,&*S,s);
-}
 
-void					CRender::clear_static_wallmarks	()
-{
-	Wallmarks->clear				();
-}
-
-void					CRender::add_SkeletonWallmark	(intrusive_ptr<CSkeletonWallmark> wm)
-{
-	Wallmarks->AddSkeletonWallmark				(wm);
-}
-void					CRender::add_SkeletonWallmark	(const Fmatrix* xf, CKinematics* obj, ref_shader& sh, const Fvector& start, const Fvector& dir, float size)
-{
-	Wallmarks->AddSkeletonWallmark				(xf, obj, sh, start, dir, size);
-}
 void					CRender::add_Occluder			(Fbox2&	bb_screenspace	)
 {
 	VERIFY					(_valid(bb_screenspace));
@@ -222,7 +198,7 @@ void					CRender::set_Object				(IRenderable*		O )
 		VERIFY(dynamic_cast<CObject*>(O)||dynamic_cast<CPS_Instance*>(O));
 		if (O->renderable.pROS) { VERIFY(dynamic_cast<CROS_impl*>(O->renderable.pROS)); }
 	}
-	if (PHASE_NORMAL==phase)	{
+    if (R_dsgraph_structure::RenderPhase::PHASE_NORMAL == xray::renderBase.phase)	{
 		if (L_Shadows)
 			L_Shadows->set_object	(O);
 		
@@ -239,7 +215,7 @@ void					CRender::set_Object				(IRenderable*		O )
 void					CRender::apply_object			(IRenderable*		O )
 {
 	if (0==O)			return	;
-	if (PHASE_NORMAL==phase	&& O->renderable_ROS())		{
+    if (R_dsgraph_structure::RenderPhase::PHASE_NORMAL == xray::renderBase.phase	&& O->renderable_ROS())		{
 		CROS_impl& LT		= *((CROS_impl*)O->renderable.pROS);
 		VERIFY(dynamic_cast<CObject*>(O)||dynamic_cast<CPS_Instance*>(O));
 		VERIFY(dynamic_cast<CROS_impl*>(O->renderable.pROS));
@@ -277,12 +253,6 @@ CRender::~CRender	()
 {
 }
 
-extern float		r_ssaDISCARD;
-extern float		r_ssaDONTSORT;
-extern float		r_ssaLOD_A,			r_ssaLOD_B;
-extern float		r_ssaGLOD_start,	r_ssaGLOD_end;
-extern float		r_ssaHZBvsTEX;
-
 ICF bool			pred_sp_sort		(ISpatial* _1, ISpatial* _2)
 {
 	float	d1		= _1->spatial.sphere.P.distance_to_sqr(Device.vCameraPosition);
@@ -298,21 +268,21 @@ void CRender::Calculate				()
 	IRender_Target* T				=	getTarget	();
 	float	fov_factor				=	_sqr		(90.f / Device.fFOV);
 	g_fSCREEN						=	float(T->get_width()*T->get_height())*fov_factor*(EPS_S+ps_r__LOD);
-	r_ssaDISCARD					=	_sqr(ps_r__ssaDISCARD)		/g_fSCREEN;
-	r_ssaDONTSORT					=	_sqr(ps_r__ssaDONTSORT/3)	/g_fSCREEN;
-	r_ssaLOD_A						=	_sqr(ps_r1_ssaLOD_A/3)		/g_fSCREEN;
-	r_ssaLOD_B						=	_sqr(ps_r1_ssaLOD_B/3)		/g_fSCREEN;
-	r_ssaGLOD_start					=	_sqr(ps_r__GLOD_ssa_start/3)/g_fSCREEN;
-	r_ssaGLOD_end					=	_sqr(ps_r__GLOD_ssa_end/3)	/g_fSCREEN;
-	r_ssaHZBvsTEX					=	_sqr(ps_r__ssaHZBvsTEX/3)	/g_fSCREEN;
+	xray::r_ssaDISCARD				=	_sqr(ps_r__ssaDISCARD)		/g_fSCREEN;
+	xray::r_ssaDONTSORT				=	_sqr(ps_r__ssaDONTSORT/3)	/g_fSCREEN;
+	xray::r_ssaLOD_A				=	_sqr(ps_r1_ssaLOD_A/3)		/g_fSCREEN;
+	xray::r_ssaLOD_B				=	_sqr(ps_r1_ssaLOD_B/3)		/g_fSCREEN;
+	xray::r_ssaGLOD_start			=	_sqr(ps_r__GLOD_ssa_start/3)/g_fSCREEN;
+	xray::r_ssaGLOD_end				=	_sqr(ps_r__GLOD_ssa_end/3)	/g_fSCREEN;
+	xray::r_ssaHZBvsTEX				=	_sqr(ps_r__ssaHZBvsTEX/3)	/g_fSCREEN;
 
 	// Frustum & HOM rendering
-	ViewBase.CreateFromMatrix		(Device.mFullTransform,FRUSTUM_P_LRTB|FRUSTUM_P_FAR);
+    xray::renderBase.ViewBase.CreateFromMatrix(Device.mFullTransform, FRUSTUM_P_LRTB | FRUSTUM_P_FAR);
 	View							= 0;
 	HOM.Enable						();
-	HOM.Render						(ViewBase);
+    HOM.Render(xray::renderBase.ViewBase);
 	gm_SetNearer					(FALSE);
-	phase							= PHASE_NORMAL;
+    xray::renderBase.phase = R_dsgraph_structure::RenderPhase::PHASE_NORMAL;
 
 	// Detect camera-sector
 	if (!vLastCameraPos.similar(Device.vCameraPosition,EPS_S)) 
@@ -347,7 +317,7 @@ void CRender::Calculate				()
 		PortalTraverser.traverse	
 			(
 			pLastSector,
-			ViewBase,
+            xray::renderBase.ViewBase,
 			Device.vCameraPosition,
 			Device.mFullTransform,
 			CPortalTraverser::VQ_HOM + CPortalTraverser::VQ_SSA + CPortalTraverser::VQ_FADE
@@ -374,7 +344,7 @@ void CRender::Calculate				()
 				lstRenderables,
 				ISpatial_DB::O_ORDERED,
 				STYPE_RENDERABLE + STYPE_LIGHTSOURCE,
-				ViewBase
+                xray::renderBase.ViewBase
 				);
 
 			// Exact sorting order (front-to-back)
@@ -385,7 +355,8 @@ void CRender::Calculate				()
 			g_pGameLevel->pHUD->Render_First	( );	// R1 shadows
 			g_pGameLevel->pHUD->Render_Last		( );	
 			u32 uID_LTRACK						= 0xffffffff;
-			if (phase==PHASE_NORMAL)			{
+            if (xray::renderBase.phase == R_dsgraph_structure::RenderPhase::PHASE_NORMAL)
+            {
 				uLastLTRACK	++;
 				if (lstRenderables.size())		uID_LTRACK	= uLastLTRACK%lstRenderables.size();
 
@@ -493,15 +464,14 @@ void	CRender::rmNormal	()
 	CHK_DX				(HW.pDevice->SetViewport(&VP));
 }
 
-extern u32 g_r;
 void	CRender::Render		()
 {
-	g_r											= 1;
+	xray::render::g_r = 1;
 	Device.Statistic->RenderDUMP.Begin();
 	// Begin
 	Target->Begin								();
 	o.vis_intersect								= FALSE			;
-	phase										= PHASE_NORMAL	;
+    xray::renderBase.phase = R_dsgraph_structure::RenderPhase::PHASE_NORMAL;
 	r_dsgraph_render_hud						();				// hud
 	r_dsgraph_render_graph						(0);			// normal level
 	if(Details)Details->Render					();				// grass / details
@@ -514,13 +484,13 @@ void	CRender::Render		()
 	o.vis_intersect								= TRUE			;
 	HOM.Disable									();
 	L_Dynamic->render							();				// addititional light sources
-	if(Wallmarks){
-		g_r										= 0;
-		Wallmarks->Render						();				// wallmarks has priority as normal geometry
+	if(xray::renderBase.Wallmarks){
+        xray::render::g_r = 0;
+        xray::renderBase.Wallmarks->Render();					// wallmarks has priority as normal geometry
 	}
 	HOM.Enable									();
 	o.vis_intersect								= FALSE			;
-	phase										= PHASE_NORMAL	;
+    xray::renderBase.phase = R_dsgraph_structure::RenderPhase::PHASE_NORMAL;
 	r_pmask										(true,true);	// enable priority "0" and "1"
 	if(L_Shadows)L_Shadows->render				();				// ... and shadows
 	r_dsgraph_render_lods						(false,true);	// lods - FB

@@ -26,3 +26,5 @@
 #include "../blenders/Blender.h"
 #include "../blenders/Blender_CLSID.h"
 #include "../psystem.h"
+#include "xrRender_console.h"
+#include "RenderBase.hpp"

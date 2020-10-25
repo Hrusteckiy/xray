@@ -14,11 +14,6 @@ using	namespace R_dsgraph;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // Scene graph actual insertion and sorting ////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-float		r_ssaDISCARD;
-float		r_ssaDONTSORT;
-float		r_ssaLOD_A,			r_ssaLOD_B;
-float		r_ssaGLOD_start,	r_ssaGLOD_end;
-float		r_ssaHZBvsTEX;
 
 ICF	float	CalcSSA				(float& distSQ, Fvector& C, IRender_Visual* V)
 {
@@ -46,7 +41,7 @@ void R_dsgraph_structure::r_dsgraph_insert_dynamic	(IRender_Visual *pVisual, Fve
 
 	float distSQ			;
 	float SSA				=	CalcSSA		(distSQ,Center,pVisual);
-	if (SSA<=r_ssaDISCARD)		return;
+    if (SSA <= xray::r_ssaDISCARD) return;
 
 	// Distortive geometry should be marked and R2 special-cases it
 	// a) Allow to optimize RT order
@@ -182,7 +177,7 @@ void R_dsgraph_structure::r_dsgraph_insert_static	(IRender_Visual *pVisual)
 
 	float distSQ;
 	float SSA					=	CalcSSA		(distSQ,pVisual->vis.sphere.P,pVisual);
-	if (SSA<=r_ssaDISCARD)		return;
+    if (SSA <= xray::r_ssaDISCARD) return;
 
 	// Distortive geometry should be marked and R2 special-cases it
 	// a) Allow to optimize RT order
@@ -315,7 +310,8 @@ void CRender::add_leafs_Dynamic	(IRender_Visual *pVisual)
 				Fvector							Tpos;	float		D;
 				val_pTransform->transform_tiny	(Tpos, pV->vis.sphere.P);
 				float		ssa		=	CalcSSA	(D,Tpos,pV->vis.sphere.R/2.f);	// assume dynamics never consume full sphere
-				if (ssa<r_ssaLOD_A)	_use_lod	= TRUE;
+                if (ssa<xray::r_ssaLOD_A)
+                    _use_lod = TRUE;
 			}
 			if (_use_lod)				
 			{
@@ -387,14 +383,14 @@ void CRender::add_leafs_Static(IRender_Visual *pVisual)
 			float		D;
 			float		ssa		=		CalcSSA(D,pV->vis.sphere.P,pV);
 			ssa					*=		pV->lod_factor;
-			if (ssa<r_ssaLOD_A)
+            if (ssa<xray::r_ssaLOD_A)
 			{
-				if (ssa<r_ssaDISCARD)	return;
+                if (ssa<xray::r_ssaDISCARD) return;
 				mapLOD_Node*	N	=	mapLOD.insertInAnyWay(D);
 				N->val.ssa			=	ssa;
 				N->val.pVisual		=	pVisual;
 			}
-			if (ssa>r_ssaLOD_B)
+            if (ssa>xray::r_ssaLOD_B)
 			{
 				// Add all children, doesn't perform any tests
 				I = pV->children.begin	();
@@ -482,7 +478,8 @@ BOOL CRender::add_Dynamic(IRender_Visual *pVisual, u32 planes)
 				Fvector							Tpos;	float		D;
 				val_pTransform->transform_tiny	(Tpos, pV->vis.sphere.P);
 				float		ssa		=	CalcSSA	(D,Tpos,pV->vis.sphere.R/2.f);	// assume dynamics never consume full sphere
-				if (ssa<r_ssaLOD_A)	_use_lod	= TRUE		;
+                if (ssa<xray::r_ssaLOD_A)
+                    _use_lod = TRUE;
 			}
 			if (_use_lod)
 			{
@@ -581,14 +578,14 @@ void CRender::add_Static(IRender_Visual *pVisual, u32 planes)
 			float		D;
 			float		ssa		= CalcSSA	(D,pV->vis.sphere.P,pV);
 			ssa					*= pV->lod_factor;
-			if (ssa<r_ssaLOD_A)	
+            if (ssa<xray::r_ssaLOD_A)
 			{
-				if (ssa<r_ssaDISCARD)	return;
+                if (ssa<xray::r_ssaDISCARD)	return;
 				mapLOD_Node*	N		= mapLOD.insertInAnyWay(D);
 				N->val.ssa				= ssa;
 				N->val.pVisual			= pVisual;
 			}
-			if (ssa>r_ssaLOD_B)
+            if (ssa>xray::r_ssaLOD_B)
 			{
 				// Add all children, perform tests
 				I = pV->children.begin	();

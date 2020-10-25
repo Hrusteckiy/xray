@@ -96,9 +96,6 @@
     <ClInclude Include="SMAP_Allocator.h">
       <Filter>Lights</Filter>
     </ClInclude>
-    <ClInclude Include="..\xrRender\WallmarksEngine.h">
-      <Filter>Wallmarks</Filter>
-    </ClInclude>
     <ClInclude Include="blender_bloom_build.h">
       <Filter>Shading templates</Filter>
     </ClInclude>
@@ -207,6 +204,9 @@
     <ClInclude Include="Blender_Particle_R2.hpp">
       <Filter>Shading templates</Filter>
     </ClInclude>
+    <ClInclude Include="WallmarksEngine_R2.hpp">
+      <Filter>Wallmarks</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -307,9 +307,6 @@
     </ClCompile>
     <ClCompile Include="..\xrRender\LightTrack.cpp">
       <Filter>Lights</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\WallmarksEngine.cpp">
-      <Filter>Wallmarks</Filter>
     </ClCompile>
     <ClCompile Include="blender_bloom_build.cpp">
       <Filter>Shading templates</Filter>
@@ -472,6 +469,9 @@
     </ClCompile>
     <ClCompile Include="Blender_Particle_R2.cpp">
       <Filter>Shading templates</Filter>
+    </ClCompile>
+    <ClCompile Include="WallmarksEngine_R2.cpp">
+      <Filter>Wallmarks</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
