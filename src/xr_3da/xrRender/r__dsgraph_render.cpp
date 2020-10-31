@@ -374,10 +374,10 @@ void R_dsgraph_structure::r_dsgraph_render_hud	()
 	RCache.set_xform_project	(Device.mProject);
 
 	// Rendering
-	rmNear						();
+    xray::renderBase.rmNear();
 	mapHUD.traverseLR			(xray::render::sorted_L1);
 	mapHUD.clear				();
-	rmNormal					();
+    xray::renderBase.rmNormal();
 
 	// Restore projection
 	Device.mProject				= Pold;
@@ -423,14 +423,14 @@ void	R_dsgraph_structure::r_dsgraph_render_subspace	(IRender_Sector* _sector, CF
 	ViewBase						= *_frustum;
 	View							= &ViewBase;
 
-	if (_precise_portals && RImplementation.rmPortals)		{
+    if (_precise_portals && xray::renderBase.rmPortals)		{
 		// Check if camera is too near to some portal - if so force DualRender
 		Fvector box_radius;		box_radius.set	(EPS_L*20,EPS_L*20,EPS_L*20);
 		RImplementation.Sectors_xrc.box_options	(CDB::OPT_FULL_TEST);
-		RImplementation.Sectors_xrc.box_query	(RImplementation.rmPortals,_cop,box_radius);
+        RImplementation.Sectors_xrc.box_query(xray::renderBase.rmPortals, _cop, box_radius);
 		for (int K=0; K<RImplementation.Sectors_xrc.r_count(); K++)
 		{
-			CPortal*	pPortal		= (CPortal*) RImplementation.Portals[RImplementation.rmPortals->get_tris()[RImplementation.Sectors_xrc.r_begin()[K].id].dummy];
+            CPortal* pPortal = (CPortal*)xray::renderBase.Portals[xray::renderBase.rmPortals->get_tris()[RImplementation.Sectors_xrc.r_begin()[K].id].dummy];
 			pPortal->bDualRender	= TRUE;
 		}
 	}

@@ -30,7 +30,7 @@ void CRender::level_Load(IReader* fs)
 		chunk = fs->open_chunk		(fsL_SHADERS);
 		R_ASSERT2					(chunk,"Level doesn't builded correctly.");
 		u32 count = chunk->r_u32	();
-		Shaders.resize				(count);
+        xray::renderBase.Shaders.resize(count);
 		for(u32 i=0; i<count; i++)	// skip first shader as "reserved" one
 		{
 			string512				n_sh,n_tlist;
@@ -41,7 +41,7 @@ void CRender::level_Load(IReader* fs)
 			LPSTR			delim	= strchr(n_sh,'/');
 			*delim					= 0;
 			strcpy					(n_tlist,delim+1);
-			Shaders[i]				= Device.Resources->Create(n_sh,n_tlist);
+            xray::renderBase.Shaders[i] = Device.Resources->Create(n_sh, n_tlist);
 		}
 		chunk->close();
 	}
@@ -85,7 +85,7 @@ void CRender::level_Load(IReader* fs)
 	LoadSectors					(fs);
 
 	// HOM
-	HOM.Load					();
+    xray::renderBase.HOM.Load();
 
 	// Lights
 	// pApp->LoadTitle			("Loading lights...");
@@ -111,34 +111,34 @@ void CRender::level_Unload()
 	u32 I;
 
 	// HOM
-	HOM.Unload				();
+    xray::renderBase.HOM.Unload();
 
 	//*** Details
 	Details->Unload			();
 
 	//*** Sectors
 	// 1.
-	xr_delete				(rmPortals);
-	pLastSector				= 0;
+    xr_delete(xray::renderBase.rmPortals);
+    xray::renderBase.pLastSector = nullptr;
 	vLastCameraPos.set		(0,0,0);
 	// 2.
-	for (I=0; I<Sectors.size(); I++)
-		xr_delete(Sectors[I]);
-	Sectors.clear			();
+    for (I = 0; I<xray::renderBase.Sectors.size(); I++)
+        xr_delete(xray::renderBase.Sectors[I]);
+    xray::renderBase.Sectors.clear();
 	// 3.
-	Portals.clear			();
+    xray::renderBase.Portals.clear();
 
 	//*** Lights
 	// Glows.Unload			();
 	Lights.Unload			();
 
 	//*** Visuals
-	for (I=0; I<Visuals.size(); I++)
+    for (I = 0; I<xray::renderBase.Visuals.size(); I++)
 	{
-		Visuals[I]->Release();
-		xr_delete(Visuals[I]);
+        xray::renderBase.Visuals[I]->Release();
+        xr_delete(xray::renderBase.Visuals[I]);
 	}
-	Visuals.clear			();
+    xray::renderBase.Visuals.clear();
 
 	//*** VB/IB
 	for (I=0; I<nVB.size(); I++)	_RELEASE(nVB[I]);
@@ -154,7 +154,7 @@ void CRender::level_Unload()
 	xr_delete					(xray::renderBase.Wallmarks);
 
 	//*** Shaders
-	Shaders.clear_and_free		();
+    xray::renderBase.Shaders.clear_and_free();
 	b_loaded					= FALSE;
 }
 
@@ -243,7 +243,7 @@ void CRender::LoadVisuals(IReader *fs)
 		chunk->r_chunk_safe			(OGF_HEADER,&H,sizeof(H));
 		V = Models->Instance_Create	(H.type);
 		V->Load(0,chunk,0);
-		Visuals.push_back(V);
+        xray::renderBase.Visuals.push_back(V);
 
 		chunk->close();
 		index++;
@@ -269,9 +269,9 @@ void CRender::LoadSectors(IReader* fs)
 	u32 size = fs->find_chunk(fsL_PORTALS); 
 	R_ASSERT(0==size%sizeof(b_portal));
 	u32 count = size/sizeof(b_portal);
-	Portals.resize	(count);
+    xray::renderBase.Portals.resize(count);
 	for (u32 c=0; c<count; c++)
-		Portals[c]	= xr_new<CPortal> ();
+        xray::renderBase.Portals[c] = xr_new<CPortal>();
 
 	// load sectors
 	IReader* S = fs->open_chunk(fsL_SECTORS);
@@ -282,7 +282,7 @@ void CRender::LoadSectors(IReader* fs)
 
 		CSector* __S		= xr_new<CSector> ();
 		__S->load			(*P);
-		Sectors.push_back	(__S);
+        xray::renderBase.Sectors.push_back(__S);
 
 		P->close();
 	}
@@ -297,10 +297,10 @@ void CRender::LoadSectors(IReader* fs)
 		{
 			b_portal	P;
 			fs->r		(&P,sizeof(P));
-			CPortal*	__P	= (CPortal*)Portals[i];
+            CPortal* __P = (CPortal*)xray::renderBase.Portals[i];
 			__P->Setup	(P.vertices.begin(),P.vertices.size(),
-				(CSector*)getSector(P.sector_front),
-				(CSector*)getSector(P.sector_back));
+                (CSector*)xray::renderBase.getSector(P.sector_front),
+                (CSector*)xray::renderBase.getSector(P.sector_back));
 			for (u32 j=2; j<P.vertices.size(); j++)
 				CL.add_face_packed_D(
 				P.vertices[0],P.vertices[j-1],P.vertices[j],
@@ -317,17 +317,19 @@ void CRender::LoadSectors(IReader* fs)
 		}
 
 		// build portal model
-		rmPortals = xr_new<CDB::MODEL> ();
-		rmPortals->build	(CL.getV(),int(CL.getVS()),CL.getT(),int(CL.getTS()));
-	} else {
-		rmPortals = 0;
+        xray::renderBase.rmPortals = xr_new<CDB::MODEL>();
+        xray::renderBase.rmPortals->build(CL.getV(), int(CL.getVS()), CL.getT(), int(CL.getTS()));
+	}
+    else
+    {
+        xray::renderBase.rmPortals = 0;
 	}
 
 	// debug
-	//	for (int d=0; d<Sectors.size(); d++)
-	//		Sectors[d]->DebugDump	();
+	//	for (int d=0; d<xray::renderBase.Sectors.size(); d++)
+	//		xray::renderBase.Sectors[d]->DebugDump	();
 
-	pLastSector = 0;
+    xray::renderBase.pLastSector = nullptr;
 }
 
 void CRender::LoadSWIs(CStreamReader* base_fs)

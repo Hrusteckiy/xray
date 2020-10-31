@@ -8,9 +8,9 @@ IRender_Sector* CRender::detectSector(const Fvector& P)
 	// Portals model
 	int		id1		= -1;
 	float	range1	= 500.f;
-	if (rmPortals)	
+    if (xray::renderBase.rmPortals)
 	{
-		Sectors_xrc.ray_query	(rmPortals,P,dir,range1);
+        Sectors_xrc.ray_query(xray::renderBase.rmPortals, P, dir, range1);
 		if (Sectors_xrc.r_count()) {
 			CDB::RESULT *RP1 = Sectors_xrc.r_begin();
 			id1 = RP1->id; range1 = RP1->range; 
@@ -36,13 +36,13 @@ IRender_Sector* CRender::detectSector(const Fvector& P)
 
 	if (ID==id1) {
 		// Take sector, facing to our point from portal
-		CDB::TRI*	pTri	= rmPortals->get_tris() + ID;
-		CPortal*	pPortal	= (CPortal*)Portals	[pTri->dummy];
+        CDB::TRI* pTri = xray::renderBase.rmPortals->get_tris() + ID;
+        CPortal* pPortal = (CPortal*)xray::renderBase.Portals[pTri->dummy];
 		return pPortal->getSectorFacing(P);
 	} else {
 		// Take triangle at ID and use it's Sector
 		CDB::TRI*	pTri	= g_pGameLevel->ObjectSpace.GetStaticTris()+ID;
-		return getSector(pTri->sector);
+        return xray::renderBase.getSector(pTri->sector);
 	}
 }
 

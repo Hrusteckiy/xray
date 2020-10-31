@@ -214,7 +214,7 @@ void CDetailManager::UpdateVisibleM()
 					if (fcvNone==_res)						continue;	// invisible-view frustum
 				}
 #ifndef _EDITOR
-				if (!RImplementation.HOM.visible(S.vis))	continue;	// invisible-occlusion
+                if (!xray::renderBase.HOM.visible(S.vis)) continue; // invisible-occlusion
 #endif
 				// Add to visibility structures
 				if (Device.dwFrame>S.frame){

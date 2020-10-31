@@ -47,14 +47,14 @@ void CPortal::OnRender	()
 
 		// draw wire
 		if (bDebug){
-			RImplementation.rmNear();
+            xray::renderBase.rmNear();
 		}else{
 			Device.SetNearer(TRUE);
 		}
 		RCache.set_Shader	(Device.m_WireShader);
 		RCache.dbg_Draw		(D3DPT_LINESTRIP,&*(V.begin()+1),V.size()-2);
 		if (bDebug){
-			RImplementation.rmNormal();
+            xray::renderBase.rmNormal();
 		}else{
 			Device.SetNearer(FALSE);
 		}
@@ -197,7 +197,7 @@ void CSector::traverse			(CFrustum &F, _scissor& R_scissor)
 				// Cull by HOM (slower algo)
 				if  (
 					(PortalTraverser.i_options&CPortalTraverser::VQ_HOM) && 
-					(!RImplementation.HOM.visible(*P))
+                    (!xray::renderBase.HOM.visible(*P))
 					)	continue;
 			} else {
 				// perform intersection (this is just to be sure, it is probably clipped in 3D already)
@@ -215,7 +215,7 @@ void CSector::traverse			(CFrustum &F, _scissor& R_scissor)
 				// Cull by HOM (faster algo)
 				if  (
 					(PortalTraverser.i_options&CPortalTraverser::VQ_HOM) && 
-					(!RImplementation.HOM.visible(scissor,depth))
+                    (!xray::renderBase.HOM.visible(scissor, depth))
 					)	continue;
 			}
 		} else {
@@ -224,7 +224,7 @@ void CSector::traverse			(CFrustum &F, _scissor& R_scissor)
 			// Cull by HOM (slower algo)
 			if  (
 				(PortalTraverser.i_options&CPortalTraverser::VQ_HOM) && 
-				(!RImplementation.HOM.visible(*P))
+                (!xray::renderBase.HOM.visible(*P))
 				)	continue;
 		}
 
@@ -245,7 +245,7 @@ void CSector::load		(IReader& fs)
 	m_portals.reserve	(count);
 	while (count) {
 		u16 ID		= fs.r_u16();
-		CPortal* P	= (CPortal*)RImplementation.getPortal	(ID);
+        CPortal* P = (CPortal*)xray::renderBase.getPortal(ID);
 		m_portals.push_back(P);
 		count--;
 	}
@@ -254,6 +254,6 @@ void CSector::load		(IReader& fs)
 	else {
 		// Assign visual
 		size	= fs.find_chunk(fsP_Root);	R_ASSERT(size==4);
-		m_root	= RImplementation.getVisual	(fs.r_u32());
+        m_root = xray::renderBase.getVisual(fs.r_u32());
 	}
 }

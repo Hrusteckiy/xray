@@ -73,11 +73,12 @@ r_aabb_ssa		r_pixel_calculator::calculate	(IRender_Visual* V)	{
 void	r_pixel_calculator	::run	()
 {
 	begin	();
-	for (u32 it=0; it<RImplementation.Visuals.size(); it++)
+    for (u32 it = 0; it<xray::renderBase.Visuals.size(); it++)
 	{
-		if (0==dynamic_cast<IRender_Mesh*>(RImplementation.Visuals[it]))		continue;
+        if (0 == dynamic_cast<IRender_Mesh*>(xray::renderBase.Visuals[it]))
+            continue;
 		Msg	("*%d*",it);
-		calculate	(RImplementation.Visuals[it]);
+        calculate(xray::renderBase.Visuals[it]);
 	}
 	end		();
 }

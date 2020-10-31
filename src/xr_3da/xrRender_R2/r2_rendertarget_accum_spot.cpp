@@ -2,7 +2,7 @@
 
 extern Fvector du_cone_vertices[DU_CONE_NUMVERTEX];
 
-void CRenderTarget::accum_spot	(light* L)
+void CRenderTarget::accum_spot(xray::Light_R2* L)
 {
 	phase_accumulator				();
 	RImplementation.stats.l_visible	++;

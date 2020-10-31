@@ -9,7 +9,7 @@ void	CRenderTarget::phase_smap_spot_clear()
 	*/
 }
 
-void	CRenderTarget::phase_smap_spot		(light* L)
+void CRenderTarget::phase_smap_spot(xray::Light_R2* L)
 {
 	// Targets + viewport
 	if (RImplementation.o.HW_smap)		u_setrt	(rt_smap_surf, NULL, NULL, rt_smap_depth->pRT);
@@ -26,7 +26,7 @@ void	CRenderTarget::phase_smap_spot		(light* L)
 	CHK_DX								(HW.pDevice->Clear( 0L, NULL, D3DCLEAR_ZBUFFER,	0xffffffff,	1.0f, 0L));
 }
 
-void	CRenderTarget::phase_smap_spot_tsh	(light* L)
+void CRenderTarget::phase_smap_spot_tsh(xray::Light_R2* L)
 {
 	VERIFY							(RImplementation.o.Tshadows);
 	RCache.set_ColorWriteEnable		();

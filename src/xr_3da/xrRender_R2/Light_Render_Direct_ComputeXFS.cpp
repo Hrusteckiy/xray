@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "light_render_direct.h"
 
-void CLight_Compute_XFORM_and_VIS::compute_xf_spot	(light* L)
+void CLight_Compute_XFORM_and_VIS::compute_xf_spot(xray::Light_R2* L)
 {
 	// Build EYE-space xform
 	Fvector						L_dir,L_up,L_right,L_pos;

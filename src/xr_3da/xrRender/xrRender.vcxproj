@@ -144,9 +144,14 @@
     <ClInclude Include="DetailModel.h" />
     <ClInclude Include="doug_lea_memory_allocator.h" />
     <ClInclude Include="FLOD.h" />
+    <ClInclude Include="HOM.h" />
+    <ClInclude Include="light.h" />
     <ClInclude Include="NvTriStrip.h" />
     <ClInclude Include="NvTriStripObjects.h" />
+    <ClInclude Include="occRasterizer.h" />
     <ClInclude Include="RenderBase.hpp" />
+    <ClInclude Include="TargetBase.hpp" />
+    <ClInclude Include="r__sector.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="tga.h" />
     <ClInclude Include="VertexCache.h" />
@@ -181,14 +186,21 @@
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">Level2</WarningLevel>
     </ClCompile>
     <ClCompile Include="FLOD.cpp" />
+    <ClCompile Include="HOM.cpp" />
+    <ClCompile Include="light.cpp" />
     <ClCompile Include="NvTriStrip.cpp" />
     <ClCompile Include="NvTriStripObjects.cpp" />
+    <ClCompile Include="occRasterizer.cpp" />
+    <ClCompile Include="occRasterizer_core.cpp" />
     <ClCompile Include="RenderBase.cpp" />
+    <ClCompile Include="r__sector.cpp" />
+    <ClCompile Include="r__sector_traversal.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Mixed|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TargetBase.cpp" />
     <ClCompile Include="tga.cpp" />
     <ClCompile Include="VertexCache.cpp" />
     <ClCompile Include="WallmarksEngine.cpp" />

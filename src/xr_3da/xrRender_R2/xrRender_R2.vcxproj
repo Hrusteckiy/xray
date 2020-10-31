@@ -146,6 +146,10 @@
     <ClInclude Include="Blender_Model_EbB_R2.hpp" />
     <ClInclude Include="Blender_Particle_R2.hpp" />
     <ClInclude Include="Blender_tree_R2.hpp" />
+    <ClInclude Include="LightTrack_R2.hpp" />
+    <ClInclude Include="Light_DB_R2.hpp" />
+    <ClInclude Include="Light_Package_R2.hpp" />
+    <ClInclude Include="Light_R2.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="r2.h" />
     <ClInclude Include="r2_types.h" />
@@ -155,13 +159,9 @@
     <ClInclude Include="..\xrRender\r__pixel_calculator.h" />
     <ClInclude Include="doug_lea_memory_allocator.h" />
     <ClInclude Include="..\xrRender\DetailManager.h" />
-    <ClInclude Include="light.h" />
-    <ClInclude Include="..\xrRender\Light_DB.h" />
     <ClInclude Include="light_gi.h" />
-    <ClInclude Include="..\xrRender\Light_Package.h" />
     <ClInclude Include="Light_Render_Direct.h" />
     <ClInclude Include="light_smapvis.h" />
-    <ClInclude Include="..\xrRender\LightTrack.h" />
     <ClInclude Include="SMAP_Allocator.h" />
     <ClInclude Include="blender_bloom_build.h" />
     <ClInclude Include="blender_combine.h" />
@@ -180,9 +180,6 @@
     <ClInclude Include="..\xrRender\FSkinned.h" />
     <ClInclude Include="..\xrRender\FTreeVisual.h" />
     <ClInclude Include="..\xrRender\FVisual.h" />
-    <ClInclude Include="..\xrRender\r__sector.h" />
-    <ClInclude Include="..\xrRender\HOM.h" />
-    <ClInclude Include="..\xrRender\occRasterizer.h" />
     <ClInclude Include="du_sphere_part.h" />
     <ClInclude Include="r2_rendertarget.h" />
     <ClInclude Include="r2_rendertarget_wallmarks.h" />
@@ -201,6 +198,10 @@
     <ClCompile Include="Blender_Model_EbB_R2.cpp" />
     <ClCompile Include="Blender_Particle_R2.cpp" />
     <ClCompile Include="Blender_tree_R2.cpp" />
+    <ClCompile Include="LightTrack_R2.cpp" />
+    <ClCompile Include="Light_DB_R2.cpp" />
+    <ClCompile Include="Light_Package_R2.cpp" />
+    <ClCompile Include="Light_R2.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Mixed|Win32'">Create</PrecompiledHeader>
@@ -241,15 +242,11 @@
     <ClCompile Include="..\xrRender\DetailManager_Decompress.cpp" />
     <ClCompile Include="..\xrRender\DetailManager_soft.cpp" />
     <ClCompile Include="..\xrRender\DetailManager_VS.cpp" />
-    <ClCompile Include="..\xrRender\light.cpp" />
-    <ClCompile Include="..\xrRender\Light_DB.cpp" />
     <ClCompile Include="light_GI.cpp" />
-    <ClCompile Include="..\xrRender\Light_Package.cpp" />
     <ClCompile Include="Light_Render_Direct.cpp" />
     <ClCompile Include="Light_Render_Direct_ComputeXFS.cpp" />
     <ClCompile Include="light_smapvis.cpp" />
     <ClCompile Include="light_vis.cpp" />
-    <ClCompile Include="..\xrRender\LightTrack.cpp" />
     <ClCompile Include="blender_bloom_build.cpp" />
     <ClCompile Include="blender_combine.cpp" />
     <ClCompile Include="blender_deffer_aref.cpp" />
@@ -267,11 +264,6 @@
     <ClCompile Include="..\xrRender\FSkinned.cpp" />
     <ClCompile Include="..\xrRender\FTreeVisual.cpp" />
     <ClCompile Include="..\xrRender\FVisual.cpp" />
-    <ClCompile Include="..\xrRender\r__sector.cpp" />
-    <ClCompile Include="..\xrRender\r__sector_traversal.cpp" />
-    <ClCompile Include="..\xrRender\HOM.cpp" />
-    <ClCompile Include="..\xrRender\occRasterizer.cpp" />
-    <ClCompile Include="..\xrRender\occRasterizer_core.cpp" />
     <ClCompile Include="du_sphere_part.cpp" />
     <ClCompile Include="r2_rendertarget.cpp">
       <AssemblerOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AssemblyAndSourceCode</AssemblerOutput>

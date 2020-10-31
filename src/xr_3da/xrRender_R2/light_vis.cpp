@@ -8,7 +8,7 @@ const	u32	delay_large_min			= 10;
 const	u32	delay_large_max			= 20;
 const	u32	cullfragments			= 4;
 
-void	light::vis_prepare			()
+void xray::Light_R2::vis_prepare()
 {
 	if (int(indirect_photons)!=ps_r2_GI_photons)	gi_generate	();
 
@@ -47,11 +47,11 @@ void	light::vis_prepare			()
 	xform_calc										();
 	RCache.set_xform_world							(m_xform);
 	vis.query_order	= RImplementation.occq_begin	(vis.query_id);
-	RImplementation.Target->draw_volume				(this);
+    RImplementation.Target->draw_volume				(this);
 	RImplementation.occq_end						(vis.query_id);
 }
 
-void	light::vis_update			()
+void xray::Light_R2::vis_update()
 {
 	//	. not pending	->>> return (early out)
 	//	. test-result:	visible:

@@ -25,15 +25,6 @@
     <Filter Include="Models\Visuals">
       <UniqueIdentifier>{aec065f1-35ec-495e-94cf-8143fdb8005a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Visibility">
-      <UniqueIdentifier>{b62de675-5eba-4c8f-a981-f4a2fa6a4612}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Visibility\Sector/Portal">
-      <UniqueIdentifier>{2efb60dc-7527-4123-bb14-089bd675ac22}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Visibility\HOM Occlusion">
-      <UniqueIdentifier>{0d763377-8ca5-4cb1-8650-6289f32f0f18}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Lights">
       <UniqueIdentifier>{3e186e57-4741-46c6-aebb-7d9cbe9960c6}</UniqueIdentifier>
     </Filter>
@@ -105,24 +96,6 @@
     <ClInclude Include="..\xrRender\FVisual.h">
       <Filter>Models\Visuals</Filter>
     </ClInclude>
-    <ClInclude Include="..\xrRender\r__sector.h">
-      <Filter>Visibility\Sector/Portal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender\HOM.h">
-      <Filter>Visibility\HOM Occlusion</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender\occRasterizer.h">
-      <Filter>Visibility\HOM Occlusion</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender\light.h">
-      <Filter>Lights</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender\Light_DB.h">
-      <Filter>Lights</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender\Light_Package.h">
-      <Filter>Lights</Filter>
-    </ClInclude>
     <ClInclude Include="LightPPA.h">
       <Filter>Lights</Filter>
     </ClInclude>
@@ -130,9 +103,6 @@
       <Filter>Lights</Filter>
     </ClInclude>
     <ClInclude Include="LightShadows.h">
-      <Filter>Lights</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender\LightTrack.h">
       <Filter>Lights</Filter>
     </ClInclude>
     <ClInclude Include="xrRender_R1_console.hpp">
@@ -170,6 +140,15 @@
     </ClInclude>
     <ClInclude Include="Blender_Particle_R1.hpp">
       <Filter>Shading templates</Filter>
+    </ClInclude>
+    <ClInclude Include="Light_Package_R1.hpp">
+      <Filter>Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="Light_DB_R1.hpp">
+      <Filter>Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="LightTrack_R1.hpp">
+      <Filter>Lights</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -272,30 +251,6 @@
     <ClCompile Include="..\xrRender\FVisual.cpp">
       <Filter>Models\Visuals</Filter>
     </ClCompile>
-    <ClCompile Include="..\xrRender\r__sector.cpp">
-      <Filter>Visibility\Sector/Portal</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\r__sector_traversal.cpp">
-      <Filter>Visibility\Sector/Portal</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\HOM.cpp">
-      <Filter>Visibility\HOM Occlusion</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\occRasterizer.cpp">
-      <Filter>Visibility\HOM Occlusion</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\occRasterizer_core.cpp">
-      <Filter>Visibility\HOM Occlusion</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\light.cpp">
-      <Filter>Lights</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\Light_DB.cpp">
-      <Filter>Lights</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\Light_Package.cpp">
-      <Filter>Lights</Filter>
-    </ClCompile>
     <ClCompile Include="LightPPA.cpp">
       <Filter>Lights</Filter>
     </ClCompile>
@@ -303,9 +258,6 @@
       <Filter>Lights</Filter>
     </ClCompile>
     <ClCompile Include="LightShadows.cpp">
-      <Filter>Lights</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\LightTrack.cpp">
       <Filter>Lights</Filter>
     </ClCompile>
     <ClCompile Include="xrRender_R1_console.cpp">
@@ -340,6 +292,15 @@
     </ClCompile>
     <ClCompile Include="Blender_Particle_R1.cpp">
       <Filter>Shading templates</Filter>
+    </ClCompile>
+    <ClCompile Include="Light_Package_R1.cpp">
+      <Filter>Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="Light_DB_R1.cpp">
+      <Filter>Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="LightTrack_R1.cpp">
+      <Filter>Lights</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -6,7 +6,7 @@
 #include "..\igame_persistent.h"
 #include "..\environment.h"
 #include "..\SkeletonCustom.h"
-#include "..\xrRender\LightTrack.h"
+#include "LightTrack_R2.hpp"
 
 CRender										RImplementation;
 
@@ -209,7 +209,7 @@ void					CRender::create					()
 	c_lmaterial					= "L_material";
 	c_sbase						= "s_base";
 
-	Target						= xr_new<CRenderTarget>		();	// Main target
+    Target = xr_new<CRenderTarget>(); // Main target
 
 	Models						= xr_new<CModelPool>		();
 	PSLibrary.OnCreate			();
@@ -231,7 +231,7 @@ void					CRender::destroy				()
 	_RELEASE					(q_sync_point[0]);
 	HWOCC.occq_destroy			();
 	xr_delete					(Models);
-	xr_delete					(Target);
+    xr_delete					(Target);
 	PSLibrary.OnDestroy			();
 	Device.seqFrame.Remove		(this);
 }
@@ -254,7 +254,7 @@ void CRender::reset_begin()
 		Lights_LastFrame.clear	();
 	}
 
-	xr_delete					(Target);
+    xr_delete					(Target);
 	HWOCC.occq_destroy			();
 	_RELEASE					(q_sync_point[1]);
 	_RELEASE					(q_sync_point[0]);
@@ -266,7 +266,7 @@ void CRender::reset_end()
 	R_CHK						(HW.pDevice->CreateQuery(D3DQUERYTYPE_EVENT,&q_sync_point[1]));
 	HWOCC.occq_create			(occq_size);
 
-	Target						=	xr_new<CRenderTarget>	();
+    Target = xr_new<CRenderTarget>();
 
 	xrRender_apply_tf			();
 }
@@ -276,7 +276,7 @@ void CRender::OnFrame()
 	Models->DeleteQueue			();
 	if (ps_r2_ls_flags.test(R2FLAG_EXP_MT_CALC))	{
 		Device.seqParallel.insert	(Device.seqParallel.begin(),
-			fastdelegate::FastDelegate0<>(&HOM,&CHOM::MT_RENDER));
+			fastdelegate::FastDelegate0<>(&xray::renderBase.HOM,&CHOM::MT_RENDER));
 	}
 }*/
 void CRender::OnFrame()
@@ -289,7 +289,7 @@ void CRender::OnFrame()
 
 		// MT-HOM (@front)
 		Device.seqParallel.insert	(Device.seqParallel.begin(),
-			fastdelegate::FastDelegate0<>(&HOM,&CHOM::MT_RENDER));
+            fastdelegate::FastDelegate0<>(&xray::renderBase.HOM, &CHOM::MT_RENDER));
 	}
 }
 
@@ -354,38 +354,16 @@ IRender_Glow*			CRender::glow_create			()					{ return xr_new<CGlow>();								}
 
 void					CRender::flush					()					{ r_dsgraph_render_graph	(0);						}
 
-BOOL					CRender::occ_visible			(vis_data& P)		{ return HOM.visible(P);								}
-BOOL					CRender::occ_visible			(sPoly& P)			{ return HOM.visible(P);								}
-BOOL					CRender::occ_visible			(Fbox& P)			{ return HOM.visible(P);								}
-
 void					CRender::add_Visual				(IRender_Visual*		V )	{ add_leafs_Dynamic(V);								}
 void					CRender::add_Geometry			(IRender_Visual*		V )	{ add_Static(V,View->getMask());					}
 
 void					CRender::add_Occluder			(Fbox2&	bb_screenspace	)
 {
-	HOM.occlude			(bb_screenspace);
+    xray::renderBase.HOM.occlude(bb_screenspace);
 }
 void					CRender::set_Object				(IRenderable*	O )	
 { 
 	val_pObject				= O;
-}
-void					CRender::rmNear				()
-{
-	IRender_Target* T	=	getTarget	();
-	D3DVIEWPORT9 VP		=	{0,0,T->get_width(),T->get_height(),0,0.02f };
-	CHK_DX				(HW.pDevice->SetViewport(&VP));
-}
-void					CRender::rmFar				()
-{
-	IRender_Target* T	=	getTarget	();
-	D3DVIEWPORT9 VP		=	{0,0,T->get_width(),T->get_height(),0.99999f,1.f };
-	CHK_DX				(HW.pDevice->SetViewport(&VP));
-}
-void					CRender::rmNormal			()
-{
-	IRender_Target* T	=	getTarget	();
-	D3DVIEWPORT9 VP		= {0,0,T->get_width(),T->get_height(),0,1.f };
-	CHK_DX				(HW.pDevice->SetViewport(&VP));
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -417,7 +395,7 @@ void	CRender::Statistics	(CGameFont* _F)
 	F.OutNext	(" visible: %2d",	stats.ic_total	);	stats.ic_total	= 0;
 	F.OutNext	(" culled : %2d",	stats.ic_culled	);	stats.ic_culled	= 0;
 #ifdef DEBUG
-	HOM.stats	();
+    xray::renderBase.HOM.stats	();
 #endif
 }
 

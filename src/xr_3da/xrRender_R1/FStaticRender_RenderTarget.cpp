@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "fstaticrender_rendertarget.h"
 #include "../IGame_Persistent.h"
-
+#include "../xrRender/TargetBase.hpp"
 
 static LPCSTR		RTname			= "$user$rendertarget";
 static LPCSTR		RTname_distort	= "$user$distort";
@@ -35,8 +35,8 @@ CRenderTarget::CRenderTarget()
 
 BOOL CRenderTarget::Create	()
 {
-	curWidth			= Device.dwWidth;
-	curHeight			= Device.dwHeight;
+    xray::render::targetBase.set_width(Device.dwWidth);
+    xray::render::targetBase.set_height(Device.dwHeight);
 
 	// Select mode to operate in
 	float	amount		= ps_r__Supersample?float(ps_r__Supersample):1	;
@@ -192,14 +192,14 @@ void CRenderTarget::Begin		()
 		// Base RT
 		RCache.set_RT			(HW.pBaseRT);
 		RCache.set_ZB			(HW.pBaseZB);
-		curWidth				= Device.dwWidth;
-		curHeight				= Device.dwHeight;
+		xray::render::targetBase.set_width(Device.dwWidth);
+		xray::render::targetBase.set_height(Device.dwHeight);
 	} else {
 		// Our 
 		RCache.set_RT			(RT->pRT);
 		RCache.set_ZB			(ZB);
-		curWidth				= rtWidth;
-		curHeight				= rtHeight;
+		xray::render::targetBase.set_width(rtWidth);
+		xray::render::targetBase.set_height(rtHeight);
 	}
 	Device.Clear				();
 }
@@ -233,8 +233,8 @@ void CRenderTarget::End		()
 	// combination/postprocess
 	RCache.set_RT		(HW.pBaseRT);
 	RCache.set_ZB		(HW.pBaseZB);
-	curWidth			= Device.dwWidth;
-	curHeight			= Device.dwHeight;
+	xray::render::targetBase.set_width(Device.dwWidth);
+	xray::render::targetBase.set_height(Device.dwHeight);
 	
 	if (!bPerform)		return;
 	RCache.set_Shader	(bDistort ? s_postprocess_D : s_postprocess );
@@ -289,4 +289,14 @@ void	CRenderTarget::phase_distortion	()
 		RImplementation.mapDistort.clear();
 
 	if (g_pGamePersistent)	g_pGamePersistent->OnRenderPPUI_PP()	;	// PP-UI
+}
+
+u32 CRenderTarget::get_width()
+{
+    return xray::render::targetBase.get_width();
+}
+
+u32 CRenderTarget::get_height()
+{
+    return xray::render::targetBase.get_height();
 }

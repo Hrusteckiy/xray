@@ -28,6 +28,18 @@
     <Filter Include="Wallmarks">
       <UniqueIdentifier>{f53b22b7-618c-416e-84b6-dd702c88f756}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Visibility">
+      <UniqueIdentifier>{118ea556-e02d-4b0f-8ad2-0899cc55b4c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Visibility\Sector/Portal">
+      <UniqueIdentifier>{739ac23e-04d2-4c4f-a9df-21079efa2518}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Visibility\HOM Occlusion">
+      <UniqueIdentifier>{edb01856-a20e-4930-b2a4-24c8e2d929ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lights">
+      <UniqueIdentifier>{e2468b4d-2539-48c2-8146-52baa4e9b98a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -95,6 +107,27 @@
     </ClCompile>
     <ClCompile Include="WallmarksEngine.cpp">
       <Filter>Wallmarks</Filter>
+    </ClCompile>
+    <ClCompile Include="r__sector.cpp">
+      <Filter>Visibility\Sector/Portal</Filter>
+    </ClCompile>
+    <ClCompile Include="r__sector_traversal.cpp">
+      <Filter>Visibility\Sector/Portal</Filter>
+    </ClCompile>
+    <ClCompile Include="HOM.cpp">
+      <Filter>Visibility\HOM Occlusion</Filter>
+    </ClCompile>
+    <ClCompile Include="occRasterizer.cpp">
+      <Filter>Visibility\HOM Occlusion</Filter>
+    </ClCompile>
+    <ClCompile Include="occRasterizer_core.cpp">
+      <Filter>Visibility\HOM Occlusion</Filter>
+    </ClCompile>
+    <ClCompile Include="light.cpp">
+      <Filter>Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetBase.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +197,21 @@
     </ClInclude>
     <ClInclude Include="WallmarksEngine.h">
       <Filter>Wallmarks</Filter>
+    </ClInclude>
+    <ClInclude Include="r__sector.h">
+      <Filter>Visibility\Sector/Portal</Filter>
+    </ClInclude>
+    <ClInclude Include="HOM.h">
+      <Filter>Visibility\HOM Occlusion</Filter>
+    </ClInclude>
+    <ClInclude Include="occRasterizer.h">
+      <Filter>Visibility\HOM Occlusion</Filter>
+    </ClInclude>
+    <ClInclude Include="light.h">
+      <Filter>Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetBase.hpp">
+      <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

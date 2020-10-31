@@ -236,7 +236,7 @@ public:
 	}
 	void				compute_caster_model	(xr_vector<Fplane>& dest, Fvector3 direction)
 	{
-		CRenderTarget&	T	= *RImplementation.Target;
+        CRenderTarget& T = *RImplementation.Target;
 
 		// COG
 		Fvector3	cog	= {0,0,0};
@@ -440,7 +440,7 @@ D3DXVECTOR2 BuildTSMProjectionMatrix_caster_depth_bounds(D3DXMATRIX& lightSpaceB
 
 void CRender::render_sun				()
 {
-	light*			fuckingsun			= (light*)Lights.sun_adapted._get()	;
+    xray::Light_R2* fuckingsun = (xray::Light_R2*)Lights.sun_adapted._get();
 	D3DXMATRIX		m_LightViewProj		;
 
 	// calculate view-frustum bounds in world space
@@ -482,9 +482,9 @@ void CRender::render_sun				()
 		//. hack: need to know real outdoor sector
 		CSector*	largest_sector		= 0;
 		float		largest_sector_vol	= 0;
-		for		(u32 s=0; s<Sectors.size(); s++)
+        for (u32 s = 0; s<xray::renderBase.Sectors.size(); s++)
 		{
-			CSector*			S		= (CSector*)Sectors[s]	;
+            CSector* S = (CSector*)xray::renderBase.Sectors[s];
 			IRender_Visual*		V		= S->root()				;
 			float				vol		= V->vis.box.getvolume();
 			if (vol>largest_sector_vol)	{
@@ -530,7 +530,7 @@ void CRender::render_sun				()
 
 	// Begin SMAP-render
 	{
-		HOM.Disable								();
+        xray::renderBase.HOM.Disable();
         xray::renderBase.phase = R_dsgraph_structure::RenderPhase::PHASE_SMAP;
 		if (RImplementation.o.Tshadows)	r_pmask	(true,true	);
 		else							r_pmask	(true,false	);
@@ -546,9 +546,9 @@ void CRender::render_sun				()
 	// IGNORE PORTALS
 	if	(ps_r2_ls_flags.test(R2FLAG_SUN_IGNORE_PORTALS))
 	{
-		for		(u32 s=0; s<Sectors.size(); s++)
+        for (u32 s = 0; s<xray::renderBase.Sectors.size(); s++)
 		{
-			CSector*			S		= (CSector*)Sectors[s]	;
+            CSector* S = (CSector*)xray::renderBase.Sectors[s];
 			IRender_Visual*		root	= S->root()				;
 
 			set_Frustum			(&cull_frustum);
@@ -856,7 +856,7 @@ void CRender::render_sun				()
 		bool	bNormal							= mapNormal[0].size() || mapMatrix[0].size();
 		bool	bSpecial						= mapNormal[1].size() || mapMatrix[1].size() || mapSorted.size();
 		if ( bNormal || bSpecial)	{
-			Target->phase_smap_direct			(fuckingsun, SE_SUN_FAR		);
+            Target->phase_smap_direct			(fuckingsun, SE_SUN_FAR);
 			RCache.set_xform_world				(Fidentity					);
 			RCache.set_xform_view				(Fidentity					);
 			RCache.set_xform_project			(fuckingsun->X.D.combine	);	
@@ -864,7 +864,7 @@ void CRender::render_sun				()
 			fuckingsun->X.D.transluent			= FALSE;
 			if (bSpecial)						{
 				fuckingsun->X.D.transluent			= TRUE;
-				Target->phase_smap_direct_tsh		(fuckingsun, SE_SUN_FAR	);
+                Target->phase_smap_direct_tsh		(fuckingsun, SE_SUN_FAR);
 				r_dsgraph_render_graph				(1);			// normal level, secondary priority
 				r_dsgraph_render_sorted				( );			// strict-sorted geoms
 			}
@@ -878,8 +878,8 @@ void CRender::render_sun				()
 	}
 
 	// Accumulate
-	Target->phase_accumulator	();
-	Target->accum_direct		(SE_SUN_FAR);
+    Target->phase_accumulator	();
+    Target->accum_direct		(SE_SUN_FAR);
 
 	// Restore XForms
 	RCache.set_xform_world		(Fidentity			);
@@ -889,7 +889,7 @@ void CRender::render_sun				()
 
 void CRender::render_sun_near	()
 {
-	light*			fuckingsun			= (light*)Lights.sun_adapted._get()	;
+    xray::Light_R2* fuckingsun = (xray::Light_R2*)Lights.sun_adapted._get();
 	D3DXMATRIX		m_LightViewProj		;
 
 	// calculate view-frustum bounds in world space
@@ -932,16 +932,16 @@ void CRender::render_sun_near	()
 		hull.compute_caster_model	(cull_planes,fuckingsun->direction);
 #ifdef	_DEBUG
 		for (u32 it=0; it<cull_planes.size(); it++)
-			RImplementation.Target->dbg_addplane(cull_planes[it],0xffffffff);
+            Target->dbg_addplane(cull_planes[it],0xffffffff);
 #endif
 
 		// Search for default sector - assume "default" or "outdoor" sector is the largest one
 		//. hack: need to know real outdoor sector
 		CSector*	largest_sector		= 0;
 		float		largest_sector_vol	= 0;
-		for		(u32 s=0; s<Sectors.size(); s++)
+        for (u32 s = 0; s<xray::renderBase.Sectors.size(); s++)
 		{
-			CSector*			S		= (CSector*)Sectors[s]	;
+            CSector* S = (CSector*)xray::renderBase.Sectors[s];
 			IRender_Visual*		V		= S->root()				;
 			float				vol		= V->vis.box.getvolume();
 			if (vol>largest_sector_vol)	{
@@ -1041,7 +1041,7 @@ void CRender::render_sun_near	()
 	{
 		bool	bSpecialFull					= mapNormal[1].size() || mapMatrix[1].size() || mapSorted.size();
 		VERIFY									(!bSpecialFull);
-		HOM.Disable								();
+        xray::renderBase.HOM.Disable();
         xray::renderBase.phase = R_dsgraph_structure::RenderPhase::PHASE_SMAP;
 		if (RImplementation.o.Tshadows)	r_pmask	(true,true	);
 		else							r_pmask	(true,false	);
@@ -1060,7 +1060,7 @@ void CRender::render_sun_near	()
 		bool	bNormal							= mapNormal[0].size() || mapMatrix[0].size();
 		bool	bSpecial						= mapNormal[1].size() || mapMatrix[1].size() || mapSorted.size();
 		if ( bNormal || bSpecial)	{
-			Target->phase_smap_direct			(fuckingsun	, SE_SUN_NEAR	);
+            Target->phase_smap_direct			(fuckingsun, SE_SUN_NEAR);
 			RCache.set_xform_world				(Fidentity					);
 			RCache.set_xform_view				(Fidentity					);
 			RCache.set_xform_project			(fuckingsun->X.D.combine	);	
@@ -1070,7 +1070,7 @@ void CRender::render_sun_near	()
 			fuckingsun->X.D.transluent			= FALSE;
 			if (bSpecial)						{
 				fuckingsun->X.D.transluent			= TRUE;
-				Target->phase_smap_direct_tsh		(fuckingsun, SE_SUN_NEAR);
+                Target->phase_smap_direct_tsh		(fuckingsun, SE_SUN_NEAR);
 				r_dsgraph_render_graph				(1);			// normal level, secondary priority
 				r_dsgraph_render_sorted				( );			// strict-sorted geoms
 			}
@@ -1084,8 +1084,8 @@ void CRender::render_sun_near	()
 	}
 
 	// Accumulate
-	Target->phase_accumulator	();
-	Target->accum_direct		(SE_SUN_NEAR);
+    Target->phase_accumulator();
+    Target->accum_direct(SE_SUN_NEAR);
 
 	// Restore XForms
 	RCache.set_xform_world		(Fidentity			);
@@ -1096,6 +1096,6 @@ void CRender::render_sun_near	()
 void CRender::render_sun_filtered	()
 {
 	if (!RImplementation.o.sunfilter)	return;
-	Target->phase_accumulator			();
-	Target->accum_direct				(SE_SUN_LUMINANCE);
+    Target->phase_accumulator();
+    Target->accum_direct(SE_SUN_LUMINANCE);
 }

@@ -339,7 +339,8 @@ void CRender::add_leafs_Dynamic	(IRender_Visual *pVisual)
 
 void CRender::add_leafs_Static(IRender_Visual *pVisual)
 {
-	if (!HOM.visible(pVisual->vis))		return;
+    if (!xray::renderBase.HOM.visible(pVisual->vis))
+        return;
 
 	// Visual is 100% visible - simply add it
 	xr_vector<IRender_Visual*>::iterator I,E;	// it may be usefull for 'hierrarhy' visuals
@@ -519,8 +520,10 @@ void CRender::add_Static(IRender_Visual *pVisual, u32 planes)
 	EFC_Visible	VIS;
 	vis_data&	vis			= pVisual->vis;
 	VIS = View->testSAABB	(vis.sphere.P,vis.sphere.R,vis.box.data(),planes);
-	if (fcvNone==VIS)		return;
-	if (!HOM.visible(vis))	return;
+	if (fcvNone==VIS)
+        return;
+    if (!xray::renderBase.HOM.visible(vis))
+        return;
 
 	// If we get here visual is visible or partially visible
 	xr_vector<IRender_Visual*>::iterator I,E;	// it may be usefull for 'hierrarhy' visuals

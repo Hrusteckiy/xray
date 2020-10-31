@@ -1,12 +1,12 @@
 #include "StdAfx.h"
-#include "..\xrRender\light.h"
+#include "Light_R2.hpp"
 
 IC bool		pred_LI			(const light_indirect& A, const light_indirect& B)
 {
 	return A.E > B.E;
 }
 
-void	light::gi_generate	()
+void xray::Light_R2::gi_generate()
 {
 	indirect.clear		();
 	indirect_photons	= ps_r2_ls_flags.test(R2FLAG_GI)?ps_r2_GI_photons:0;

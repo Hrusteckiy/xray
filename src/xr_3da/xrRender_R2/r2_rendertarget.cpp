@@ -9,30 +9,31 @@
 #include "blender_combine.h"
 #include "blender_bloom_build.h"
 #include "blender_luminance.h"
+#include "../xrRender/TargetBase.hpp"
 
 void	CRenderTarget::u_setrt			(const ref_rt& _1, const ref_rt& _2, const ref_rt& _3, IDirect3DSurface9* zb)
 {
 	VERIFY									(_1);
-	dwWidth									= _1->dwWidth;
-	dwHeight								= _1->dwHeight;
+	xray::render::targetBase.set_width(_1->dwWidth);
+	xray::render::targetBase.set_height(_1->dwHeight);
 	if (_1) RCache.set_RT(_1->pRT,	0); else RCache.set_RT(NULL,0);
 	if (_2) RCache.set_RT(_2->pRT,	1); else RCache.set_RT(NULL,1);
 	if (_3) RCache.set_RT(_3->pRT,	2); else RCache.set_RT(NULL,2);
 	RCache.set_ZB							(zb);
-//	RImplementation.rmNormal				();
+//	xray::renderBase.rmNormal				();
 }
 
 void	CRenderTarget::u_setrt			(u32 W, u32 H, IDirect3DSurface9* _1, IDirect3DSurface9* _2, IDirect3DSurface9* _3, IDirect3DSurface9* zb)
 {
 	VERIFY									(_1);
-	dwWidth									= W;
-	dwHeight								= H;
+	xray::render::targetBase.set_width(W);
+	xray::render::targetBase.set_height(H);
 	VERIFY									(_1);
 	RCache.set_RT							(_1,	0);
 	RCache.set_RT							(_2,	1);
 	RCache.set_RT							(_3,	2);
 	RCache.set_ZB							(zb);
-//	RImplementation.rmNormal				();
+//	xray::renderBase.rmNormal				();
 }
 
 void	CRenderTarget::u_stencil_optimize	(BOOL		common_stencil)
@@ -456,8 +457,8 @@ CRenderTarget::CRenderTarget		()
 	g_menu.create						(FVF::F_TL,RCache.Vertex.Buffer(),RCache.QuadIB);
 
 	// 
-	dwWidth		= Device.dwWidth;
-	dwHeight	= Device.dwHeight;
+	xray::render::targetBase.set_width(Device.dwWidth);
+	xray::render::targetBase.set_height(Device.dwHeight);
 }
 
 CRenderTarget::~CRenderTarget	()
@@ -508,4 +509,14 @@ CRenderTarget::~CRenderTarget	()
 	xr_delete					(b_accum_direct			);
 	xr_delete					(b_accum_mask			);
 	xr_delete					(b_occq					);
+}
+
+u32 CRenderTarget::get_width()
+{
+    return xray::render::targetBase.get_width();
+}
+
+u32 CRenderTarget::get_height()
+{
+    return xray::render::targetBase.get_height();
 }

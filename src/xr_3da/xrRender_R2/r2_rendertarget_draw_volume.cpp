@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "du_sphere_part.h"
 
-void CRenderTarget::draw_volume		(light* L)
+void CRenderTarget::draw_volume(xray::Light_R2* L)
 {
 	switch(L->flags.type) {
 	case IRender_Light::REFLECTED	:

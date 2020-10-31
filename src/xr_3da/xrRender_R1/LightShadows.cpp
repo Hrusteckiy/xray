@@ -4,7 +4,7 @@
 
 #include "stdafx.h"
 #include "LightShadows.h"
-#include "..\xrRender\LightTrack.h"
+#include "LightTrack_R1.hpp"
 #include "..\xr_object.h"
 #include "..\fbasicvisual.h"
 #include "..\CustomHUD.h"
@@ -131,7 +131,7 @@ void CLightShadows::add_element	(NODE& N)
 	casters.back()->nodes.push_back		(N);
 }
 
-IC float PLC_energy	(Fvector& P, Fvector& N, light* L, float E)
+IC float PLC_energy(Fvector& P, Fvector& N, xray::Light* L, float E)
 {
 	Fvector Ldir;
 	if (L->flags.type==IRender_Light::DIRECT)
@@ -163,7 +163,7 @@ IC float PLC_energy	(Fvector& P, Fvector& N, light* L, float E)
 	}
 }
 
-IC int PLC_calc	(Fvector& P, Fvector& N, light* L, float energy, Fvector& O)
+IC int PLC_calc(Fvector& P, Fvector& N, xray::Light* L, float energy, Fvector& O)
 {
 	float	E		= PLC_energy(P,N,L,energy);
 	float	C1		= clampr(Device.vCameraPosition.distance_to_sqr(P)/S_distance2,	0.f,1.f);
@@ -207,7 +207,7 @@ void CLightShadows::calculate	()
 			if (!bRTS)	{
 				bRTS						= TRUE;
 				RCache.set_RT				(RT_temp->pRT);
-				RCache.set_ZB				(RImplementation.Target->pTempZB);
+                RCache.set_ZB				(RImplementation.Target->pTempZB);
 				HW.pDevice->Clear			(0,0,D3DCLEAR_TARGET,D3DCOLOR_XRGB(255,255,255),1,0);
 			}
 
@@ -328,7 +328,7 @@ void CLightShadows::calculate	()
 		
 		// Actual rendering (pass0, temp2real)
 		RCache.set_RT				(RT->pRT	);
-		RCache.set_ZB				(RImplementation.Target->pTempZB	);
+        RCache.set_ZB				(RImplementation.Target->pTempZB	);
 		RCache.set_Shader			(sh_BlurTR	);
 		RCache.set_Geometry			(geom_Blur	);
 		RCache.Render				(D3DPT_TRIANGLELIST,Offset,0,4,0,2);

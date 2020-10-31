@@ -7,7 +7,7 @@
 
 class occTri;
 
-class CHOM  
+class XRRENDER_API CHOM
 #ifdef DEBUG
 	: public pureRender
 #endif

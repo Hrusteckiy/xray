@@ -148,9 +148,9 @@ void CLightR_Manager::render_point	()
 	// for each light
 	Fvector		lc_COP		= Device.vCameraPosition	;
 	float		lc_limit	= ps_r1_dlights_clip		;
-	for (xr_vector<light*>::iterator it=selected_point.begin(); it!=selected_point.end(); it++)
+    for (xr_vector<xray::Light*>::iterator it = selected_point.begin(); it != selected_point.end(); it++)
 	{
-		light*	L					= *it;
+        xray::Light* L = *it;
 		VERIFY						(L->spatial.sector && _valid(L->range));
 
 		//		0. Dimm & Clip
@@ -222,9 +222,9 @@ void CLightR_Manager::render_spot	()
 	Fvector		lc_COP		= Device.vCameraPosition	;
 	float		lc_limit	= ps_r1_dlights_clip		;
 
-	for (xr_vector<light*>::iterator it=selected_spot.begin(); it!=selected_spot.end(); it++)
+    for (xr_vector<xray::Light*>::iterator it = selected_spot.begin(); it != selected_spot.end(); it++)
 	{
-		light*	L					= *it;
+        xray::Light* L = *it;
 
 		//		0. Dimm & Clip
 		float	lc_dist				= lc_COP.distance_to	(L->spatial.sphere.P) - L->spatial.sphere.R;
@@ -305,7 +305,7 @@ void CLightR_Manager::render		()
 	}
 }
 
-void CLightR_Manager::add			(light* L)
+void CLightR_Manager::add(xray::Light* L)
 {
 	if (L->range<0.1f)				return;
 	if (0==L->spatial.sector)		return;

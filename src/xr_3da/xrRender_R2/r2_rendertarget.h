@@ -1,17 +1,15 @@
 #pragma once
 
-class light;
+#include "Light_R2.hpp"
 
 #define DU_SPHERE_NUMVERTEX 92
 #define DU_SPHERE_NUMFACES	180
 #define DU_CONE_NUMVERTEX	18
 #define DU_CONE_NUMFACES	32
 
-class CRenderTarget		: public IRender_Target
+class CRenderTarget : public IRender_Target
 {
 private:
-	u32							dwWidth;
-	u32							dwHeight;
 	u32							dwAccumulatorClearMark;
 public:
 	u32							dwLightMarkerID;
@@ -162,27 +160,27 @@ public:
 	void						phase_scene_end			();
 	void						phase_occq				();
 	void						phase_wallmarks			();
-	void						phase_smap_direct		(light* L,	u32 sub_phase);
-	void						phase_smap_direct_tsh	(light* L,	u32 sub_phase);
+    void						phase_smap_direct(xray::Light_R2* L, u32 sub_phase);
+    void						phase_smap_direct_tsh(xray::Light_R2* L, u32 sub_phase);
 	void						phase_smap_spot_clear	();
-	void						phase_smap_spot			(light* L);
-	void						phase_smap_spot_tsh		(light* L);
+    void						phase_smap_spot(xray::Light_R2* L);
+    void						phase_smap_spot_tsh(xray::Light_R2* L);
 	void						phase_accumulator		();
-	void						shadow_direct			(light* L, u32 dls_phase);
+    void						shadow_direct(xray::Light_R2* L, u32 dls_phase);
 	
-	BOOL						enable_scissor			(light* L);		// true if intersects near plane
-	void						enable_dbt_bounds		(light* L);
+    BOOL						enable_scissor(xray::Light_R2* L);		// true if intersects near plane
+    void						enable_dbt_bounds(xray::Light_R2* L);
 
 	void						disable_aniso			();
 
-	void						draw_volume				(light* L);
+    void						draw_volume(xray::Light_R2* L);
 	void						accum_direct			(u32	sub_phase);
 	void						accum_direct_f			(u32	sub_phase);
 	void						accum_direct_lum		();
 	void						accum_direct_blend		();
-	void						accum_point				(light* L);
-	void						accum_spot				(light* L);
-	void						accum_reflected			(light* L);
+    void						accum_point(xray::Light_R2* L);
+    void						accum_spot(xray::Light_R2* L);
+    void						accum_reflected(xray::Light_R2* L);
 	void						phase_bloom				();
 	void						phase_luminance			();
 	void						phase_combine			();
@@ -199,8 +197,8 @@ public:
 	virtual void				set_color_gray			(u32	f)		{ param_color_gray=f;				}
 	virtual void				set_color_add			(u32	f)		{ param_color_add=f;				}
 
-	virtual u32					get_width				()				{ return dwWidth;					}
-	virtual u32					get_height				()				{ return dwHeight;					}
+	virtual u32					get_width				();
+	virtual u32					get_height				();
 
 #ifdef DEBUG
 	IC void						dbg_addline				(Fvector& P0, Fvector& P1, u32 c)					{

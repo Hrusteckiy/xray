@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-void CRenderTarget::accum_point		(light* L)
+void CRenderTarget::accum_point(xray::Light_R2* L)
 {
 	phase_accumulator				();
 	RImplementation.stats.l_visible	++;

@@ -127,7 +127,7 @@ IC	BOOL			test_Level	(occD* depth, int dim, float _x0, float _y0, float _x1, flo
 	int y1		= iFloor	(_y1*dim+.5f);	clamp(y1,y0,	dim-1);
 	
 	// MT-Sync (delayed as possible)
-	RImplementation.HOM.MT_SYNC	();
+    xray::renderBase.HOM.MT_SYNC();
 
 	for (int y=y0; y<=y1; y++)
 	{

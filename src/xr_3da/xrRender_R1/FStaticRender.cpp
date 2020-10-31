@@ -10,7 +10,7 @@
 #include "..\xr_object.h"
 #include "..\fmesh.h"
 #include "..\SkeletonCustom.h"
-#include "..\xrRender\lighttrack.h"
+#include "LightTrack_R1.hpp"
  
 using	namespace		R_dsgraph;
 
@@ -72,7 +72,7 @@ void					CRender::create					()
 	c_ldynamic_props			= "L_dynamic_props";
 
 //---------
-	Target						= xr_new<CRenderTarget>		();
+    Target = xr_new<CRenderTarget>();
 //---------
 	//
 	Models						= xr_new<CModelPool>		();
@@ -94,7 +94,7 @@ void					CRender::destroy				()
 	xr_delete					(Models);
 	
 	//*** Components
-	xr_delete					(Target);
+    xr_delete(Target);
 	Device.seqFrame.Remove		(this);
 
 	r_dsgraph_destroy			();
@@ -102,7 +102,7 @@ void					CRender::destroy				()
 
 void					CRender::reset_begin			()
 {
-	xr_delete					(Target);
+    xr_delete(Target);
 //.	HWOCC.occq_destroy			();
 }
 
@@ -110,7 +110,7 @@ void					CRender::reset_end				()
 {
 	xrRender_apply_tf			();
 //.	HWOCC.occq_create			(occq_size);
-	Target						=	xr_new<CRenderTarget>	();
+    Target = xr_new<CRenderTarget>();
 	if (L_Projector)			L_Projector->invalidate		();
 }
 
@@ -172,9 +172,6 @@ IRender_Glow*			CRender::glow_create			()					{ return xr_new<CGlow>();								}
 
 void					CRender::flush					()					{ r_dsgraph_render_graph	(0);						}
 
-BOOL					CRender::occ_visible			(vis_data& P)		{ return HOM.visible(P);								}
-BOOL					CRender::occ_visible			(sPoly& P)			{ return HOM.visible(P);								}
-BOOL					CRender::occ_visible			(Fbox& P)			{ return HOM.visible(P);								}
 ENGINE_API	extern BOOL g_bRendering;
 void					CRender::add_Visual				(IRender_Visual* V )
 {
@@ -186,7 +183,7 @@ void					CRender::add_Geometry			(IRender_Visual* V ){ add_Static(V,View->getMas
 void					CRender::add_Occluder			(Fbox2&	bb_screenspace	)
 {
 	VERIFY					(_valid(bb_screenspace));
-	HOM.occlude				(bb_screenspace);
+    xray::renderBase.HOM.occlude(bb_screenspace);
 }
 
 #include "../PS_instance.h"
@@ -237,8 +234,10 @@ IC		void			gm_SetNearer		(BOOL bNearer)
 	if (bNearer	!= gm_Nearer)
 	{
 		gm_Nearer	= bNearer;
-		if (gm_Nearer)	RImplementation.rmNear	();
-		else			RImplementation.rmNormal();
+        if (gm_Nearer)
+            xray::renderBase.rmNear();
+		else
+            xray::renderBase.rmNormal();
 	}
 }
 
@@ -265,7 +264,7 @@ void CRender::Calculate				()
 	Device.Statistic->RenderCALC.Begin();
 
 	// Transfer to global space to avoid deep pointer access
-	IRender_Target* T				=	getTarget	();
+	IRender_Target* T				=	getTarget();
 	float	fov_factor				=	_sqr		(90.f / Device.fFOV);
 	g_fSCREEN						=	float(T->get_width()*T->get_height())*fov_factor*(EPS_S+ps_r__LOD);
 	xray::r_ssaDISCARD				=	_sqr(ps_r__ssaDISCARD)		/g_fSCREEN;
@@ -279,8 +278,8 @@ void CRender::Calculate				()
 	// Frustum & HOM rendering
     xray::renderBase.ViewBase.CreateFromMatrix(Device.mFullTransform, FRUSTUM_P_LRTB | FRUSTUM_P_FAR);
 	View							= 0;
-	HOM.Enable						();
-    HOM.Render(xray::renderBase.ViewBase);
+    xray::renderBase.HOM.Enable();
+    xray::renderBase.HOM.Render(xray::renderBase.ViewBase);
 	gm_SetNearer					(FALSE);
     xray::renderBase.phase = R_dsgraph_structure::RenderPhase::PHASE_NORMAL;
 
@@ -288,20 +287,21 @@ void CRender::Calculate				()
 	if (!vLastCameraPos.similar(Device.vCameraPosition,EPS_S)) 
 	{
 		CSector* pSector		= (CSector*)detectSector(Device.vCameraPosition);
-		if (0==pSector) pSector = pLastSector;
-		pLastSector				= pSector;
+        if (pSector == nullptr)
+            pSector = xray::renderBase.pLastSector;
+        xray::renderBase.pLastSector = pSector;
 		vLastCameraPos.set		(Device.vCameraPosition);
 	}
 
 	// Check if camera is too near to some portal - if so force DualRender
-	if (rmPortals) 
+    if (xray::renderBase.rmPortals)
 	{
 		Fvector box_radius;		box_radius.set(EPS_L*2,EPS_L*2,EPS_L*2);
 		Sectors_xrc.box_options	(CDB::OPT_FULL_TEST);
-		Sectors_xrc.box_query	(rmPortals,Device.vCameraPosition,box_radius);
+        Sectors_xrc.box_query(xray::renderBase.rmPortals, Device.vCameraPosition, box_radius);
 		for (int K=0; K<Sectors_xrc.r_count(); K++)
 		{
-			CPortal*	pPortal		= (CPortal*) Portals[rmPortals->get_tris()[Sectors_xrc.r_begin()[K].id].dummy];
+            CPortal* pPortal = (CPortal*)xray::renderBase.Portals[xray::renderBase.rmPortals->get_tris()[Sectors_xrc.r_begin()[K].id].dummy];
 			pPortal->bDualRender	= TRUE;
 		}
 	}
@@ -311,12 +311,12 @@ void CRender::Calculate				()
 
 	// Main process
 	marker	++;
-	if (pLastSector)
+    if (xray::renderBase.pLastSector)
 	{
 		// Traverse sector/portal structure
 		PortalTraverser.traverse	
 			(
-			pLastSector,
+            xray::renderBase.pLastSector,
             xray::renderBase.ViewBase,
 			Device.vCameraPosition,
 			Device.mFullTransform,
@@ -392,7 +392,7 @@ void CRender::Calculate				()
 							vis_data&		v_orig			= renderable->renderable.visual->vis;
 							vis_data		v_copy			= v_orig;
 							v_copy.box.xform				(renderable->renderable.xform);
-							BOOL			bVisible		= HOM.visible(v_copy);
+							BOOL			bVisible		= xray::renderBase.HOM.visible(v_copy);
 							v_orig.accept_frame				= v_copy.accept_frame;
 							v_orig.marker					= v_copy.marker;
 							v_orig.hom_frame				= v_copy.hom_frame;
@@ -412,11 +412,12 @@ void CRender::Calculate				()
 					} else {
 						VERIFY								(spatial->spatial.type & STYPE_LIGHTSOURCE);
 						// lightsource
-						light*			L					= (light*)	spatial->dcast_Light	();
+                        xray::Light* L = (xray::Light*)spatial->dcast_Light();
 						VERIFY								(L);
 						if (L->spatial.sector)				{
 							vis_data&		vis		= L->get_homdata	( );
-							if	(HOM.visible(vis))	L_DB->add_light		(L);
+                            if (xray::renderBase.HOM.visible(vis))
+                                L_DB->add_light(L);
 						}
 					}
 					break;	// exit loop on frustums
@@ -445,31 +446,12 @@ void CRender::Calculate				()
 	Device.Statistic->RenderCALC.End	();
 }
 
-void	CRender::rmNear		()
-{
-	IRender_Target* T	=	getTarget	();
-	D3DVIEWPORT9 VP		=	{0,0,T->get_width(),T->get_height(),0,0.02f };
-	CHK_DX				(HW.pDevice->SetViewport(&VP));
-}
-void	CRender::rmFar		()
-{
-	IRender_Target* T	=	getTarget	();
-	D3DVIEWPORT9 VP		=	{0,0,T->get_width(),T->get_height(),0.99999f,1.f };
-	CHK_DX				(HW.pDevice->SetViewport(&VP));
-}
-void	CRender::rmNormal	()
-{
-	IRender_Target* T	=	getTarget	();
-	D3DVIEWPORT9 VP		= {0,0,T->get_width(),T->get_height(),0,1.f };
-	CHK_DX				(HW.pDevice->SetViewport(&VP));
-}
-
 void	CRender::Render		()
 {
 	xray::render::g_r = 1;
 	Device.Statistic->RenderDUMP.Begin();
 	// Begin
-	Target->Begin								();
+    Target->Begin();
 	o.vis_intersect								= FALSE			;
     xray::renderBase.phase = R_dsgraph_structure::RenderPhase::PHASE_NORMAL;
 	r_dsgraph_render_hud						();				// hud
@@ -482,13 +464,13 @@ void	CRender::Render		()
 
 	r_pmask										(true,false);	// disable priority "1"
 	o.vis_intersect								= TRUE			;
-	HOM.Disable									();
+    xray::renderBase.HOM.Disable();
 	L_Dynamic->render							();				// addititional light sources
 	if(xray::renderBase.Wallmarks){
         xray::render::g_r = 0;
         xray::renderBase.Wallmarks->Render();					// wallmarks has priority as normal geometry
 	}
-	HOM.Enable									();
+    xray::renderBase.HOM.Enable();
 	o.vis_intersect								= FALSE			;
     xray::renderBase.phase = R_dsgraph_structure::RenderPhase::PHASE_NORMAL;
 	r_pmask										(true,true);	// enable priority "0" and "1"
@@ -502,7 +484,7 @@ void	CRender::Render		()
 	g_pGamePersistent->Environment().RenderLast	();				// rain/thunder-bolts
 
 	// Postprocess, if necessary
-	Target->End									();
+    Target->End();
 	if (L_Projector) L_Projector->finalize		();
 
 	// HUD
@@ -536,7 +518,7 @@ void	CRender::Statistics	(CGameFont* _F)
 	F.OutNext	(" culled : %2d",	stats.o_culled	);	stats.o_culled	= 0;
 	F.OutSkip	();
 #ifdef DEBUG
-	HOM.stats	();
+    xray::renderBase.HOM.stats();
 #endif
 }
 

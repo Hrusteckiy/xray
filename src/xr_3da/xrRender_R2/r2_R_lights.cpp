@@ -1,23 +1,23 @@
 #include "stdafx.h"
 
-IC		bool	pred_area		(light* _1, light* _2)
+IC bool pred_area(xray::Light_R2* _1, xray::Light_R2* _2)
 {
 	u32		a0		= _1->X.S.size;
 	u32		a1		= _2->X.S.size;
 	return	a0>a1;	// reverse -> descending
 }
 
-void	CRender::render_lights	(light_Package& LP)
+void CRender::render_lights(xray::Light_Package_R2& LP)
 {
 	//////////////////////////////////////////////////////////////////////////
 	// Refactor order based on ability to pack shadow-maps
 	// 1. calculate area + sort in descending order
 	// const	u16		smap_unassigned		= u16(-1);
 	{
-		xr_vector<light*>&	source			= LP.v_shadowed;
+        xr_vector<xray::Light_R2*>& source = LP.v_shadowed;
 		for (u32 it=0; it<source.size(); it++)
 		{
-			light*	L		= source[it];
+            xray::Light_R2*	L = source[it];
 			L->vis_update	();
 			if	(!L->vis.visible)	{
 				source.erase		(source.begin()+it);
@@ -30,8 +30,8 @@ void	CRender::render_lights	(light_Package& LP)
 
 	// 2. refactor - infact we could go from the backside and sort in ascending order
 	{
-		xr_vector<light*>&		source		= LP.v_shadowed;
-		xr_vector<light*>		refactored	;
+		xr_vector<xray::Light_R2*>& source = LP.v_shadowed;
+		xr_vector<xray::Light_R2*> refactored;
 		refactored.reserve		(source.size());
 		u32						total		= source.size();
 
@@ -41,7 +41,7 @@ void	CRender::render_lights	(light_Package& LP)
 			std::sort				(source.begin(),source.end(),pred_area);
 			for	(u32 test=0; test<source.size(); test++)
 			{
-				light*	L	= source[test];
+                xray::Light_R2* L = source[test];
 				SMAP_Rect	R;
 				if		(LP_smap_pool.push(R,L->X.S.size))	{
 					// OK
@@ -73,17 +73,17 @@ void	CRender::render_lights	(light_Package& LP)
 	//	}
 	//	if (left_some_lights_that_doesn't cast shadows)
 	//		accumulate them
-	HOM.Disable	();
+    xray::renderBase.HOM.Disable();
 	while		(LP.v_shadowed.size() )
 	{
 		// if (has_spot_shadowed)
-		xr_vector<light*>	L_spot_s;
+        xr_vector<xray::Light_R2*> L_spot_s;
 		stats.s_used		++;
 
 		// generate spot shadowmap
-		Target->phase_smap_spot_clear	();
-		xr_vector<light*>&	source		= LP.v_shadowed;
-		light*		L		= source.back	()	;
+        Target->phase_smap_spot_clear();
+        xr_vector<xray::Light_R2*>&	source = LP.v_shadowed;
+        xray::Light_R2* L = source.back();
 		u16			sid		= L->vis.smap_ID	;
 		while (true)	
 		{
@@ -104,7 +104,7 @@ void	CRender::render_lights	(light_Package& LP)
 			if ( bNormal || bSpecial)	{
 				stats.s_merged						++;
 				L_spot_s.push_back					(L);
-				Target->phase_smap_spot				(L);
+                Target->phase_smap_spot				(L);
 				RCache.set_xform_world				(Fidentity);
 				RCache.set_xform_view				(L->X.S.view);
 				RCache.set_xform_project			(L->X.S.project);
@@ -112,7 +112,7 @@ void	CRender::render_lights	(light_Package& LP)
 				L->X.S.transluent					= FALSE;
 				if (bSpecial)						{
 					L->X.S.transluent					= TRUE;
-					Target->phase_smap_spot_tsh			(L);
+                    Target->phase_smap_spot_tsh			(L);
 					r_dsgraph_render_graph				(1);			// normal level, secondary priority
 					r_dsgraph_render_sorted				( );			// strict-sorted geoms
 				}
@@ -124,26 +124,26 @@ void	CRender::render_lights	(light_Package& LP)
 		}
 
 		//		switch-to-accumulator
-		Target->phase_accumulator			();
-		HOM.Disable							();
+        Target->phase_accumulator();
+        xray::renderBase.HOM.Disable();
 
 		//		if (has_point_unshadowed)	-> 	accum point unshadowed
 		if		(!LP.v_point.empty())	{
-			light*	L	= LP.v_point.back	();		LP.v_point.pop_back		();
+            xray::Light_R2* L = LP.v_point.back();		LP.v_point.pop_back();
 			L->vis_update				();
 			if (L->vis.visible)			{ 
-				Target->accum_point		(L);
+                Target->accum_point		(L);
 				render_indirect			(L);
 			}
 		}
 
 		//		if (has_spot_unshadowed)	-> 	accum spot unshadowed
 		if		(!LP.v_spot.empty())	{
-			light*	L	= LP.v_spot.back	();		LP.v_spot.pop_back			();
+            xray::Light_R2* L = LP.v_spot.back();		LP.v_spot.pop_back();
 			L->vis_update				();
 			if (L->vis.visible)			{ 
 				LR.compute_xf_spot		(L);
-				Target->accum_spot		(L);
+                Target->accum_spot		(L);
 				render_indirect			(L);
 			}
 		}
@@ -151,7 +151,7 @@ void	CRender::render_lights	(light_Package& LP)
 		//		if (was_spot_shadowed)		->	accum spot shadowed
 		if		(!L_spot_s.empty())		{ 
 			for (u32 it=0; it<L_spot_s.size(); it++)	{
-				Target->accum_spot			(L_spot_s[it]);
+                Target->accum_spot			(L_spot_s[it]);
 				render_indirect				(L_spot_s[it]);
 			}
 			L_spot_s.clear	();
@@ -160,12 +160,12 @@ void	CRender::render_lights	(light_Package& LP)
 
 	// Point lighting (unshadowed, if left)
 	if (!LP.v_point.empty())		{
-		xr_vector<light*>&	Lvec		= LP.v_point;
+        xr_vector<xray::Light_R2*>& Lvec = LP.v_point;
 		for	(u32 pid=0; pid<Lvec.size(); pid++)	{
 			Lvec[pid]->vis_update		();
 			if (Lvec[pid]->vis.visible)	{
 				render_indirect			(Lvec[pid]);
-				Target->accum_point		(Lvec[pid]);
+                Target->accum_point		(Lvec[pid]);
 			}
 		}
 		Lvec.clear	();
@@ -173,24 +173,24 @@ void	CRender::render_lights	(light_Package& LP)
 
 	// Spot lighting (unshadowed, if left)
 	if (!LP.v_spot.empty())		{
-		xr_vector<light*>&	Lvec		= LP.v_spot;
+        xr_vector<xray::Light_R2*>& Lvec = LP.v_spot;
 		for	(u32 pid=0; pid<Lvec.size(); pid++)	{
 			Lvec[pid]->vis_update		();
 			if (Lvec[pid]->vis.visible)	{
 				LR.compute_xf_spot		(Lvec[pid]);
 				render_indirect			(Lvec[pid]);
-				Target->accum_spot		(Lvec[pid]);
+                Target->accum_spot		(Lvec[pid]);
 			}
 		}
 		Lvec.clear	();
 	}
 }
 
-void	CRender::render_indirect			(light* L)
+void CRender::render_indirect(xray::Light_R2* L)
 {
 	if (!ps_r2_ls_flags.test(R2FLAG_GI))	return;
 
-	light									LIGEN;
+    xray::Light_R2 LIGEN;
 	LIGEN.set_type							(IRender_Light::REFLECTED);
 	LIGEN.set_shadow						(false);
 	LIGEN.set_cone							(PI_DIV_2*2.f);
@@ -223,6 +223,6 @@ void	CRender::render_indirect			(light* L)
 		if		(x < 0.1f)				continue;
 		LIGEN.set_range					(x);
 
-		Target->accum_reflected			(&LIGEN);
+        Target->accum_reflected(&LIGEN);
 	}
 }

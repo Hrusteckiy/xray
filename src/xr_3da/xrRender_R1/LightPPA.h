@@ -19,13 +19,13 @@ struct	CLightR_Vertex
 class	CLightR_Manager
 {
 	xrXRC							xrc;
-	xr_vector<light*>				selected_point;
-	xr_vector<light*>				selected_spot;
+    xr_vector<xray::Light*> selected_point;
+    xr_vector<xray::Light*> selected_spot;
 public:
 	CLightR_Manager					();
 	virtual ~CLightR_Manager		();
 
-	void			add				(light* L);
+    void add(xray::Light* L);
 	void			render			();
 	void			render_point	();
 	void			render_spot		();

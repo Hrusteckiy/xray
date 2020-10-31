@@ -369,14 +369,14 @@ void CHOM::OnRender	()
 			Device.SetNearer(FALSE);
 			// draw wire
 			if (bDebug){
-				RImplementation.rmNear();
+                xray::renderBase.rmNear();
 			}else{
 				Device.SetNearer(TRUE);
 			}
 			RCache.set_Shader	(Device.m_SelectionShader);
 			RCache.dbg_Draw		(D3DPT_LINELIST,&*line.begin(),line.size()/2);
 			if (bDebug){
-				RImplementation.rmNormal();
+                xray::renderBase.rmNormal();
 			}else{
 				Device.SetNearer(FALSE);
 			}

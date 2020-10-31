@@ -17,7 +17,7 @@ void CRender::render_main	(Fmatrix&	m_ViewProjection, bool _fportals)
 	marker					++;
 
 	// Calculate sector(s) and their objects
-	if (pLastSector)		{
+    if (xray::renderBase.pLastSector)		{
 		//!!!
 		//!!! BECAUSE OF PARALLEL HOM RENDERING TRY TO DELAY ACCESS TO HOM AS MUCH AS POSSIBLE
 		//!!!
@@ -63,7 +63,7 @@ void CRender::render_main	(Fmatrix&	m_ViewProjection, bool _fportals)
 		// Traverse sector/portal structure
 		PortalTraverser.traverse	
 			(
-			pLastSector,
+            xray::renderBase.pLastSector,
             xray::renderBase.ViewBase,
 			Device.vCameraPosition,
 			m_ViewProjection,
@@ -91,14 +91,15 @@ void CRender::render_main	(Fmatrix&	m_ViewProjection, bool _fportals)
 
 			if (spatial->spatial.type & STYPE_LIGHTSOURCE)		{
 				// lightsource
-				light*			L				= (light*)	(spatial->dcast_Light());
+                xray::Light_R2* L = (xray::Light_R2*)(spatial->dcast_Light());
 				VERIFY							(L);
 				float	lod		= L->get_LOD	();
 				if (lod>EPS_L)	{
 					vis_data&		vis		= L->get_homdata	( );
-					if	(HOM.visible(vis))	Lights.add_light	(L);
+                    if (xray::renderBase.HOM.visible(vis))
+                        Lights.add_light(L);
 				}
-				continue					;
+				continue;
 			}
 
 			if	(PortalTraverser.i_marker != sector->r_marker)	continue;	// inactive (untouched) sector
@@ -116,7 +117,7 @@ void CRender::render_main	(Fmatrix&	m_ViewProjection, bool _fportals)
 					vis_data&		v_orig			= renderable->renderable.visual->vis;
 					vis_data		v_copy			= v_orig;
 					v_copy.box.xform				(renderable->renderable.xform);
-					BOOL			bVisible		= HOM.visible(v_copy);
+					BOOL			bVisible		= xray::renderBase.HOM.visible(v_copy);
 					v_orig.marker					= v_copy.marker;
 					v_orig.accept_frame				= v_copy.accept_frame;
 					v_orig.hom_frame				= v_copy.hom_frame;
@@ -149,20 +150,20 @@ void CRender::render_menu	()
 
 	// Main Render
 	{
-		Target->u_setrt						(Target->rt_Generic_0,0,0,HW.pBaseZB);		// LDR RT
+        Target->u_setrt(Target->rt_Generic_0, 0, 0, HW.pBaseZB); // LDR RT
 		g_pGamePersistent->OnRenderPPUI_main()	;	// PP-UI
 	}
 	// Distort
 	{
-		Target->u_setrt						(Target->rt_Generic_1,0,0,HW.pBaseZB);		// Now RT is a distortion mask
+        Target->u_setrt(Target->rt_Generic_1, 0, 0, HW.pBaseZB); // Now RT is a distortion mask
 		CHK_DX(HW.pDevice->Clear			( 0L, NULL, D3DCLEAR_TARGET, color_rgba(127,127,0,127), 1.0f, 0L));
 		g_pGamePersistent->OnRenderPPUI_PP	()	;	// PP-UI
 	}
 
 	// Actual Display
-	Target->u_setrt					( Device.dwWidth,Device.dwHeight,HW.pBaseRT,NULL,NULL,HW.pBaseZB);
-	RCache.set_Shader				( Target->s_menu	);
-	RCache.set_Geometry				( Target->g_menu	);
+    Target->u_setrt(Device.dwWidth, Device.dwHeight, HW.pBaseRT, NULL, NULL, HW.pBaseZB);
+    RCache.set_Shader(Target->s_menu);
+    RCache.set_Geometry(Target->g_menu);
 
 	Fvector2						p0,p1;
 	u32								Offset;
@@ -174,12 +175,12 @@ void CRender::render_menu	()
 	p0.set							(.5f/_w, .5f/_h);
 	p1.set							((_w+.5f)/_w, (_h+.5f)/_h );
 
-	FVF::TL* pv						= (FVF::TL*) RCache.Vertex.Lock	(4,Target->g_menu->vb_stride,Offset);
+    FVF::TL* pv = (FVF::TL*) RCache.Vertex.Lock(4, Target->g_menu->vb_stride, Offset);
 	pv->set							(EPS,			float(_h+EPS),	d_Z,	d_W, C, p0.x, p1.y);	pv++;
 	pv->set							(EPS,			EPS,			d_Z,	d_W, C, p0.x, p0.y);	pv++;
 	pv->set							(float(_w+EPS),	float(_h+EPS),	d_Z,	d_W, C, p1.x, p1.y);	pv++;
 	pv->set							(float(_w+EPS),	EPS,			d_Z,	d_W, C, p1.x, p0.y);	pv++;
-	RCache.Vertex.Unlock			(4,Target->g_menu->vb_stride);
+    RCache.Vertex.Unlock			(4, Target->g_menu->vb_stride);
 	RCache.Render					(D3DPT_TRIANGLELIST,Offset,0,4,0,2);
 }
 
@@ -198,7 +199,7 @@ void CRender::Render		()
 
 	// Configure
 	RImplementation.o.distortion				= FALSE;		// disable distorion
-	Fcolor					sun_color			= ((light*)Lights.sun_adapted._get())->color;
+    Fcolor					sun_color = ((xray::Light_R2*)Lights.sun_adapted._get())->color;
 	BOOL					bSUN				= ps_r2_ls_flags.test(R2FLAG_SUN) && (u_diffuse2s(sun_color.r,sun_color.g,sun_color.b)>EPS);
 	if (o.sunstatic)		bSUN				= FALSE;
 	// Msg						("sstatic: %s, sun: %s",o.sunstatic?"true":"false", bSUN?"true":"false");
@@ -207,8 +208,8 @@ void CRender::Render		()
     xray::renderBase.ViewBase.CreateFromMatrix(Device.mFullTransform, FRUSTUM_P_LRTB + FRUSTUM_P_FAR);
 	View										= 0;
 	if (!ps_r2_ls_flags.test(R2FLAG_EXP_MT_CALC))	{
-		HOM.Enable									();
-        HOM.Render(xray::renderBase.ViewBase);
+        xray::renderBase.HOM.Enable();
+        xray::renderBase.HOM.Render(xray::renderBase.ViewBase);
 	}
 
 	//******* Z-prefill calc - DEFERRER RENDERER
@@ -229,12 +230,14 @@ void CRender::Render		()
 		Device.Statistic->RenderCALC.End				( )			;
 
 		// flush
-		Target->phase_scene_prepare					();
+        Target->phase_scene_prepare					();
 		RCache.set_ColorWriteEnable					(FALSE);
 		r_dsgraph_render_graph						(0);
 		RCache.set_ColorWriteEnable					( );
-	} else {
-		Target->phase_scene_prepare					();
+	}
+    else
+    {
+        Target->phase_scene_prepare();
 	}
 
 	//*******
@@ -276,27 +279,27 @@ void CRender::Render		()
 	if (!split_the_scene_to_minimize_wait)
 	{
 		// level, DO NOT SPLIT
-		Target->phase_scene_begin				();
+        Target->phase_scene_begin				();
 		r_dsgraph_render_hud					();
 		r_dsgraph_render_graph					(0);
 		r_dsgraph_render_lods					(true,true);
 		if(Details)	Details->Render				();
-		Target->phase_scene_end					();
+        Target->phase_scene_end					();
 	} else {
 		// level, SPLIT
-		Target->phase_scene_begin				();
+        Target->phase_scene_begin				();
 		r_dsgraph_render_graph					(0);
-		Target->disable_aniso					();
+        Target->disable_aniso					();
 	}
 
 	//******* Occlusion testing of volume-limited light-sources
-	Target->phase_occq							();
+    Target->phase_occq							();
 	LP_normal.clear								();
 	LP_pending.clear							();
 	{
 		// perform tests
 		u32	count			= 0;
-		light_Package&	LP	= Lights.package;
+        xray::Light_Package_R2& LP = Lights.package;
 
 		// stats
 		stats.l_shadowed	= LP.v_shadowed.size();
@@ -309,19 +312,19 @@ void CRender::Render		()
 		count				= _max	(count,LP.v_shadowed.size());
 		for (u32 it=0; it<count; it++)	{
 			if (it<LP.v_point.size())		{
-				light*	L			= LP.v_point	[it];
+                xray::Light_R2* L = LP.v_point[it];
 				L->vis_prepare		();
 				if (L->vis.pending)	LP_pending.v_point.push_back	(L);
 				else				LP_normal.v_point.push_back		(L);
 			}
 			if (it<LP.v_spot.size())		{
-				light*	L			= LP.v_spot		[it];
+                xray::Light_R2* L = LP.v_spot[it];
 				L->vis_prepare		();
 				if (L->vis.pending)	LP_pending.v_spot.push_back		(L);
 				else				LP_normal.v_spot.push_back		(L);
 			}
 			if (it<LP.v_shadowed.size())	{
-				light*	L			= LP.v_shadowed	[it];
+                xray::Light_R2* L = LP.v_shadowed[it];
 				L->vis_prepare		();
 				if (L->vis.pending)	LP_pending.v_shadowed.push_back	(L);
 				else				LP_normal.v_shadowed.push_back	(L);
@@ -336,7 +339,7 @@ void CRender::Render		()
 		// skybox can be drawn here
 		if (0)
 		{
-			Target->u_setrt		( Target->rt_Generic_0,	Target->rt_Generic_1,0,HW.pBaseZB );
+            Target->u_setrt(Target->rt_Generic_0, Target->rt_Generic_1, 0, HW.pBaseZB);
 			RCache.set_CullMode	( CULL_NONE );
 			RCache.set_Stencil	( FALSE		);
 
@@ -348,17 +351,17 @@ void CRender::Render		()
 		}
 
 		// level
-		Target->phase_scene_begin				();
+        Target->phase_scene_begin				();
 		r_dsgraph_render_hud					();
 		r_dsgraph_render_lods					(true,true);
 		if(Details)	Details->Render				();
-		Target->phase_scene_end					();
+        Target->phase_scene_end					();
 	}
 
 	// Wall marks
     if (xray::renderBase.Wallmarks)
     {
-		Target->phase_wallmarks					();
+        Target->phase_wallmarks();
         xray::render::g_r = 0;
         xray::renderBase.Wallmarks->Render();				// wallmarks has priority as normal geometry
 	}
@@ -384,19 +387,19 @@ void CRender::Render		()
 		render_sun_near						();
 		render_sun							();
 		render_sun_filtered					();
-		Target->accum_direct_blend			();
+        Target->accum_direct_blend			();
 	}
 
 	// Lighting, non dependant on OCCQ
-	Target->phase_accumulator				();
-	HOM.Disable								();
+    Target->phase_accumulator();
+    xray::renderBase.HOM.Disable();
 	render_lights							(LP_normal);
 	
 	// Lighting, dependant on OCCQ
 	render_lights							(LP_pending);
 
 	// Postprocess
-	Target->phase_combine					();
+    Target->phase_combine();
 	VERIFY	(0==mapDistort.size());
 }
 

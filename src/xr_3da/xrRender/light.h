@@ -1,13 +1,10 @@
 #pragma once
 
-#include "..\ispatial.h"
-#if RENDER==R_R2
-	#include "light_package.h"
-	#include "light_smapvis.h"
-	#include "light_GI.h"
-#endif
+#include "../ISpatial.h"
 
-class	light		:	public IRender_Light, public ISpatial
+namespace xray {
+
+class XRRENDER_API Light : public IRender_Light, public ISpatial
 {
 public:
 	struct {
@@ -26,54 +23,6 @@ public:
 	vis_data		hom			;
 	u32				frame_render;
 
-#if RENDER==R_R2
-	light*						omnipart	[6]	;
-	xr_vector<light_indirect>	indirect		;
-	u32							indirect_photons;
-
-	smapvis			svis;		// used for 6-cubemap faces
-
-	ref_shader		s_spot;
-	ref_shader		s_point;
-
-	u32				m_xform_frame;
-	Fmatrix			m_xform;
-
-	struct _vis		{
-		u32			frame2test;		// frame the test is sheduled to
-		u32			query_id;		// ID of occlusion query
-		u32			query_order;	// order of occlusion query
-		bool		visible;		// visible/invisible
-		bool		pending;		// test is still pending
-		u16			smap_ID;
-	}				vis;
-
-	union			_xform	{
-		struct		_D		{
-			Fmatrix						combine	;
-			s32							minX,maxX	;
-			s32							minY,maxY	;
-			BOOL						transluent	;
-		}	D;
-		struct		_P		{
-			Fmatrix						world		;
-			Fmatrix						view		;
-			Fmatrix						project		;
-			Fmatrix						combine		;
-		}	P;
-		struct		_S		{
-			Fmatrix						view		;
-			Fmatrix						project		;
-			Fmatrix						combine		;
-			u32							size		;
-			u32							posX		;
-			u32							posY		;
-			BOOL						transluent	;
-		}	S;
-	}	X;
-#endif
-
-public:
 	virtual void	set_type				(LT type)						{ flags.type = type;		}
 	virtual void	set_active				(bool b);
 	virtual bool	get_active				()								{ return flags.bActive;		}
@@ -96,16 +45,11 @@ public:
 	virtual IRender_Light*	dcast_Light		()	{ return this; }
 
 	vis_data&		get_homdata				();
-#if RENDER==R_R2
-	void			gi_generate				();
-	void			xform_calc				();
-	void			vis_prepare				();
-	void			vis_update				();
-	void			export 					(light_Package& dest);
-#endif
 
 	float			get_LOD					();
 
-	light();
-	virtual ~light();
+    Light();
+    virtual ~Light();
 };
+
+}

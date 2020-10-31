@@ -9,7 +9,7 @@ BOOL	tri_vs_sphere_intersect			(Fvector& SC, float R, Fvector& v0, Fvector& v1, 
 	return	CDB::TestSphereTri	(SC,R,v0,e0.sub(v1,v0),e1.sub(v2,v0));
 }
 
-void CRenderTarget::enable_dbt_bounds		(light* L)
+void CRenderTarget::enable_dbt_bounds(xray::Light_R2* L)
 {
 	if (!RImplementation.o.nvdbt)					return;
 	if (!ps_r2_ls_flags.test(R2FLAG_USE_NVDBT))		return;
@@ -53,7 +53,7 @@ void	CRenderTarget::u_DBT_disable	()
 		HW.pDevice->SetRenderState(D3DRS_ADAPTIVETESS_X,0);
 }
 
-BOOL CRenderTarget::enable_scissor		(light* L)		// true if intersects near plane
+BOOL CRenderTarget::enable_scissor(xray::Light_R2* L) // true if intersects near plane
 {
 	// Msg	("%d: %x type(%d), pos(%f,%f,%f)",Device.dwFrame,u32(L),u32(L->flags.type),VPUSH(L->position));
 

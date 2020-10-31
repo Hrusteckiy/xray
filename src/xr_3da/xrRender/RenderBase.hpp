@@ -1,8 +1,10 @@
 #pragma once
 
 #include "r__dsgraph_structure.h"
+
 #include "../SkeletonCustom.h"
 #include "WallmarksEngine.h"
+#include "HOM.h"
 
 namespace xray {
 
@@ -36,6 +38,8 @@ public:
     virtual IRender_Visual* getVisual(int id);
     virtual IRender_Sector* detectSector(const Fvector& P) { return nullptr; }
     virtual IRender_Target* getTarget() { return nullptr; }
+
+    // Main
     virtual void flush() {} // should be impemented here later { r_dsgraph_render_graph (0); }
     virtual void set_Object(IRenderable* O) {}
     virtual	void add_Occluder(Fbox2& bb_screenspace) {}
@@ -48,15 +52,19 @@ public:
     virtual void add_SkeletonWallmark(intrusive_ptr<CSkeletonWallmark> wm);
     virtual void add_SkeletonWallmark(const Fmatrix* xf, CKinematics* obj, ref_shader& sh, const Fvector& start, const Fvector& dir, float size);
 
+    //
     virtual IBlender* blender_create(CLASS_ID cls) { return nullptr; }
     virtual void blender_destroy(IBlender* &B);
 
+    //
     virtual IRender_ObjectSpecific* ros_create(IRenderable* parent) { return nullptr; } // should be impemented here later { return xr_new<CROS_impl>(); }
     virtual void ros_destroy(IRender_ObjectSpecific* &) {} // should be impemented here later { xr_delete(p); }
 
+    // Lighting
     virtual IRender_Light* light_create() { return nullptr; }
     virtual IRender_Glow* glow_create() { return nullptr; }
 
+    // Models
     virtual IRender_Visual* model_CreateParticles(LPCSTR name) { return nullptr; } // add implementation (it's the same for R1 and R2) from here...
     virtual IRender_DetailModel* model_CreateDM(IReader* F) { return nullptr; }
     virtual IRender_Visual* model_Create(LPCSTR name, IReader* data = 0) { return nullptr; }
@@ -68,18 +76,21 @@ public:
     virtual void models_Prefetch() {}
     virtual void models_Clear(BOOL b_complete) {} // ...to here
 
-    virtual BOOL occ_visible(vis_data& V) { return FALSE; } // should be impemented here later { return HOM.visible(P); }
-    virtual BOOL occ_visible(Fbox& B) { return FALSE; } // should be impemented here later { return HOM.visible(P); }
-    virtual BOOL occ_visible(sPoly& P) { return FALSE; } // should be impemented here later { return HOM.visible(P); }
+    // Occlusion culling
+    virtual BOOL occ_visible(vis_data& V);
+    virtual BOOL occ_visible(Fbox& B);
+    virtual BOOL occ_visible(sPoly& P);
 
+    // Main
     virtual void Calculate() {}
     virtual void Render() {}
     virtual void Screenshot(ScreenshotMode mode = SM_NORMAL, LPCSTR name = 0) {} // implemented in r__screenshot.cpp, add this file to xrRnder later
     virtual void OnFrame() {}
 
-    virtual void rmNear() {} // should be impemented here later (same for R1 and R2)
-    virtual void rmFar() {} // should be impemented here later (same for R1 and R2)
-    virtual void rmNormal() {} // should be impemented here later (same for R1 and R2)
+    // Render Mode
+    virtual void rmNear();
+    virtual void rmFar();
+    virtual void rmNormal();
 
     // fields and methods for renders only
     virtual IRender_Portal* getPortal(int id);
@@ -92,6 +103,8 @@ public:
     CSector* pLastSector;
 
     CWallmarksEngine* Wallmarks;
+    CDB::MODEL* rmPortals;
+    CHOM HOM;
 };
 
 extern XRRENDER_API CRenderBase renderBase;

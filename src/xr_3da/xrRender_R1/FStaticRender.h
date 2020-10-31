@@ -11,7 +11,7 @@
 #include "lightShadows.h"
 #include "lightProjector.h"
 #include "lightPPA.h"
-#include "..\xrRender\light_DB.h"
+#include "Light_DB_R1.hpp"
 
 #include "../Fmesh.h"
 
@@ -34,8 +34,6 @@ public:
 	Fvector														vLastCameraPos;
 	u32															uLastLTRACK;
 	xrXRC														Sectors_xrc;
-	CDB::MODEL*													rmPortals;
-	CHOM														HOM;
 //.	R_occlusion													HWOCC;
 	
 	// Global containers
@@ -46,7 +44,7 @@ public:
 	xr_vector<IDirect3DIndexBuffer9*>							IB;
 	CPSLibrary													PSLibrary;
 
-	CLight_DB*													L_DB;
+    xray::CLight_DB_R1*											L_DB;
 	CLightR_Manager*											L_Dynamic;
 	CLightShadows*												L_Shadows;
 	CLightProjector*											L_Projector;
@@ -54,11 +52,11 @@ public:
 	CDetailManager*												Details;
 	CModelPool*													Models;
 
-	CRenderTarget*												Target;			// Render-target
+    CRenderTarget*												Target;			// Render-target
 
 	// R1-specific global constants
 	Fmatrix														r1_dlight_tcgen			;
-	light*														r1_dlight_light			;
+    xray::Light*												r1_dlight_light;
 	float														r1_dlight_scale			;
 	cl_light_PR													r1_dlight_binder_PR		;
 	cl_light_C													r1_dlight_binder_color	;
@@ -119,7 +117,7 @@ public:
 	virtual void					Statistics				(CGameFont* F);
 	virtual LPCSTR					getShaderPath			()									{ return "r1\\";	}
 	virtual IRender_Sector*			detectSector			(const Fvector& P);
-	virtual IRender_Target*			getTarget				();
+    virtual IRender_Target*			getTarget					();
 	
 	// Main 
 	virtual void					flush					();
@@ -155,21 +153,11 @@ public:
 	virtual void					models_Prefetch			();
 	virtual void					models_Clear			(BOOL b_complete);
 	
-	// Occlusion culling
-	virtual BOOL					occ_visible				(vis_data&	V);
-	virtual BOOL					occ_visible				(Fbox&		B);
-	virtual BOOL					occ_visible				(sPoly&		P);
-	
 	// Main
 	virtual void					Calculate				();
 	virtual void					Render					();
 	virtual void					Screenshot				(ScreenshotMode mode=SM_NORMAL, LPCSTR name = 0);
 	virtual void					OnFrame					();
-	
-	// Render mode
-	virtual void					rmNear					();
-	virtual void					rmFar					();
-	virtual void					rmNormal				();
 
 	// Constructor/destructor/loader
 	CRender							();

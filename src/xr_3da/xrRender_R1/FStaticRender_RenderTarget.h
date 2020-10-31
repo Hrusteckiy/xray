@@ -1,15 +1,11 @@
 #pragma once
 
-
-class CRenderTarget		: public IRender_Target
+class CRenderTarget : public IRender_Target
 {
 private:
 	BOOL				bAvailable;
 	u32					rtWidth;
 	u32					rtHeight;
-
-	u32					curWidth;
-	u32					curHeight;
 
 	ref_rt				RT;
 	ref_rt				RT_distort;
@@ -67,6 +63,6 @@ public:
 	virtual void		set_color_gray		(u32	f)		{ param_color_gray=f;										}
 	virtual void		set_color_add		(u32	f)		{ param_color_add=f;										}
 
-	virtual u32			get_width			()				{ return curWidth;											}
-	virtual u32			get_height			()				{ return curHeight;											}
+	virtual u32			get_width			();
+	virtual u32			get_height			();
 };

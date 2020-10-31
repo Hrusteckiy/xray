@@ -8,7 +8,7 @@ extern float		r_dtex_range	;
 void CRender::Calculate		()
 {
 	// Transfer to global space to avoid deep pointer access
-	IRender_Target* T				=	getTarget	();
+	IRender_Target* T				=	RImplementation.getTarget();
 	float	fov_factor				=	_sqr		(90.f / Device.fFOV);
 	g_fSCREEN						=	float(T->get_width()*T->get_height())*fov_factor*(EPS_S+ps_r__LOD);
 	xray::r_ssaDISCARD				=	_sqr(ps_r__ssaDISCARD)		/g_fSCREEN;
@@ -24,20 +24,21 @@ void CRender::Calculate		()
 	if (!vLastCameraPos.similar(Device.vCameraPosition,EPS_S)) 
 	{
 		CSector* pSector		= (CSector*)detectSector(Device.vCameraPosition);
-		if (0==pSector) pSector = pLastSector;
-		pLastSector = pSector;
+		if (pSector == nullptr)
+            pSector = xray::renderBase.pLastSector;
+        xray::renderBase.pLastSector = pSector;
 		vLastCameraPos.set(Device.vCameraPosition);
 	}
 
 	// Check if camera is too near to some portal - if so force DualRender
-	if (rmPortals) 
+    if (xray::renderBase.rmPortals)
 	{
 		float	eps			= VIEWPORT_NEAR+EPS_L;
 		Fvector box_radius; box_radius.set(eps,eps,eps);
 		Sectors_xrc.box_options	(CDB::OPT_FULL_TEST);
-		Sectors_xrc.box_query	(rmPortals,Device.vCameraPosition,box_radius);
+        Sectors_xrc.box_query(xray::renderBase.rmPortals, Device.vCameraPosition, box_radius);
 		for (int K=0; K<Sectors_xrc.r_count(); K++)	{
-			CPortal*	pPortal		= (CPortal*) Portals[rmPortals->get_tris()[Sectors_xrc.r_begin()[K].id].dummy];
+            CPortal* pPortal = (CPortal*)xray::renderBase.Portals[xray::renderBase.rmPortals->get_tris()[Sectors_xrc.r_begin()[K].id].dummy];
 			pPortal->bDualRender	= TRUE;
 		}
 	}
@@ -55,7 +56,7 @@ void CRender::Calculate		()
 
 		VERIFY							(spatial->spatial.type & STYPE_LIGHTSOURCE);
 		// lightsource
-		light*			L				= (light*)	(spatial->dcast_Light());
+        xray::Light_R2* L = (xray::Light_R2*)(spatial->dcast_Light());
 		VERIFY							(L);
 		Lights.add_light				(L);
 	}

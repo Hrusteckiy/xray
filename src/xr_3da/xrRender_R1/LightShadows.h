@@ -28,7 +28,7 @@ private:
 		int					slot;
 		Fvector				C;
 		Fmatrix				M;
-		light*				L;
+        xray::Light*		L;
 		float				E;
 	};
 	struct	tess_tri		{
@@ -39,7 +39,7 @@ public:
 	struct	cache_item		{
 		IRenderable*		O;
 		Fvector				Op;
-		light*				L;
+        xray::Light*		L;
 		Fvector				Lp;
 		u32					time;
 		tess_tri*			tris;

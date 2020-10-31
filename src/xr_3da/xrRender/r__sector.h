@@ -6,8 +6,8 @@
 #define _PORTAL_H_
 #pragma once
 
-class	CPortal;
-class	CSector;
+class XRRENDER_API CPortal;
+class XRRENDER_API CSector;
 
 struct	_scissor					: public Fbox2
 {
@@ -68,7 +68,7 @@ public:
 	virtual							~CSector		( );
 };
 
-class	CPortalTraverser
+class XRRENDER_API CPortalTraverser
 {
 public:
 	enum
@@ -101,6 +101,6 @@ public:
 #endif
 };
 
-extern	CPortalTraverser			PortalTraverser	;
+extern XRRENDER_API CPortalTraverser PortalTraverser;
 
 #endif // !defined(AFX_PORTAL_H__1FC2D371_4A19_49EA_BD1E_2D0F8DEBBF15__INCLUDED_)
