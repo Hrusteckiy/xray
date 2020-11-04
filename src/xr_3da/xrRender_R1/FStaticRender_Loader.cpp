@@ -49,8 +49,8 @@ void CRender::level_Load(IReader *fs)
 	L_Projector					= xr_new<CLightProjector>	();
 	L_DB						= xr_new<xray::CLight_DB_R1>();
 	L_Glows						= xr_new<CGlowManager>		();
-    xray::renderBase.Wallmarks  = xr_new<CWallmarksEngine>();
-	Details						= xr_new<CDetailManager>	();
+    xray::renderBase.Wallmarks = xr_new<CWallmarksEngine>();
+    xray::renderBase.Details = xr_new<CDetailManager_R1>();
 
     xray::renderBase.rmFar();
     xray::renderBase.rmNormal();
@@ -73,7 +73,7 @@ void CRender::level_Load(IReader *fs)
 
 		// Details
 		g_pGamePersistent->LoadTitle("st_loading_details");
-		Details->Load				();
+        xray::renderBase.Details->Load();
 	}
 	
 	// Sectors
@@ -103,7 +103,7 @@ void CRender::level_Unload		()
     xray::renderBase.HOM.Unload();
 
 	//*** Details
-	Details->Unload				();
+    xray::renderBase.Details->Unload();
 
 	//*** Sectors
 	// 1.
@@ -149,7 +149,7 @@ void CRender::level_Unload		()
 	IB.clear_and_free			();
 
 	//*** Components
-	xr_delete					(Details);
+	xr_delete					(xray::renderBase.Details);
 	xr_delete					(xray::renderBase.Wallmarks);
 	xr_delete					(L_Glows);
 	xr_delete					(L_DB);

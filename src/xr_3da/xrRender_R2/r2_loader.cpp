@@ -47,8 +47,8 @@ void CRender::level_Load(IReader* fs)
 	}
 
 	// Components
-    xray::renderBase.Wallmarks  = xr_new<CWallmarksEngine_R2>();
-	Details						= xr_new<CDetailManager>	();
+    xray::renderBase.Wallmarks = xr_new<CWallmarksEngine_R2>();
+    xray::renderBase.Details = xr_new<CDetailManager_R2>();
 
 	if	(!g_dedicated_server)	{
 		// VB,IB,SWI
@@ -77,7 +77,7 @@ void CRender::level_Load(IReader* fs)
 
 		// Details
 		g_pGamePersistent->LoadTitle("st_loading_details");
-		Details->Load				();
+        xray::renderBase.Details->Load();
 	}
 
 	// Sectors
@@ -114,7 +114,7 @@ void CRender::level_Unload()
     xray::renderBase.HOM.Unload();
 
 	//*** Details
-	Details->Unload			();
+    xray::renderBase.Details->Unload();
 
 	//*** Sectors
 	// 1.
@@ -150,8 +150,8 @@ void CRender::level_Unload()
 	nDC.clear(); xDC.clear();
 
 	//*** Components
-	xr_delete					(Details);
-	xr_delete					(xray::renderBase.Wallmarks);
+    xr_delete(xray::renderBase.Details);
+	xr_delete(xray::renderBase.Wallmarks);
 
 	//*** Shaders
     xray::renderBase.Shaders.clear_and_free();

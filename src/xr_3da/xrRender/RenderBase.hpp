@@ -5,6 +5,7 @@
 #include "../SkeletonCustom.h"
 #include "WallmarksEngine.h"
 #include "HOM.h"
+#include "DetailManager.h"
 
 namespace xray {
 
@@ -105,6 +106,7 @@ public:
     CWallmarksEngine* Wallmarks;
     CDB::MODEL* rmPortals;
     CHOM HOM;
+    CDetailManager* Details;
 };
 
 extern XRRENDER_API CRenderBase renderBase;

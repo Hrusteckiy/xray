@@ -187,7 +187,7 @@ void	CDetailManager::hw_Render_dump		(ref_constant x_array, u32 var_id, u32 lod_
 		if (!vis.empty()){
 			// Setup matrices + colors (and flush it as nesessary)
 			RCache.set_Element				(Object.shader->E[lod_id]);
-			RImplementation.apply_lmaterial	();
+			apply_lmaterial();
 			u32			c_base				= x_array->vs.index;
 			Fvector4*	c_storage			= RCache.get_ConstantCache_Vertex().get_array_f().access(c_base);
 
@@ -211,19 +211,8 @@ void	CDetailManager::hw_Render_dump		(ref_constant x_array, u32 var_id, u32 lod_
 					c_storage[base+2].set	(M._13*scale,	M._23*scale,	M._33*scale,	M._43	);
 
 					// Build color
-#if RENDER==R_R1
-					Fvector C;
-					C.set					(c_ambient);
-//					C.mad					(c_lmap,Instance.c_rgb);
-					C.mad					(c_hemi,Instance.c_hemi);
-					C.mad					(c_sun,	Instance.c_sun);
-					c_storage[base+3].set	(C.x,			C.y,			C.z,			1.f		);
-#else
-					// R2 only needs hemisphere
-					float		h			= Instance.c_hemi;
-					float		s			= Instance.c_sun;
-					c_storage[base+3].set	(s,				s,				s,				h		);
-#endif
+                    buildColorHwRender(c_storage, base, Instance, c_ambient, c_hemi, c_sun);
+
 					dwBatch	++;
 					if (dwBatch == hw_BatchSize)	{
 						// flush

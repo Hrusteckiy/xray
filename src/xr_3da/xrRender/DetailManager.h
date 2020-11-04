@@ -6,7 +6,7 @@
 #define DetailManagerH
 #pragma once
 
-#include "xrpool.h"
+#include <xrCore/xrPool.h>
 #include "detailformat.h"
 #include "detailmodel.h"
 
@@ -26,7 +26,7 @@ const int		dm_cache_size		= dm_cache_line*dm_cache_line;
 const float		dm_fade				= float(2*dm_size)-.5f;
 const float		dm_slot_size		= DETAIL_SLOT_SIZE;
 
-class CDetailManager
+class XRRENDER_API CDetailManager
 {
 public:
 	struct	SlotItem	{								// один кустик
@@ -36,9 +36,9 @@ public:
 		u32							vis_ID;				// индекс в visibility списке он же тип [не качается, качается1, качается2]
 		float						c_hemi;
 		float						c_sun;
-#if RENDER==R_R1
-		Fvector						c_rgb;
-#endif
+
+		Fvector						c_rgb; // Only for R1
+
 	};
 	DEFINE_VECTOR(SlotItem*,SlotItemVec,SlotItemVecIt);
 	struct	SlotPart	{                              	// 
@@ -75,9 +75,9 @@ public:
 	typedef	svector<CDetail*,dm_max_objects>	DetailVec;
 	typedef	DetailVec::iterator					DetailIt;
 	typedef	poolSS<SlotItem,4096>				PSS;
-public:
+
 	int								dither			[16][16];
-public:
+
 	// swing values
 	struct SSwingValue{
 		float						rot1;
@@ -89,13 +89,12 @@ public:
 	};
 	SSwingValue						swing_desc[2];
 	SSwingValue						swing_current; 
-public:
+
 	IReader*						dtFS;
 	DetailHeader					dtH;
 	DetailSlot*						dtSlots;		// note: pointer into VFS
 	DetailSlot						DS_empty;
 
-public:
 	DetailVec						objects;
 	vis_list						m_visibles	[3];	// 0=still, 1=Wave1, 2=Wave2
 
@@ -113,7 +112,7 @@ public:
 
 	void							UpdateVisibleM	();
 	void							UpdateVisibleS	();
-public:
+
 #ifdef _EDITOR
 	virtual ObjectList* 			GetSnapList		()=0;
 #endif
@@ -143,7 +142,6 @@ public:
 	void							hw_Render		();
 	void							hw_Render_dump	(ref_constant array, u32 var_id, u32 lod_id, u32 c_base);
 
-public:
 	// get unpacked slot
 	DetailSlot&						QueryDB			(int sx, int sz);
     
@@ -179,6 +177,10 @@ public:
 
 	CDetailManager					();
 	virtual ~CDetailManager			();
+
+    virtual void buildColorDecompress(SlotItem& Item, DetailSlot& DS) {} // Only for R1
+    virtual void apply_lmaterial() {} // Only for R2
+    virtual void buildColorHwRender(Fvector4* c_storage, const u32 base, SlotItem& Instance, const Fvector& c_ambient, const Fvector& c_hemi, const Fvector& c_sun) {}
 };
 
 #endif //DetailManagerH

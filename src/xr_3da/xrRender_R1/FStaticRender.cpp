@@ -456,7 +456,8 @@ void	CRender::Render		()
     xray::renderBase.phase = R_dsgraph_structure::RenderPhase::PHASE_NORMAL;
 	r_dsgraph_render_hud						();				// hud
 	r_dsgraph_render_graph						(0);			// normal level
-	if(Details)Details->Render					();				// grass / details
+    if (xray::renderBase.Details)
+        xray::renderBase.Details->Render();				// grass / details
 	r_dsgraph_render_lods						(true,false);	// lods - FB
 
 	g_pGamePersistent->Environment().RenderSky	();				// sky / sun

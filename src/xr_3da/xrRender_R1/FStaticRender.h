@@ -3,7 +3,7 @@
 #include "..\xrRender\PSLibrary.h"
 
 #include "..\xrRender\hom.h"
-#include "..\xrRender\detailmanager.h"
+#include "DetailManager_R1.hpp"
 #include "glowmanager.h"
 #include "fstaticrender_rendertarget.h"
 #include "..\xrRender\modelpool.h"
@@ -49,7 +49,6 @@ public:
 	CLightShadows*												L_Shadows;
 	CLightProjector*											L_Projector;
 	CGlowManager*												L_Glows;
-	CDetailManager*												Details;
 	CModelPool*													Models;
 
     CRenderTarget*												Target;			// Render-target

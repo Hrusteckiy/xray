@@ -141,6 +141,8 @@
     <ClInclude Include="Blender_Particle.h" />
     <ClInclude Include="Blender_Screen_SET.h" />
     <ClInclude Include="Blender_tree.h" />
+    <ClInclude Include="DetailFormat.h" />
+    <ClInclude Include="DetailManager.h" />
     <ClInclude Include="DetailModel.h" />
     <ClInclude Include="doug_lea_memory_allocator.h" />
     <ClInclude Include="FLOD.h" />
@@ -170,6 +172,11 @@
     <ClCompile Include="Blender_Particle.cpp" />
     <ClCompile Include="Blender_Screen_SET.cpp" />
     <ClCompile Include="Blender_tree.cpp" />
+    <ClCompile Include="DetailManager.cpp" />
+    <ClCompile Include="DetailManager_CACHE.cpp" />
+    <ClCompile Include="DetailManager_Decompress.cpp" />
+    <ClCompile Include="DetailManager_soft.cpp" />
+    <ClCompile Include="DetailManager_VS.cpp" />
     <ClCompile Include="DetailModel.cpp" />
     <ClCompile Include="doug_lea_memory_allocator.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Mixed|Win32'">

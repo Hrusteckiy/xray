@@ -8,7 +8,7 @@
 #include "r2_rendertarget.h"
 
 #include "..\xrRender\hom.h"
-#include "..\xrRender\detailmanager.h"
+#include "DetailManager_R2.hpp"
 #include "..\xrRender\modelpool.h"
 
 #include "smap_allocator.h"
@@ -81,7 +81,6 @@ public:
 	xr_vector<IDirect3DIndexBuffer9*>							nIB,xIB;
 	CPSLibrary													PSLibrary;
 
-	CDetailManager*												Details;
 	CModelPool*													Models;
 
     CRenderTarget*												Target;			// Render-target

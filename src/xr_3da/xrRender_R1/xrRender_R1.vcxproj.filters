@@ -48,9 +48,6 @@
     <ClInclude Include="..\xrRender\doug_lea_memory_allocator.h">
       <Filter>Core\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\xrRender\DetailManager.h">
-      <Filter>Details</Filter>
-    </ClInclude>
     <ClInclude Include="GlowManager.h">
       <Filter>Glows</Filter>
     </ClInclude>
@@ -108,9 +105,6 @@
     <ClInclude Include="xrRender_R1_console.hpp">
       <Filter>Kernel</Filter>
     </ClInclude>
-    <ClInclude Include="..\xrRender\DetailFormat.h">
-      <Filter>Details</Filter>
-    </ClInclude>
     <ClInclude Include="..\xrRender\PSLibrary.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -149,6 +143,9 @@
     </ClInclude>
     <ClInclude Include="LightTrack_R1.hpp">
       <Filter>Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="DetailManager_R1.hpp">
+      <Filter>Details</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -190,21 +187,6 @@
     </ClCompile>
     <ClCompile Include="..\xrRender\doug_lea_memory_allocator.c">
       <Filter>Core\memory</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\DetailManager.cpp">
-      <Filter>Details</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\DetailManager_CACHE.cpp">
-      <Filter>Details</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\DetailManager_Decompress.cpp">
-      <Filter>Details</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\DetailManager_soft.cpp">
-      <Filter>Details</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\DetailManager_VS.cpp">
-      <Filter>Details</Filter>
     </ClCompile>
     <ClCompile Include="GlowManager.cpp">
       <Filter>Glows</Filter>
@@ -301,6 +283,9 @@
     </ClCompile>
     <ClCompile Include="LightTrack_R1.cpp">
       <Filter>Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="DetailManager_R1.cpp">
+      <Filter>Details</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
