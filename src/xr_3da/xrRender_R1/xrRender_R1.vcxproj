@@ -148,10 +148,6 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\xrRender\ParticleEffect.h" />
-    <ClInclude Include="..\xrRender\ParticleEffectDef.h" />
-    <ClInclude Include="..\xrRender\ParticleGroup.h" />
-    <ClInclude Include="..\xrRender\PSLibrary.h" />
     <ClInclude Include="Blender_BmmD_R1.hpp" />
     <ClInclude Include="Blender_detail_still_R1.hpp" />
     <ClInclude Include="Blender_Lm(EbB)_R1.hpp" />
@@ -159,9 +155,14 @@
     <ClInclude Include="Blender_Particle_R1.hpp" />
     <ClInclude Include="Blender_tree_R1.hpp" />
     <ClInclude Include="DetailManager_R1.hpp" />
+    <ClInclude Include="FProgressive_R1.hpp" />
+    <ClInclude Include="FSkinned_R1.hpp" />
+    <ClInclude Include="FTreeVisual_R1.hpp" />
+    <ClInclude Include="FVisual_R1.hpp" />
     <ClInclude Include="LightTrack_R1.hpp" />
     <ClInclude Include="Light_DB_R1.hpp" />
     <ClInclude Include="Light_Package_R1.hpp" />
+    <ClInclude Include="ModelPool_R1.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="FStaticRender.h" />
     <ClInclude Include="FStaticRender_RenderTarget.h" />
@@ -178,21 +179,12 @@
     <ClInclude Include="Blender_Vertex.h" />
     <ClInclude Include="Blender_Vertex_aref.h" />
     <ClInclude Include="BlenderDefault.h" />
-    <ClInclude Include="..\xrRender\ModelPool.h" />
-    <ClInclude Include="..\xrRender\FProgressive.h" />
-    <ClInclude Include="..\xrRender\FSkinned.h" />
-    <ClInclude Include="..\xrRender\FTreeVisual.h" />
-    <ClInclude Include="..\xrRender\FVisual.h" />
     <ClInclude Include="LightPPA.h" />
     <ClInclude Include="LightProjector.h" />
     <ClInclude Include="LightShadows.h" />
     <ClInclude Include="xrRender_R1_console.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\xrRender\ParticleEffect.cpp" />
-    <ClCompile Include="..\xrRender\ParticleEffectDef.cpp" />
-    <ClCompile Include="..\xrRender\ParticleGroup.cpp" />
-    <ClCompile Include="..\xrRender\PSLibrary.cpp" />
     <ClCompile Include="Blender_BmmD_R1.cpp" />
     <ClCompile Include="Blender_detail_still_R1.cpp" />
     <ClCompile Include="Blender_Lm(EbB)_R1.cpp" />
@@ -200,9 +192,14 @@
     <ClCompile Include="Blender_Particle_R1.cpp" />
     <ClCompile Include="Blender_tree_R1.cpp" />
     <ClCompile Include="DetailManager_R1.cpp" />
+    <ClCompile Include="FProgressive_R1.cpp" />
+    <ClCompile Include="FSkinned_R1.cpp" />
+    <ClCompile Include="FTreeVisual_R1.cpp" />
+    <ClCompile Include="FVisual_R1.cpp" />
     <ClCompile Include="LightTrack_R1.cpp" />
     <ClCompile Include="Light_DB_R1.cpp" />
     <ClCompile Include="Light_Package_R1.cpp" />
+    <ClCompile Include="ModelPool_R1.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Mixed|Win32'">Create</PrecompiledHeader>
@@ -242,11 +239,6 @@
     <ClCompile Include="Blender_Vertex.cpp" />
     <ClCompile Include="Blender_Vertex_aref.cpp" />
     <ClCompile Include="BlenderDefault.cpp" />
-    <ClCompile Include="..\xrRender\ModelPool.cpp" />
-    <ClCompile Include="..\xrRender\FProgressive.cpp" />
-    <ClCompile Include="..\xrRender\FSkinned.cpp" />
-    <ClCompile Include="..\xrRender\FTreeVisual.cpp" />
-    <ClCompile Include="..\xrRender\FVisual.cpp" />
     <ClCompile Include="LightPPA.cpp" />
     <ClCompile Include="LightProjector.cpp" />
     <ClCompile Include="LightShadows.cpp" />

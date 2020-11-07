@@ -20,7 +20,7 @@ class CCC_ModelPoolStat : public IConsole_Command
 public:
     CCC_ModelPoolStat(LPCSTR N) : IConsole_Command(N)  { bEmptyArgsHandled = TRUE; };
     virtual void Execute(LPCSTR args) {
-        RImplementation.Models->dump();
+        xray::renderBase.Models->dump();
     }
 };
 

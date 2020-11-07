@@ -4,6 +4,9 @@
 #define ModelPoolH
 #pragma once
 
+#include "ParticleEffect.h"
+#include "ParticleGroup.h"
+
 // refs
 class ENGINE_API IRender_Visual;
 namespace PS	{ 
@@ -11,9 +14,9 @@ namespace PS	{
 };
 
 // defs
-class ECORE_API CModelPool
+class XRRENDER_API CModelPool
 {
-private:
+protected:
 	friend class CRender;
 
 	struct str_pred : public std::binary_function<const shared_str&, const shared_str&, bool> 
@@ -33,7 +36,7 @@ private:
 	typedef POOL::iterator										POOL_IT;
 	typedef xr_map<IRender_Visual*,shared_str>					REGISTRY;
 	typedef REGISTRY::iterator									REGISTRY_IT;
-private:
+
 	xr_vector<ModelDef>			Models;				// Reference / Base
 	xr_vector<IRender_Visual*>	ModelsToDelete;		// 
 	REGISTRY					Registry;			// Just pairing of pointer / Name
@@ -46,7 +49,7 @@ private:
 public:
                             CModelPool			();
 	virtual 				~CModelPool			();
-	IRender_Visual*			Instance_Create		(u32 Type);
+	virtual IRender_Visual*	Instance_Create		(u32 Type) = 0;
 	IRender_Visual*			Instance_Duplicate	(IRender_Visual* V);
 	IRender_Visual*			Instance_Load		(LPCSTR N, BOOL allow_register);
 	IRender_Visual*			Instance_Load		(LPCSTR N, IReader* data, BOOL allow_register);

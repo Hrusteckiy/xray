@@ -2,14 +2,11 @@
 
 #include "..\xrRender\r__occlusion.h"
 
-#include "..\xrRender\PSLibrary.h"
-
 #include "r2_types.h"
 #include "r2_rendertarget.h"
 
 #include "..\xrRender\hom.h"
 #include "DetailManager_R2.hpp"
-#include "..\xrRender\modelpool.h"
 
 #include "smap_allocator.h"
 #include "Light_DB_R2.hpp"
@@ -77,9 +74,6 @@ public:
 	xr_vector<VertexDeclarator>									alternativeDCL;
 	xr_vector<IDirect3DVertexBuffer9*>							alternativeVertexBuffer;
 	xr_vector<IDirect3DIndexBuffer9*>							alternativeIndexBuffer;
-	CPSLibrary													PSLibrary;
-
-	CModelPool*													Models;
 
     CRenderTarget*												Target;			// Render-target
 
@@ -130,7 +124,6 @@ public:
     D3DVERTEXELEMENT9* getAlternativeVertexBufferFormat(int id);
     IDirect3DVertexBuffer9* getAlternativeVertexBuffer(int id);
     IDirect3DIndexBuffer9* getAlternativeIndexBuffer(int id);
-	IRender_Visual*					model_CreatePE				(LPCSTR name);
 	IRender_Sector*					detectSector				(const Fvector& P, Fvector& D);
     virtual IRender_Target*			getTarget					();
 
@@ -221,7 +214,7 @@ public:
 	virtual IRender_Visual*			model_Duplicate				(IRender_Visual*	V);
 	virtual void					model_Delete				(IRender_Visual* &	V, BOOL bDiscard);
 	virtual void 					model_Delete				(IRender_DetailModel* & F);
-	virtual void					model_Logging				(BOOL bEnable)				{ Models->Logging(bEnable);	}
+	virtual void					model_Logging				(BOOL bEnable)				{ xray::renderBase.Models->Logging(bEnable); }
 	virtual void					models_Prefetch				();
 	virtual void					models_Clear				(BOOL b_complete);
 

@@ -66,7 +66,7 @@ namespace PS
 	};
 	DEFINE_VECTOR(CPGDef*,PGDVec,PGDIt);
 
-	class ECORE_API CParticleGroup: public IParticleCustom
+    class XRRENDER_API CParticleGroup : public IParticleCustom
 	{
 		const CPGDef*		m_Def;
 		float				m_CurrentTime;

@@ -158,7 +158,7 @@ void CParticleGroup::SItem::Clear()
 }
 void CParticleGroup::SItem::StartRelatedChild(CParticleEffect* emitter, LPCSTR eff_name, PAPI::Particle& m)
 {
-    CParticleEffect*C		= static_cast<CParticleEffect*>(RImplementation.model_CreatePE(eff_name));
+    CParticleEffect*C = static_cast<CParticleEffect*>(xray::renderBase.model_CreatePE(eff_name));
     Fmatrix M; 				M.identity();
     Fvector vel; 			vel.sub(m.pos,m.posB); vel.div(fDT_STEP);
     if (emitter->m_RT_Flags.is(CParticleEffect::flRT_XFORM)){
@@ -183,7 +183,7 @@ void CParticleGroup::SItem::StopRelatedChild(u32 idx)
 }
 void CParticleGroup::SItem::StartFreeChild(CParticleEffect* emitter, LPCSTR nm, PAPI::Particle& m)
 {
-    CParticleEffect*C			= static_cast<CParticleEffect*>(RImplementation.model_CreatePE(nm));
+    CParticleEffect*C = static_cast<CParticleEffect*>(xray::renderBase.model_CreatePE(nm));
     if(!C->IsLooped()){
         Fmatrix M; 				M.identity();
         Fvector vel; 			vel.sub(m.pos,m.posB); vel.div(fDT_STEP);
@@ -436,7 +436,7 @@ BOOL CParticleGroup::Compile(CPGDef* def)
     if (m_Def){
         items.resize			(m_Def->m_Effects.size());
         for (CPGDef::EffectVec::const_iterator e_it=m_Def->m_Effects.begin(); e_it!=m_Def->m_Effects.end(); e_it++){
-        	CParticleEffect* eff = (CParticleEffect*)RImplementation.model_CreatePE(*(*e_it)->m_EffectName);
+            CParticleEffect* eff = (CParticleEffect*)xray::renderBase.model_CreatePE(*(*e_it)->m_EffectName);
             eff->SetBirthDeadCB	(OnGroupParticleBirth,OnGroupParticleDead,this,u32(e_it-m_Def->m_Effects.begin()));
 			items[e_it-def->m_Effects.begin()].Set(eff);
         }

@@ -6,7 +6,9 @@
 #include "WallmarksEngine.h"
 #include "HOM.h"
 #include "DetailManager.h"
+#include "ModelPool.h"
 #include <xr_3da/Fmesh.h>
+#include "PSLibrary.h"
 
 namespace xray {
 
@@ -102,6 +104,7 @@ public:
     D3DVERTEXELEMENT9* getVertexBufferFormat(int id);
     IDirect3DVertexBuffer9*	getVertexBuffer(int id);
     IDirect3DIndexBuffer9* getIndexBuffer(int id);
+    IRender_Visual* model_CreatePE(LPCSTR name);
 
     xr_vector<ref_shader> Shaders;
     xr_vector<IRender_Sector*> Sectors;
@@ -113,6 +116,7 @@ public:
     CDB::MODEL* rmPortals;
     CHOM HOM;
     CDetailManager* Details;
+    CModelPool* Models;
 
     // Global containers
     xr_vector<FSlideWindowItem> slideWindowItems;
@@ -120,7 +124,7 @@ public:
     xr_vector<VertexDeclarator> DCL;
     xr_vector<IDirect3DVertexBuffer9*> vertexBuffer;
     xr_vector<IDirect3DIndexBuffer9*> indexBuffer;
-    //CPSLibrary PSLibrary; // PSLibrary needed
+    CPSLibrary PSLibrary;
 
 protected:
     // Loading / Unloading

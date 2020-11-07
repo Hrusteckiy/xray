@@ -108,21 +108,6 @@
     <ClInclude Include="blender_luminance.h">
       <Filter>Shading templates</Filter>
     </ClInclude>
-    <ClInclude Include="..\xrRender\ModelPool.h">
-      <Filter>Models</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender\FProgressive.h">
-      <Filter>Models\Visuals</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender\FSkinned.h">
-      <Filter>Models\Visuals</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender\FTreeVisual.h">
-      <Filter>Models\Visuals</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender\FVisual.h">
-      <Filter>Models\Visuals</Filter>
-    </ClInclude>
     <ClInclude Include="du_sphere_part.h">
       <Filter>Core_Target</Filter>
     </ClInclude>
@@ -134,18 +119,6 @@
     </ClInclude>
     <ClInclude Include="xrRender_R2_console.hpp">
       <Filter>Kernel</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender\PSLibrary.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender\ParticleEffect.h">
-      <Filter>Models\Visuals</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender\ParticleEffectDef.h">
-      <Filter>Models\Visuals</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrRender\ParticleGroup.h">
-      <Filter>Models\Visuals</Filter>
     </ClInclude>
     <ClInclude Include="Blender_tree_R2.hpp">
       <Filter>Shading templates</Filter>
@@ -185,6 +158,21 @@
     </ClInclude>
     <ClInclude Include="DetailManager_R2.hpp">
       <Filter>Details</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelPool_R2.hpp">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="FTreeVisual_R2.hpp">
+      <Filter>Models\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="FProgressive_R2.hpp">
+      <Filter>Models\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="FVisual_R2.hpp">
+      <Filter>Models\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="FSkinned_R2.hpp">
+      <Filter>Models\Visuals</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -296,21 +284,6 @@
     <ClCompile Include="blender_luminance.cpp">
       <Filter>Shading templates</Filter>
     </ClCompile>
-    <ClCompile Include="..\xrRender\ModelPool.cpp">
-      <Filter>Models</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\FProgressive.cpp">
-      <Filter>Models\Visuals</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\FSkinned.cpp">
-      <Filter>Models\Visuals</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\FTreeVisual.cpp">
-      <Filter>Models\Visuals</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\FVisual.cpp">
-      <Filter>Models\Visuals</Filter>
-    </ClCompile>
     <ClCompile Include="du_sphere_part.cpp">
       <Filter>Core_Target</Filter>
     </ClCompile>
@@ -374,18 +347,6 @@
     <ClCompile Include="xrRender_R2_console.cpp">
       <Filter>Kernel</Filter>
     </ClCompile>
-    <ClCompile Include="..\xrRender\PSLibrary.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\ParticleEffect.cpp">
-      <Filter>Models\Visuals</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\ParticleEffectDef.cpp">
-      <Filter>Models\Visuals</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrRender\ParticleGroup.cpp">
-      <Filter>Models\Visuals</Filter>
-    </ClCompile>
     <ClCompile Include="Blender_tree_R2.cpp">
       <Filter>Shading templates</Filter>
     </ClCompile>
@@ -424,6 +385,21 @@
     </ClCompile>
     <ClCompile Include="DetailManager_R2.cpp">
       <Filter>Details</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelPool_R2.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="FTreeVisual_R2.cpp">
+      <Filter>Models\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="FProgressive_R2.cpp">
+      <Filter>Models\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="FVisual_R2.cpp">
+      <Filter>Models\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="FSkinned_R2.cpp">
+      <Filter>Models\Visuals</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

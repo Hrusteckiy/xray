@@ -126,6 +126,13 @@ IDirect3DIndexBuffer9* CRenderBase::getIndexBuffer(int id)
     return renderBase.indexBuffer[id];
 }
 
+IRender_Visual* CRenderBase::model_CreatePE(LPCSTR name)
+{
+    PS::CPEDef*	SE = renderBase.PSLibrary.FindPED(name);
+    R_ASSERT3(SE, "Particle effect doesn't exist", name);
+    return renderBase.Models->CreatePE(SE);
+}
+
 void CRenderBase::loadSlideWindowItems(CStreamReader* base_fs)
 {
     // allocate memory for portals

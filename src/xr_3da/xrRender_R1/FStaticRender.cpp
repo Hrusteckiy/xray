@@ -11,6 +11,7 @@
 #include "..\fmesh.h"
 #include "..\SkeletonCustom.h"
 #include "LightTrack_R1.hpp"
+#include "ModelPool_R1.hpp"
  
 using	namespace		R_dsgraph;
 
@@ -75,9 +76,9 @@ void					CRender::create					()
     Target = xr_new<CRenderTarget>();
 //---------
 	//
-	Models						= xr_new<CModelPool>		();
+    xray::renderBase.Models = xr_new<CModelPool_R1>();
 	L_Dynamic					= xr_new<CLightR_Manager>	();
-	PSLibrary.OnCreate			();
+    xray::renderBase.PSLibrary.OnCreate();
 //.	HWOCC.occq_create			(occq_size);
 
 	xrRender_apply_tf			();
@@ -88,10 +89,10 @@ void					CRender::destroy				()
 {
 	::PortalTraverser.destroy	();
 //.	HWOCC.occq_destroy			();
-	PSLibrary.OnDestroy			();
+    xray::renderBase.PSLibrary.OnDestroy();
 	
 	xr_delete					(L_Dynamic);
-	xr_delete					(Models);
+    xr_delete(xray::renderBase.Models);
 	
 	//*** Components
     xr_delete(Target);
@@ -116,16 +117,33 @@ void					CRender::reset_end				()
 
 void					CRender::OnFrame				()
 {
-	Models->DeleteQueue	();
+    xray::renderBase.Models->DeleteQueue();
 }
 
 // Implementation
 IRender_ObjectSpecific*	CRender::ros_create				(IRenderable* parent)					{ return xr_new<CROS_impl>();			}
 void					CRender::ros_destroy			(IRender_ObjectSpecific* &p)			{ xr_delete(p);							}
-IRender_Visual*			CRender::model_Create			(LPCSTR name, IReader* data)			{ return Models->Create(name,data);		}
-IRender_Visual*			CRender::model_CreateChild		(LPCSTR name, IReader* data)			{ return Models->CreateChild(name,data);}
-IRender_Visual*			CRender::model_Duplicate		(IRender_Visual* V)						{ return Models->Instance_Duplicate(V);	}
-void					CRender::model_Delete			(IRender_Visual* &V, BOOL bDiscard)		{ Models->Delete(V,bDiscard);			}
+
+IRender_Visual* CRender::model_Create(LPCSTR name, IReader* data)
+{
+    return xray::renderBase.Models->Create(name, data);
+}
+
+IRender_Visual* CRender::model_CreateChild(LPCSTR name, IReader* data)
+{
+    return xray::renderBase.Models->CreateChild(name, data);
+}
+
+IRender_Visual* CRender::model_Duplicate(IRender_Visual* V)
+{
+    return xray::renderBase.Models->Instance_Duplicate(V);
+}
+
+void CRender::model_Delete(IRender_Visual* &V, BOOL bDiscard)
+{
+    xray::renderBase.Models->Delete(V, bDiscard);
+}
+
 IRender_DetailModel*	CRender::model_CreateDM			(IReader*F)
 {
 	CDetail*	D		= xr_new<CDetail> ();
@@ -142,23 +160,31 @@ void					CRender::model_Delete			(IRender_DetailModel* & F)
 		F				= NULL;
 	}
 }
-IRender_Visual*			CRender::model_CreatePE			(LPCSTR name)	
-{ 
-	PS::CPEDef*	SE		= PSLibrary.FindPED	(name);		R_ASSERT3(SE,"Particle effect doesn't exist",name);
-	return				Models->CreatePE	(SE);
-}
 
 IRender_Visual*			CRender::model_CreateParticles	(LPCSTR name)	
 { 
-	PS::CPEDef*	SE		= PSLibrary.FindPED	(name);
-	if (SE) return		Models->CreatePE	(SE);
-	else{
-		PS::CPGDef*	SG	= PSLibrary.FindPGD	(name);		R_ASSERT3(SG,"Particle effect or group doesn't exist",name);
-		return			Models->CreatePG	(SG);
+    PS::CPEDef*	SE = xray::renderBase.PSLibrary.FindPED(name);
+    if (SE)
+    {
+        return xray::renderBase.Models->CreatePE(SE);
+    }
+	else
+    {
+        PS::CPGDef*	SG = xray::renderBase.PSLibrary.FindPGD(name);
+        R_ASSERT3(SG, "Particle effect or group doesn't exist", name);
+        return xray::renderBase.Models->CreatePG(SG);
 	}
 }
-void					CRender::models_Prefetch		()					{ Models->Prefetch	();}
-void					CRender::models_Clear			(BOOL b_complete)	{ Models->ClearPool	(b_complete);}
+
+void CRender::models_Prefetch()
+{
+    xray::renderBase.Models->Prefetch();
+}
+
+void CRender::models_Clear(BOOL b_complete)
+{
+    xray::renderBase.Models->ClearPool(b_complete);
+}
 
 IRender_Target*			CRender::getTarget				()					{ return Target;										}
 

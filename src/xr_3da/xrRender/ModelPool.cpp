@@ -3,80 +3,16 @@
 
 #include "ModelPool.h"
 
-#ifndef _EDITOR
-	#include "..\IGame_Persistent.h"
-    #include "..\fmesh.h"
-    #include "..\fhierrarhyvisual.h"
-    #include "..\SkeletonAnimated.h"
-	#include "fvisual.h"
-	#include "fprogressive.h"
-	#include "fskinned.h"
-	#include "flod.h"
-    #include "ftreevisual.h"
-    #include "ParticleGroup.h"
-#else
-    #include "fmesh.h"
-    #include "fvisual.h"
-    #include "fprogressive.h"
-    #include "ParticleGroup.h"
-	#include "fskinned.h"
-    #include "fhierrarhyvisual.h"
-    #include "SkeletonAnimated.h"
-	#include "IGame_Persistent.h"
-#endif
-
-IRender_Visual*	CModelPool::Instance_Create(u32 type)
-{
-	IRender_Visual *V = NULL;
-
-	// Check types
-	switch (type) {
-	case MT_NORMAL:				// our base visual
-		V	= xr_new<Fvisual>				();
-		break;
-	case MT_HIERRARHY:
-		V	= xr_new<FHierrarhyVisual>		();
-		break;
-	case MT_PROGRESSIVE:		// dynamic-resolution visual
-		V	= xr_new<FProgressive>			();
-		break;
-	case MT_SKELETON_ANIM:
-		V	= xr_new<CKinematicsAnimated>	();
-		break;
-	case MT_SKELETON_RIGID:
-		V	= xr_new<CKinematics>			();
-		break;
-	case MT_SKELETON_GEOMDEF_PM:
-		V	= xr_new<CSkeletonX_PM>			();
-		break;
-	case MT_SKELETON_GEOMDEF_ST:
-		V	= xr_new<CSkeletonX_ST>			();
-		break;
-	case MT_PARTICLE_EFFECT:
-		V	= xr_new<PS::CParticleEffect>	();
-		break;
-	case MT_PARTICLE_GROUP:
-		V	= xr_new<PS::CParticleGroup>	();
-		break;
-#ifndef _EDITOR
-	case MT_LOD:
-		V	= xr_new<FLOD>					();
-		break;
-	case MT_TREE_ST:
-		V	= xr_new<FTreeVisual_ST>		();
-		break;
-	case MT_TREE_PM:
-		V	= xr_new<FTreeVisual_PM>		();
-		break;
-#endif
-	default:
-		FATAL	("Unknown visual type");
-		break;
-	}
-	R_ASSERT	(V);
-	V->Type		= type;
-	return		V;
-}
+//#include "..\IGame_Persistent.h"
+//#include "..\fmesh.h"
+//#include "..\fhierrarhyvisual.h"
+#include "..\SkeletonAnimated.h"
+//#include "fvisual.h"
+//#include "fprogressive.h"
+//#include "fskinned.h"
+//#include "flod.h"
+//#include "ftreevisual.h"
+//#include "ParticleGroup.h"
 
 IRender_Visual*	CModelPool::Instance_Duplicate	(IRender_Visual* V)
 {

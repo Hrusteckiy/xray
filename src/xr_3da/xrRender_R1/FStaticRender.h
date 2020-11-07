@@ -1,12 +1,9 @@
 #pragma once
 
-#include "..\xrRender\PSLibrary.h"
-
 #include "..\xrRender\hom.h"
 #include "DetailManager_R1.hpp"
 #include "glowmanager.h"
 #include "fstaticrender_rendertarget.h"
-#include "..\xrRender\modelpool.h"
 
 #include "lightShadows.h"
 #include "lightProjector.h"
@@ -35,16 +32,12 @@ public:
 	u32															uLastLTRACK;
 	xrXRC														Sectors_xrc;
 //.	R_occlusion													HWOCC;
-	
-	// Global containers
-	CPSLibrary													PSLibrary;
 
     xray::CLight_DB_R1*											L_DB;
 	CLightR_Manager*											L_Dynamic;
 	CLightShadows*												L_Shadows;
 	CLightProjector*											L_Projector;
 	CGlowManager*												L_Glows;
-	CModelPool*													Models;
 
     CRenderTarget*												Target;			// Render-target
 
@@ -71,7 +64,6 @@ private:
 public:
 	ShaderElement*						rimp_select_sh_static	(IRender_Visual	*pVisual, float cdist_sq);
 	ShaderElement*						rimp_select_sh_dynamic	(IRender_Visual	*pVisual, float cdist_sq);
-	IRender_Visual*						model_CreatePE			(LPCSTR			name);
 	void								ApplyBlur4				(FVF::TL4uv*	dest, u32 w, u32 h, float k);
 	void								apply_object			(IRenderable*	O);
 	IC void								apply_lmaterial			()				{};
@@ -124,7 +116,7 @@ public:
 	virtual void					ros_destroy				(IRender_ObjectSpecific* &);
 
 	// Particle library
-	virtual CPSLibrary*				ps_library				(){return &PSLibrary;}
+	virtual CPSLibrary*				ps_library				(){return &xray::renderBase.PSLibrary;}
 
 	// Lighting
 	virtual IRender_Light*			light_create			();
@@ -138,7 +130,7 @@ public:
 	virtual IRender_Visual*			model_Duplicate			(IRender_Visual*	V);
 	virtual void					model_Delete			(IRender_Visual* &	V, BOOL bDiscard);
 	virtual void 					model_Delete			(IRender_DetailModel* & F);
-	virtual void					model_Logging			(BOOL bEnable)				{ Models->Logging(bEnable);	}
+	virtual void					model_Logging			(BOOL bEnable)				{ xray::renderBase.Models->Logging(bEnable); }
 	virtual void					models_Prefetch			();
 	virtual void					models_Clear			(BOOL b_complete);
 	

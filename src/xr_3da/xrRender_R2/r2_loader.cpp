@@ -245,7 +245,7 @@ void CRender::LoadVisuals(IReader *fs)
 	while ((chunk=fs->open_chunk(index))!=0)
 	{
 		chunk->r_chunk_safe			(OGF_HEADER,&H,sizeof(H));
-		V = Models->Instance_Create	(H.type);
+        V = xray::renderBase.Models->Instance_Create(H.type);
 		V->Load(0,chunk,0);
         xray::renderBase.Visuals.push_back(V);
 

@@ -7,6 +7,7 @@
 #include "..\environment.h"
 #include "..\SkeletonCustom.h"
 #include "LightTrack_R2.hpp"
+#include "ModelPool_R2.hpp"
 
 CRender										RImplementation;
 
@@ -211,8 +212,8 @@ void					CRender::create					()
 
     Target = xr_new<CRenderTarget>(); // Main target
 
-	Models						= xr_new<CModelPool>		();
-	PSLibrary.OnCreate			();
+    xray::renderBase.Models = xr_new<CModelPool_R2>();
+    xray::renderBase.PSLibrary.OnCreate();
 	HWOCC.occq_create			(occq_size);
 
 	//rmNormal					();
@@ -230,9 +231,9 @@ void					CRender::destroy				()
 	_RELEASE					(q_sync_point[1]);
 	_RELEASE					(q_sync_point[0]);
 	HWOCC.occq_destroy			();
-	xr_delete					(Models);
+	xr_delete					(xray::renderBase.Models);
     xr_delete					(Target);
-	PSLibrary.OnDestroy			();
+    xray::renderBase.PSLibrary.OnDestroy();
 	Device.seqFrame.Remove		(this);
 }
 
@@ -273,7 +274,7 @@ void CRender::reset_end()
 /*
 void CRender::OnFrame()
 {
-	Models->DeleteQueue			();
+	xray::renderBase.Models->DeleteQueue();
 	if (ps_r2_ls_flags.test(R2FLAG_EXP_MT_CALC))	{
 		Device.seqParallel.insert	(Device.seqParallel.begin(),
 			fastdelegate::FastDelegate0<>(&xray::renderBase.HOM,&CHOM::MT_RENDER));
@@ -281,7 +282,7 @@ void CRender::OnFrame()
 }*/
 void CRender::OnFrame()
 {
-	Models->DeleteQueue			();
+    xray::renderBase.Models->DeleteQueue();
 	if (ps_r2_ls_flags.test(R2FLAG_EXP_MT_CALC))	{
 		// MT-details (@front)
 		Device.seqParallel.insert	(Device.seqParallel.begin(),
@@ -297,10 +298,27 @@ void CRender::OnFrame()
 // Implementation
 IRender_ObjectSpecific*	CRender::ros_create				(IRenderable* parent)				{ return xr_new<CROS_impl>();			}
 void					CRender::ros_destroy			(IRender_ObjectSpecific* &p)		{ xr_delete(p);							}
-IRender_Visual*			CRender::model_Create			(LPCSTR name, IReader* data)		{ return Models->Create(name,data);		}
-IRender_Visual*			CRender::model_CreateChild		(LPCSTR name, IReader* data)		{ return Models->CreateChild(name,data);}
-IRender_Visual*			CRender::model_Duplicate		(IRender_Visual* V)					{ return Models->Instance_Duplicate(V);	}
-void					CRender::model_Delete			(IRender_Visual* &V, BOOL bDiscard)	{ Models->Delete(V, bDiscard);			}
+
+IRender_Visual* CRender::model_Create(LPCSTR name, IReader* data)
+{
+    return xray::renderBase.Models->Create(name, data);
+}
+
+IRender_Visual* CRender::model_CreateChild(LPCSTR name, IReader* data)
+{
+    return xray::renderBase.Models->CreateChild(name, data);
+}
+
+IRender_Visual* CRender::model_Duplicate(IRender_Visual* V)
+{
+    return xray::renderBase.Models->Instance_Duplicate(V);
+}
+
+void CRender::model_Delete(IRender_Visual* &V, BOOL bDiscard)
+{
+    xray::renderBase.Models->Delete(V, bDiscard);
+}
+
 IRender_DetailModel*	CRender::model_CreateDM			(IReader*	F)
 {
 	CDetail*	D		= xr_new<CDetail> ();
@@ -317,22 +335,32 @@ void					CRender::model_Delete			(IRender_DetailModel* & F)
 		F				= NULL;
 	}
 }
-IRender_Visual*			CRender::model_CreatePE			(LPCSTR name)	
-{ 
-	PS::CPEDef*	SE			= PSLibrary.FindPED	(name);		R_ASSERT3(SE,"Particle effect doesn't exist",name);
-	return					Models->CreatePE	(SE);
-}
+
 IRender_Visual*			CRender::model_CreateParticles	(LPCSTR name)	
 { 
-	PS::CPEDef*	SE			= PSLibrary.FindPED	(name);
-	if (SE) return			Models->CreatePE	(SE);
-	else{
-		PS::CPGDef*	SG		= PSLibrary.FindPGD	(name);		R_ASSERT3(SG,"Particle effect or group doesn't exist",name);
-		return				Models->CreatePG	(SG);
+    PS::CPEDef*	SE = xray::renderBase.PSLibrary.FindPED(name);
+    if (SE)
+    {
+        return xray::renderBase.Models->CreatePE(SE);
+    }
+	else
+    {
+        PS::CPGDef*	SG = xray::renderBase.PSLibrary.FindPGD(name);
+        R_ASSERT3(SG, "Particle effect or group doesn't exist", name);
+        return xray::renderBase.Models->CreatePG(SG);
 	}
 }
-void					CRender::models_Prefetch		()					{ Models->Prefetch	();}
-void					CRender::models_Clear			(BOOL b_complete)	{ Models->ClearPool	(b_complete);}
+
+void CRender::models_Prefetch()
+{
+    xray::renderBase.Models->Prefetch();
+}
+
+void CRender::models_Clear(BOOL b_complete)
+{
+    xray::renderBase.Models->ClearPool(b_complete);
+}
+
 
 D3DVERTEXELEMENT9* CRender::getAlternativeVertexBufferFormat(int id)
 {

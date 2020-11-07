@@ -3,9 +3,9 @@
 // refs
 struct	FSlideWindowItem;
 
-class	FTreeVisual				:	public IRender_Visual, public IRender_Mesh
+class XRRENDER_API FTreeVisual : public IRender_Visual, public IRender_Mesh
 {
-private:
+protected:
 	struct	_5color
 	{
 		Fvector					rgb;		// - all static lighting
@@ -16,8 +16,18 @@ protected:
 	_5color						c_scale;
 	_5color						c_bias;
 	Fmatrix						xform;
+
+    shared_str m_xform;
+    shared_str m_xform_v;
+    shared_str c_consts;
+    shared_str c_wave;
+    shared_str c_wind;
+    shared_str c_c_bias;
+    shared_str c_c_scale;
+    shared_str c_c_sun;
+
 public:
-	virtual void Render			(float LOD		);									// LOD - Level Of Detail  [0.0f - min, 1.0f - max], Ignored
+	virtual void Render			(float LOD) = 0;									// LOD - Level Of Detail  [0.0f - min, 1.0f - max], Ignored
 	virtual void Load			(LPCSTR N, IReader *data, u32 dwFlags);
 	virtual void Copy			(IRender_Visual *pFrom	);
 	virtual void Release		();
@@ -26,39 +36,16 @@ public:
 	virtual ~FTreeVisual(void);
 };
 
-class FTreeVisual_ST :	public FTreeVisual
+struct XRRENDER_API FTreeVisual_setup
 {
-	typedef FTreeVisual inherited;
-public:
-					FTreeVisual_ST	(void);
-	virtual			~FTreeVisual_ST	(void);
+    u32			dwFrame;
+    float		scale;
+    Fvector4	wave;
+    Fvector4	wind;
 
-	virtual void	Render			(float LOD		);									// LOD - Level Of Detail  [0.0f - min, 1.0f - max], Ignored
-	virtual void	Load			(LPCSTR N, IReader *data, u32 dwFlags);
-	virtual void	Copy			(IRender_Visual *pFrom	);
-	virtual void	Release			();
-private:
-	FTreeVisual_ST				(const FTreeVisual_ST& other);
-	void	operator=			( const FTreeVisual_ST& other);
-};
+    FTreeVisual_setup() { dwFrame = 0; }
 
-class FTreeVisual_PM :	public FTreeVisual
-{
-	typedef FTreeVisual inherited;
-private:
-	FSlideWindowItem*	pSWI;
-	u32					last_lod;
-public:
-					FTreeVisual_PM	(void);
-	virtual			~FTreeVisual_PM	(void);
-
-	virtual void	Render			(float LOD		);									// LOD - Level Of Detail  [0.0f - min, 1.0f - max], Ignored
-	virtual void	Load			(LPCSTR N, IReader *data, u32 dwFlags);
-	virtual void	Copy			(IRender_Visual *pFrom	);
-	virtual void	Release			();
-private:
-	FTreeVisual_PM				(const FTreeVisual_PM& other);
-	void	operator=			( const FTreeVisual_PM& other);
+    void calculate();
 };
 
 const int		FTreeVisual_tile	= 16;
