@@ -334,19 +334,21 @@ IRender_Visual*			CRender::model_CreateParticles	(LPCSTR name)
 void					CRender::models_Prefetch		()					{ Models->Prefetch	();}
 void					CRender::models_Clear			(BOOL b_complete)	{ Models->ClearPool	(b_complete);}
 
-D3DVERTEXELEMENT9*		CRender::getVB_Format			(int id, BOOL	_alt)	{ 
-	if (_alt)	{ VERIFY(id<int(xDC.size()));	return xDC[id].begin();	}
-	else		{ VERIFY(id<int(nDC.size()));	return nDC[id].begin(); }
+D3DVERTEXELEMENT9* CRender::getAlternativeVertexBufferFormat(int id)
+{
+    VERIFY(id<int(alternativeDCL.size()));
+    return alternativeDCL[id].begin();
 }
-IDirect3DVertexBuffer9*	CRender::getVB					(int id, BOOL	_alt)	{
-	if (_alt)	{ VERIFY(id<int(xVB.size()));	return xVB[id];		}
-	else		{ VERIFY(id<int(nVB.size()));	return nVB[id];		}
+IDirect3DVertexBuffer9*	CRender::getAlternativeVertexBuffer(int id)
+{
+    VERIFY(id<int(alternativeVertexBuffer.size()));
+    return alternativeVertexBuffer[id];
 }
-IDirect3DIndexBuffer9*	CRender::getIB					(int id, BOOL	_alt)	{ 
-	if (_alt)	{ VERIFY(id<int(xIB.size()));	return xIB[id];		}
-	else		{ VERIFY(id<int(nIB.size()));	return nIB[id];		}
+IDirect3DIndexBuffer9* CRender::getAlternativeIndexBuffer(int id)
+{
+    VERIFY(id<int(alternativeIndexBuffer.size()));
+    return alternativeIndexBuffer[id];
 }
-FSlideWindowItem*		CRender::getSWI					(int id)			{ VERIFY(id<int(SWIs.size()));		return &SWIs[id];	}
 IRender_Target*			CRender::getTarget				()					{ return Target;										}
 
 IRender_Light*			CRender::light_create			()					{ return Lights.Create();								}

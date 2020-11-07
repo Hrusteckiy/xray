@@ -2,6 +2,9 @@
 #include "RenderBase.hpp"
 #include "TargetBase.hpp"
 
+#include <xrCore/stream_reader.h>
+#include <xr_3da/xrLevel.h>
+
 namespace xray {
 
 XRRENDER_API float r_ssaDISCARD;
@@ -97,6 +100,63 @@ IRender_Portal* CRenderBase::getPortal(int id)
 IRender_Sector* CRenderBase::getSectorActive()
 {
     return renderBase.pLastSector;
+}
+
+FSlideWindowItem* CRenderBase::getSlideWindowItem(int id)
+{
+    VERIFY(id<int(renderBase.slideWindowItems.size()));
+    return &renderBase.slideWindowItems[id];
+}
+
+D3DVERTEXELEMENT9* CRenderBase::getVertexBufferFormat(int id)
+{
+    VERIFY(id<int(renderBase.DCL.size()));
+    return renderBase.DCL[id].begin();
+}
+
+IDirect3DVertexBuffer9*	CRenderBase::getVertexBuffer(int id)
+{
+    VERIFY(id<int(renderBase.vertexBuffer.size()));
+    return renderBase.vertexBuffer[id];
+}
+
+IDirect3DIndexBuffer9* CRenderBase::getIndexBuffer(int id)
+{
+    VERIFY(id<int(renderBase.indexBuffer.size()));
+    return renderBase.indexBuffer[id];
+}
+
+void CRenderBase::loadSlideWindowItems(CStreamReader* base_fs)
+{
+    // allocate memory for portals
+    if (base_fs->find_chunk(fsL_SWIS))
+    {
+        CStreamReader		*fs = base_fs->open_chunk(fsL_SWIS);
+        u32 item_count = fs->r_u32();
+
+        xr_vector<FSlideWindowItem>::iterator it = renderBase.slideWindowItems.begin();
+        xr_vector<FSlideWindowItem>::iterator it_e = renderBase.slideWindowItems.end();
+
+        for (; it != it_e; ++it)
+            xr_free((*it).sw);
+
+        renderBase.slideWindowItems.clear_not_free();
+
+        renderBase.slideWindowItems.resize(item_count);
+        for (u32 c = 0; c<item_count; c++){
+            FSlideWindowItem& swi = renderBase.slideWindowItems[c];
+            swi.reserved[0] = fs->r_u32();
+            swi.reserved[1] = fs->r_u32();
+            swi.reserved[2] = fs->r_u32();
+            swi.reserved[3] = fs->r_u32();
+            swi.count = fs->r_u32();
+            VERIFY(NULL == swi.sw);
+            swi.sw = xr_alloc<FSlideWindow>(swi.count);
+            fs->r(swi.sw, sizeof(FSlideWindow)*swi.count);
+        }
+
+        fs->close();
+    }
 }
 
 }

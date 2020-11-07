@@ -57,7 +57,7 @@ void CRender::level_Load(IReader* fs)
 			CStreamReader			*geom = FS.rs_open("$level$","level.geom");
 			R_ASSERT2				(geom, "level.geom");
 			LoadBuffers				(geom,FALSE);
-			LoadSWIs				(geom);
+            loadSlideWindowItems(geom);
 			FS.r_close				(geom);
 		}
 
@@ -141,13 +141,17 @@ void CRender::level_Unload()
     xray::renderBase.Visuals.clear();
 
 	//*** VB/IB
-	for (I=0; I<nVB.size(); I++)	_RELEASE(nVB[I]);
-	for (I=0; I<xVB.size(); I++)	_RELEASE(xVB[I]);
-	nVB.clear(); xVB.clear();
-	for (I=0; I<nIB.size(); I++)	_RELEASE(nIB[I]);
-	for (I=0; I<xIB.size(); I++)	_RELEASE(xIB[I]);
-	nIB.clear(); xIB.clear();
-	nDC.clear(); xDC.clear();
+    for (I = 0; I < xray::renderBase.vertexBuffer.size(); I++)
+        _RELEASE(xray::renderBase.vertexBuffer[I]);
+    for (I = 0; I < alternativeVertexBuffer.size(); I++)
+        _RELEASE(alternativeVertexBuffer[I]);
+    xray::renderBase.vertexBuffer.clear(); alternativeVertexBuffer.clear();
+    for (I = 0; I < xray::renderBase.indexBuffer.size(); I++)
+        _RELEASE(xray::renderBase.indexBuffer[I]);
+    for (I = 0; I < alternativeIndexBuffer.size(); I++)
+        _RELEASE(alternativeIndexBuffer[I]);
+    xray::renderBase.indexBuffer.clear(); alternativeIndexBuffer.clear();
+    xray::renderBase.DCL.clear(); alternativeDCL.clear();
 
 	//*** Components
     xr_delete(xray::renderBase.Details);
@@ -164,9 +168,9 @@ void CRender::LoadBuffers		(CStreamReader *base_fs,	BOOL _alternative)
 	Device.Resources->Evict		();
 	u32	dwUsage					= D3DUSAGE_WRITEONLY;
 
-	xr_vector<VertexDeclarator>				&_DC	= _alternative?xDC:nDC;
-	xr_vector<IDirect3DVertexBuffer9*>		&_VB	= _alternative?xVB:nVB;
-	xr_vector<IDirect3DIndexBuffer9*>		&_IB	= _alternative?xIB:nIB;
+    xr_vector<VertexDeclarator> &_DC = _alternative ? alternativeDCL : xray::renderBase.DCL;
+    xr_vector<IDirect3DVertexBuffer9*> &_VB = _alternative ? alternativeVertexBuffer : xray::renderBase.vertexBuffer;
+    xr_vector<IDirect3DIndexBuffer9*>		&_IB = _alternative ? alternativeIndexBuffer : xray::renderBase.indexBuffer;
 
 	// Vertex buffers
 	{
@@ -330,35 +334,4 @@ void CRender::LoadSectors(IReader* fs)
 	//		xray::renderBase.Sectors[d]->DebugDump	();
 
     xray::renderBase.pLastSector = nullptr;
-}
-
-void CRender::LoadSWIs(CStreamReader* base_fs)
-{
-	// allocate memory for portals
-	if (base_fs->find_chunk(fsL_SWIS)){
-		CStreamReader		*fs	= base_fs->open_chunk(fsL_SWIS);
-		u32 item_count		= fs->r_u32();
-
-		xr_vector<FSlideWindowItem>::iterator it	= SWIs.begin();
-		xr_vector<FSlideWindowItem>::iterator it_e	= SWIs.end();
-
-		for(;it!=it_e;++it)
-			xr_free( (*it).sw );
-
-		SWIs.clear_not_free();
-
-		SWIs.resize			(item_count);
-		for (u32 c=0; c<item_count; c++){
-			FSlideWindowItem& swi = SWIs[c];
-			swi.reserved[0]	= fs->r_u32();	
-			swi.reserved[1]	= fs->r_u32();	
-			swi.reserved[2]	= fs->r_u32();	
-			swi.reserved[3]	= fs->r_u32();	
-			swi.count		= fs->r_u32();
-			VERIFY			(NULL==swi.sw);
-			swi.sw			= xr_alloc<FSlideWindow> (swi.count);
-			fs->r			(swi.sw,sizeof(FSlideWindow)*swi.count);
-		}
-		fs->close			();
-	}
 }

@@ -37,11 +37,6 @@ public:
 //.	R_occlusion													HWOCC;
 	
 	// Global containers
-	xr_vector<FSlideWindowItem>									SWIs;
-	typedef svector<D3DVERTEXELEMENT9,MAXD3DDECLLENGTH+1>		VertexDeclarator;
-	xr_vector<VertexDeclarator>									DCL;
-	xr_vector<IDirect3DVertexBuffer9*>							VB;
-	xr_vector<IDirect3DIndexBuffer9*>							IB;
 	CPSLibrary													PSLibrary;
 
     xray::CLight_DB_R1*											L_DB;
@@ -67,7 +62,6 @@ private:
 	void								LoadVisuals				(IReader *fs);
 	void								LoadLights				(IReader *fs);
 	void								LoadSectors				(IReader *fs);
-	void								LoadSWIs				(CStreamReader	*fs);
 
 	BOOL								add_Dynamic				(IRender_Visual	*pVisual, u32 planes);		// normal processing
 	void								add_Static				(IRender_Visual	*pVisual, u32 planes);
@@ -77,10 +71,6 @@ private:
 public:
 	ShaderElement*						rimp_select_sh_static	(IRender_Visual	*pVisual, float cdist_sq);
 	ShaderElement*						rimp_select_sh_dynamic	(IRender_Visual	*pVisual, float cdist_sq);
-	D3DVERTEXELEMENT9*					getVB_Format			(int id);
-	IDirect3DVertexBuffer9*				getVB					(int id);
-	IDirect3DIndexBuffer9*				getIB					(int id);
-	FSlideWindowItem*					getSWI					(int id);
 	IRender_Visual*						model_CreatePE			(LPCSTR			name);
 	void								ApplyBlur4				(FVF::TL4uv*	dest, u32 w, u32 h, float k);
 	void								apply_object			(IRenderable*	O);

@@ -2,10 +2,11 @@
 
 #include "r__dsgraph_structure.h"
 
-#include "../SkeletonCustom.h"
+#include <xr_3da/SkeletonCustom.h>
 #include "WallmarksEngine.h"
 #include "HOM.h"
 #include "DetailManager.h"
+#include <xr_3da/Fmesh.h>
 
 namespace xray {
 
@@ -97,6 +98,11 @@ public:
     virtual IRender_Portal* getPortal(int id);
     virtual IRender_Sector* getSectorActive();
 
+    FSlideWindowItem* getSlideWindowItem(int id);
+    D3DVERTEXELEMENT9* getVertexBufferFormat(int id);
+    IDirect3DVertexBuffer9*	getVertexBuffer(int id);
+    IDirect3DIndexBuffer9* getIndexBuffer(int id);
+
     xr_vector<ref_shader> Shaders;
     xr_vector<IRender_Sector*> Sectors;
     xr_vector<IRender_Visual*> Visuals;
@@ -107,6 +113,20 @@ public:
     CDB::MODEL* rmPortals;
     CHOM HOM;
     CDetailManager* Details;
+
+    // Global containers
+    xr_vector<FSlideWindowItem> slideWindowItems;
+    typedef svector<D3DVERTEXELEMENT9, MAXD3DDECLLENGTH + 1> VertexDeclarator;
+    xr_vector<VertexDeclarator> DCL;
+    xr_vector<IDirect3DVertexBuffer9*> vertexBuffer;
+    xr_vector<IDirect3DIndexBuffer9*> indexBuffer;
+    //CPSLibrary PSLibrary; // PSLibrary needed
+
+protected:
+    // Loading / Unloading
+    //void LoadVisuals(IReader *fs);
+    //void LoadSectors(IReader *fs);
+    void loadSlideWindowItems(CStreamReader* base_fs);
 };
 
 extern XRRENDER_API CRenderBase renderBase;

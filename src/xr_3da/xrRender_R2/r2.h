@@ -74,11 +74,9 @@ public:
 	R_occlusion													HWOCC;
 
 	// Global vertex-buffer container
-	xr_vector<FSlideWindowItem>									SWIs;
-	typedef svector<D3DVERTEXELEMENT9,MAXD3DDECLLENGTH+1>		VertexDeclarator;
-	xr_vector<VertexDeclarator>									nDC,xDC;
-	xr_vector<IDirect3DVertexBuffer9*>							nVB,xVB;
-	xr_vector<IDirect3DIndexBuffer9*>							nIB,xIB;
+	xr_vector<VertexDeclarator>									alternativeDCL;
+	xr_vector<IDirect3DVertexBuffer9*>							alternativeVertexBuffer;
+	xr_vector<IDirect3DIndexBuffer9*>							alternativeIndexBuffer;
 	CPSLibrary													PSLibrary;
 
 	CModelPool*													Models;
@@ -107,7 +105,6 @@ private:
 	void							LoadLights					(IReader	*fs);
 	void							LoadPortals					(IReader	*fs);
 	void							LoadSectors					(IReader	*fs);
-	void							LoadSWIs					(CStreamReader	*fs);
 
 	BOOL							add_Dynamic					(IRender_Visual	*pVisual, u32 planes);		// normal processing
 	void							add_Static					(IRender_Visual	*pVisual, u32 planes);
@@ -130,10 +127,9 @@ public:
 
 	ShaderElement*					rimp_select_sh_static		(IRender_Visual	*pVisual, float cdist_sq);
 	ShaderElement*					rimp_select_sh_dynamic		(IRender_Visual	*pVisual, float cdist_sq);
-	D3DVERTEXELEMENT9*				getVB_Format				(int id, BOOL	_alt=FALSE);
-	IDirect3DVertexBuffer9*			getVB						(int id, BOOL	_alt=FALSE);
-	IDirect3DIndexBuffer9*			getIB						(int id, BOOL	_alt=FALSE);
-	FSlideWindowItem*				getSWI						(int id);
+    D3DVERTEXELEMENT9* getAlternativeVertexBufferFormat(int id);
+    IDirect3DVertexBuffer9* getAlternativeVertexBuffer(int id);
+    IDirect3DIndexBuffer9* getAlternativeIndexBuffer(int id);
 	IRender_Visual*					model_CreatePE				(LPCSTR name);
 	IRender_Sector*					detectSector				(const Fvector& P, Fvector& D);
     virtual IRender_Target*			getTarget					();

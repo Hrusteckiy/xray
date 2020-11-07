@@ -49,9 +49,9 @@ void Fvisual::Load		(const char* N, IReader *data, u32 dwFlags)
 
 		VERIFY				(NULL==p_rm_Vertices);
 
-		p_rm_Vertices		= RImplementation.getVB			(ID);
+        p_rm_Vertices = xray::renderBase.getVertexBuffer(ID);
 		p_rm_Vertices->AddRef	();
-		vFormat				= RImplementation.getVB_Format	(ID);
+        vFormat = xray::renderBase.getVertexBufferFormat(ID);
 		loaded_v			= true;
 
 		// indices
@@ -61,7 +61,7 @@ void Fvisual::Load		(const char* N, IReader *data, u32 dwFlags)
 		dwPrimitives		= iCount/3;
 
 		VERIFY				(NULL==p_rm_Indices);
-		p_rm_Indices		= RImplementation.getIB		(ID);
+        p_rm_Indices = xray::renderBase.getIndexBuffer(ID);
 		p_rm_Indices->AddRef();
 #endif
 #if RENDER==R_R2
@@ -80,9 +80,9 @@ void Fvisual::Load		(const char* N, IReader *data, u32 dwFlags)
 			m_fast->vCount				= def().r_u32			();
 
 			VERIFY						(NULL==m_fast->p_rm_Vertices);
-			m_fast->p_rm_Vertices		= RImplementation.getVB	(ID,true);
+            m_fast->p_rm_Vertices = RImplementation.getAlternativeVertexBuffer(ID);
 			m_fast->p_rm_Vertices->AddRef();
-			fmt							= RImplementation.getVB_Format(ID,true);
+            fmt = RImplementation.getAlternativeVertexBufferFormat(ID);
 
 			// indices
 			ID							= def().r_u32			();
@@ -91,7 +91,7 @@ void Fvisual::Load		(const char* N, IReader *data, u32 dwFlags)
 			m_fast->dwPrimitives		= iCount/3;
 		
 			VERIFY						(NULL==m_fast->p_rm_Indices);
-			m_fast->p_rm_Indices		= RImplementation.getIB	(ID,true);
+            m_fast->p_rm_Indices = RImplementation.getAlternativeIndexBuffer(ID);
 			m_fast->p_rm_Indices->AddRef();
 
 			// geom
@@ -108,9 +108,9 @@ void Fvisual::Load		(const char* N, IReader *data, u32 dwFlags)
 			vBase				= data->r_u32				();
 			vCount				= data->r_u32				();
 			VERIFY				(NULL==p_rm_Vertices);
-			p_rm_Vertices		= RImplementation.getVB			(ID);
+            p_rm_Vertices = xray::renderBase.getVertexBuffer(ID);
 			p_rm_Vertices->AddRef();
-			vFormat				= RImplementation.getVB_Format	(ID);
+            vFormat = xray::renderBase.getVertexBufferFormat(ID);
 #endif
 		} else {
 			R_ASSERT			(data->find_chunk(OGF_VERTICES));
@@ -142,7 +142,7 @@ void Fvisual::Load		(const char* N, IReader *data, u32 dwFlags)
 			iCount				= data->r_u32			();
 			dwPrimitives		= iCount/3;
 			VERIFY				(NULL==p_rm_Indices);
-			p_rm_Indices		= RImplementation.getIB	(ID);
+            p_rm_Indices = xray::renderBase.getIndexBuffer(ID);
 			p_rm_Indices->AddRef	();
 #endif
 		} else {
