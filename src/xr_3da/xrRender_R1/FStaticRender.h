@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../xrRender/r__dsgraph_structure.h"
 #include "..\xrRender\hom.h"
 #include "DetailManager_R1.hpp"
 #include "glowmanager.h"
@@ -13,7 +14,7 @@
 #include "../Fmesh.h"
 
 // definition
-class CRender : public xray::CRenderBase
+class CRender : public R_dsgraph_structure
 {
 public:
 	struct		_options	{

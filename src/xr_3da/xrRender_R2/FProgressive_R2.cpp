@@ -67,7 +67,7 @@ void FProgressive_R2::Load(const char* N, IReader *data, u32 dwFlags)
 
 void FProgressive_R2::Render(float LOD)
 {
-    if (m_fast && xray::renderBase.phase == R_dsgraph_structure::RenderPhase::PHASE_SMAP)
+    if (m_fast && xray::renderBase.phase == xray::RenderPhase::PHASE_SMAP)
     {
         int lod_id = iFloor((1.f - clampr(LOD, 0.f, 1.f))*float(xSWI->count - 1) + 0.5f);
         VERIFY(lod_id >= 0 && lod_id<int(xSWI->count));

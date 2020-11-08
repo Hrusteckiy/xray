@@ -531,7 +531,7 @@ void CRender::render_sun				()
 	// Begin SMAP-render
 	{
         xray::renderBase.HOM.Disable();
-        xray::renderBase.phase = R_dsgraph_structure::RenderPhase::PHASE_SMAP;
+        xray::renderBase.phase = xray::RenderPhase::PHASE_SMAP;
 		if (RImplementation.o.Tshadows)	r_pmask	(true,true	);
 		else							r_pmask	(true,false	);
 //		fuckingsun->svis.begin					();
@@ -1042,7 +1042,7 @@ void CRender::render_sun_near	()
 		bool	bSpecialFull					= mapNormal[1].size() || mapMatrix[1].size() || mapSorted.size();
 		VERIFY									(!bSpecialFull);
         xray::renderBase.HOM.Disable();
-        xray::renderBase.phase = R_dsgraph_structure::RenderPhase::PHASE_SMAP;
+        xray::renderBase.phase = xray::RenderPhase::PHASE_SMAP;
 		if (RImplementation.o.Tshadows)	r_pmask	(true,true	);
 		else							r_pmask	(true,false	);
 //		fuckingsun->svis.begin					();

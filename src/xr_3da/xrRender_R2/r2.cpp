@@ -33,7 +33,7 @@ float		r_dtex_range		= 50.f;
 ShaderElement*			CRender::rimp_select_sh_dynamic	(IRender_Visual	*pVisual, float cdist_sq)
 {
 	int		id	= SE_R2_SHADOW;
-    if (R_dsgraph_structure::RenderPhase::PHASE_NORMAL == xray::renderBase.phase)
+    if (xray::RenderPhase::PHASE_NORMAL == xray::renderBase.phase)
 	{
 		id = ((_sqrt(cdist_sq)-pVisual->vis.sphere.R)<r_dtex_range)?SE_R2_NORMAL_HQ:SE_R2_NORMAL_LQ;
 	}
@@ -43,7 +43,7 @@ ShaderElement*			CRender::rimp_select_sh_dynamic	(IRender_Visual	*pVisual, float
 ShaderElement*			CRender::rimp_select_sh_static	(IRender_Visual	*pVisual, float cdist_sq)
 {
 	int		id	= SE_R2_SHADOW;
-    if (R_dsgraph_structure::RenderPhase::PHASE_NORMAL == xray::renderBase.phase)
+    if (xray::RenderPhase::PHASE_NORMAL == xray::renderBase.phase)
 	{
 		id = ((_sqrt(cdist_sq)-pVisual->vis.sphere.R)<r_dtex_range)?SE_R2_NORMAL_HQ:SE_R2_NORMAL_LQ;
 	}

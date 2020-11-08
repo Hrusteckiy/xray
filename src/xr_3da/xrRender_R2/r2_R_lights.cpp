@@ -94,7 +94,7 @@ void CRender::render_lights(xray::Light_Package_R2& LP)
 			Lights_LastFrame.push_back	(L);
 
 			// render
-            xray::renderBase.phase = R_dsgraph_structure::RenderPhase::PHASE_SMAP;
+            xray::renderBase.phase = xray::RenderPhase::PHASE_SMAP;
 			if (RImplementation.o.Tshadows)	r_pmask	(true,true	);
 			else							r_pmask	(true,false	);
 			L->svis.begin							();

@@ -21,9 +21,9 @@ CRender													RImplementation;
 ShaderElement*			CRender::rimp_select_sh_dynamic	(IRender_Visual	*pVisual, float cdist_sq)
 {
 	switch (xray::renderBase.phase)		{
-    case R_dsgraph_structure::RenderPhase::PHASE_NORMAL: return (RImplementation.L_Projector->shadowing() ? pVisual->shader->E[SE_R1_NORMAL_HQ] : pVisual->shader->E[SE_R1_NORMAL_LQ])._get();
-	case R_dsgraph_structure::RenderPhase::PHASE_POINT: return pVisual->shader->E[SE_R1_LPOINT]._get();
-	case R_dsgraph_structure::RenderPhase::PHASE_SPOT: return pVisual->shader->E[SE_R1_LSPOT]._get();
+    case xray::RenderPhase::PHASE_NORMAL: return (RImplementation.L_Projector->shadowing() ? pVisual->shader->E[SE_R1_NORMAL_HQ] : pVisual->shader->E[SE_R1_NORMAL_LQ])._get();
+    case xray::RenderPhase::PHASE_POINT: return pVisual->shader->E[SE_R1_LPOINT]._get();
+    case xray::RenderPhase::PHASE_SPOT: return pVisual->shader->E[SE_R1_LSPOT]._get();
 	default: NODEFAULT;
 	}
 #ifdef DEBUG
@@ -34,9 +34,9 @@ ShaderElement*			CRender::rimp_select_sh_dynamic	(IRender_Visual	*pVisual, float
 ShaderElement*			CRender::rimp_select_sh_static	(IRender_Visual	*pVisual, float cdist_sq)
 {
     switch (xray::renderBase.phase)		{
-	case R_dsgraph_structure::RenderPhase::PHASE_NORMAL: return (((_sqrt(cdist_sq) - pVisual->vis.sphere.R)<44)?pVisual->shader->E[SE_R1_NORMAL_HQ]:pVisual->shader->E[SE_R1_NORMAL_LQ])._get();
-	case R_dsgraph_structure::RenderPhase::PHASE_POINT: return pVisual->shader->E[SE_R1_LPOINT]._get();
-	case R_dsgraph_structure::RenderPhase::PHASE_SPOT: return pVisual->shader->E[SE_R1_LSPOT]._get();
+    case xray::RenderPhase::PHASE_NORMAL: return (((_sqrt(cdist_sq) - pVisual->vis.sphere.R)<44) ? pVisual->shader->E[SE_R1_NORMAL_HQ] : pVisual->shader->E[SE_R1_NORMAL_LQ])._get();
+    case xray::RenderPhase::PHASE_POINT: return pVisual->shader->E[SE_R1_LPOINT]._get();
+    case xray::RenderPhase::PHASE_SPOT: return pVisual->shader->E[SE_R1_LSPOT]._get();
 	default: NODEFAULT;
 	}
 #ifdef DEBUG
@@ -217,7 +217,7 @@ void					CRender::set_Object				(IRenderable*		O )
 		VERIFY(dynamic_cast<CObject*>(O)||dynamic_cast<CPS_Instance*>(O));
 		if (O->renderable.pROS) { VERIFY(dynamic_cast<CROS_impl*>(O->renderable.pROS)); }
 	}
-    if (R_dsgraph_structure::RenderPhase::PHASE_NORMAL == xray::renderBase.phase)	{
+    if (xray::RenderPhase::PHASE_NORMAL == xray::renderBase.phase)	{
 		if (L_Shadows)
 			L_Shadows->set_object	(O);
 		
@@ -234,7 +234,7 @@ void					CRender::set_Object				(IRenderable*		O )
 void					CRender::apply_object			(IRenderable*		O )
 {
 	if (0==O)			return	;
-    if (R_dsgraph_structure::RenderPhase::PHASE_NORMAL == xray::renderBase.phase	&& O->renderable_ROS())		{
+    if (xray::RenderPhase::PHASE_NORMAL == xray::renderBase.phase	&& O->renderable_ROS())		{
 		CROS_impl& LT		= *((CROS_impl*)O->renderable.pROS);
 		VERIFY(dynamic_cast<CObject*>(O)||dynamic_cast<CPS_Instance*>(O));
 		VERIFY(dynamic_cast<CROS_impl*>(O->renderable.pROS));
@@ -303,7 +303,7 @@ void CRender::Calculate				()
     xray::renderBase.HOM.Enable();
     xray::renderBase.HOM.Render(xray::renderBase.ViewBase);
 	gm_SetNearer					(FALSE);
-    xray::renderBase.phase = R_dsgraph_structure::RenderPhase::PHASE_NORMAL;
+    xray::renderBase.phase = xray::RenderPhase::PHASE_NORMAL;
 
 	// Detect camera-sector
 	if (!vLastCameraPos.similar(Device.vCameraPosition,EPS_S)) 
@@ -377,7 +377,7 @@ void CRender::Calculate				()
 			g_pGameLevel->pHUD->Render_First	( );	// R1 shadows
 			g_pGameLevel->pHUD->Render_Last		( );	
 			u32 uID_LTRACK						= 0xffffffff;
-            if (xray::renderBase.phase == R_dsgraph_structure::RenderPhase::PHASE_NORMAL)
+            if (xray::renderBase.phase == xray::RenderPhase::PHASE_NORMAL)
             {
 				uLastLTRACK	++;
 				if (lstRenderables.size())		uID_LTRACK	= uLastLTRACK%lstRenderables.size();
@@ -475,7 +475,7 @@ void	CRender::Render		()
 	// Begin
     Target->Begin();
 	o.vis_intersect								= FALSE			;
-    xray::renderBase.phase = R_dsgraph_structure::RenderPhase::PHASE_NORMAL;
+    xray::renderBase.phase = xray::RenderPhase::PHASE_NORMAL;
 	r_dsgraph_render_hud						();				// hud
 	r_dsgraph_render_graph						(0);			// normal level
     if (xray::renderBase.Details)
@@ -495,7 +495,7 @@ void	CRender::Render		()
 	}
     xray::renderBase.HOM.Enable();
 	o.vis_intersect								= FALSE			;
-    xray::renderBase.phase = R_dsgraph_structure::RenderPhase::PHASE_NORMAL;
+    xray::renderBase.phase = xray::RenderPhase::PHASE_NORMAL;
 	r_pmask										(true,true);	// enable priority "0" and "1"
 	if(L_Shadows)L_Shadows->render				();				// ... and shadows
 	r_dsgraph_render_lods						(false,true);	// lods - FB

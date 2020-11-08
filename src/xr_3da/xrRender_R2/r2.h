@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../xrRender/r__dsgraph_structure.h"
 #include "..\xrRender\r__occlusion.h"
 
 #include "r2_types.h"
@@ -17,7 +18,7 @@
 #include "../fmesh.h"
 
 // definition
-class CRender : public xray::CRenderBase
+class CRender : public R_dsgraph_structure
 {
 public:
 	struct		_options	{

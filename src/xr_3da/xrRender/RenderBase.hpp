@@ -1,8 +1,9 @@
 #pragma once
 
-#include "r__dsgraph_structure.h"
+#include <xr_3da/Render.h>
 
 #include <xr_3da/SkeletonCustom.h>
+#include "r__sector.h"
 #include "WallmarksEngine.h"
 #include "HOM.h"
 #include "DetailManager.h"
@@ -18,9 +19,19 @@ extern XRRENDER_API float r_ssaLOD_A, r_ssaLOD_B;
 extern XRRENDER_API float r_ssaGLOD_start, r_ssaGLOD_end;
 extern XRRENDER_API float r_ssaHZBvsTEX;
 
-class XRRENDER_API CRenderBase : public R_dsgraph_structure
+enum class XRRENDER_API RenderPhase : u32
+{
+    PHASE_NORMAL = 0,
+    PHASE_POINT,
+    PHASE_SPOT,
+    PHASE_SMAP
+};
+
+class XRRENDER_API CRenderBase : public IRender_interface
 {
 public:
+    CRenderBase();
+
     // overriding (mostly) as empty methods to be able to create instance of CRenderBase
     // these methods are not used in common render files so it shouldn't break anything
     // in the end specific R1 or R2 implemntation will be used unless they are the same
@@ -44,6 +55,10 @@ public:
     virtual IRender_Target* getTarget() { return nullptr; }
 
     // Main
+    virtual void set_Transform(Fmatrix* M);
+    virtual void set_HUD(BOOL V);
+    virtual BOOL get_HUD();
+    virtual void set_Invisible(BOOL V);
     virtual void flush() {} // should be impemented here later { r_dsgraph_render_graph (0); }
     virtual void set_Object(IRenderable* O) {}
     virtual	void add_Occluder(Fbox2& bb_screenspace) {}
@@ -89,12 +104,12 @@ public:
     virtual void Calculate() {}
     virtual void Render() {}
     virtual void Screenshot(ScreenshotMode mode = SM_NORMAL, LPCSTR name = 0) {} // implemented in r__screenshot.cpp, add this file to xrRnder later
-    virtual void OnFrame() {}
 
     // Render Mode
     virtual void rmNear();
     virtual void rmFar();
     virtual void rmNormal();
+    virtual u32 memory_usage();
 
     // fields and methods for renders only
     virtual IRender_Portal* getPortal(int id);
@@ -105,6 +120,11 @@ public:
     IDirect3DVertexBuffer9*	getVertexBuffer(int id);
     IDirect3DIndexBuffer9* getIndexBuffer(int id);
     IRender_Visual* model_CreatePE(LPCSTR name);
+
+    Fmatrix* val_pTransform;
+    BOOL val_bHUD;
+    BOOL val_bInvisible;
+    RenderPhase phase;
 
     xr_vector<ref_shader> Shaders;
     xr_vector<IRender_Sector*> Sectors;

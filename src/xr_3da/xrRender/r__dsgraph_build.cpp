@@ -53,7 +53,7 @@ void R_dsgraph_structure::r_dsgraph_insert_dynamic	(IRender_Visual *pVisual, Fve
 		N->val.ssa				= SSA;
 		N->val.pObject			= RI.val_pObject;
 		N->val.pVisual			= pVisual;
-		N->val.Matrix			= *RI.val_pTransform;
+		N->val.Matrix			= *xray::renderBase.val_pTransform;
 		N->val.se				= sh_d;		// 4=L_special
 	}
 
@@ -64,16 +64,17 @@ void R_dsgraph_structure::r_dsgraph_insert_dynamic	(IRender_Visual *pVisual, Fve
 
 	// Create common node
 	// NOTE: Invisible elements exist only in R1
-	_MatrixItem		item	= {SSA,RI.val_pObject,pVisual,*RI.val_pTransform};
+    _MatrixItem item = { SSA, RI.val_pObject, pVisual, *xray::renderBase.val_pTransform };
 
 	// HUD rendering
-	if (RI.val_bHUD)			{
+    if (xray::renderBase.val_bHUD)
+    {
 		if (sh->flags.bStrictB2F)	{
 			mapSorted_Node* N		= mapSorted.insertInAnyWay	(distSQ);
 			N->val.ssa				= SSA;
 			N->val.pObject			= RI.val_pObject;
 			N->val.pVisual			= pVisual;
-			N->val.Matrix			= *RI.val_pTransform;
+			N->val.Matrix			= *xray::renderBase.val_pTransform;
 			N->val.se				= sh;
 			return;
 		} else {
@@ -81,7 +82,7 @@ void R_dsgraph_structure::r_dsgraph_insert_dynamic	(IRender_Visual *pVisual, Fve
 			N->val.ssa				= SSA;
 			N->val.pObject			= RI.val_pObject;
 			N->val.pVisual			= pVisual;
-			N->val.Matrix			= *RI.val_pTransform;
+			N->val.Matrix			= *xray::renderBase.val_pTransform;
 			N->val.se				= sh;
 			return;
 		}
@@ -91,7 +92,8 @@ void R_dsgraph_structure::r_dsgraph_insert_dynamic	(IRender_Visual *pVisual, Fve
 #if RENDER==R_R1
 	RI.L_Shadows->add_element	(item);
 #endif
-	if (RI.val_bInvisible)		return;
+    if (xray::renderBase.val_bInvisible)
+        return;
 
 	// strict-sorting selection
 	if (sh->flags.bStrictB2F)	{
@@ -99,7 +101,7 @@ void R_dsgraph_structure::r_dsgraph_insert_dynamic	(IRender_Visual *pVisual, Fve
 		N->val.ssa				= SSA;
 		N->val.pObject			= RI.val_pObject;
 		N->val.pVisual			= pVisual;
-		N->val.Matrix			= *RI.val_pTransform;
+		N->val.Matrix			= *xray::renderBase.val_pTransform;
 		N->val.se				= sh;
 		return;
 	}
@@ -115,7 +117,7 @@ void R_dsgraph_structure::r_dsgraph_insert_dynamic	(IRender_Visual *pVisual, Fve
 		N->val.ssa				= SSA;
 		N->val.pObject			= RI.val_pObject;
 		N->val.pVisual			= pVisual;
-		N->val.Matrix			= *RI.val_pTransform;
+		N->val.Matrix			= *xray::renderBase.val_pTransform;
 		N->val.se				= &*pVisual->shader->E[4];		// 4=L_special
 	}
 	if (sh->flags.bWmark	&& pmask_wmark)	{
@@ -123,7 +125,7 @@ void R_dsgraph_structure::r_dsgraph_insert_dynamic	(IRender_Visual *pVisual, Fve
 		N->val.ssa				= SSA;
 		N->val.pObject			= RI.val_pObject;
 		N->val.pVisual			= pVisual;
-		N->val.Matrix			= *RI.val_pTransform;
+		N->val.Matrix			= *xray::renderBase.val_pTransform;
 		N->val.se				= sh;							
 		return					;
 	}
@@ -156,7 +158,7 @@ void R_dsgraph_structure::r_dsgraph_insert_dynamic	(IRender_Visual *pVisual, Fve
 #if RENDER==R_R2
 	if (val_recorder)			{
 		Fbox3		temp		;
-		Fmatrix&	xf			= *RI.val_pTransform;
+		Fmatrix&	xf			= *xray::renderBase.val_pTransform;
 		temp.xform	(pVisual->vis.box,xf);
 		val_recorder->push_back	(temp);
 	}
@@ -308,7 +310,7 @@ void CRender::add_leafs_Dynamic	(IRender_Visual *pVisual)
 			if (pV->m_lod)				
 			{
 				Fvector							Tpos;	float		D;
-				val_pTransform->transform_tiny	(Tpos, pV->vis.sphere.P);
+                xray::renderBase.val_pTransform->transform_tiny(Tpos, pV->vis.sphere.P);
 				float		ssa		=	CalcSSA	(D,Tpos,pV->vis.sphere.R/2.f);	// assume dynamics never consume full sphere
                 if (ssa<xray::r_ssaLOD_A)
                     _use_lod = TRUE;
@@ -330,7 +332,7 @@ void CRender::add_leafs_Dynamic	(IRender_Visual *pVisual)
 			// General type of visual
 			// Calculate distance to it's center
 			Fvector							Tpos;
-			val_pTransform->transform_tiny	(Tpos, pVisual->vis.sphere.P);
+            xray::renderBase.val_pTransform->transform_tiny(Tpos, pVisual->vis.sphere.P);
 			r_dsgraph_insert_dynamic		(pVisual,Tpos);
 		}
 		return;
@@ -425,7 +427,7 @@ BOOL CRender::add_Dynamic(IRender_Visual *pVisual, u32 planes)
 	Fvector		Tpos;	// transformed position
 	EFC_Visible	VIS;
 
-	val_pTransform->transform_tiny	(Tpos, pVisual->vis.sphere.P);
+    xray::renderBase.val_pTransform->transform_tiny(Tpos, pVisual->vis.sphere.P);
 	VIS = View->testSphere			(Tpos, pVisual->vis.sphere.R,planes);
 	if (fcvNone==VIS) return FALSE	;
 
@@ -477,7 +479,7 @@ BOOL CRender::add_Dynamic(IRender_Visual *pVisual, u32 planes)
 			if (pV->m_lod)				
 			{
 				Fvector							Tpos;	float		D;
-				val_pTransform->transform_tiny	(Tpos, pV->vis.sphere.P);
+                xray::renderBase.val_pTransform->transform_tiny(Tpos, pV->vis.sphere.P);
 				float		ssa		=	CalcSSA	(D,Tpos,pV->vis.sphere.R/2.f);	// assume dynamics never consume full sphere
                 if (ssa<xray::r_ssaLOD_A)
                     _use_lod = TRUE;

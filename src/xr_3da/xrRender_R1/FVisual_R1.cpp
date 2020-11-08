@@ -110,7 +110,7 @@ void Fvisual_R1::Load(const char* N, IReader *data, u32 dwFlags)
 
 void Fvisual_R1::Render(float)
 {
-    if (m_fast && xray::renderBase.phase == R_dsgraph_structure::RenderPhase::PHASE_SMAP)
+    if (m_fast && xray::renderBase.phase == xray::RenderPhase::PHASE_SMAP)
     {
         RCache.set_Geometry(m_fast->rm_geom);
         RCache.Render(D3DPT_TRIANGLELIST, m_fast->vBase, 0, m_fast->vCount, m_fast->iBase, m_fast->dwPrimitives);

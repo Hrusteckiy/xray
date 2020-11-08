@@ -1,9 +1,8 @@
 #pragma once
 
-#include "..\render.h"
+#include "RenderBase.hpp"
 #include "..\ispatial.h"
 #include "r__dsgraph_types.h"
-#include "r__sector.h"
 
 // ALPHA
 namespace xray {
@@ -23,26 +22,14 @@ public:
 //////////////////////////////////////////////////////////////////////////
 // common part of interface implementation for all D3D renderers		//
 //////////////////////////////////////////////////////////////////////////
-class	R_dsgraph_structure										: public IRender_interface, public pureFrame
+class R_dsgraph_structure : public xray::CRenderBase, public pureFrame
 {
 public:
-    enum class RenderPhase : u32
-    {
-        PHASE_NORMAL = 0,
-        PHASE_POINT,
-        PHASE_SPOT,
-        PHASE_SMAP
-    };
-
 	IRenderable*												val_pObject;
-	Fmatrix*													val_pTransform;
-	BOOL														val_bHUD;
-	BOOL														val_bInvisible;
 	BOOL														val_bRecordMP;		// record nearest for multi-pass
 	R_feedback*													val_feedback;		// feedback for geometry being rendered
 	u32															val_feedback_breakp;// breakpoint
 	xr_vector<Fbox3,render_alloc<Fbox3> >*						val_recorder;		// coarse structure recorder
-    RenderPhase													phase;
 	u32															marker;
 	bool														pmask		[2]		;
 	bool														pmask_wmark			;
@@ -87,10 +74,6 @@ public:
 	u32															counter_D	;
 	BOOL														b_loaded	;
 public:
-	virtual		void					set_Transform			(Fmatrix*	M	)				{ VERIFY(M);	val_pTransform = M;	}
-	virtual		void					set_HUD					(BOOL 		V	)				{ val_bHUD		= V;				}
-	virtual		BOOL					get_HUD					()								{ return		val_bHUD;			}
-	virtual		void					set_Invisible			(BOOL 		V	)				{ val_bInvisible= V;				}
 				void					set_Feedback			(R_feedback*V, u32	id)			{ val_feedback_breakp = id; val_feedback = V;		}
 				void					set_Recorder			(xr_vector<Fbox3,render_alloc<Fbox3> >* dest)		{ val_recorder	= dest;	if (dest) dest->clear();	}
 				void					get_Counters			(u32&	s,	u32& d)				{ s=counter_S; d=counter_D;			}
@@ -99,9 +82,6 @@ public:
 	R_dsgraph_structure	()
 	{
 		val_pObject			= NULL	;
-		val_pTransform		= NULL	;
-		val_bHUD			= FALSE	;
-		val_bInvisible		= FALSE	;
 		val_bRecordMP		= FALSE	;
 		val_feedback		= 0;
 		val_feedback_breakp	= 0;
@@ -163,14 +143,4 @@ public:
 	void		r_dsgraph_render_subspace						(IRender_Sector* _sector, CFrustum* _frustum, Fmatrix& mCombined, Fvector& _cop, BOOL _dynamic, BOOL _precise_portals=FALSE	);
 	void		r_dsgraph_render_subspace						(IRender_Sector* _sector, Fmatrix& mCombined, Fvector& _cop, BOOL _dynamic, BOOL _precise_portals=FALSE	);
 	void		r_dsgraph_render_R1_box							(IRender_Sector* _sector, Fbox& _bb, int _element);
-
-public:
-	virtual		u32						memory_usage			()
-	{
-#ifdef USE_DOUG_LEA_ALLOCATOR_FOR_RENDER
-		return	((u32)dlmallinfo().uordblks);
-#else // USE_DOUG_LEA_ALLOCATOR_FOR_RENDER
-		return	(0);
-#endif // USE_DOUG_LEA_ALLOCATOR_FOR_RENDER
-	}
 };

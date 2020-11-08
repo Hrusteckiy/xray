@@ -20,7 +20,7 @@ const float	SSM_tex_size 			=	32.f;
 void cl_light_PR::setup		(R_constant* C)					{
 	Fvector&	P	= RImplementation.r1_dlight_light->position;
 	float		R	= RImplementation.r1_dlight_light->range;
-    if (xray::renderBase.phase == R_dsgraph_structure::RenderPhase::PHASE_POINT)
+    if (xray::renderBase.phase == xray::RenderPhase::PHASE_POINT)
         RCache.set_c(C, P.x, P.y, P.z, .5f / R);
 	else
         RCache.set_c(C,P.x,P.y,P.z,1.f/R);
@@ -294,12 +294,12 @@ void CLightR_Manager::render_spot	()
 void CLightR_Manager::render		()
 {
 	if (selected_spot.size())		{ 
-        xray::renderBase.phase = R_dsgraph_structure::RenderPhase::PHASE_SPOT;
+        xray::renderBase.phase = xray::RenderPhase::PHASE_SPOT;
 		render_spot			();	
 		selected_spot.clear	();	
 	}
 	if (selected_point.size())		{ 
-        xray::renderBase.phase = R_dsgraph_structure::RenderPhase::PHASE_POINT;
+        xray::renderBase.phase = xray::RenderPhase::PHASE_POINT;
 		render_point		();	
 		selected_point.clear(); 
 	}

@@ -4,6 +4,7 @@
 
 #include <xrCore/stream_reader.h>
 #include <xr_3da/xrLevel.h>
+#include "r__dsgraph_types.h"
 
 namespace xray {
 
@@ -14,6 +15,13 @@ XRRENDER_API float r_ssaGLOD_start, r_ssaGLOD_end;
 XRRENDER_API float r_ssaHZBvsTEX;
 
 XRRENDER_API CRenderBase renderBase;
+
+CRenderBase::CRenderBase()
+{
+    renderBase.val_pTransform = NULL;
+    renderBase.val_bHUD = FALSE;
+    renderBase.val_bInvisible = FALSE;
+}
 
 ref_shader CRenderBase::getShader(int id)
 {
@@ -31,6 +39,27 @@ IRender_Visual* CRenderBase::getVisual(int id)
 {
     VERIFY(id<int(renderBase.Visuals.size()));
     return renderBase.Visuals[id];
+}
+
+void CRenderBase::set_Transform(Fmatrix* M)
+{
+    VERIFY(M);
+    renderBase.val_pTransform = M;
+}
+
+void CRenderBase::set_HUD(BOOL V)
+{
+    renderBase.val_bHUD = V;
+}
+
+BOOL CRenderBase::get_HUD()
+{
+    return renderBase.val_bHUD;
+}
+
+void CRenderBase::set_Invisible(BOOL V)
+{
+    renderBase.val_bInvisible = V;
 }
 
 void CRenderBase::add_StaticWallmark(ref_shader& S, const Fvector& P, float s, CDB::TRI* T, Fvector* verts)
@@ -89,6 +118,15 @@ void CRenderBase::rmNormal()
 {
     D3DVIEWPORT9 VP = { 0, 0, render::targetBase.get_width(), render::targetBase.get_height(), 0, 1.f };
     CHK_DX(HW.pDevice->SetViewport(&VP));
+}
+
+u32 CRenderBase::memory_usage()
+{
+#ifdef USE_DOUG_LEA_ALLOCATOR_FOR_RENDER
+    return	((u32)dlmallinfo().uordblks);
+#else // USE_DOUG_LEA_ALLOCATOR_FOR_RENDER
+    return	(0);
+#endif // USE_DOUG_LEA_ALLOCATOR_FOR_RENDER
 }
 
 IRender_Portal* CRenderBase::getPortal(int id)

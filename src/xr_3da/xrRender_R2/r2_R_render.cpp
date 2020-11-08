@@ -37,7 +37,7 @@ void CRender::render_main	(Fmatrix&	m_ViewProjection, bool _fportals)
 			// Determine visibility for dynamic part of scene
 			set_Object							(0);
 			u32 uID_LTRACK						= 0xffffffff;
-            if (xray::renderBase.phase == R_dsgraph_structure::RenderPhase::PHASE_NORMAL)			{
+            if (xray::renderBase.phase == xray::RenderPhase::PHASE_NORMAL)			{
 				uLastLTRACK	++;
 				if (lstRenderables.size())		uID_LTRACK	= uLastLTRACK%lstRenderables.size();
 
@@ -132,12 +132,12 @@ void CRender::render_main	(Fmatrix&	m_ViewProjection, bool _fportals)
 				break;	// exit loop on frustums
 			}
 		}
-        if (g_pGameLevel && (xray::renderBase.phase == R_dsgraph_structure::RenderPhase::PHASE_NORMAL))	g_pGameLevel->pHUD->Render_Last(); // HUD
+        if (g_pGameLevel && (xray::renderBase.phase == xray::RenderPhase::PHASE_NORMAL))	g_pGameLevel->pHUD->Render_Last(); // HUD
 	}
 	else
 	{
 		set_Object									(0);
-        if (g_pGameLevel && (xray::renderBase.phase == R_dsgraph_structure::RenderPhase::PHASE_NORMAL))	g_pGameLevel->pHUD->Render_Last(); // HUD
+        if (g_pGameLevel && (xray::renderBase.phase == xray::RenderPhase::PHASE_NORMAL))	g_pGameLevel->pHUD->Render_Last(); // HUD
 	}
 }
 
@@ -224,7 +224,7 @@ void CRender::Render		()
 		m_zfill.mul	(m_project,Device.mView);
 		r_pmask										(true,false);	// enable priority "0"
 		set_Recorder								(NULL)		;
-        xray::renderBase.phase = R_dsgraph_structure::RenderPhase::PHASE_SMAP;
+        xray::renderBase.phase = xray::RenderPhase::PHASE_SMAP;
 		render_main									(m_zfill,false)	;
 		r_pmask										(true,false);	// disable priority "1"
 		Device.Statistic->RenderCALC.End				( )			;
@@ -266,7 +266,7 @@ void CRender::Render		()
 	r_pmask										(true,false,true);	// enable priority "0",+ capture wmarks
 	if (bSUN)									set_Recorder	(&main_coarse_structure);
 	else										set_Recorder	(NULL);
-    xray::renderBase.phase = R_dsgraph_structure::RenderPhase::PHASE_NORMAL;
+    xray::renderBase.phase = xray::RenderPhase::PHASE_NORMAL;
 	render_main									(Device.mFullTransform,true);
 	set_Recorder								(NULL);
 	r_pmask										(true,false);	// disable priority "1"
@@ -415,7 +415,7 @@ void CRender::render_forward				()
 	{
 		// level
 		r_pmask									(false,true);			// enable priority "1"
-        xray::renderBase.phase = R_dsgraph_structure::RenderPhase::PHASE_NORMAL;
+        xray::renderBase.phase = xray::RenderPhase::PHASE_NORMAL;
 		render_main								(Device.mFullTransform,false);//
 		r_dsgraph_render_graph					(1)	;					// normal level, secondary priority
 		PortalTraverser.fade_render				()	;					// faded-portals
