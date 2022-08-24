@@ -248,8 +248,8 @@ BOOL CDemoRecord::Process(Fvector &P, Fvector &D, Fvector &N, float& fFov, float
 		P.set(m_Camera.c);
 		fAspect = 1.f;
 	}else{
-		if (psHUD_Flags.test(HUD_DRAW)){
-			if ((Device.dwTimeGlobal/750)%3!=0) {
+		if (psHUD_Flags.test(HUD_DRAW) && IR_GetKeyState(DIK_F11))
+		{
 //				pApp->pFontSystem->SetSizeI	(0.02f);
 				pApp->pFontSystem->SetColor	(color_rgba(255,0,0,255));
 				pApp->pFontSystem->SetAligment(CGameFont::alCenter);
@@ -270,7 +270,6 @@ BOOL CDemoRecord::Process(Fvector &P, Fvector &D, Fvector &N, float& fFov, float
 				pApp->pFontSystem->OutNext	("= Quit");
 				pApp->pFontSystem->OutNext	("= Level Map ScreenShot");
 				pApp->pFontSystem->OutNext	("= ScreenShot");
-			}
 		}
 
 		m_vVelocity.lerp		(m_vVelocity,m_vT,0.3f);

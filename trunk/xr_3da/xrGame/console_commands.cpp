@@ -380,6 +380,17 @@ public:
 	  }
 };
 
+class CCC_UI_Reload : public IConsole_Command
+{
+public:
+	CCC_UI_Reload(LPCSTR N) : IConsole_Command(N) { bEmptyArgsHandled = TRUE; };
+	virtual void Execute(LPCSTR args)
+	{
+		if (g_pGamePersistent && g_pGameLevel && Level().game)
+			HUD().OnScreenRatioChanged();// перезагружаем UI через эту команду
+	}
+};
+
 bool valid_file_name(LPCSTR file_name)
 {
 
@@ -1026,6 +1037,49 @@ struct CCC_JumpToLevel : public IConsole_Command {
 		Msg							("! There is no level \"%s\" in the game graph!",level);
 	}
 };
+
+class CCC_Spawn : public IConsole_Command {
+public:
+	CCC_Spawn(pcstr name) : IConsole_Command(name) {}
+
+	void Execute(pcstr args) override
+	{
+		if (!g_pGameLevel)
+			return;
+
+		string256 string;
+		sscanf(args, "%s", &string);
+
+		if (!IsGameTypeSingle() || !pSettings->section_exist(args))
+			return;
+
+		Fvector pos = Actor()->Position();
+		Level().g_cl_Spawn(args, 0xff, M_SPAWN_OBJECT_LOCAL, pos);
+	}
+	void Info(TInfo& I) override
+	{
+		strcpy(I, "valid name of entity or item that can be spawned");
+	}
+};
+
+class CCC_Money : public IConsole_Command
+{
+public:
+	CCC_Money(LPCSTR N) : IConsole_Command(N) { };
+	virtual void Execute(LPCSTR money)
+	{
+		if (!g_pGameLevel)
+		{
+			Log("Error: No game level!");
+			return;
+		}
+
+		CActor* actor = smart_cast<CActor*>(Level().CurrentEntity());
+		int	m_iMoney = (int)atoi(money);
+		if (actor)
+			Actor()->set_money(Actor()->get_money() + m_iMoney, false);
+	}
+};
 #endif // MASTER_GOLD
 
 #include "GamePersistent.h"
@@ -1371,7 +1425,8 @@ void CCC_RegisterCommands()
 	CMD1(CCC_LoadLastSave,		"load_last_save"		);		// load last saved game from ...
 
 	CMD1(CCC_FlushLog,			"flush"					);		// flush log
-	CMD1(CCC_ClearLog,			"clear_log"					);
+	CMD1(CCC_ClearLog,			"clear_log"				);
+	CMD1(CCC_UI_Reload,			"ui_reload"				);	// перезагрузка UI
 
 #ifndef MASTER_GOLD
 	CMD1(CCC_ALifeTimeFactor,		"al_time_factor"		);		// set time factor
@@ -1502,6 +1557,8 @@ void CCC_RegisterCommands()
 
 #ifndef MASTER_GOLD
 	CMD1(CCC_JumpToLevel,	"jump_to_level"		);
+	CMD1(CCC_Spawn,			"g_spawn"			);
+	CMD1(CCC_Money,			"g_money"			);
 	CMD3(CCC_Mask,			"g_god",			&psActorFlags,	AF_GODMODE	);
 	CMD3(CCC_Mask,			"g_unlimitedammo",	&psActorFlags,	AF_UNLIMITEDAMMO);
 	CMD1(CCC_Script,		"run_script");
