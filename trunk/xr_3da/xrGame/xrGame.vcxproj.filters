@@ -6204,6 +6204,9 @@
     <ClInclude Include="ui\UIInventoryUtilities.h">
       <Filter>UI\Common\InventoryUtilities</Filter>
     </ClInclude>
+    <ClInclude Include="ui\UIHelper.h">
+      <Filter>UI\Common\InventoryUtilities</Filter>
+    </ClInclude>
     <ClInclude Include="callback_info.h">
       <Filter>UI\UIWindows</Filter>
     </ClInclude>
@@ -9314,6 +9317,9 @@
     <ClCompile Include="ui\UIInventoryUtilities.cpp">
       <Filter>UI\Common\InventoryUtilities</Filter>
     </ClCompile>
+    <ClInclude Include="ui\UIHelper.cpp">
+      <Filter>UI\Common\InventoryUtilities</Filter>
+    </ClInclude>
     <ClCompile Include="ui\UIBtnHint.cpp">
       <Filter>UI\UIWindows</Filter>
     </ClCompile>
