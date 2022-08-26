@@ -6183,7 +6183,7 @@
     <ClInclude Include="ui\UICharacterInfo.h">
       <Filter>UI\Common\CharacterInfo</Filter>
     </ClInclude>
-    <ClInclude Include="ui\ui_af_params.h">
+    <ClInclude Include="ui\UIArtefactParams.h">
       <Filter>UI\Common\ItemInfo</Filter>
     </ClInclude>
     <ClInclude Include="ui\UIItemInfo.h">
@@ -9299,7 +9299,7 @@
     <ClCompile Include="ui\IUWpnParams.cpp">
       <Filter>UI\Common\ItemInfo</Filter>
     </ClCompile>
-    <ClCompile Include="ui\ui_af_params.cpp">
+    <ClCompile Include="ui\UIArtefactParams.cpp">
       <Filter>UI\Common\ItemInfo</Filter>
     </ClCompile>
     <ClCompile Include="ui\UIItemInfo.cpp">
