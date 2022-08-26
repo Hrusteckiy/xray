@@ -2,6 +2,7 @@
 
 
 #include "uiwindow.h"
+#include "uilines.h"
 #include "../uistaticitem.h"
 #include "../script_export_space.h"
 
@@ -65,6 +66,7 @@ public:
 			void		TextureOff					()							{ m_bTextureEnable = false; }
 			void		TextureAvailable			(bool value)				{ m_bAvailableTexture = value; }
 			bool		TextureAvailable			()							{ return m_bAvailableTexture;}
+	CUILines*			TextItemControl				();
 
 
 	// own
@@ -135,8 +137,8 @@ public:
 	Frect		GetSelfClipRect				();
 	Frect		GetClipperRect				();	
 
-	// Анализируем текст на помещаемость его по длинне в заданную ширину, и если нет, то всталяем 
-	// "\n" реализуем таким образом wordwrap
+	// СРЅР°Р»РёР·РёСЂСѓРµРј С‚РµРєСЃС‚ РЅР° РїРѕРјРµС‰Р°РµРјРѕСЃС‚СЊ РµРіРѕ РїРѕ РґР»РёРЅРЅРµ РІ Р·Р°РґР°РЅРЅСѓСЋ С€РёСЂРёРЅСѓ, Рё РµСЃР»Рё РЅРµС‚, С‚Рѕ РІСЃС‚Р°Р»В¤РµРј 
+	// "\n" СЂРµР°Р»РёР·СѓРµРј С‚Р°РєРёРј РѕР±СЂР°Р·РѕРј wordwrap
 //	static void PreprocessText				(STRING &str, float width, CGameFont *pFont);
 	enum EElipsisPosition
 	{
@@ -167,7 +169,8 @@ public:
 	CUILines*				m_pLines;
 protected:
 	bool			m_bEnableTextHighlighting;
-		// Цвет подсветки
+	CUILines*		m_pTextControl;
+		// Г·РІРµС‚ РїРѕРґСЃРІРµС‚РєРё
 	u32				m_HighlightColor;
 
 	// this array of color will be useful in CUI3tButton class
@@ -187,11 +190,11 @@ protected:
 	bool			m_bHeading;
 	float			m_fHeading;
 
-    // Для вывода текстуры с обрезанием по маске используем CUIFrameWindow
+    // Ж’Р»В¤ РІС‹РІРѕРґР° С‚РµРєСЃС‚СѓСЂС‹ СЃ РѕР±СЂРµР·Р°РЅРёРµРј РїРѕ РјР°СЃРєРµ РёСЃРїРѕР»СЊР·СѓРµРј CUIFrameWindow
 	CUIFrameWindow	*m_pMask;
 	Fvector2		m_TextureOffset;
 
-	// Обрезка надписи
+	// СњР±СЂРµР·РєР° РЅР°РґРїРёСЃРё
 	EElipsisPosition	m_ElipsisPos;
 	void Elipsis(const Frect &rect, EElipsisPosition elipsisPos);
 	int	m_iElipsisIndent;
@@ -202,6 +205,36 @@ private:
 
 public:
 	DECLARE_SCRIPT_REGISTER_FUNCTION
+};
+
+class CUITextWnd :public CUIWindow
+{
+	typedef CUIWindow	inherited;
+	CUILines			m_lines;
+public:
+						CUITextWnd				();
+	virtual				~CUITextWnd				(){};
+	virtual void		Draw					();
+	virtual void		Update					();
+
+			void 		AdjustHeightToText		();
+			void 		AdjustWidthToText		();
+
+			void		SetText					(LPCSTR txt)				{TextItemControl().SetText(txt);}
+			LPCSTR		GetText					()							{return TextItemControl().GetText();}
+			void		SetFont					(CGameFont* F)				{TextItemControl().SetFont(F);}
+			CGameFont*	GetFont					()							{return TextItemControl().GetFont();}
+			void		SetTextColor			(u32 color)					{TextItemControl().SetTextColor(color);}
+			u32			GetTextColor			()							{return TextItemControl().GetTextColor();}
+			void		SetTextComplexMode		(bool mode = true)			{TextItemControl().SetTextComplexMode(mode);}
+			void		SetTextAlignment		(ETextAlignment al)			{TextItemControl().SetTextAlignment(al);}
+			void		SetVTextAlignment		(EVTextAlignment al)		{TextItemControl().SetVTextAlignment(al);}
+			void		SetCutWordsMode			(bool mode)					{TextItemControl().SetCutWordsMode(mode);}
+			void		SetTextOffset			(float x, float y)			{TextItemControl().m_TextOffset.x = x; TextItemControl().m_TextOffset.y = y;}
+
+	virtual void		ColorAnimationSetTextColor(u32 color, bool only_alpha);
+
+	CUILines&			TextItemControl			()							{return m_lines;}
 };
 
 add_to_type_list(CUIStatic)

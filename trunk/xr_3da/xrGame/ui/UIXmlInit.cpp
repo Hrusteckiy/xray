@@ -140,7 +140,7 @@ bool CUIXmlInit::InitFrameWindow(CUIXml& xml_doc, LPCSTR path,
 
 	if(*tex_name) pWnd->InitLeftBottom(*tex_name, x,y);
 */
-	//инициализировать заголовок окна
+	//РёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°С‚СЊ Р·Р°РіРѕР»РѕРІРѕРє РѕРєРЅР°
 	strconcat(sizeof(buf),buf,path,":title");
 	if(xml_doc.NavigateToNode(buf,index)) InitStatic(xml_doc, buf, index, pWnd->UITitleText);
 	
@@ -225,6 +225,35 @@ bool CUIXmlInit::InitCheck(CUIXml& xml_doc, LPCSTR path, int index, CUICheckButt
 	InitStatic(xml_doc, path, index, pWnd);
 	InitOptionsItem(xml_doc, path, index, pWnd);
 
+	return true;
+}
+
+
+bool CUIXmlInit::InitTextWnd(CUIXml& xml_doc, LPCSTR path, int index, CUITextWnd* pWnd)
+{
+	R_ASSERT3(xml_doc.NavigateToNode(path, index), "XML node not found", path, xml_doc.m_xml_file_name);
+
+	InitWindow(xml_doc, path, index, pWnd);
+
+	string256			buf;
+	InitText(xml_doc, strconcat(sizeof(buf), buf, path, ":text"), index, &pWnd->TextItemControl());
+	pWnd->TextItemControl().SetParrentWnd(pWnd);
+
+	LPCSTR str_flag = xml_doc.ReadAttrib(path, index, "light_anim", "");
+	int flag_cyclic = xml_doc.ReadAttribInt(path, index, "la_cyclic", 1);
+	int flag_alpha = xml_doc.ReadAttribInt(path, index, "la_alpha", 0);
+
+	/*u8 flags = LA_TEXTCOLOR;
+	if (flag_cyclic)			flags |= LA_CYCLIC;
+	if (flag_alpha)			flags |= LA_ONLYALPHA;
+	pWnd->SetColorAnimation(str_flag, flags);*/
+
+
+	bool bComplexMode = xml_doc.ReadAttribInt(path, index, "complex_mode", 0) ? true : false;
+	if (bComplexMode)
+		pWnd->SetTextComplexMode(bComplexMode);
+
+	R_ASSERT(pWnd->GetChildWndList().size() == 0);
 	return true;
 }
 
