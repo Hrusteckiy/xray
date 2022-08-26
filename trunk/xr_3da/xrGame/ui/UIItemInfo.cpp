@@ -14,6 +14,7 @@
 #include "../PhysicsShellHolder.h"
 #include "UIWpnParams.h"
 #include "UIArtefactParams.h"
+#include "UIBoosterInfo.h"
 
 CUIItemInfo::CUIItemInfo()
 {
@@ -28,6 +29,7 @@ CUIItemInfo::CUIItemInfo()
 	UIArtefactParams			= NULL;
 	UIName						= NULL;
 	m_pInvItem					= NULL;
+	UIBoosterInfo				= NULL;
 	m_b_force_drawing			= false;
 }
 
@@ -35,6 +37,7 @@ CUIItemInfo::~CUIItemInfo()
 {
 	xr_delete					(UIWpnParams);
 	xr_delete					(UIArtefactParams);
+	xr_delete					(UIBoosterInfo);
 }
 
 void CUIItemInfo::Init(LPCSTR xml_name){
@@ -100,6 +103,8 @@ void CUIItemInfo::Init(LPCSTR xml_name){
 		UIArtefactParams				= xr_new<CUIArtefactParams>();
 		UIWpnParams->InitFromXml		(uiXml);
 		UIArtefactParams->InitFromXml	(uiXml);
+		UIBoosterInfo					= xr_new<CUIBoosterInfo>();
+		UIBoosterInfo->InitFromXml		(uiXml);
 		UIDesc							= xr_new<CUIScrollView>(); 
 		AttachChild						(UIDesc);		
 		UIDesc->SetAutoDelete			(true);
@@ -166,6 +171,7 @@ void CUIItemInfo::InitItem(CInventoryItem* pInvItem)
 		VERIFY								(0==UIDesc->GetSize());
 		TryAddWpnInfo						(pInvItem->object().cNameSect());
 		TryAddArtefactInfo					(pInvItem->object().cNameSect());
+		TryAddBoosterInfo					(pInvItem->object().cNameSect());
 		if(m_desc_info.bShowDescrText)
 		{
 			CUIStatic* pItem					= xr_new<CUIStatic>();
@@ -181,7 +187,7 @@ void CUIItemInfo::InitItem(CInventoryItem* pInvItem)
 	}
 	if(UIItemImage)
 	{
-		// Çàãðóæàåì êàðòèíêó
+		// Ð—Ð°Ð³Ñ€ÑƒÐ¶Ð°ÐµÐ¼ ÐºÐ°Ñ€Ñ‚Ð¸Ð½ÐºÑƒ
 		UIItemImage->SetShader				(InventoryUtilities::GetEquipmentIconsShader());
 
 		int iGridWidth						= pInvItem->GetGridWidth();
@@ -221,6 +227,15 @@ void CUIItemInfo::TryAddArtefactInfo	(const shared_str& af_section)
 	{
 		UIArtefactParams->SetInfo(af_section);
 		UIDesc->AddWindow(UIArtefactParams, false);
+	}
+}
+
+void CUIItemInfo::TryAddBoosterInfo(const shared_str& section)
+{
+	if (UIBoosterInfo->Check(section))
+	{
+		UIBoosterInfo->SetInfo(section);
+		UIDesc->AddWindow(UIBoosterInfo, false);
 	}
 }
 

@@ -6186,6 +6186,9 @@
     <ClInclude Include="ui\UIArtefactParams.h">
       <Filter>UI\Common\ItemInfo</Filter>
     </ClInclude>
+    <ClInclude Include="ui\UIBoosterInfo.h">
+      <Filter>UI\Common\ItemInfo</Filter>
+    </ClInclude>
     <ClInclude Include="ui\UIItemInfo.h">
       <Filter>UI\Common\ItemInfo</Filter>
     </ClInclude>
@@ -9300,6 +9303,9 @@
       <Filter>UI\Common\ItemInfo</Filter>
     </ClCompile>
     <ClCompile Include="ui\UIArtefactParams.cpp">
+      <Filter>UI\Common\ItemInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\UIBoosterInfo.cpp">
       <Filter>UI\Common\ItemInfo</Filter>
     </ClCompile>
     <ClCompile Include="ui\UIItemInfo.cpp">

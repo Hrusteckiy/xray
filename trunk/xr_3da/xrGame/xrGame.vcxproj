@@ -1668,6 +1668,7 @@
     <ClInclude Include="ui\UIKeyBinding.h" />
     <ClInclude Include="ui\UICharacterInfo.h" />
     <ClInclude Include="ui\UIArtefactParams.h" />
+    <ClInclude Include="ui\UIBoosterInfo.h" />
     <ClInclude Include="ui\UIHelper.h" />
     <ClInclude Include="ui\UIItemInfo.h" />
     <ClInclude Include="ui\UIWpnParams.h" />
@@ -6180,6 +6181,7 @@
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)$(ProjectName)_script.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <ClCompile Include="ui\UIArtefactParams.cpp" />
+    <ClCompile Include="ui\UIBoosterInfo.cpp" />
     <ClCompile Include="ui\UIHelper.cpp" />
     <ClCompile Include="ui\UIItemInfo.cpp" />
     <ClCompile Include="ui\UIOutfitInfo.cpp" />
