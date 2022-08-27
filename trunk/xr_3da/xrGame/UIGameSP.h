@@ -16,6 +16,7 @@ class CChangeLevelWnd;
 class CUIMessageBox;
 class CInventoryBox;
 class CInventoryOwner;
+class CAttachableItem;
 
 class CUIGameSP : public CUIGameCustom
 {
@@ -38,8 +39,12 @@ public:
 	virtual void		ReInitShownUI			();
 	void				ChangeLevel				(GameGraph::_GRAPH_ID game_vert_id, u32 level_vert_id, Fvector pos, Fvector ang, Fvector pos2, Fvector ang2, bool b);
 
+#ifdef DEBUG
+	virtual void		Render					();
+#endif
 	virtual void		HideShownDialogs		();
 
+	CAttachableItem*	AtchbleItem;
 	CUIInventoryWnd*	InventoryMenu;
 	CUIPdaWnd*			PdaMenu;
 	CUITalkWnd*			TalkMenu;

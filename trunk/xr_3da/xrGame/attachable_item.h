@@ -45,6 +45,10 @@ public:
 	IC		bool				enabled					() const;
 			void				enable					(bool value);
 
+#ifdef DEBUG
+			void attach_adjust_mode_keyb(int dik);
+			void attach_draw_adjust_mode();
+#endif
 public:
 #ifdef DEBUG
 	static CAttachableItem		*m_dbgItem;
@@ -52,10 +56,12 @@ public:
 	static Fvector				get_pos_offset			()	{VERIFY(m_dbgItem);return m_dbgItem->m_offset.c;};
 	static	void				set_angle_offset		(Fvector val){Fvector c = get_pos_offset(); m_dbgItem->m_offset.setHPB(VPUSH(val));m_dbgItem->m_offset.c=c; }
 
+	static	void				rot						(int axis, float val){Fvector v = get_angle_offset(); v[axis]+=val;set_angle_offset(v);}	
 	static	void				rot_dx					(float val){Fvector v = get_angle_offset(); v.x +=val;set_angle_offset(v);}	
 	static	void				rot_dy					(float val){Fvector v = get_angle_offset(); v.y +=val;set_angle_offset(v);}	
 	static	void				rot_dz					(float val){Fvector v = get_angle_offset(); v.z +=val;set_angle_offset(v);}	
 
+	static	void				mov						(int axis, float val){Fvector c = get_pos_offset(); c[axis]+=val; m_dbgItem->m_offset.c=c;}	
 	static	void				mov_dx					(float val){Fvector c = get_pos_offset(); c.x +=val; m_dbgItem->m_offset.c=c;}	
 	static	void				mov_dy					(float val){Fvector c = get_pos_offset(); c.y +=val; m_dbgItem->m_offset.c=c;}	
 	static	void				mov_dz					(float val){Fvector c = get_pos_offset(); c.z +=val; m_dbgItem->m_offset.c=c;}	

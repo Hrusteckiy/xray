@@ -19,6 +19,9 @@
 #include "ui/UICarBodyWnd.h"
 #include "ui/UIMessageBox.h"
 
+#ifdef DEBUG
+#include "attachable_item.h"
+#endif
 CUIGameSP::CUIGameSP()
 {
 	m_game			= NULL;
@@ -49,6 +52,14 @@ void CUIGameSP::shedule_Update(u32 dt)
 	HideShownDialogs						();
 }
 
+#ifdef DEBUG
+void CUIGameSP::Render()
+{
+	inherited::Render();
+	AtchbleItem->attach_draw_adjust_mode();
+}
+#endif
+
 void CUIGameSP::HideShownDialogs()
 {
 	CUIDialogWnd* mir				= MainInputReceiver();
@@ -77,6 +88,9 @@ bool CUIGameSP::IR_OnKeyboardPress(int dik)
 
 	if( Device.Paused()		) return false;
 
+#ifdef DEBUG
+	AtchbleItem->attach_adjust_mode_keyb(dik);
+#endif
 	CActor *pActor = smart_cast<CActor*>(Level().CurrentEntity());
 	if(!pActor)								return false;
 	if( pActor && !pActor->g_Alive() )		return false;

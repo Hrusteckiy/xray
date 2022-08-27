@@ -1232,6 +1232,8 @@ struct CCC_DbgBullets : public CCC_Integer {
 
 #include "attachable_item.h"
 #include "attachment_owner.h"
+#include "InventoryOwner.h"
+#include "Inventory.h"
 class CCC_TuneAttachableItem : public IConsole_Command
 {
 public		:
@@ -1244,20 +1246,32 @@ public		:
 			return;
 		};
 
-		CObject* obj = Level().CurrentViewEntity();	VERIFY(obj);
+		CObject* obj			= Level().CurrentViewEntity();	VERIFY(obj);
+		shared_str ssss			= args;
+
 		CAttachmentOwner* owner = smart_cast<CAttachmentOwner*>(obj);
-		shared_str ssss = args;
-		CAttachableItem* itm = owner->attachedItem(ssss);
-		if(itm){
+		CAttachableItem* itm	= owner->attachedItem(ssss);
+		if(itm)
+		{
 			CAttachableItem::m_dbgItem = itm;
+		}
+		else
+		{
+			CInventoryOwner* iowner = smart_cast<CInventoryOwner*>(obj);
+			PIItem active_item = iowner->m_inventory->ActiveItem();
+			if(active_item && active_item->object().cNameSect()==ssss )
+				CAttachableItem::m_dbgItem = active_item->cast_attachable_item();
+		}
+
+		if(CAttachableItem::m_dbgItem)
 			Msg("CCC_TuneAttachableItem switched to ON for [%s]",args);
-		}else
+		else
 			Msg("CCC_TuneAttachableItem cannot find attached item [%s]",args);
 	}
 
 	virtual void	Info	(TInfo& I)
 	{	
-		sprintf_s(I,"allows to change bind rotation and position offsets for attached item, <section_name> given as arguments");
+		xr_sprintf(I,"allows to change bind rotation and position offsets for attached item, <section_name> given as arguments");
 	}
 };
 
