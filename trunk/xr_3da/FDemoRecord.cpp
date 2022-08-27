@@ -248,7 +248,7 @@ BOOL CDemoRecord::Process(Fvector &P, Fvector &D, Fvector &N, float& fFov, float
 		P.set(m_Camera.c);
 		fAspect = 1.f;
 	}else{
-		if (psHUD_Flags.test(HUD_DRAW) && IR_GetKeyState(DIK_F11))
+		if (psHUD_Flags.test(HUD_DRAW) && IR_GetKeyState(DIK_F1))
 		{
 //				pApp->pFontSystem->SetSizeI	(0.02f);
 				pApp->pFontSystem->SetColor	(color_rgba(255,0,0,255));
