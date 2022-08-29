@@ -23,6 +23,7 @@ protected:
 		_item_power_restore_speed,
 		_item_radiation_restore_speed,
 		_item_satiety_restore_speed,
+		_item_alcohol_restore_speed,
 
 		eBoostExplImmunity
 	};

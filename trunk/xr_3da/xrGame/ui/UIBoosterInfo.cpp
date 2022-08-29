@@ -31,6 +31,7 @@ LPCSTR boost_influence_caption[] =
 	"ui_inv_power",
 	"ui_inv_radiation",
 	"ui_inv_satiety",
+	"ui_inv_alcohol",
 };
 
 LPCSTR ef_boosters_section_names[] =
@@ -40,6 +41,7 @@ LPCSTR ef_boosters_section_names[] =
 	"eat_power",
 	"eat_radiation",
 	"eat_satiety",
+	"eat_alcohol",
 };
 
 LPCSTR ef_boosters_node_names[] =
@@ -49,6 +51,7 @@ LPCSTR ef_boosters_node_names[] =
 	"boost_power",
 	"boost_radiation",
 	"boost_satiety",
+	"boost_alcohol",
 };
 
 void CUIBoosterInfo::InitFromXml(CUIXml& xml)
