@@ -2,14 +2,11 @@
 #include "UIBoosterInfo.h"
 #include "UIStatic.h"
 #include "../object_broker.h"
-#include "../EntityCondition.h"
 #include "../eatable_item.h"
 #include "..\actor.h"
-#include "../ActorCondition.h"
 #include "UIXmlInit.h"
 #include "UIHelper.h"
 #include "../string_table.h"
-#include "uicellitem.h"
 
 CUIBoosterInfo::CUIBoosterInfo()
 {
@@ -93,17 +90,18 @@ void CUIBoosterInfo::InitFromXml(CUIXml& xml)
 	xml.SetLocalRoot( stored_root );
 }
 
-void CUIBoosterInfo::SetInfo( shared_str const& section )
+void CUIBoosterInfo::SetInfo(CInventoryItem& pInvItem)
 {
 	DetachAll();
 	AttachChild( m_Prop_line );
 
+	const shared_str& section = pInvItem.object().cNameSect();
+	CEatableItem* eatable = pInvItem.cast_eatable_item();
 	CActor* actor = smart_cast<CActor*>( Level().CurrentViewEntity() );
 	if ( !actor )
 	{
 		return;
 	}
-
 
 	float val = 0.0f;
 	Fvector2 pos;
@@ -131,9 +129,10 @@ void CUIBoosterInfo::SetInfo( shared_str const& section )
 		}
 	}
 
-	if (pSettings->line_exist(section.c_str(), "eat_portions_num"))
+	//Portions
+	if (eatable)
 	{
-		val = pSettings->r_float(section, "eat_portions_num");
+		int val = eatable->m_iPortionsNum;
 
 		if (val > 1)
 		{
@@ -148,14 +147,6 @@ void CUIBoosterInfo::SetInfo( shared_str const& section )
 	}
 
 	SetHeight(h);
-}
-
-bool CUIBoosterInfo::Check(const shared_str& section)
-{
-	if(pSettings->line_exist(section,"eat_health"))
-		return true;
-	else
-		return false;
 }
 
 /// ----------------------------------------------------------------
@@ -211,20 +202,16 @@ void UIBoosterInfoItem::SetValue(float value)
 {
 	value *= m_magnitude;
 	string32 buf;
-	if(m_show_sign)
-		sprintf(buf, "%+.0f", value);
-	else
-		sprintf(buf, "%.0f", value);
+	string32 str;
 	u32 red = color_rgba(255, 0, 0, 255);
 	u32 green = color_rgba(0, 255, 0, 255);
-#pragma todo(SOLVE THIS!!!)
-	/*LPSTR str;
-	if(m_unit_str.size())
-		strconcat(sizeof(str),str, buf, " ", m_unit_str.c_str());
-	else
-		strconcat(sizeof(str), str, buf, "", m_unit_str.c_str());*/
+	m_show_sign?
+		xr_sprintf(buf, "%+.0f", value):xr_sprintf(buf, "%.0f", value);
 
-	m_value->SetText(buf);
+	m_unit_str.size()?
+		xr_sprintf(str,"%s%s", buf, m_unit_str.c_str()):xr_sprintf(str,"%s", buf);
+
+	m_value->SetText(str);
 
 	if (m_color_mode == 2)
 	{

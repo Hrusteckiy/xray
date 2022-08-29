@@ -33,7 +33,7 @@ public:
 	void				InitItem			(CInventoryItem* pInvItem);
 	void				TryAddWpnInfo		(const shared_str& wpn_section);
 	void				TryAddArtefactInfo	(const shared_str& af_section);
-	void				TryAddBoosterInfo	(const shared_str& af_section);
+	void				TryAddBoosterInfo	(CInventoryItem& pInvItem);
 
 	virtual void		Draw				();
 	bool				m_b_force_drawing;

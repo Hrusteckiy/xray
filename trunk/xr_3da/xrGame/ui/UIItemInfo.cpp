@@ -12,6 +12,7 @@
 #include "../Inventory_Item.h"
 #include "UIInventoryUtilities.h"
 #include "../PhysicsShellHolder.h"
+#include "../eatable_item.h"
 #include "UIWpnParams.h"
 #include "UIArtefactParams.h"
 #include "UIBoosterInfo.h"
@@ -171,7 +172,7 @@ void CUIItemInfo::InitItem(CInventoryItem* pInvItem)
 		VERIFY								(0==UIDesc->GetSize());
 		TryAddWpnInfo						(pInvItem->object().cNameSect());
 		TryAddArtefactInfo					(pInvItem->object().cNameSect());
-		TryAddBoosterInfo					(pInvItem->object().cNameSect());
+		TryAddBoosterInfo					(*pInvItem);
 		if(m_desc_info.bShowDescrText)
 		{
 			CUIStatic* pItem					= xr_new<CUIStatic>();
@@ -230,11 +231,12 @@ void CUIItemInfo::TryAddArtefactInfo	(const shared_str& af_section)
 	}
 }
 
-void CUIItemInfo::TryAddBoosterInfo(const shared_str& section)
+void CUIItemInfo::TryAddBoosterInfo(CInventoryItem& pInvItem)
 {
-	if (UIBoosterInfo->Check(section))
+	CEatableItem* food = smart_cast<CEatableItem*>(&pInvItem);
+	if (UIBoosterInfo && food)
 	{
-		UIBoosterInfo->SetInfo(section);
+		UIBoosterInfo->SetInfo(pInvItem);
 		UIDesc->AddWindow(UIBoosterInfo, false);
 	}
 }

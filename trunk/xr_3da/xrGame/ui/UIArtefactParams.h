@@ -1,8 +1,11 @@
 #pragma once
 #include "UIWindow.h"
 
+
 class CUIXml;
 class CUIStatic;
+class CUITextWnd;
+class UIArtefactParamsItem;
 
 class CUIArtefactParams :public CUIWindow
 {
@@ -37,5 +40,30 @@ protected:
 		_max_item_index,
 
 	};
-	CUIStatic*					m_info_items[_max_item_index];
+	UIArtefactParamsItem*					m_info_items[_max_item_index];
+	CUIStatic*								m_Prop_line;
 };
+
+// -----------------------------------
+
+class UIArtefactParamsItem : public CUIWindow
+{
+public:
+	UIArtefactParamsItem();
+	virtual		~UIArtefactParamsItem();
+
+	void	Init(CUIXml& xml, LPCSTR section);
+	void	SetCaption(LPCSTR name);
+	void	SetValue(float value);
+
+private:
+	CUIStatic* m_caption;
+	CUITextWnd* m_value;
+	float		m_magnitude;
+	bool		m_show_sign;
+	int			m_color_mode;
+	shared_str	m_unit_str;
+	shared_str	m_texture_minus;
+	shared_str	m_texture_plus;
+
+}; // class UIArtefactParamsItem

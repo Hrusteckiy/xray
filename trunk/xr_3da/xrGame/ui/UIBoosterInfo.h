@@ -1,12 +1,11 @@
 #pragma once
 #include "UIWindow.h"
-#include "../EntityCondition.h"
 
 class CUIXml;
 class CUIStatic;
 class CUITextWnd;
+class CInventoryItem;
 class UIBoosterInfoItem;
-class CUICellItem;
 
 class CUIBoosterInfo : public CUIWindow
 {
@@ -14,8 +13,7 @@ public:
 					CUIBoosterInfo		();
 	virtual			~CUIBoosterInfo		();
 			void	InitFromXml			(CUIXml& xml);
-			void	SetInfo				(const shared_str& section);
-			bool	Check				(const shared_str& section);
+			void	SetInfo				(CInventoryItem& pInvItem);
 
 protected:
 	enum {
@@ -31,7 +29,6 @@ protected:
 	UIBoosterInfoItem*	m_booster_items[eBoostExplImmunity];
 	UIBoosterInfoItem*	m_portions;
 	
-	CUICellItem*		m_CellItem;
 	CUIStatic*			m_Prop_line;
 
 }; // class CUIBoosterInfo
