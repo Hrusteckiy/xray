@@ -147,7 +147,7 @@ void CUIMainIngameWnd::Init()
 
 	UIWeaponIcon.Enable			(false);
 
-	//индикаторы 
+	//РёРЅРґРёРєР°С‚РѕСЂС‹ 
 	UIZoneMap->Init				();
 	UIZoneMap->SetScale			(DEFAULT_MAP_SCALE);
 
@@ -158,19 +158,19 @@ void CUIMainIngameWnd::Init()
 	}
 
 
-	//Полоса прогресса здоровья
+	//РџРѕР»РѕСЃР° РїСЂРѕРіСЂРµСЃСЃР° Р·РґРѕСЂРѕРІСЊСЏ
 	UIStaticHealth.AttachChild	(&UIHealthBar);
 //.	xml_init.InitAutoStaticGroup(uiXml,"static_health", &UIStaticHealth);
 	xml_init.InitProgressBar	(uiXml, "progress_bar_health", 0, &UIHealthBar);
 
-	//Полоса прогресса армора
+	//РџРѕР»РѕСЃР° РїСЂРѕРіСЂРµСЃСЃР° Р°СЂРјРѕСЂР°
 	UIStaticArmor.AttachChild	(&UIArmorBar);
 //.	xml_init.InitAutoStaticGroup(uiXml,"static_armor", &UIStaticArmor);
 	xml_init.InitProgressBar	(uiXml, "progress_bar_armor", 0, &UIArmorBar);
 
 	
 
-	// Подсказки, которые возникают при наведении прицела на объект
+	// РџРѕРґСЃРєР°Р·РєРё, РєРѕС‚РѕСЂС‹Рµ РІРѕР·РЅРёРєР°СЋС‚ РїСЂРё РЅР°РІРµРґРµРЅРёРё РїСЂРёС†РµР»Р° РЅР° РѕР±СЉРµРєС‚
 	AttachChild					(&UIStaticQuickHelp);
 	xml_init.InitStatic			(uiXml, "quick_info", 0, &UIStaticQuickHelp);
 
@@ -180,7 +180,7 @@ void CUIMainIngameWnd::Init()
 	xml_init.InitScrollView		(uiXml, "icons_scroll_view", 0, m_UIIcons);
 	AttachChild					(m_UIIcons);
 
-	// Загружаем иконки 
+	// Р—Р°РіСЂСѓР¶Р°РµРј РёРєРѕРЅРєРё 
 	if(IsGameTypeSingle())
 	{
 		xml_init.InitStatic		(uiXml, "starvation_static", 0, &UIStarvationIcon);
@@ -218,11 +218,11 @@ void CUIMainIngameWnd::Init()
 		"invincible"
 	};
 
-	// Загружаем пороговые значения для индикаторов
+	// Р—Р°РіСЂСѓР¶Р°РµРј РїРѕСЂРѕРіРѕРІС‹Рµ Р·РЅР°С‡РµРЅРёСЏ РґР»СЏ РёРЅРґРёРєР°С‚РѕСЂРѕРІ
 	EWarningIcons j = ewiWeaponJammed;
 	while (j < ewiInvincible)
 	{
-		// Читаем данные порогов для каждого индикатора
+		// Р§РёС‚Р°РµРј РґР°РЅРЅС‹Рµ РїРѕСЂРѕРіРѕРІ РґР»СЏ РєР°Р¶РґРѕРіРѕ РёРЅРґРёРєР°С‚РѕСЂР°
 		shared_str cfgRecord = pSettings->r_string("main_ingame_indicators_thresholds", *warningStrings[static_cast<int>(j) - 1]);
 		u32 count = _GetItemCount(*cfgRecord);
 
@@ -326,29 +326,36 @@ void CUIMainIngameWnd::SetAmmoIcon (const shared_str& sect_name)
 
 	UIWeaponIcon.Show			(true);
 	//properties used by inventory menu
-	float iGridWidth			= pSettings->r_float(sect_name, "inv_grid_width");
-	float iGridHeight			= pSettings->r_float(sect_name, "inv_grid_height");
-
-	float iXPos				= pSettings->r_float(sect_name, "inv_grid_x");
-	float iYPos				= pSettings->r_float(sect_name, "inv_grid_y");
-
-	UIWeaponIcon.GetUIStaticItem().SetOriginalRect(	(iXPos		 * INV_GRID_WIDTH),
-													(iYPos		 * INV_GRID_HEIGHT),
-													(iGridWidth	 * INV_GRID_WIDTH),
-													(iGridHeight * INV_GRID_HEIGHT));
+	Frect texture_rect;
+	texture_rect.x1 = pSettings->r_float(sect_name, "inv_grid_x") * INV_GRID_WIDTH;
+	texture_rect.y1 = pSettings->r_float(sect_name, "inv_grid_y") * INV_GRID_HEIGHT;
+	texture_rect.x2 = pSettings->r_float(sect_name, "inv_grid_width") * INV_GRID_WIDTH;
+	texture_rect.y2 = pSettings->r_float(sect_name, "inv_grid_height") * INV_GRID_HEIGHT;
+	texture_rect.rb.add(texture_rect.lt);
+	UIWeaponIcon.GetUIStaticItem().SetOriginalRect(texture_rect);
 	UIWeaponIcon.SetStretchTexture(true);
 
 	// now perform only width scale for ammo, which (W)size >2
-	// all others ammo (1x1, 1x2) will be not scaled (original picture)
-	float w = ((iGridWidth>2)?1.6f:iGridWidth)*INV_GRID_WIDTH*0.9f;
-	float h = INV_GRID_HEIGHT*0.9f;//1 cell
-
-	float x = UIWeaponIcon_rect.x1;
-	if	(iGridWidth<2)
-		x	+= ( UIWeaponIcon_rect.width() - w) / 2.0f;
-
-	UIWeaponIcon.SetWndPos	(x, UIWeaponIcon_rect.y1);
-	
+	float h = texture_rect.height() * 0.8f;
+	float w = texture_rect.width() * 0.8f;
+	h = texture_rect.height() * 0.8f;
+	w = texture_rect.width() * (UI()->is_16_9_mode() ? 0.7f : 0.8f);
+	float posx_16 = 30.0f;
+	float posx = 32.0f;
+	if (texture_rect.width() > 2.01f * INV_GRID_WIDTH)
+	{
+		w = INV_GRID_WIDTH * 1.6f;
+	}
+	if (texture_rect.width() < 1.01f * INV_GRID_WIDTH)
+	{
+		UIWeaponIcon.SetTextureOffset(UI()->is_16_9_mode() ? posx_16 : posx, 5.0f);
+	}
+	else
+	{
+		posx_16 = 12.f;
+		posx = 14.f;
+		UIWeaponIcon.SetTextureOffset(UI()->is_16_9_mode() ? posx_16 : posx, 5.0f);
+	}
 	UIWeaponIcon.SetWidth	(w);
 	UIWeaponIcon.SetHeight	(h);
 };
@@ -458,14 +465,14 @@ void CUIMainIngameWnd::Update()
 
 			xr_vector<float>::reverse_iterator	rit;
 
-			// Сначала проверяем на точное соответсвие
+			// РЎРЅР°С‡Р°Р»Р° РїСЂРѕРІРµСЂСЏРµРј РЅР° С‚РѕС‡РЅРѕРµ СЃРѕРѕС‚РІРµС‚СЃРІРёРµ
 			rit  = std::find(m_Thresholds[i].rbegin(), m_Thresholds[i].rend(), value);
 
-			// Если его нет, то берем последнее меньшее значение ()
+			// Р•СЃР»Рё РµРіРѕ РЅРµС‚, С‚Рѕ Р±РµСЂРµРј РїРѕСЃР»РµРґРЅРµРµ РјРµРЅСЊС€РµРµ Р·РЅР°С‡РµРЅРёРµ ()
 			if (rit == m_Thresholds[i].rend())
 				rit = std::find_if(m_Thresholds[i].rbegin(), m_Thresholds[i].rend(), std::bind2nd(std::less<float>(), value));
 
-			// Минимальное и максимальное значения границы
+			// РњРёРЅРёРјР°Р»СЊРЅРѕРµ Рё РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёСЏ РіСЂР°РЅРёС†С‹
 			float min = m_Thresholds[i].front();
 			float max = m_Thresholds[i].back();
 
@@ -499,7 +506,7 @@ bool CUIMainIngameWnd::OnKeyboardPress(int dik)
 #if 0//def DEBUG
 	test_key(dik);
 #endif
-	// поддержка режима adjust hud mode
+	// РїРѕРґРґРµСЂР¶РєР° СЂРµР¶РёРјР° adjust hud mode
 	bool flag = false;
 	if (g_bHudAdjustMode)
 	{
@@ -958,7 +965,7 @@ void CUIMainIngameWnd::SetWarningIconColor(EWarningIcons icon, const u32 cl)
 {
 	bool bMagicFlag = true;
 
-	// Задаем цвет требуемой иконки
+	// Р—Р°РґР°РµРј С†РІРµС‚ С‚СЂРµР±СѓРµРјРѕР№ РёРєРѕРЅРєРё
 	switch(icon)
 	{
 	case ewiAll:
@@ -999,7 +1006,7 @@ void CUIMainIngameWnd::TurnOffWarningIcon(EWarningIcons icon)
 
 void CUIMainIngameWnd::SetFlashIconState_(EFlashingIcons type, bool enable)
 {
-	// Включаем анимацию требуемой иконки
+	// Р’РєР»СЋС‡Р°РµРј Р°РЅРёРјР°С†РёСЋ С‚СЂРµР±СѓРµРјРѕР№ РёРєРѕРЅРєРё
 	FlashingIcons_it icon = m_FlashingIcons.find(type);
 	R_ASSERT2(icon != m_FlashingIcons.end(), "Flashing icon with this type not existed");
 	icon->second->Show(enable);
@@ -1012,14 +1019,14 @@ void CUIMainIngameWnd::InitFlashingIcons(CUIXml* node)
 
 	CUIXmlInit xml_init;
 	CUIStatic *pIcon = NULL;
-	// Пробегаемся по всем нодам и инициализируем из них статики
+	// РџСЂРѕР±РµРіР°РµРјСЃСЏ РїРѕ РІСЃРµРј РЅРѕРґР°Рј Рё РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј РёР· РЅРёС… СЃС‚Р°С‚РёРєРё
 	for (int i = 0; i < staticsCount; ++i)
 	{
 		pIcon = xr_new<CUIStatic>();
 		xml_init.InitStatic(*node, flashingIconNodeName, i, pIcon);
 		shared_str iconType = node->ReadAttrib(flashingIconNodeName, i, "type", "none");
 
-		// Теперь запоминаем иконку и ее тип
+		// РўРµРїРµСЂСЊ Р·Р°РїРѕРјРёРЅР°РµРј РёРєРѕРЅРєСѓ Рё РµРµ С‚РёРї
 		EFlashingIcons type = efiPdaTask;
 
 		if		(iconType == "pda")		type = efiPdaTask;
