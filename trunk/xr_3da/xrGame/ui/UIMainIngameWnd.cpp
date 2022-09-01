@@ -136,8 +136,6 @@ void CUIMainIngameWnd::Init()
 
 	m_iPickUpItemIconWidth		= UIPickUpItemIcon.GetWidth();
 	m_iPickUpItemIconHeight		= UIPickUpItemIcon.GetHeight();
-	m_iPickUpItemIconX			= UIPickUpItemIcon.GetWndRect().left;
-	m_iPickUpItemIconY			= UIPickUpItemIcon.GetWndRect().top;
 	//---------------------------------------------------------
 
 
@@ -1039,21 +1037,17 @@ void CUIMainIngameWnd::UpdatePickUpItem	()
 
 	float scale = scale_x<scale_y?scale_x:scale_y;
 
-	UIPickUpItemIcon.GetUIStaticItem().SetOriginalRect(
-		float(m_iXPos * INV_GRID_WIDTH),
-		float(m_iYPos * INV_GRID_HEIGHT),
-		float(m_iGridWidth * INV_GRID_WIDTH),
-		float(m_iGridHeight * INV_GRID_HEIGHT));
-
+	Frect					texture_rect;
+	texture_rect.lt.set		(m_iXPos*INV_GRID_WIDTH, m_iYPos*INV_GRID_HEIGHT);
+	texture_rect.rb.set		(m_iGridWidth*INV_GRID_WIDTH, m_iGridHeight*INV_GRID_HEIGHT);
+	texture_rect.rb.add		(texture_rect.lt);
+	UIPickUpItemIcon.GetStaticItem()->SetOriginalRect(texture_rect);
 	UIPickUpItemIcon.SetStretchTexture(true);
 
 	UIPickUpItemIcon.SetWidth(m_iGridWidth*INV_GRID_WIDTH*scale);
 	UIPickUpItemIcon.SetHeight(m_iGridHeight*INV_GRID_HEIGHT*scale);
 
-	UIPickUpItemIcon.SetWndPos(m_iPickUpItemIconX + 
-		(m_iPickUpItemIconWidth - UIPickUpItemIcon.GetWidth())/2,
-		m_iPickUpItemIconY + 
-		(m_iPickUpItemIconHeight - UIPickUpItemIcon.GetHeight())/2);
+	UIPickUpItemIcon.SetAlignment(waCenter);
 
 	UIPickUpItemIcon.SetColor(color_rgba(255,255,255,192));
 	UIPickUpItemIcon.Show(true);
