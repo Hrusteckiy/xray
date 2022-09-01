@@ -191,10 +191,10 @@ void CUIItemInfo::InitItem(CInventoryItem* pInvItem)
 		// Загружаем картинку
 		UIItemImage->SetShader				(InventoryUtilities::GetEquipmentIconsShader());
 
-		int iGridWidth						= pInvItem->GetGridWidth();
-		int iGridHeight						= pInvItem->GetGridHeight();
-		int iXPos							= pInvItem->GetXPos();
-		int iYPos							= pInvItem->GetYPos();
+		int iGridWidth						= pInvItem->GetInvGridWidth();
+		int iGridHeight						= pInvItem->GetInvGridHeight();
+		int iXPos							= pInvItem->GetInvGridX();
+		int iYPos							= pInvItem->GetInvGridY();
 
 		UIItemImage->GetUIStaticItem().SetOriginalRect(	float(iXPos*INV_GRID_WIDTH), float(iYPos*INV_GRID_HEIGHT),
 														float(iGridWidth*INV_GRID_WIDTH),	float(iGridHeight*INV_GRID_HEIGHT));
