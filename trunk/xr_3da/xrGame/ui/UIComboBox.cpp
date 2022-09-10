@@ -40,22 +40,28 @@ void CUIComboBox::SetListLength(int length){
 	m_iListHeight = length;
 }
 
-void CUIComboBox::Init(float x, float y, float width){
+void CUIComboBox::InitComboBox(Fvector2 pos, float width)
+{
+	float lb_text_offset = 5.0f;
+
 	m_bInited = true;
 	if (0 == m_iListHeight)
 		m_iListHeight = 4;
 
 //.	width								-= BTN_SIZE;
+	CUIWindow::SetWndPos(pos);
+	CUIWindow::SetWndSize(Fvector2().set(width, CB_HEIGHT));
 
-	CUIWindow::Init						(x, y, width, CB_HEIGHT);
 	// Frame Line
 	m_frameLine.Init					(0, 0, width, CB_HEIGHT);
 	m_frameLine.InitEnabledState		("ui_cb_linetext_e"); // horizontal by default
 	m_frameLine.InitHighlightedState	("ui_cb_linetext_h");
-
-
+	
 	// Edit Box on left side of frame line
-	m_text.Init							(0, 0, width, CB_HEIGHT); 
+	m_text.SetWndPos					(Fvector2().set(lb_text_offset,0.0f));
+	m_text.SetWndSize					(Fvector2().set(width-lb_text_offset, CB_HEIGHT)); 
+
+	m_text.SetVTextAlignment			(valCenter);
 	m_text.SetTextColor					(m_textColor[0]);
 	m_text.Enable						(false);
 	// Button on right side of frame line
@@ -75,11 +81,6 @@ void CUIComboBox::Init(float x, float y, float width){
 
 	m_list.Show							(false);
 	m_frameWnd.Show						(false);
-}
-
-void CUIComboBox::Init(float x, float y, float width, float height)
-{
-	this->Init		(x, y, width);
 }
 
 #include "uilistboxitem.h"
@@ -295,5 +296,49 @@ void CUIComboBox::Undo()
 	SetItem				(m_backup_itoken_id);
 	SaveValue			();
 	SetCurrentValue		();
+}
+
+void CUIComboBox::disable_id(int id)
+{
+	if(m_disabled.end()==std::find(m_disabled.begin(),m_disabled.end(),id))
+		m_disabled.push_back(id);
+}
+
+void CUIComboBox::enable_id(int id)
+{
+	xr_vector<int>::iterator it = std::find(m_disabled.begin(),m_disabled.end(),id);
+
+	if(m_disabled.end()!=it)
+		m_disabled.erase(it);
+}
+
+LPCSTR CUIComboBox::GetTextOf(int index)
+{
+	if (u32(index) >= GetSize())
+		return "";
+
+	return m_list.GetText(index);
+}
+
+u32 CUIComboBox::GetSize()
+{
+	return m_list.GetSize();
+}
+
+void CUIComboBox::SetText(LPCSTR text)
+{
+	if (!text)
+		return;
+
+	m_text.SetText(text);
+}
+
+void CUIComboBox::ClearList()
+{
+	m_list.Clear();
+	m_text.SetText("");
+	m_itoken_id = 0;
+	ShowList(false);
+	m_disabled.clear();
 }
 
