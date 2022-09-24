@@ -24,7 +24,6 @@ class CUIComboBox : public CUIWindow, public CUIOptionsItem {
 		LIST_FONDED    
 	} E_COMBO_STATE;
 
-	xr_vector<int>		m_disabled;
 public:
 						CUIComboBox				();
 	virtual				~CUIComboBox			();
@@ -36,10 +35,6 @@ public:
 	virtual void 		Undo					();
 
 			LPCSTR		GetText					();
-			LPCSTR		GetTextOf				(int index);
-			void		ClearList				();
-			void		SetText					(LPCSTR text);
-			u32			GetSize					();
 
 	// methods
 	CUIListBox*			GetListWnd				();
@@ -47,15 +42,14 @@ public:
 			void		SetVertScroll			(bool bVScroll = true){m_list.SetFixedScrollBar(bVScroll);};
 //.	virtual void		AddItem					(LPCSTR str, bool bSelected);
 	CUIListBoxItem*		AddItem_				(LPCSTR str, int _data);
-			void		InitComboBox			(Fvector2 pos, float width);
+	virtual void		Init					(float x, float y, float width);
 			void		SetItem					(int i);
 
+	virtual void		Init					(float x, float y, float width, float height);	
 	virtual void		SendMessage				(CUIWindow *pWnd, s16 msg, void* pData = 0);
 	virtual void		OnFocusLost				();
 	virtual void		OnFocusReceive			();
 			int			CurrentID				()	{return m_itoken_id;}
-			void		disable_id				(int id);
-			void		enable_id				(int id);
 protected:
 	virtual void		SetState				(UIState state);	
 	virtual bool		OnMouse					(float x, float y, EUIMessages mouse_action);
@@ -72,7 +66,7 @@ protected:
 	int					m_backup_itoken_id;
 
 	CUI_IB_FrameLineWnd	m_frameLine;
-	CUITextWnd			m_text;
+	CUILabel			m_text;
 	CUIFrameWindow		m_frameWnd;
 
 	u32					m_textColor[2];

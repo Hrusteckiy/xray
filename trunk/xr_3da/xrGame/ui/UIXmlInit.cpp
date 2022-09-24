@@ -1327,15 +1327,13 @@ bool CUIXmlInit::InitTrackBar(CUIXml& xml_doc, const char* path, int index, CUIT
 	return				true;
 }
 
-bool CUIXmlInit::InitComboBox(CUIXml& xml_doc, LPCSTR path, int index, CUIComboBox* pWnd)
-{
+bool CUIXmlInit::InitComboBox(CUIXml& xml_doc, const char* path, int index, CUIComboBox* pWnd){
 	u32							color;
 	CGameFont*					pFont;
 
 	pWnd->SetListLength			(xml_doc.ReadAttribInt(path, index, "list_length", 4));
 
 	InitWindow					(xml_doc, path, index, pWnd);
-	pWnd->InitComboBox			(pWnd->GetWndPos(),pWnd->GetWidth());
 	InitOptionsItem				(xml_doc, path, index, pWnd);
 
 	bool b = (1==xml_doc.ReadAttribInt(path, index, "always_show_scroll",1));
@@ -1345,9 +1343,12 @@ bool CUIXmlInit::InitComboBox(CUIXml& xml_doc, LPCSTR path, int index, CUIComboB
 	string512					_path;
 	strconcat					(sizeof(_path),_path, path, ":list_font");
 	InitFont					(xml_doc, _path, index, color, pFont);
-//.	pWnd->SetFont				(pFont);
+	pWnd->SetFont				(pFont);
 	pWnd->m_list.SetFont		(pFont);
 	pWnd->m_list.SetTextColor	(color);
+	strconcat					(sizeof(_path),_path, path, ":list_font_s");	
+	InitFont					(xml_doc, _path, index, color, pFont);
+	pWnd->m_list.SetTextColorS	(color);
 	
 	strconcat					(sizeof(_path),_path, path, ":text_color:e");
 	if (xml_doc.NavigateToNode(_path, index)){
