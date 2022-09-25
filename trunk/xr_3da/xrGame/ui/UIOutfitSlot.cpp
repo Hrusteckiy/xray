@@ -80,7 +80,7 @@ void CUIOutfitDragDropList::SetOutfit(CUICellItem* itm)
 		r.y2			= r.y1+CHAR_ICON_FULL_HEIGHT*ICON_GRID_HEIGHT;
 
 		m_background->SetShader				(InventoryUtilities::GetCharIconsShader());
-        m_background->SetOriginalRect		(r);
+        m_background->SetTextureRect		(r);
 		*/
 	}
 

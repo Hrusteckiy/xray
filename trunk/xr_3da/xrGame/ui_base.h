@@ -63,7 +63,7 @@ public:
 					ui_core							();
 					~ui_core						();
 	CFontManager*	Font							()							{return m_pFontManager;}
-	CUICursor*		GetUICursor						()							{return m_pUICursor;}
+	CUICursor&		GetUICursor						()							{return *m_pUICursor;}
 
 	void			ClientToScreenScaled			(Fvector2& dest, float left, float top);
 	void			ClientToScreenScaled			(Fvector2& src_and_dest);
@@ -80,9 +80,9 @@ public:
 	void			RenderFont						();
 
 	virtual void	OnDeviceReset					();
-	static	bool	is_16_9_mode					();
+	static	bool	is_widescreen					();
 	shared_str		get_xml_name					(LPCSTR fn);
 };
 
-extern CUICursor*	GetUICursor						();
-extern ui_core*		UI								();
+extern CUICursor&	GetUICursor						();
+extern ui_core&		UI								();

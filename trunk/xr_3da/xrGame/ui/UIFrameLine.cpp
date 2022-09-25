@@ -3,10 +3,10 @@
 //	Created by Roman E. Marchenko, vortex@gsc-game.kiev.ua
 //	Copyright 2004. GSC Game World
 //	---------------------------------------------------------------------------
-//  Класс аналогичный UIFrameRect за исключением того, что он предназначен для
-//	отображения затекстурированного узкого прямоуголника произвольной длинны или
-//	ширины. В качестве исходных материалов необходимо 3 текстуры: правая(нижняя),
-//	левая(верхняя) и центральная
+//  РљР»Р°СЃСЃ Р°РЅР°Р»РѕРіРёС‡РЅС‹Р№ UIFrameRect Р·Р° РёСЃРєР»СЋС‡РµРЅРёРµРј С‚РѕРіРѕ, С‡С‚Рѕ РѕРЅ РїСЂРµРґРЅР°Р·РЅР°С‡РµРЅ РґР»СЏ
+//	РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ Р·Р°С‚РµРєСЃС‚СѓСЂРёСЂРѕРІР°РЅРЅРѕРіРѕ СѓР·РєРѕРіРѕ РїСЂСЏРјРѕСѓРіРѕР»РЅРёРєР° РїСЂРѕРёР·РІРѕР»СЊРЅРѕР№ РґР»РёРЅРЅС‹ РёР»Рё
+//	С€РёСЂРёРЅС‹. Р’ РєР°С‡РµСЃС‚РІРµ РёСЃС…РѕРґРЅС‹С… РјР°С‚РµСЂРёР°Р»РѕРІ РЅРµРѕР±С…РѕРґРёРјРѕ 3 С‚РµРєСЃС‚СѓСЂС‹: РїСЂР°РІР°СЏ(РЅРёР¶РЅСЏСЏ),
+//	Р»РµРІР°СЏ(РІРµСЂС…РЅСЏСЏ) Рё С†РµРЅС‚СЂР°Р»СЊРЅР°СЏ
 //=============================================================================
 
 #include "stdafx.h"
@@ -58,13 +58,13 @@ void CUIFrameLine::UpdateSize()
 {
 	VERIFY(g_bRendering);
 
-	float f_width		= elements[flFirst].GetOriginalRect().width();
-	float f_height		= elements[flFirst].GetOriginalRect().height();
+	float f_width		= elements[flFirst].GetTextureRect().width();
+	float f_height		= elements[flFirst].GetTextureRect().height();
 	elements[flFirst].SetPos(iPos.x, iPos.y);
 
 	// Right or bottom texture
-	float s_width		= elements[flSecond].GetOriginalRect().width();
-	float s_height		= elements[flSecond].GetOriginalRect().height();
+	float s_width		= elements[flSecond].GetTextureRect().width();
+	float s_height		= elements[flSecond].GetTextureRect().height();
 	
 	(bHorizontalOrientation) ?
 		elements[flSecond].SetPos(iPos.x + iSize - s_width, iPos.y) :
@@ -101,8 +101,8 @@ void CUIFrameLine::UpdateSize()
 	float rem;
 	int tile;
 
-	float b_width		= elements[flBack].GetOriginalRect().width();
-	float b_height		= elements[flBack].GetOriginalRect().height();
+	float b_width		= elements[flBack].GetTextureRect().width();
+	float b_height		= elements[flBack].GetTextureRect().height();
 
 	if (bHorizontalOrientation)
 	{

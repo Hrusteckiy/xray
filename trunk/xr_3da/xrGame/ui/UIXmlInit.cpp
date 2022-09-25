@@ -140,7 +140,7 @@ bool CUIXmlInit::InitFrameWindow(CUIXml& xml_doc, LPCSTR path,
 
 	if(*tex_name) pWnd->InitLeftBottom(*tex_name, x,y);
 */
-	//инициализировать заголовок окна
+	//РёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°С‚СЊ Р·Р°РіРѕР»РѕРІРѕРє РѕРєРЅР°
 	strconcat(sizeof(buf),buf,path,":title");
 	if(xml_doc.NavigateToNode(buf,index)) InitStatic(xml_doc, buf, index, pWnd->UITitleText);
 	
@@ -657,47 +657,47 @@ bool CUIXmlInit::InitFont(CUIXml &xml_doc, LPCSTR path, int index, u32 &color, C
 	{
 		if(!xr_strcmp(*font_name, GRAFFITI19_FONT_NAME))
 		{
-			pFnt = UI()->Font()->pFontGraffiti19Russian;
+			pFnt = UI().Font()->pFontGraffiti19Russian;
 		}
 		else if(!xr_strcmp(*font_name, GRAFFITI22_FONT_NAME))
 		{
-			pFnt = UI()->Font()->pFontGraffiti22Russian;
+			pFnt = UI().Font()->pFontGraffiti22Russian;
 		}
 		else if(!xr_strcmp(*font_name, GRAFFITI32_FONT_NAME))
 		{
-			pFnt = UI()->Font()->pFontGraffiti32Russian;
+			pFnt = UI().Font()->pFontGraffiti32Russian;
 		}
 		else if(!xr_strcmp(*font_name, GRAFFITI50_FONT_NAME))
 		{
-			pFnt = UI()->Font()->pFontGraffiti50Russian;
+			pFnt = UI().Font()->pFontGraffiti50Russian;
 		}
 		else if(!xr_strcmp(*font_name, "arial_14"))
 		{
-			pFnt = UI()->Font()->pFontArial14;
+			pFnt = UI().Font()->pFontArial14;
 		}
 		else if(!xr_strcmp(*font_name, MEDIUM_FONT_NAME))
 		{
-			pFnt = UI()->Font()->pFontMedium;
+			pFnt = UI().Font()->pFontMedium;
 		}
 		else if(!xr_strcmp(*font_name, SMALL_FONT_NAME))
 		{
-			pFnt = UI()->Font()->pFontStat;
+			pFnt = UI().Font()->pFontStat;
 		}
 		else if(!xr_strcmp(*font_name, LETTERICA16_FONT_NAME))
 		{
-			pFnt = UI()->Font()->pFontLetterica16Russian;
+			pFnt = UI().Font()->pFontLetterica16Russian;
 		}
 		else if(!xr_strcmp(*font_name, LETTERICA18_FONT_NAME))
 		{
-			pFnt = UI()->Font()->pFontLetterica18Russian;
+			pFnt = UI().Font()->pFontLetterica18Russian;
 		}
 		else if(!xr_strcmp(*font_name, LETTERICA25_FONT_NAME))
 		{
-			pFnt = UI()->Font()->pFontLetterica25;
+			pFnt = UI().Font()->pFontLetterica25;
 		}
 		else if(!xr_strcmp(*font_name, DI_FONT_NAME))
 		{
-			pFnt = UI()->Font()->pFontDI;
+			pFnt = UI().Font()->pFontDI;
 		}
 		else{
 			R_ASSERT3(0,"unknown font",*font_name);
@@ -1002,7 +1002,7 @@ bool CUIXmlInit::InitTexture(CUIXml& xml_doc, const char* path, int index, IUISi
 	pWnd->SetTextureColor(color);
 
 	if (rect.width() != 0 && rect.height() != 0)
-		pWnd->SetOriginalRect(rect);
+		pWnd->SetTextureRect(rect);
 
 	return true;
 }

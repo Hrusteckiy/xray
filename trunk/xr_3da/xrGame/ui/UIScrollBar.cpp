@@ -83,7 +83,7 @@ void CUIScrollBar::Init(float x, float y, float length, bool bIsHorizontal, LPCS
 }
 
 
-//корректировка размеров скроллера
+//РєРѕСЂСЂРµРєС‚РёСЂРѕРІРєР° СЂР°Р·РјРµСЂРѕРІ СЃРєСЂРѕР»Р»РµСЂР°
 void CUIScrollBar::SetWidth(float width)
 {
 	if(width<=0.0f) width = 1.0f;
@@ -127,7 +127,7 @@ void CUIScrollBar::Enable(bool b)
 void CUIScrollBar::UpdateScrollBar()
 {
 	if (IsShown()){
-		//уcтановить размер и положение каретки
+		//СѓcС‚Р°РЅРѕРІРёС‚СЊ СЂР°Р·РјРµСЂ Рё РїРѕР»РѕР¶РµРЅРёРµ РєР°СЂРµС‚РєРё
 		if(m_iMaxPos==m_iMinPos)	m_iMaxPos++;
 		float box_sz				= float(m_ScrollWorkArea)*float(m_iPageSize ? m_iPageSize : 1)/float(m_iMaxPos-m_iMinPos);
 		if(m_bIsHorizontal){	
@@ -161,7 +161,7 @@ bool CUIScrollBar::OnKeyboardHold(int dik)
 {
 	if(dik==MOUSE_1 && (last_hold_time+100)<Device.dwTimeContinual)
 	{
-		Fvector2 cursor_pos			= GetUICursor()->GetCursorPosition();
+		Fvector2 cursor_pos			= GetUICursor().GetCursorPosition();
 		Frect	dec_rect;
 		Frect	inc_rect;
 
@@ -248,7 +248,7 @@ void CUIScrollBar::SendMessage(CUIWindow *pWnd, s16 msg, void *pData)
 		}
 	}else if(pWnd == m_ScrollBox){
 		if(msg == SCROLLBOX_MOVE){
-			//вычислить новое положение прокрутки
+			//РІС‹С‡РёСЃР»РёС‚СЊ РЅРѕРІРѕРµ РїРѕР»РѕР¶РµРЅРёРµ РїСЂРѕРєСЂСѓС‚РєРё
 			ClampByViewRect		();
 			if(m_bIsHorizontal)
 			{
@@ -320,13 +320,13 @@ void CUIScrollBar::Reset()
 
 void CUIScrollBar::Draw()
 {
-	//нарисовать фоновую подложку
+	//РЅР°СЂРёСЃРѕРІР°С‚СЊ С„РѕРЅРѕРІСѓСЋ РїРѕРґР»РѕР¶РєСѓ
 	Frect rect;
 	GetAbsoluteRect(rect);
 	if(m_bIsHorizontal){
-		if (m_StaticBackground->GetOriginalRect().width()){
+		if (m_StaticBackground->GetTextureRect().width()){
 			float size	= GetWidth() - m_DecButton->GetWidth() - m_IncButton->GetWidth();
-			float w		= m_StaticBackground->GetOriginalRect().width();
+			float w		= m_StaticBackground->GetTextureRect().width();
 
 			int tile	= iFloor(size/w);
 			float rem	= size - tile*w;
@@ -335,9 +335,9 @@ void CUIScrollBar::Draw()
 			m_StaticBackground->SetPos(rect.left + m_DecButton->GetWidth(),rect.top);
 		}
 	}else{
-		if (m_StaticBackground->GetOriginalRect().height()){
+		if (m_StaticBackground->GetTextureRect().height()){
 			float size	= GetHeight()- m_IncButton->GetHeight() - m_DecButton->GetHeight();
-			float h		= m_StaticBackground->GetOriginalRect().height();
+			float h		= m_StaticBackground->GetTextureRect().height();
 
 			int tile	= iFloor(size/h);
 			float rem	= size - tile*h;

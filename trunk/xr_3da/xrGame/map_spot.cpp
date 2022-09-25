@@ -114,7 +114,7 @@ void CMiniMapSpot::Load(CUIXml* xml, LPCSTR path)
 	base_rect.x2 = xml->ReadAttribFlt(path, 0, "width", 0);
 	base_rect.y2 = xml->ReadAttribFlt(path, 0, "height", 0);
 
-	Frect _stored_rect = m_UIStaticItem.GetOriginalRect();
+	Frect _stored_rect = m_UIStaticItem.GetTextureRect();
 
 	strconcat(sizeof(buf), buf, path, ":texture_above");
 	n = xml->NavigateToNode(buf,0);
@@ -129,7 +129,7 @@ void CMiniMapSpot::Load(CUIXml* xml, LPCSTR path)
 			float height			= xml->ReadAttribFlt(buf, 0, "height", base_rect.height());
 			m_tex_rect_above.set	(x,y,x+width,y+height);
 		}else
-			m_tex_rect_above		= m_UIStaticItem.GetOriginalRect();
+			m_tex_rect_above		= m_UIStaticItem.GetTextureRect();
 
 		m_icon_above				= m_UIStaticItem.GetShader		();
 	}
@@ -147,7 +147,7 @@ void CMiniMapSpot::Load(CUIXml* xml, LPCSTR path)
 			float height			= xml->ReadAttribFlt(buf, 0, "height", base_rect.height());
 			m_tex_rect_below.set	(x,y,x+width,y+height);
 		}else
-			m_tex_rect_below		= m_UIStaticItem.GetOriginalRect();
+			m_tex_rect_below		= m_UIStaticItem.GetTextureRect();
 
 		m_icon_below				= m_UIStaticItem.GetShader		();
 	}
@@ -164,12 +164,12 @@ void CMiniMapSpot::Load(CUIXml* xml, LPCSTR path)
 			float height			= xml->ReadAttribFlt(buf, 0, "height", base_rect.height());
 			m_tex_rect_normal.set	(x,y,x+width,y+height);
 		}else
-			m_tex_rect_normal		= m_UIStaticItem.GetOriginalRect();
+			m_tex_rect_normal		= m_UIStaticItem.GetTextureRect();
 
 		m_icon_normal				= m_UIStaticItem.GetShader		();
 	}
 
-	m_UIStaticItem.SetOriginalRect	(_stored_rect);
+	m_UIStaticItem.SetTextureRect	(_stored_rect);
 }
 
 void CMiniMapSpot::Draw()
@@ -181,14 +181,14 @@ void CMiniMapSpot::Draw()
 
 		if(d>1.8f){
 			GetUIStaticItem().SetShader(m_icon_below);
-			GetUIStaticItem().SetOriginalRect(m_tex_rect_below.x1,m_tex_rect_below.y1,m_tex_rect_below.width(),m_tex_rect_below.height());
+			GetUIStaticItem().SetTextureRect(m_tex_rect_below.x1,m_tex_rect_below.y1,m_tex_rect_below.width(),m_tex_rect_below.height());
 		}else
 		if(d<-1.8f){
 			GetUIStaticItem().SetShader(m_icon_above);
-			GetUIStaticItem().SetOriginalRect(m_tex_rect_above.x1,m_tex_rect_above.y1,m_tex_rect_above.width(),m_tex_rect_above.height());
+			GetUIStaticItem().SetTextureRect(m_tex_rect_above.x1,m_tex_rect_above.y1,m_tex_rect_above.width(),m_tex_rect_above.height());
 		}else{
 			GetUIStaticItem().SetShader(m_icon_normal);
-			GetUIStaticItem().SetOriginalRect(m_tex_rect_normal.x1,m_tex_rect_normal.y1,m_tex_rect_normal.width(),m_tex_rect_normal.height());
+			GetUIStaticItem().SetTextureRect(m_tex_rect_normal.x1,m_tex_rect_normal.y1,m_tex_rect_normal.width(),m_tex_rect_normal.height());
 		}
 	};
 

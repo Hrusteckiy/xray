@@ -29,10 +29,10 @@ void CUICursor::InitInternal()
 	m_static->InitTextureEx		("ui\\ui_ani_cursor", "hud\\cursor");
 	Frect						rect;
 	rect.set					(0.0f,0.0f,40.0f,40.0f);
-	m_static->SetOriginalRect	(rect);
+	m_static->SetTextureRect	(rect);
 	Fvector2					sz;
 	sz.set						(rect.rb);
-	if(UI()->is_16_9_mode())
+	if(UI().is_widescreen())
 		sz.x					/= 1.2f;
 
 	m_static->SetWndSize		(sz);
@@ -50,7 +50,7 @@ void CUICursor::OnRender	()
 
 	if(bDebug)
 	{
-	CGameFont* F		= UI()->Font()->pFontDI;
+	CGameFont* F		= UI().Font()->pFontDI;
 	F->SetAligment		(CGameFont::alCenter);
 	F->SetHeightI		(0.02f);
 	F->OutSetI			(0.f,-0.9f);

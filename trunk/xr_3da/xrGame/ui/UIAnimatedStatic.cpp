@@ -3,7 +3,7 @@
 //	Created by Roman E. Marchenko, vortex@gsc-game.kiev.ua
 //	Copyright 2004. GSC Game World
 //	---------------------------------------------------------------------------
-//  Статик для отображения анимированной иконки
+//  РЎС‚Р°С‚РёРє РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ Р°РЅРёРјРёСЂРѕРІР°РЅРЅРѕР№ РёРєРѕРЅРєРё
 //=============================================================================
 
 #include "stdafx.h"
@@ -36,10 +36,10 @@ void CUIAnimatedStatic::Update()
 
 	static u32 oneFrameDuration = 0;
 
-	// Пересчитаем пааметры анимации
+	// РџРµСЂРµСЃС‡РёС‚Р°РµРј РїР°Р°РјРµС‚СЂС‹ Р°РЅРёРјР°С†РёРё
 	if (m_bParamsChanged && 0 != m_uFrameCount)
 	{
-		// Пересчитаем время одного кадра
+		// РџРµСЂРµСЃС‡РёС‚Р°РµРј РІСЂРµРјСЏ РѕРґРЅРѕРіРѕ РєР°РґСЂР°
 		oneFrameDuration = iCeil(m_uAnimationDuration / static_cast<float>(m_uFrameCount));
 
 		SetFrame(0);
@@ -47,11 +47,11 @@ void CUIAnimatedStatic::Update()
 		m_bParamsChanged = false;
 	}
 
-	// Прибавляем время кадра
+	// РџСЂРёР±Р°РІР»СЏРµРј РІСЂРµРјСЏ РєР°РґСЂР°
 	m_uTimeElapsed += Device.dwTimeContinual - m_prevTime;
 	m_prevTime = Device.dwTimeContinual;
 
-	// Если анимация закончилась
+	// Р•СЃР»Рё Р°РЅРёРјР°С†РёСЏ Р·Р°РєРѕРЅС‡РёР»Р°СЃСЊ
 	if (m_uTimeElapsed > m_uAnimationDuration)
 	{
 		Rewind(0);
@@ -59,7 +59,7 @@ void CUIAnimatedStatic::Update()
 			Stop();
 	}
 
-	// Теперь вычисляем кадры в зависимости от времени
+	// РўРµРїРµСЂСЊ РІС‹С‡РёСЃР»СЏРµРј РєР°РґСЂС‹ РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ РІСЂРµРјРµРЅРё
 	u32 curFrame = m_uTimeElapsed / oneFrameDuration;
 
 	if (curFrame != m_uCurFrame)
@@ -76,7 +76,7 @@ void CUIAnimatedStatic::SetFrame(const u32 frameNum)
 	//static u32 currRow = 0xffffffff, currCol = 0xffffffff;
 	int currRow = frameNum / m_uAnimCols;
 	int currCol = frameNum % m_uAnimCols;
-	GetUIStaticItem().SetOriginalRect(m_pos.x + float(currCol*m_uFrameWidth), m_pos.y + float(currRow*m_uFrameHeight), float(m_uFrameWidth), float(m_uFrameHeight));
+	GetUIStaticItem().SetTextureRect(m_pos.x + float(currCol*m_uFrameWidth), m_pos.y + float(currRow*m_uFrameHeight), float(m_uFrameWidth), float(m_uFrameHeight));
 }
 
 void CUIAnimatedStatic::SetAnimPos(float pos){

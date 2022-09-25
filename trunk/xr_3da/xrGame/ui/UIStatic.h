@@ -46,7 +46,7 @@ public:
 	virtual ref_shader& GetShader					();
 	virtual void		SetTextureColor				(u32 color);
 	virtual u32			GetTextureColor				() const;
-	virtual void		SetOriginalRect				(const Frect& r)			{m_UIStaticItem.SetOriginalRect(r);}
+	virtual void		SetTextureRect				(const Frect& r)			{m_UIStaticItem.SetTextureRect(r);}
 	virtual void		SetOriginalRectEx			(const Frect& r)			{m_UIStaticItem.SetOriginalRectEx(r);}
 	//
 			void		SetVTextAlignment(EVTextAlignment al);
@@ -56,7 +56,7 @@ public:
 	virtual void		InitTexture					(LPCSTR tex_name);
 	virtual void		InitTextureEx				(LPCSTR tex_name, LPCSTR sh_name="hud\\default");
 	CUIStaticItem*		GetStaticItem				()							{return &m_UIStaticItem;}
-			void		SetOriginalRect				(float x, float y, float width, float height)	{m_UIStaticItem.SetOriginalRect(x,y,width,height);}
+			void		SetTextureRect				(float x, float y, float width, float height)	{m_UIStaticItem.SetTextureRect(x,y,width,height);}
 			void		SetHeadingPivot				(const Fvector2& p)			{m_UIStaticItem.SetHeadingPivot(p);}
 			void		SetMask						(CUIFrameWindow *pMask);
 	virtual void		SetTextureOffset			(float x, float y)			{ m_TextureOffset.set(x, y); }

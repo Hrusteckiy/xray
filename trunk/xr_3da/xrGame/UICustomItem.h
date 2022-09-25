@@ -25,14 +25,14 @@ protected:
 		flValidHeadingPivot		=0x0004,
 	};
 
-	//прямоугольник(в пикселях) 
-	//геом. регион  на который натягикается текстура с текстурными координатами iOriginalRect
+	//РїСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРє(РІ РїРёРєСЃРµР»СЏС…) 
+	//РіРµРѕРј. СЂРµРіРёРѕРЅ  РЅР° РєРѕС‚РѕСЂС‹Р№ РЅР°С‚СЏРіРёРєР°РµС‚СЃСЏ С‚РµРєСЃС‚СѓСЂР° СЃ С‚РµРєСЃС‚СѓСЂРЅС‹РјРё РєРѕРѕСЂРґРёРЅР°С‚Р°РјРё iOriginalRect
 	Frect			iVisRect;
 
-	//фрейм текстуры в пикселях отн. 0/0
+	//С„СЂРµР№Рј С‚РµРєСЃС‚СѓСЂС‹ РІ РїРёРєСЃРµР»СЏС… РѕС‚РЅ. 0/0
 	Frect			iOriginalRect;
 
-	// точка, относительно которой применяем поворот
+	// С‚РѕС‡РєР°, РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РєРѕС‚РѕСЂРѕР№ РїСЂРёРјРµРЅСЏРµРј РїРѕРІРѕСЂРѕС‚
 	Fvector2		iHeadingPivot;
 
 	u32				uFlags;
@@ -44,10 +44,10 @@ public:
 	virtual			~CUICustomItem			();
 	IC void			SetRect					(float x1, float y1, float x2, float y2){iVisRect.set(x1,y1,x2,y2); uFlags|=flValidRect; }
 	IC void			SetRect					(const Frect& r){iVisRect.set(r); uFlags|=flValidRect; }
-	  void			SetOriginalRect			(float x, float y, float width, float height);
+	  void			SetTextureRect			(float x, float y, float width, float height);
 
 	IC Frect		GetRect					() {return iVisRect;}
-	   Frect		GetOriginalRect			() const;
+	   Frect		GetTextureRect			() const;
 	   Frect		GetOriginalRectScaled	();
 	
 	   void			SetHeadingPivot			(const Fvector2& p)		{iHeadingPivot=p; uFlags|=flValidHeadingPivot;}

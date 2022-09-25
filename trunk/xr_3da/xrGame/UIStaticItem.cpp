@@ -64,14 +64,14 @@ void CUIStaticItem::Init(LPCSTR tex, LPCSTR sh, float left, float top, u32 align
 void CUIStaticItem::Render()
 {
 	VERIFY(g_bRendering);
-	// установить обязательно перед вызовом CustomItem::Render() !!!
+	// СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ РїРµСЂРµРґ РІС‹Р·РѕРІРѕРј CustomItem::Render() !!!
 	VERIFY(hShader);
 	RCache.set_Shader			(hShader);
 	if(alpha_ref!=-1)
 		CHK_DX(HW.pDevice->SetRenderState(D3DRS_ALPHAREF,alpha_ref));
 	// convert&set pos
 	Fvector2		bp;
-	UI()->ClientToScreenScaled	(bp,float(iPos.x),float(iPos.y));
+	UI().ClientToScreenScaled	(bp,float(iPos.x),float(iPos.y));
 	bp.x						= (float)iFloor(bp.x);
 	bp.y						= (float)iFloor(bp.y);
 
@@ -79,7 +79,7 @@ void CUIStaticItem::Render()
 	u32							vOffset;
 	Fvector2					pos;
 	Fvector2					f_len;
-	UI()->ClientToScreenScaled	(f_len, iVisRect.x2, iVisRect.y2 );
+	UI().ClientToScreenScaled	(f_len, iVisRect.x2, iVisRect.y2 );
 
 	int tile_x					= fis_zero(iRemX)?iTileX:iTileX+1;
 	int tile_y					= fis_zero(iRemY)?iTileY:iTileY+1;
@@ -98,19 +98,19 @@ void CUIStaticItem::Render()
 	RCache.Vertex.Unlock		(u32(pv-start_pv),hGeom_fan.stride());
 	// set scissor
 	Frect clip_rect				= {iPos.x,iPos.y,iPos.x+iVisRect.x2*iTileX+iRemX,iPos.y+iVisRect.y2*iTileY+iRemY};
-	UI()->PushScissor			(clip_rect);
+	UI().PushScissor			(clip_rect);
 	// set geom
 	RCache.set_Geometry			(hGeom_fan);
 	if (p_cnt!=0)RCache.Render	(D3DPT_TRIANGLELIST,vOffset,u32(p_cnt));
 	if(alpha_ref!=-1)
 		CHK_DX(HW.pDevice->SetRenderState(D3DRS_ALPHAREF,0));
-	UI()->PopScissor			();
+	UI().PopScissor			();
 }
 
 void CUIStaticItem::Render(float angle)
 {
 	VERIFY						(g_bRendering);
-	// установить обязательно перед вызовом CustomItem::Render() !!!
+	// СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ РїРµСЂРµРґ РІС‹Р·РѕРІРѕРј CustomItem::Render() !!!
 	VERIFY						(hShader);
 	RCache.set_Shader			(hShader);
 	if(alpha_ref!=-1)

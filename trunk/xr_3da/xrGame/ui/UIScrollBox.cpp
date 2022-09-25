@@ -40,7 +40,7 @@ bool CUIScrollBox::OnMouse(float x, float y, EUIMessages mouse_action)
 	else if(im_capturer && mouse_action == WINDOW_MOUSE_MOVE && cursor_over)
 	{
 		Fvector2	pos		= GetWndPos();
-		Fvector2	delta	= GetUICursor()->GetCursorPositionDelta();
+		Fvector2	delta	= GetUICursor().GetCursorPositionDelta();
 
 		if(m_bIsHorizontal)
 			pos.x				+= delta.x;
@@ -57,17 +57,17 @@ bool CUIScrollBox::OnMouse(float x, float y, EUIMessages mouse_action)
 void CUIScrollBox::Draw()
 {
 	if(m_bIsHorizontal){
-		if (m_UIStaticItem.GetOriginalRect().width())
+		if (m_UIStaticItem.GetTextureRect().width())
 		{
-			int tile		= iFloor(GetWidth()/m_UIStaticItem.GetOriginalRect().width());
-			float rem		= GetWidth()-tile*m_UIStaticItem.GetOriginalRect().width();
+			int tile		= iFloor(GetWidth()/m_UIStaticItem.GetTextureRect().width());
+			float rem		= GetWidth()-tile*m_UIStaticItem.GetTextureRect().width();
 			m_UIStaticItem.SetTile(tile,1,rem,0);
 		}
 	}else{
-		if (m_UIStaticItem.GetOriginalRect().height())
+		if (m_UIStaticItem.GetTextureRect().height())
 		{
-			int tile		= iFloor(GetHeight()/m_UIStaticItem.GetOriginalRect().height());
-			float rem		= GetHeight()-tile*m_UIStaticItem.GetOriginalRect().height();
+			int tile		= iFloor(GetHeight()/m_UIStaticItem.GetTextureRect().height());
+			float rem		= GetHeight()-tile*m_UIStaticItem.GetTextureRect().height();
 			m_UIStaticItem.SetTile(1,tile,0,rem);
 		}
 	}

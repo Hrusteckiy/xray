@@ -84,17 +84,17 @@ void CUIStatsIcon::SetText(LPCSTR str){
 		int rank = atoi(strstr(str,"0")) - 1;
 
 		GetStaticItem()->SetShader(m_tex_info[rank][team].sh);
-		SetOriginalRect(m_tex_info[rank][team].rect);
+		SetTextureRect(m_tex_info[rank][team].rect);
 	}
 	else if (0 == xr_strcmp(str,"death"))
 	{
 		GetStaticItem()->SetShader(m_tex_info[DEATH][0].sh);
-		SetOriginalRect(m_tex_info[DEATH][0].rect);
+		SetTextureRect(m_tex_info[DEATH][0].rect);
 	}
 	else if (0 == xr_strcmp(str,"artefact"))
 	{
 		GetStaticItem()->SetShader(m_tex_info[ARTEFACT][0].sh);
-		SetOriginalRect(m_tex_info[ARTEFACT][0].rect);
+		SetTextureRect(m_tex_info[ARTEFACT][0].rect);
 	}
 	else
 	{

@@ -42,7 +42,7 @@ void CUIEncyclopediaArticleWnd::SetArticle(CEncyclopediaArticle* article)
 {
 	if( article->data()->image.TextureAvailable() ){
 		m_UIImage->SetShader			(article->data()->image.GetShader());
-		m_UIImage->SetOriginalRect		(article->data()->image.GetStaticItem()->GetOriginalRect());
+		m_UIImage->SetTextureRect		(article->data()->image.GetStaticItem()->GetTextureRect());
 		m_UIImage->SetWndSize			(article->data()->image.GetWndSize());
 
 		float img_x						= (GetWidth()-m_UIImage->GetWidth())/2.0f;

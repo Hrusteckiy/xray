@@ -91,7 +91,7 @@ void CUICustomEdit::SendMessage(CUIWindow* pWnd, s16 msg, void* pData)
 {
 //	if(pWnd == GetParent())
 //	{
-		//êòî-òî äğóãîé çàõâàòèë êëàâèàòóğó
+		//ĞºÑ‚Ğ¾-Ñ‚Ğ¾ Ğ´Ñ€ÑƒĞ³Ğ¾Ğ¹ Ğ·Ğ°Ñ…Ğ²Ğ°Ñ‚Ğ¸Ğ» ĞºĞ»Ğ°Ğ²Ğ¸Ğ°Ñ‚ÑƒÑ€Ñƒ
 		if(msg == WINDOW_KEYBOARD_CAPTURE_LOST)
 		{
 			m_bInputFocus = false;
@@ -222,7 +222,7 @@ bool CUICustomEdit::KeyPressed(int dik)
 	default:
 		it = gs_DIK2CHR.find(dik);
 
-		//íàæàòà êëàâèøà ñ áóêâîé 
+		//Ğ½Ğ°Ğ¶Ğ°Ñ‚Ğ° ĞºĞ»Ğ°Ğ²Ğ¸ÑˆĞ° Ñ Ğ±ÑƒĞºĞ²Ğ¾Ğ¹ 
 		if (gs_DIK2CHR.end() != it){
 			AddLetter((*it).second);
 			bChanged = true;
@@ -272,7 +272,7 @@ void CUICustomEdit::AddChar(char c)
 	if(xr_strlen(m_lines.GetText()) >= m_max_symb_count)					return;
 
 	float text_length	= m_lines.GetFont()->SizeOf_(m_lines.GetText());
-	UI()->ClientToScreenScaledWidth		(text_length);
+	UI().ClientToScreenScaledWidth		(text_length);
 
 	if (!m_lines.GetTextComplexMode() && (text_length > GetWidth() - 1))	return;
 
@@ -316,8 +316,8 @@ void CUICustomEdit::AddLetter(char c)
 	AddChar(c);
 }
 
-//âğåìÿ äëÿ îáåñïå÷èâàíèÿ ïå÷àòàíèÿ
-//ñèìâîëà ïğè óäåğæèâàåìîé êíîïêå
+//Ğ²Ñ€ĞµĞ¼Ñ Ğ´Ğ»Ñ Ğ¾Ğ±ĞµÑĞ¿ĞµÑ‡Ğ¸Ğ²Ğ°Ğ½Ğ¸Ñ Ğ¿ĞµÑ‡Ğ°Ñ‚Ğ°Ğ½Ğ¸Ñ
+//ÑĞ¸Ğ¼Ğ²Ğ¾Ğ»Ğ° Ğ¿Ñ€Ğ¸ ÑƒĞ´ĞµÑ€Ğ¶Ğ¸Ğ²Ğ°ĞµĞ¼Ğ¾Ğ¹ ĞºĞ½Ğ¾Ğ¿ĞºĞµ
 #define HOLD_WAIT_TIME 400
 #define HOLD_REPEAT_TIME 100
 
@@ -370,7 +370,7 @@ void  CUICustomEdit::Draw()
 		
 		outXY.x								= 0.0f;
 		float _h				= m_lines.m_pFont->CurrentHeight_();
-		UI()->ClientToScreenScaledHeight(_h);
+		UI().ClientToScreenScaledHeight(_h);
 		outXY.y								= pos.y + (GetWndSize().y - _h)/2.0f;
 
 		float								_w_tmp;
@@ -379,12 +379,12 @@ void  CUICustomEdit::Draw()
 		strncpy								(buff,m_lines.m_text.c_str(),i);
 		buff[i]								= 0;
 		_w_tmp								= m_lines.m_pFont->SizeOf_(buff);
-		UI()->ClientToScreenScaledWidth		(_w_tmp);
+		UI().ClientToScreenScaledWidth		(_w_tmp);
 		outXY.x								= pos.x + _w_tmp;
 		
 		_w_tmp								= m_lines.m_pFont->SizeOf_("-");
-		UI()->ClientToScreenScaledWidth		(_w_tmp);
-		UI()->ClientToScreenScaled			(outXY);
+		UI().ClientToScreenScaledWidth		(_w_tmp);
+		UI().ClientToScreenScaled			(outXY);
 
 		m_lines.m_pFont->Out				(outXY.x, outXY.y, "_");
 	}

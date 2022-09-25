@@ -40,15 +40,15 @@ void CUIFrameRect::InitTexture(const char* texture){
 		frame[fmRT].CreateShader(texture,sh);
 		frame[fmRB].CreateShader(texture,sh);
 		frame[fmLB].CreateShader(texture,sh);
-		v = ini->r_fvector4("frame","back");	frame[fmBK].SetOriginalRect	(v.x,v.y,v.z,v.w);	frame[fmBK].SetRect	(0,0,v.z,v.w);
-		v = ini->r_fvector4("frame","l");		frame[fmL].SetOriginalRect	(v.x,v.y,v.z,v.w);	frame[fmL].SetRect	(0,0,v.z,v.w);
-		v = ini->r_fvector4("frame","r");		frame[fmR].SetOriginalRect	(v.x,v.y,v.z,v.w);	frame[fmR].SetRect	(0,0,v.z,v.w);
-		v = ini->r_fvector4("frame","t");		frame[fmT].SetOriginalRect	(v.x,v.y,v.z,v.w);	frame[fmT].SetRect	(0,0,v.z,v.w);
-		v = ini->r_fvector4("frame","b");		frame[fmB].SetOriginalRect	(v.x,v.y,v.z,v.w);	frame[fmB].SetRect	(0,0,v.z,v.w);
-		v = ini->r_fvector4("frame","lt");		frame[fmLT].SetOriginalRect	(v.x,v.y,v.z,v.w);	frame[fmLT].SetRect	(0,0,v.z,v.w);
-		v = ini->r_fvector4("frame","rt");		frame[fmRT].SetOriginalRect	(v.x,v.y,v.z,v.w);	frame[fmRT].SetRect	(0,0,v.z,v.w);
-		v = ini->r_fvector4("frame","rb");		frame[fmRB].SetOriginalRect	(v.x,v.y,v.z,v.w);	frame[fmRB].SetRect	(0,0,v.z,v.w);
-		v = ini->r_fvector4("frame","lb");		frame[fmLB].SetOriginalRect	(v.x,v.y,v.z,v.w);	frame[fmLB].SetRect	(0,0,v.z,v.w);
+		v = ini->r_fvector4("frame","back");	frame[fmBK].SetTextureRect	(v.x,v.y,v.z,v.w);	frame[fmBK].SetRect	(0,0,v.z,v.w);
+		v = ini->r_fvector4("frame","l");		frame[fmL].SetTextureRect	(v.x,v.y,v.z,v.w);	frame[fmL].SetRect	(0,0,v.z,v.w);
+		v = ini->r_fvector4("frame","r");		frame[fmR].SetTextureRect	(v.x,v.y,v.z,v.w);	frame[fmR].SetRect	(0,0,v.z,v.w);
+		v = ini->r_fvector4("frame","t");		frame[fmT].SetTextureRect	(v.x,v.y,v.z,v.w);	frame[fmT].SetRect	(0,0,v.z,v.w);
+		v = ini->r_fvector4("frame","b");		frame[fmB].SetTextureRect	(v.x,v.y,v.z,v.w);	frame[fmB].SetRect	(0,0,v.z,v.w);
+		v = ini->r_fvector4("frame","lt");		frame[fmLT].SetTextureRect	(v.x,v.y,v.z,v.w);	frame[fmLT].SetRect	(0,0,v.z,v.w);
+		v = ini->r_fvector4("frame","rt");		frame[fmRT].SetTextureRect	(v.x,v.y,v.z,v.w);	frame[fmRT].SetRect	(0,0,v.z,v.w);
+		v = ini->r_fvector4("frame","rb");		frame[fmRB].SetTextureRect	(v.x,v.y,v.z,v.w);	frame[fmRB].SetRect	(0,0,v.z,v.w);
+		v = ini->r_fvector4("frame","lb");		frame[fmLB].SetTextureRect	(v.x,v.y,v.z,v.w);	frame[fmLB].SetRect	(0,0,v.z,v.w);
 		CInifile::Destroy(ini);
 	}
 	else
@@ -75,15 +75,15 @@ void CUIFrameRect::UpdateSize()
 
 	Fvector2 _bk, _lt,_lb,_rb,_rt, _l,_r,_t,_b;
 
-	_bk.set		(frame[fmBK].GetOriginalRect().width(),	frame[fmBK].GetOriginalRect().height());
-	_lt.set		(frame[fmLT].GetOriginalRect().width(), frame[fmLT].GetOriginalRect().height());
-	_lb.set		(frame[fmLB].GetOriginalRect().width(), frame[fmLB].GetOriginalRect().height());
-	_rb.set		(frame[fmRB].GetOriginalRect().width(), frame[fmRB].GetOriginalRect().height());
-	_rt.set		(frame[fmRT].GetOriginalRect().width(), frame[fmRT].GetOriginalRect().height());
-	_l.set		(frame[fmL].GetOriginalRect().width(),	frame[fmL].GetOriginalRect().height());
-	_r.set		(frame[fmR].GetOriginalRect().width(),	frame[fmR].GetOriginalRect().height());
-	_t.set		(frame[fmT].GetOriginalRect().width(),	frame[fmT].GetOriginalRect().height());
-	_b.set		(frame[fmB].GetOriginalRect().width(),	frame[fmB].GetOriginalRect().height());
+	_bk.set		(frame[fmBK].GetTextureRect().width(),	frame[fmBK].GetTextureRect().height());
+	_lt.set		(frame[fmLT].GetTextureRect().width(), frame[fmLT].GetTextureRect().height());
+	_lb.set		(frame[fmLB].GetTextureRect().width(), frame[fmLB].GetTextureRect().height());
+	_rb.set		(frame[fmRB].GetTextureRect().width(), frame[fmRB].GetTextureRect().height());
+	_rt.set		(frame[fmRT].GetTextureRect().width(), frame[fmRT].GetTextureRect().height());
+	_l.set		(frame[fmL].GetTextureRect().width(),	frame[fmL].GetTextureRect().height());
+	_r.set		(frame[fmR].GetTextureRect().width(),	frame[fmR].GetTextureRect().height());
+	_t.set		(frame[fmT].GetTextureRect().width(),	frame[fmT].GetTextureRect().height());
+	_b.set		(frame[fmB].GetTextureRect().width(),	frame[fmB].GetTextureRect().height());
 
 	Fvector2 wnd_pos	= GetWndPos();
 	frame[fmLT].SetPos	(wnd_pos.x,						wnd_pos.y);	
@@ -96,7 +96,7 @@ void CUIFrameRect::UpdateSize()
 	float size_left		= m_wndSize.y - _lt.y - _lb.y;
 	float size_right	= m_wndSize.y - _rt.y - _rb.y;
 
-	//‘ÓÌ
+	//–§–æ–Ω
 	ts.set			(_bk.x,_bk.y);
 	rem_x  			= fmod(size_top,ts.x);
 	rem_y  			= fmod(size_left,ts.y);
@@ -106,7 +106,7 @@ void CUIFrameRect::UpdateSize()
 	frame[fmBK].SetPos	(wnd_pos.x+_lt.x, wnd_pos.y+_lt.y);
 	frame[fmBK].SetTile	(tile_x,tile_y, rem_x,rem_y);
 
-	//Œ·‡ÏÎÂÌËÂ
+	//–û–±—Ä–∞–º–ª–µ–Ω–∏–µ
 	ts.set				(_t.x,_t.y);
 	rem_x				= fmod(size_top,ts.x);
 	tile_x				= iFloor(size_top/ts.x); tile_x=_max(tile_x, 0);

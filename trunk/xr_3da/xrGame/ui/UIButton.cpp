@@ -1,4 +1,4 @@
-// UIButton.cpp: êëàññ íàæèìàåìîé êíîïêè
+// UIButton.cpp: ÐºÐ»Ð°ÑÑ Ð½Ð°Ð¶Ð¸Ð¼Ð°ÐµÐ¼Ð¾Ð¹ ÐºÐ½Ð¾Ð¿ÐºÐ¸
 //
 //////////////////////////////////////////////////////////////////////
 
@@ -230,7 +230,7 @@ void  CUIButton::Update()
 	{
 		g_btnHint->SetHintText	(this,*m_hint_text);
 
-		Fvector2 c_pos			= GetUICursor()->GetCursorPosition();
+		Fvector2 c_pos			= GetUICursor().GetCursorPosition();
 		Frect vis_rect;
 		vis_rect.set			(0,0,UI_BASE_WIDTH, UI_BASE_HEIGHT);
 

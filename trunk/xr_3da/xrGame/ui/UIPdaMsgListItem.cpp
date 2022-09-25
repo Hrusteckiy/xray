@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
-// UIPdaMsgListItem.cpp: ýëåìåíò îêíà ñïèñêà â îñíîâíîì 
-// ýêðàíå äëÿ ñîîáùåíèé PDA
+// UIPdaMsgListItem.cpp: ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ Ð¾ÐºÐ½Ð° ÑÐ¿Ð¸ÑÐºÐ° Ð² Ð¾ÑÐ½Ð¾Ð²Ð½Ð¾Ð¼ 
+// ÑÐºÑ€Ð°Ð½Ðµ Ð´Ð»Ñ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ð¹ PDA
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
@@ -65,7 +65,7 @@ void CUIPdaMsgListItem::InitCharacter(CInventoryOwner* pInvOwner)
 	UIIcon.InitTexture		( pInvOwner->CharacterInfo().IconName().c_str() );
 /*
 	UIIcon.SetShader(GetCharIconsShader());
-	UIIcon.GetUIStaticItem().SetOriginalRect(
+	UIIcon.GetUIStaticItem().SetTextureRect(
 					float(pInvOwner->CharacterInfo().TradeIconX()*ICON_GRID_WIDTH),
 					float(pInvOwner->CharacterInfo().TradeIconY()*ICON_GRID_HEIGHT),
 					float(pInvOwner->CharacterInfo().TradeIconX()+CHAR_ICON_WIDTH*ICON_GRID_WIDTH),

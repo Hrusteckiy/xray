@@ -1,5 +1,5 @@
-// UICheckButton.cpp: êëàññ êíîïêè, èìåþùåé 2 ñîñòîÿíèÿ:
-// ñ ãàëî÷êîé è áåç
+// UICheckButton.cpp: ÐºÐ»Ð°ÑÑ ÐºÐ½Ð¾Ð¿ÐºÐ¸, Ð¸Ð¼ÐµÑŽÑ‰ÐµÐ¹ 2 ÑÐ¾ÑÑ‚Ð¾ÑÐ½Ð¸Ñ:
+// Ñ Ð³Ð°Ð»Ð¾Ñ‡ÐºÐ¾Ð¹ Ð¸ Ð±ÐµÐ·
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
@@ -52,7 +52,7 @@ void CUICheckButton::Init(float x, float y, float width, float height){
 void CUICheckButton::InitTexture()
 {
 	CUI3tButton::InitTexture("ui_checker");
-	Frect r = m_background.GetE()->GetStaticItem()->GetOriginalRect();
+	Frect r = m_background.GetE()->GetStaticItem()->GetTextureRect();
 	CUI3tButton::SetTextX(r.width());	
 }
 

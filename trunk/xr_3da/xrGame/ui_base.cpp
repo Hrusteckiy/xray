@@ -4,8 +4,8 @@
 #include "UICursor.h"
 #include "HUDManager.h"
 
-CUICursor*	GetUICursor		()	{return UI()->GetUICursor();};
-ui_core*	UI				()	{return GamePersistent().m_pUI_core;};
+CUICursor&	GetUICursor		()	{return UI().GetUICursor();};
+ui_core&	UI				()	{return *GamePersistent().m_pUI_core;};
 extern ENGINE_API Fvector2		g_current_font_scale;
 
 void S2DVert::rotate_pt(const Fvector2& pivot, float cosA, float sinA, float kx)
@@ -246,7 +246,7 @@ void ui_core::RenderFont()
 	Font()->Render();
 }
 
-bool ui_core::is_16_9_mode()
+bool ui_core::is_widescreen()
 {
 	return (Device.dwWidth)/float(Device.dwHeight) > (UI_BASE_WIDTH/UI_BASE_HEIGHT +0.01f);
 }
@@ -254,7 +254,7 @@ bool ui_core::is_16_9_mode()
 shared_str	ui_core::get_xml_name(LPCSTR fn)
 {
 	string_path				str;
-	if(!is_16_9_mode()){
+	if(!is_widescreen()){
 		sprintf_s(str, "%s", fn);
 		if ( NULL==strext(fn) ) strcat(str, ".xml");
 	}else{

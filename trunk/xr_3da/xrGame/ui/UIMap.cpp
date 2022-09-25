@@ -383,7 +383,7 @@ void CUILevelMap::Init	(shared_str name, CInifile& gameLtx, LPCSTR sh_name)
 		Frect rect; rect.set				(tmp.x,tmp.y,tmp.x+tmp.z,tmp.y+tmp.w);
 		m_anomalies_map						= xr_new<CUIStatic>();
 		m_anomalies_map->Init				(texture,0.0f,0.0f,0.0f,0.0f);
-		m_anomalies_map->GetUIStaticItem().SetOriginalRect(rect);
+		m_anomalies_map->GetUIStaticItem().SetTextureRect(rect);
 		m_anomalies_map->SetStretchTexture	(true);
 		m_anomalies_map->SetAutoDelete		(false);
 	}

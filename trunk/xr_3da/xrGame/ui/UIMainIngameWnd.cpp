@@ -256,7 +256,7 @@ void CUIMainIngameWnd::Init()
 	UIStaticDiskIO.SetWndRect				(1000,750,16,16);
 	UIStaticDiskIO.GetUIStaticItem().SetRect(0,0,16,16);
 	UIStaticDiskIO.InitTexture				("ui\\ui_disk_io");
-	UIStaticDiskIO.SetOriginalRect			(0,0,32,32);
+	UIStaticDiskIO.SetTextureRect			(0,0,32,32);
 	UIStaticDiskIO.SetStretchTexture		(TRUE);
 
 
@@ -326,14 +326,14 @@ void CUIMainIngameWnd::SetAmmoIcon (const shared_str& sect_name)
 	texture_rect.x2 = pSettings->r_float(sect_name, "inv_grid_width") * INV_GRID_WIDTH;
 	texture_rect.y2 = pSettings->r_float(sect_name, "inv_grid_height") * INV_GRID_HEIGHT;
 	texture_rect.rb.add(texture_rect.lt);
-	UIWeaponIcon.GetUIStaticItem().SetOriginalRect(texture_rect);
+	UIWeaponIcon.GetUIStaticItem().SetTextureRect(texture_rect);
 	UIWeaponIcon.SetStretchTexture(true);
 
 	// now perform only width scale for ammo, which (W)size >2
 	float h = texture_rect.height() * 0.8f;
 	float w = texture_rect.width() * 0.8f;
 	h = texture_rect.height() * 0.8f;
-	w = texture_rect.width() * (UI()->is_16_9_mode() ? 0.7f : 0.8f);
+	w = texture_rect.width() * (UI().is_widescreen() ? 0.7f : 0.8f);
 	float posx_16 = 30.0f;
 	float posx = 32.0f;
 	if (texture_rect.width() > 2.01f * INV_GRID_WIDTH)
@@ -342,13 +342,13 @@ void CUIMainIngameWnd::SetAmmoIcon (const shared_str& sect_name)
 	}
 	if (texture_rect.width() < 1.01f * INV_GRID_WIDTH)
 	{
-		UIWeaponIcon.SetTextureOffset(UI()->is_16_9_mode() ? posx_16 : posx, 5.0f);
+		UIWeaponIcon.SetTextureOffset(UI().is_widescreen() ? posx_16 : posx, 5.0f);
 	}
 	else
 	{
 		posx_16 = 12.f;
 		posx = 14.f;
-		UIWeaponIcon.SetTextureOffset(UI()->is_16_9_mode() ? posx_16 : posx, 5.0f);
+		UIWeaponIcon.SetTextureOffset(UI().is_widescreen() ? posx_16 : posx, 5.0f);
 	}
 	UIWeaponIcon.SetWidth	(w);
 	UIWeaponIcon.SetHeight	(h);
@@ -1041,7 +1041,7 @@ void CUIMainIngameWnd::UpdatePickUpItem	()
 	texture_rect.lt.set		(m_iXPos*INV_GRID_WIDTH, m_iYPos*INV_GRID_HEIGHT);
 	texture_rect.rb.set		(m_iGridWidth*INV_GRID_WIDTH, m_iGridHeight*INV_GRID_HEIGHT);
 	texture_rect.rb.add		(texture_rect.lt);
-	UIPickUpItemIcon.GetStaticItem()->SetOriginalRect(texture_rect);
+	UIPickUpItemIcon.GetStaticItem()->SetTextureRect(texture_rect);
 	UIPickUpItemIcon.SetStretchTexture(true);
 
 	UIPickUpItemIcon.SetWidth(m_iGridWidth*INV_GRID_WIDTH*scale);
@@ -1237,7 +1237,7 @@ void CUIMainIngameWnd::draw_adjust_mode()
 		bool bCamFirstEye = !!m_pWeapon->GetHUDmode();
 		string32 hud_view="HUD view";
 		string32 _3rd_person_view="3-rd person view";
-		CGameFont* F		= UI()->Font()->pFontDI;
+		CGameFont* F		= UI().Font()->pFontDI;
 		F->SetAligment		(CGameFont::alCenter);
 //.		F->SetSizeI			(0.02f);
 		F->OutSetI			(0.f,-0.8f);

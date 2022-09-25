@@ -36,10 +36,10 @@ void SBinocVisibleObj::create_default(u32 color)
 	m_rt.Init			("ui\\ui_enemy_frame",0,0,RECT_SIZE,RECT_SIZE);
 	m_rb.Init			("ui\\ui_enemy_frame",0,0,RECT_SIZE,RECT_SIZE);
 
-	m_lt.SetOriginalRect(0,			0,			RECT_SIZE,	RECT_SIZE);
-	m_lb.SetOriginalRect(0,			RECT_SIZE,	RECT_SIZE,	RECT_SIZE);
-	m_rt.SetOriginalRect(RECT_SIZE,	0,			RECT_SIZE,	RECT_SIZE);
-	m_rb.SetOriginalRect(RECT_SIZE,	RECT_SIZE,	RECT_SIZE,	RECT_SIZE);
+	m_lt.SetTextureRect(0,			0,			RECT_SIZE,	RECT_SIZE);
+	m_lb.SetTextureRect(0,			RECT_SIZE,	RECT_SIZE,	RECT_SIZE);
+	m_rt.SetTextureRect(RECT_SIZE,	0,			RECT_SIZE,	RECT_SIZE);
+	m_rb.SetTextureRect(RECT_SIZE,	RECT_SIZE,	RECT_SIZE,	RECT_SIZE);
 
 
 	u32 clr			= subst_alpha(color,128);

@@ -287,7 +287,7 @@ void CUICharacterInfo::ClearInfo()
 	ResetAllStrings	();
 	
 	if (m_icons[eUIIcon]) {
-		m_icons[eUIIcon]->GetUIStaticItem().SetOriginalRect(	8*ICON_GRID_WIDTH,0,
+		m_icons[eUIIcon]->GetUIStaticItem().SetTextureRect(	8*ICON_GRID_WIDTH,0,
 			float(CHAR_ICON_WIDTH*ICON_GRID_WIDTH),
 			float(CHAR_ICON_HEIGHT*ICON_GRID_HEIGHT));
 	}

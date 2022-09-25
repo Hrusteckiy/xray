@@ -21,7 +21,7 @@ class CUIStaticItem: public IUISimpleTextureControl, public CUICustomItem
 protected:
 	typedef CUICustomItem inherited;
 public:
-	using CUICustomItem::SetOriginalRect;
+	using CUICustomItem::SetTextureRect;
 
 #ifdef DEBUG
 	shared_str	dbg_tex_name;
@@ -34,7 +34,7 @@ public:
 	virtual void	SetShader		(const ref_shader& sh);
 	virtual void	SetTextureColor	(u32 color)											{SetColor(color);}
 	virtual u32		GetTextureColor	()											const	{return GetColor();}
-	virtual	void	SetOriginalRect	(const Frect& r)									{iOriginalRect = r; uFlags|=flValidOriginalRect;}
+	virtual	void	SetTextureRect	(const Frect& r)									{iOriginalRect = r; uFlags|=flValidOriginalRect;}
 	virtual void	SetOriginalRectEx(const Frect& r)									{iOriginalRect = r; uFlags|=flValidOriginalRect; SetRect(0,0,r.width(),r.height());}
 
 
