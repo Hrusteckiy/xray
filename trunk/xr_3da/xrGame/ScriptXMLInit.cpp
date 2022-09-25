@@ -54,6 +54,9 @@ void CScriptXmlInit::InitWindow(LPCSTR path, int index, CUIWindow* pWnd){
 	CUIXmlInit::InitWindow(m_xml, path, index, pWnd);
 }
 
+bool CScriptXmlInit::is_widescreen() {
+	return UI().is_widescreen();
+}
 
 CUIFrameWindow*	CScriptXmlInit::InitFrame(LPCSTR path, CUIWindow* parent){
 	CUIFrameWindow* pWnd = xr_new<CUIFrameWindow>();
@@ -292,6 +295,7 @@ void CScriptXmlInit::script_register(lua_State *L){
 		.def("ParseFile",				&CScriptXmlInit::ParseFile)
 		.def("ParseShTexInfo",			&CScriptXmlInit::ParseShTexInfo)
 		.def("InitWindow",				&CScriptXmlInit::InitWindow)
+		.def("is_widescreen",			&CScriptXmlInit::is_widescreen)
 		.def("InitFrame",				&CScriptXmlInit::InitFrame)
 		.def("InitFrameLine",			&CScriptXmlInit::InitFrameLine)
 		.def("InitLabel",				&CScriptXmlInit::InitLabel)

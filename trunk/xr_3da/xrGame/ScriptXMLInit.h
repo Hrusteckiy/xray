@@ -42,6 +42,7 @@ public:
 	void ParseFile		(LPCSTR xml_file);
 	void ParseShTexInfo	(LPCSTR xml_file);
 	void InitWindow		(LPCSTR path, int index, CUIWindow* pWnd);
+	bool is_widescreen	();
 	//void InitList		(LPCSTR path, int index, CUIListWnd* pWnd);
 
 	CUIListWnd*			InitList(LPCSTR path, CUIWindow* parent);
