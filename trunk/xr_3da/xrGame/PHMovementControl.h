@@ -129,9 +129,9 @@ public:
 	bool				bExernalImpulse;
 	BOOL				bSleep;
 
-	BOOL				gcontact_Was;			// Приземление
-	float				gcontact_Power;			// Насколько сильно ударились
-	float				gcontact_HealthLost;	// Скоко здоровья потеряли
+	BOOL				gcontact_Was;			// РџСЂРёР·РµРјР»РµРЅРёРµ
+	float				gcontact_Power;			// РќР°СЃРєРѕР»СЊРєРѕ СЃРёР»СЊРЅРѕ СѓРґР°СЂРёР»РёСЃСЊ
+	float				gcontact_HealthLost;	// РЎРєРѕР»СЊРєРѕ Р·РґРѕСЂРѕРІСЊСЏ РїРѕС‚РµСЂСЏР»Рё
 
 public:
 	void				AllocateCharacterObject			(CharacterType type)									;
