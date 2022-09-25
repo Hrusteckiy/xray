@@ -121,7 +121,8 @@ void CUIArtefactParams::SetInfo(const shared_str& af_section)
 			if					(fis_zero(_val))				continue;
 			
 			_val				= (_val/_actor_val)*100.0f;
-		}else
+		}
+		else
 		{
 			shared_str _sect	= pSettings->r_string(af_section, "hit_absorbation_sect");
 			_val				= pSettings->r_float(_sect, af_item_sect_names[i]);
@@ -174,7 +175,7 @@ void UIArtefactParamsItem::Init(CUIXml& xml, LPCSTR section)
 	xml.SetLocalRoot(xml.NavigateToNode(section));
 
 	m_caption   = UIHelper::CreateStatic(xml, "caption", this);
-	m_value     = UIHelper::CreateTextWnd(xml, "value",   this);
+	m_value     = UIHelper::CreateStatic(xml, "value",   this);
 	m_magnitude = xml.ReadAttribFlt("value", 0, "magnitude", 1.0f);
 	m_show_sign = (xml.ReadAttribInt("value", 0, "show_sign", 1) == 1);
 	m_color_mode = xml.ReadAttribInt("value", 0, "color_mode", 0);

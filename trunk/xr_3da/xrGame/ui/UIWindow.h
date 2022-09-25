@@ -250,6 +250,8 @@ public:
 	DECLARE_SCRIPT_REGISTER_FUNCTION
 };
 
+bool fit_in_rect(CUIWindow* w, Frect const& vis_rect, float border = 0.0f, float dx16pos = 0.0f );
+
 add_to_type_list(CUIWindow)
 #undef script_type_list
 #define script_type_list save_type_list(CUIWindow)

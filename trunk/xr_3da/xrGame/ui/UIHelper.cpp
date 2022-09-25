@@ -11,6 +11,8 @@
 
 #include "UIProgressBar.h"
 #include "UIProgressShape.h"
+#include "UIDragDropListEx.h"
+#include "UIHint.h"
 #include "UIFrameLineWnd.h"
 #include "UIFrameWindow.h"
 #include "UI3tButton.h"
@@ -28,18 +30,6 @@ CUIStatic* UIHelper::CreateStatic( CUIXml& xml, LPCSTR ui_path, CUIWindow* paren
 		ui->SetAutoDelete	( true );
 	}
 	CUIXmlInit::InitStatic	( xml, ui_path, 0, ui);
-	return ui;
-}
-
-CUITextWnd* UIHelper::CreateTextWnd( CUIXml& xml, LPCSTR ui_path, CUIWindow* parent )
-{
-	CUITextWnd* ui			= xr_new <CUITextWnd>();
-	if(parent)
-	{
-		parent->AttachChild	( ui );
-		ui->SetAutoDelete	( true );
-	}
-	CUIXmlInit::InitTextWnd	( xml, ui_path, 0, ui );
 	return ui;
 }
 
@@ -156,5 +146,22 @@ CUICheckButton* UIHelper::CreateCheck( CUIXml& xml, LPCSTR ui_path, CUIWindow* p
 		ui->SetAutoDelete(true);
 	}
 	CUIXmlInit::InitCheck		( xml, ui_path, 0, ui );
+	return ui;
+}
+
+UIHint* UIHelper::CreateHint( CUIXml& xml, LPCSTR ui_path)
+{
+	UIHint* ui					= xr_new<UIHint>();
+	ui->SetAutoDelete			( true );
+	ui->init_from_xml			( xml, ui_path );
+	return ui;
+}
+
+CUIDragDropListEx* UIHelper::CreateDragDropListEx( CUIXml& xml, LPCSTR ui_path, CUIWindow* parent )
+{
+	CUIDragDropListEx* ui			= xr_new<CUIDragDropListEx>();
+	parent->AttachChild				( ui );
+	ui->SetAutoDelete				( true );
+	CUIXmlInit::InitDragDropListEx	( xml, ui_path, 0, ui );
 	return ui;
 }

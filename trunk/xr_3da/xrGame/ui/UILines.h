@@ -33,18 +33,6 @@ public:
 	virtual ETextAlignment	GetTextAlignment()							{return m_eTextAlign;}
 			void			SetVTextAlignment(EVTextAlignment al)		{m_eVTextAlign = al;}
 			EVTextAlignment GetVTextAlignment()							{return m_eVTextAlign;}
-			
-		Fvector2			m_TextOffset;
-		Fvector2			m_wndSize;
-		Fvector2			m_wndPos;
-			
-			void			SetWndPos			(const Fvector2& pos)						{m_wndPos.set(pos.x,pos.y);}
-			void			SetWndSize			(const Fvector2& size)						{m_wndSize = size;}
-			void			SetHeight			(float height)								{m_wndSize.y = height;}
-			void			SetWidth			(float width)								{m_wndSize.x = width;}
-
-			void			SetParrentWnd								(CUIWindow* val){ m_parrentWnd = val; };
-			CUIWindow*		GetParrentWnd								() { return m_parrentWnd; };
 
 	// additional
 			void			SetCursorColor								(u32 color)			{m_dwCursorColor = color;}
@@ -117,7 +105,6 @@ protected:
 private:
 	Flags8					uFlags;
 	float					m_oldWidth;
-	CUIWindow*				m_parrentWnd;
 };
 
 class CUILinesOwner : public IUITextControl {

@@ -48,7 +48,7 @@ public:
 	
 private:
 	CUIStatic*	m_caption;
-	CUITextWnd*	m_value;
+	CUIStatic*	m_value;
 	float		m_magnitude;
 	bool		m_show_sign;
 	int			m_color_mode;

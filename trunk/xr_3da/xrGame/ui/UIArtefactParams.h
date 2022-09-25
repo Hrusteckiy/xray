@@ -4,7 +4,6 @@
 
 class CUIXml;
 class CUIStatic;
-class CUITextWnd;
 class UIArtefactParamsItem;
 
 class CUIArtefactParams :public CUIWindow
@@ -57,8 +56,8 @@ public:
 	void	SetValue(float value);
 
 private:
-	CUIStatic* m_caption;
-	CUITextWnd* m_value;
+	CUIStatic*  m_caption;
+	CUIStatic*  m_value;
 	float		m_magnitude;
 	bool		m_show_sign;
 	int			m_color_mode;
