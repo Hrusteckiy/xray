@@ -154,6 +154,8 @@ void CInventoryItem::Load(LPCSTR section)
 	m_fControlInertionFactor	= READ_IF_EXISTS(pSettings, r_float,section,"control_inertion_factor",	1.0f);
 	m_icon_name					= READ_IF_EXISTS(pSettings, r_string,section,"icon_name",				NULL);
 
+	// Added by Axel, to enable optional condition use on any item
+	m_flags.set(FUsingCondition, READ_IF_EXISTS(pSettings, r_bool, section, "use_condition", false));
 }
 
 
@@ -166,7 +168,7 @@ void  CInventoryItem::ChangeCondition(float fDeltaCondition)
 
 void	CInventoryItem::Hit					(SHit* pHDS)
 {
-	if( !m_flags.test(FUsingCondition) ) return;
+	if(!IsUsingCondition()) return;
 
 	float hit_power = pHDS->damage();
 	hit_power *= m_HitTypeK[pHDS->hit_type];

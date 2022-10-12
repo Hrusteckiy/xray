@@ -485,12 +485,12 @@ bool CUIInventoryWnd::OnKeyboard(int dik, EUIMessages keyboard_action)
 	if (WINDOW_KEY_PRESSED == keyboard_action)
 	{
 #ifdef DEBUG
-		if(DIK_NUMPAD7 == dik && CurrentIItem())
+		if(DIK_NUMPAD7 == dik && CurrentIItem() && CurrentIItem()->IsUsingCondition())
 		{
 			CurrentIItem()->ChangeCondition(-0.05f);
 			UIItemInfo.InitItem(CurrentIItem());
 		}
-		else if(DIK_NUMPAD8 == dik && CurrentIItem())
+		else if(DIK_NUMPAD8 == dik && CurrentIItem() && CurrentIItem()->IsUsingCondition())
 		{
 			CurrentIItem()->ChangeCondition(0.05f);
 			UIItemInfo.InitItem(CurrentIItem());
